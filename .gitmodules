@@ -1,0 +1,3 @@
+[submodule "20110223 Git/MarkBorcherding.Slides"]
+	path = 20110223 Git/MarkBorcherding.Slides
+	url = git@github.com:MarkBorcherding/altnet-stl-git-presentation.git
