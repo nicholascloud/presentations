@@ -1,4 +1,6 @@
-# Presenting Hacker News Radio
+# 06/22/2011 Hacker News Radio #
+
+by Jeff Sigmon
 
 A model for publishing audio streams from textual sources on the web.
 
