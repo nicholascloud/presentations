@@ -1,0 +1,20 @@
+syntax: glob
+# C# section
+[Bb]in/
+.svn/
+[Oo]bj/
+*.user
+*.suo
+[Dd]ebug
+[Rr]elease
+*.orig
+*.sln.cache
+*.sdf
+*.opensdf
+nunit.results.xml
+_ReSharper*
+
+# Visual C++ section
+ipch/
+*.tlb
+*.ncb

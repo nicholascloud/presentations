@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShop.MVC", "CoffeeShop.MVC\CoffeeShop.MVC.csproj", "{8583F246-5CC8-40B4-A671-C9C4D0F1B3F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShop.Domain", "CoffeeShop.Domain\CoffeeShop.Domain.csproj", "{2145576D-30A1-4265-A466-4F932DD54885}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8583F246-5CC8-40B4-A671-C9C4D0F1B3F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8583F246-5CC8-40B4-A671-C9C4D0F1B3F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8583F246-5CC8-40B4-A671-C9C4D0F1B3F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8583F246-5CC8-40B4-A671-C9C4D0F1B3F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2145576D-30A1-4265-A466-4F932DD54885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2145576D-30A1-4265-A466-4F932DD54885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2145576D-30A1-4265-A466-4F932DD54885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2145576D-30A1-4265-A466-4F932DD54885}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

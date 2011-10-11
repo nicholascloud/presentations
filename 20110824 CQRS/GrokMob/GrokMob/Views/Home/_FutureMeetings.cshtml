@@ -1,0 +1,19 @@
+﻿@using GrokMob.Mvc
+@using GrokMob.ReadModel
+@model IEnumerable<Meeting>
+
+@foreach (var meeting in Model) {
+  <div class="meetingSummary">
+    <img src="/assets/icons/calendar.png" />
+    <div>
+      <h4><a href="@Url.Action("meeting", new { id = meeting.Id })">@meeting.Title</a></h4>
+      <p>@meeting.Description.Chop(100)</p>
+      <p>@meeting.ScheduledFor</p>
+      <p>@meeting.Location</p>
+    </div>
+  </div>
+}
+
+@if(!Model.Any()) {
+  <h4>No future meetings scheduled</h4>
+}

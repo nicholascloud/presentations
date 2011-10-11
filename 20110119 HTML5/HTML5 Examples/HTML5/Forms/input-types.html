@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>form tags</title>
+    <style type="text/css">
+        label { display: block; font-weight: bold; }
+        #rangeValue { font-size: .8em; }
+
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+
+            var range = document.getElementById("range");
+            var rangeValue = document.getElementById("rangeValue");
+            range.onchange = function() {
+                rangeValue.innerHTML = range.value;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Input "types"</h1>
+
+    <form>
+
+        <h2>Wide browser support</h2>
+
+        <label>Phone</label>
+        <input name="tel" type="tel" />
+
+        <label>Email</label>
+        <input name="email" type="email" />
+
+        <label>URL</label>
+        <input name="url" type="url" />
+
+        <label>Search</label>
+        <input name="search" type="search" />
+
+        <label>Range</label>
+        <input id="range" name="range" type="range" min="1" max="100" value="0" />
+        <span id="rangeValue"></span>
+
+
+        <h2>Narrow browser support/proposed</h2>
+
+        <label>Number</label>
+        <input name="number" type="number" min="0" max="100" step="2" value="10" />
+
+        <label>Color</label>
+        <input name="color" type="color" />
+
+        <label>DateTime</label>
+        <input name="datetime" type="datetime" />
+
+        <label>DateTime-Local</label>
+        <input name="datetimeLocal" type="datetime-local" />
+
+        <label>Time</label>
+        <input name="time" type="time" />
+
+        <label>Date</label>
+        <input name="date" type="date" />
+
+        <label>Week</label>
+        <input name="week" type="week" />
+
+        <label>Month</label>
+        <input name="month" type="month" />
+
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+
+    </form>
+
+</body>
+</html>

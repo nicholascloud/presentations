@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>with workers</title>
+    <script type="text/javascript">
+        
+        window.addEventListener("load", function() {
+
+            var clickMe = document.getElementById("clickMe");
+            var clickMeToo = document.getElementById("clickMeToo");
+            var timestamp = document.getElementById("timestamp");
+
+            clickMe.onclick = function() {
+                var worker = new Worker("getdate.js");
+                worker.onmessage = function (event) {
+                    timestamp.innerHTML = event.data;
+                }
+                clickMe.disabled = true;
+            };
+
+            clickMeToo.onclick = function() {
+                alert(document.getElementById("inputText").value);
+            };
+        }, false);
+        
+    </script>
+</head>
+<body>
+
+    <div>
+        <h1>Without Workers</h1>
+        <label id="timestamp"></label>
+        <button id="clickMe">Click Me</button>
+    </div>
+
+    <div>
+        <input id="inputText" type="text" />
+        <button id="clickMeToo">Click Me Too!</button>
+    </div>
+
+</body>
+</html>

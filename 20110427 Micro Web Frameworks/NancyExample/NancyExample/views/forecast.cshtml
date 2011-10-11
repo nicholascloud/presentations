@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Forecast</title>
+    <link type="text/css" rel="Stylesheet" href="/style/weather.css"></link>
+</head>
+<body>
+    <p><a href="/">Home</a></p>
+    <h1>Forecast for @Model.Location</h1>
+
+    @foreach (var day in @Model.Days) {
+    <div class="stackItem">
+        <img src="@day.IconURL" alt="" />
+        <ul>
+            <li>Period: @day.Period</li>
+            <li>Date: @day.Date</li>
+            <li>High: @day.High</li>
+            <li>Low: @day.Low</li>
+            <li>Conditions: @day.Conditions</li>
+        </ul>
+    </div>
+    }
+</body>
+</html>

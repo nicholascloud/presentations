@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>attribute selectors</title>
+    <style type="text/css">
+        #d1 input[type="text"] { background-color: red; }
+        #d2 p[class^=imp] { font-weight: bold; font-size: 1.4em; }
+        #d3 p[class$=ive] { font-style: italic; font-size: 1.4em; }
+        #d4 label[lang*=en] { background-color: yellow; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="d1">
+        <h1>input[type="text"] { background-color: red; }</h1>
+        <input type="text" />
+        <input type="checkbox" />
+    </div>
+    <hr />
+    <div id="d2">
+        <h1>p[class^=imp] { font-weight: bold; font-size: 1.2em; }</h1>
+        <p class="important">This is some important tech!</p>
+        <p class="improper">This is some improper shit!</p>
+        <p class="dull">This is only dull crap.</p>
+    </div>
+    <hr />
+    <div id="d3">
+        <h1>p[class$=ive] { font-style: italic; font-size: 1.4em; }</h1>
+        <p class="impressive">This is some impressive tech!</p>
+        <p class="offensive">This is some offensive shit!</p>
+        <p class="dull">This is only dull crap.</p>
+    </div>
+    <hr />
+    <div id="d4">
+        <h1>label[lang*=en] { color: orange; font-weight: bold; }</h1>
+        <label lang="en">English motherfucker do you speak it!?!?</label><br />
+        <label lang="en-us">English motherfucker do you speak it!?!?</label><br />
+        <label lang="fr">Motherfucker français, vous le parlez!?!?</label>
+    </div>
+</body>
+</html>

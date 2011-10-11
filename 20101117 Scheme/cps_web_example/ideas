@@ -1,0 +1,27 @@
+Basic Functional Programming
+  Recursion
+  Absence of Mutation
+  Combinators
+  Compositional programs
+Advantages
+  Reasoning
+  Efficiency
+  Reliability
+  Scaling
+  Manageability
+  AKA Better Abstractions
+Disadvantages
+  It's not the one true way
+  Object-oriented problems
+  Imperative is sometimes the way to go
+  Still not as declarative as you might want
+Alternatives
+  Logic Programming
+  Multi-paradigm languages
+  Macros
+A combined example
+  Recursion
+  Controlled and isolated mutation
+  Compositionality
+  Continuations 
+  Web programming

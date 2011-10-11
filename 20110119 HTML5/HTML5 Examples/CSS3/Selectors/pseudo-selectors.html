@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>pseudo selectors</title>
+    <style type="text/css">
+        #d1 li:first-child { background-color: yellow; }
+        #d2 li:last-child { background-color: orange; }
+        #d3 li:nth-child(3) { background-color: aqua; }
+        #d4 input:disabled { background-color: red; }
+        #d5 input:checked { width: 100px; }
+        #d6 div:not([class=even]) { background-color: #adff2f; }
+    </style>
+</head>
+<body>
+
+    <div id="d1">
+        <h1>li:first-child { background-color: yellow; }</h1>
+        <ul>
+            <li>Reservoir Dogs</li>
+            <li>Pulp Fiction</li>
+            <li>Kill Bill</li>
+            <li>Death Proof</li>
+            <li>Inglorious Basters</li>
+        </ul>
+    </div>
+    <hr />
+    <div id="d2">
+        <h1>li:last-child { background-color: orange; }</h1>
+        <ul>
+            <li>Reservoir Dogs</li>
+            <li>Pulp Fiction</li>
+            <li>Kill Bill</li>
+            <li>Death Proof</li>
+            <li>Inglorious Basters</li>
+        </ul>
+    </div>
+    <hr />
+    <div id="d3">
+        <h1>li:nth-child(3) { background-color: aqua; }</h1>
+        <ul>
+            <li>Reservoir Dogs</li>
+            <li>Pulp Fiction</li>
+            <li>Kill Bill</li>
+            <li>Death Proof</li>
+            <li>Inglorious Basters</li>
+        </ul>
+    </div>
+    <hr />
+    <div id="d4">
+        <h1>input:disabled { background-color: red; }</h1>
+        <input type="text" value="enabled" />
+        <input type="text" value="disabled" disabled />
+        <input type="text" value="enabled" />
+    </div>
+    <hr />
+    <div id="d5">
+        <h1>input:checked { width: 100px; }</h1>
+        <input type="checkbox" />unchecked&nbsp;
+        <input type="checkbox" checked />checked&nbsp;
+        <input type="checkbox" checked />checked
+    </div>
+    <hr />
+    <div id="d6">
+        <h1>div:not([class=even]) { background-color: #adff2f; }</h1>
+        <div class="odd">Git</div>
+        <div class="even">Subversion</div>
+        <div class="odd">Murcurial</div>
+        <div class="even">TFS</div>
+        <div class="odd">CVS</div>
+    </div>
+    <hr />
+</body>
+</html>

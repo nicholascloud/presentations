@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Admin</title>
+    <link href="http://fonts.googleapis.com/css?family=Istok+Web|Oswald" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/assets/styles/grokmob.public.css" />
+    <link type="text/css" rel="stylesheet" href="/assets/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
+    <link type="text/css" rel="stylesheet" href="/assets/themes/jquery-ui-timepicker.css"/>
+    <script type="text/javascript" src="/assets/scripts/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="/assets/scripts/jquery-ui-1.8.15.custom.min.js"></script>
+    <script type="text/javascript" src="/assets/scripts/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var row = 0;
+        var evenColor = 'white';
+        var oddColor = '#F3F3F7';
+        $('.recentActivity').each(function () {
+          var isEven = row++ % 2 == 0;
+          var backgroundColor = isEven ? evenColor : oddColor;
+          $(this).css({ 'background-color': backgroundColor });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    
+    <div id="header">
+      <h1>GrokMob</h1>
+    </div>
+    
+    <div id="bigContent">
+      
+      <div id="bigLeft">
+        <div class="leftBlock">
+          <h3>Welcome</h3>
+          @ViewBag.CurrentUser
+        </div>
+        <div class="leftBlock">
+          @Html.Partial("_Navigation")
+        </div>
+        <div class="leftBlock">
+          @Html.Partial("_Stats", ViewData["Stats"])
+        </div>
+        <div class="leftBlock">
+          @RenderSection("BigLeft")
+        </div>
+        <p>&copy; 2011 GrokMob</p>
+      </div>
+      
+      <div id="bigRight">
+        @RenderBody()
+      </div>
+
+    </div>
+    
+  </body>
+</html>

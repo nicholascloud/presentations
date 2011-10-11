@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>web storage</title>
+    <style type="text/css">
+        #theList { border: solid 1px black; width: 300px; height: 300px; }    
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var theList = $("#theList");
+            var newItem = $("#newItem");
+
+            $("#addItem").click(function() {
+                var groceries = getGroceries();
+                var addItem = newItem.val();
+                groceries.push(addItem);
+                saveGroceries(groceries);
+
+                var oldListContents = theList.val();
+                theList.val(oldListContents + addItem + "\n");
+                newItem.val("");
+            });
+
+            $("#clear").click(function() {
+                clearGroceries();
+            });
+
+            function getGroceries() {
+                var delimited = localStorage.getItem("groceries");
+                if(delimited == undefined || delimited == null) {
+                    return [];
+                }
+                return delimited.split("|");
+            }
+
+            function saveGroceries(groceries) {
+                localStorage.setItem("groceries", groceries.join("|"));
+            }
+
+            function clearGroceries() {
+                localStorage.clear();
+                theList.val("");
+            }
+
+            var groceries = getGroceries();
+            theList.val(groceries.join("\n") + (groceries.length > 0 ? "\n" : ""));
+        });
+    </script>
+
+</head>
+<body>
+
+    <h1>Grocery List</h1>
+    <input id="newItem" type="text" /><button id="addItem">Add Item</button>
+    <div>
+        <textarea id="theList"></textarea>
+    </div>
+    <button id="clear">Clear Storage</button>
+
+</body>
+</html>

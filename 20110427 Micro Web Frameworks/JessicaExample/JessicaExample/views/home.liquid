@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Prize Picker</title>
+    <script language="javascript" type="text/javascript" src="/assets/scripts/jquery-1.5.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/assets/scripts/prize.js"></script>
+    <link type="text/css" rel="Stylesheet" href="/assets/styles/main.css" />
+</head>
+<body>
+
+    <h1>Winning (Sheen Style)!</h1>
+    
+    <fieldset>
+        <div>
+            <h3>Names</h3>
+            <h3>Prizes</h3>
+        </div>
+        <div>
+            <textarea id="names" name="names" style="float:left;"></textarea>
+            <div style="margin-left:240px;">
+                {% for prize in model -%}
+                <span class="prize">
+                    <input type="checkbox" value="{{ prize.id }}" />&nbsp;{{ prize.name }}
+                </span>
+                {% endfor -%}
+            </div>
+        </div>
+        <div style="clear:both;">
+            <button id="pickButton">Pick</button>
+        </div>
+    </fieldset>
+
+    <div id="sheen">
+        <img alt="lulz" src="/assets/graphics/lol-face.gif" />
+        Congratulations <span id="winner"></span>!
+    </div>
+</body>
+</html>

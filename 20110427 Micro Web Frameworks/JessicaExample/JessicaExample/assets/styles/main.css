@@ -1,0 +1,5 @@
+﻿textarea { width: 200px; height: 200px; margin: 10px; }
+h3 { display: inline; margin: 10px 160px 10px 10px; }
+.prize { display: block; }
+#sheen { display: none; font-size: 1.8em; font-weight: bold; padding: 10px; }
+#sheen img { float: left; margin-right: 10px; }

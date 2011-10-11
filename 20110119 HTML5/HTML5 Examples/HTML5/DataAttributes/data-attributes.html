@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>data attributes</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#getData").click(function() {
+                var addressParts = $("#address span");
+                $.each(addressParts, function(index) {
+                    var data = addressParts[index].getAttribute("data-address");
+                    alert(data);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div id="address">
+        <span data-address="street">123 Nowhere</span><br />
+        <span data-address="city">Nowheresville</span>,&nbsp;<span data-address="state">MO</span><br />
+        <span data-address="zip">55555</span>
+    </div>
+
+    <button id="getData">Get Data</button>
+
+</body>
+</html>

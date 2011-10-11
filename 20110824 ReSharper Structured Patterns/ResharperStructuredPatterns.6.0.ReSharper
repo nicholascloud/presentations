@@ -1,0 +1,140 @@
+<Configuration>
+  <CustomStructuralPatterns>
+    <Pattern Severity="HINT" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>an else might be better</Comment>
+      <ReplaceComment>Replace the continue with an else clause</ReplaceComment>
+      <ReplacePattern><![CDATA[if ($CONDITIONAL$)
+{
+    $TRUESTMT$
+}
+else 
+{
+  $FALSESTMT$
+}
+]]></ReplacePattern>
+      <SearchPattern><![CDATA[if ($CONDITIONAL$)
+{
+    $TRUESTMT$
+    continue;
+}
+$FALSESTMT$]]></SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="CONDITIONAL" ExpressionType="bool" ExactType="True" />
+        <StatementPlaceholder Name="TRUESTMT" Minimal="-1" Maximal="-1" />
+        <StatementPlaceholder Name="FALSESTMT" Minimal="1" Maximal="-1" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="HINT" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Use fluent syntax</Comment>
+      <ReplaceComment>Convert to Assert.That(..., Is.EqualTo(...))</ReplaceComment>
+      <ReplacePattern>Assert.That($ACTUAL$, Is.EqualTo($EXPECTED$));</ReplacePattern>
+      <SearchPattern>Assert.AreEqual($EXPECTED$, $ACTUAL$);</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="ACTUAL" ExpressionType="" ExactType="True" />
+        <ExpressionPlaceholder Name="EXPECTED" ExpressionType="" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="HINT" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Use fluent syntax</Comment>
+      <ReplaceComment>Replace with Assert.That(..., Is.False))</ReplaceComment>
+      <ReplacePattern>Assert.That($ACTUAL$, Is.False, $MSG$);</ReplacePattern>
+      <SearchPattern>Assert.False($ACTUAL$, $MSG$);</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="ACTUAL" ExpressionType="" ExactType="True" />
+        <ExpressionPlaceholder Name="EXPECTED" ExpressionType="" ExactType="True" />
+        <ExpressionPlaceholder Name="MSG" ExpressionType="System.String" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="HINT" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Use fluent syntax</Comment>
+      <ReplaceComment>Replace with Assert.That(..., Is.False), message...)</ReplaceComment>
+      <ReplacePattern>Assert.That($ACTUAL$, Is.False, $MSGFORMAT$);</ReplacePattern>
+      <SearchPattern>Assert.False($ACTUAL$, $MSGFORMAT$);</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="ACTUAL" ExpressionType="" ExactType="True" />
+        <ExpressionPlaceholder Name="EXPECTED" ExpressionType="" ExactType="True" />
+        <ArgumentPlaceholder Name="MSGFORMAT" Minimal="2" Maximal="-1" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="HINT" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Split || into multiple ifs</Comment>
+      <ReplaceComment>Split || into multiple ifs each with the body of the original</ReplaceComment>
+      <ReplacePattern><![CDATA[if ($expr1$)
+	$stmt$
+ 
+if ($expr2$)
+	$stmt$]]></ReplacePattern>
+      <SearchPattern><![CDATA[if ($expr1$ || $expr2$)
+	$stmt$]]></SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="expr1" ExpressionType="System.Boolean" ExactType="True" />
+        <ExpressionPlaceholder Name="expr2" ExpressionType="System.Boolean" ExactType="True" />
+        <StatementPlaceholder Name="stmt" Minimal="1" Maximal="-1" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="SUGGESTION" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Call string.IsNullOrEmpty()</Comment>
+      <ReplaceComment>Call string.IsNullOrEmpty()</ReplaceComment>
+      <ReplacePattern>string.IsNullOrEmpty($stringExpr$)</ReplacePattern>
+      <SearchPattern>$stringExpr$ == null</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="stringExpr" ExpressionType="System.String" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="SUGGESTION" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Call string.IsNullOrEmpty()</Comment>
+      <ReplaceComment>Call string.IsNullOrEmpty()</ReplaceComment>
+      <ReplacePattern>string.IsNullOrEmpty($stringExpr$)</ReplacePattern>
+      <SearchPattern>$stringExpr$ == ""</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="stringExpr" ExpressionType="System.String" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="SUGGESTION" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Call string.IsNullOrEmpty()</Comment>
+      <ReplaceComment>Call string.IsNullOrEmpty()</ReplaceComment>
+      <ReplacePattern>string.IsNullOrEmpty($stringExpr$)</ReplacePattern>
+      <SearchPattern>$stringExpr$.Length == 0</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="stringExpr" ExpressionType="System.String" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="HINT" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Remove try leaving the body</Comment>
+      <ReplaceComment>Remove try leaving the body</ReplaceComment>
+      <ReplacePattern>$TRYBODY$</ReplacePattern>
+      <SearchPattern><![CDATA[ try 
+ {
+	$TRYBODY$
+ } 
+ catch (Exception ex) 
+ {
+	$CATCHBODY$
+ }]]></SearchPattern>
+      <Params />
+      <Placeholders>
+        <StatementPlaceholder Name="TRYBODY" Minimal="1" Maximal="-1" />
+        <StatementPlaceholder Name="CATCHBODY" Minimal="-1" Maximal="-1" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="SUGGESTION" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>The Where is unnecessary</Comment>
+      <ReplaceComment>Move the predicate to Single, eliminating the Where</ReplaceComment>
+      <ReplacePattern>$EXPR$.Single($PREDICATE$)</ReplacePattern>
+      <SearchPattern>$EXPR$.Where($PREDICATE$).Single()</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="EXPR" ExpressionType="" ExactType="True" />
+        <ExpressionPlaceholder Name="PREDICATE" ExpressionType="" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+  </CustomStructuralPatterns>
+</Configuration>

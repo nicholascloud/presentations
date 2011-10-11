@@ -1,0 +1,7 @@
+Mark has made his presentation availble via github!
+
+https://github.com/MarkBorcherding/altnet-stl-git-presentation
+
+Sign up for an account and clone his repository to get the presentation files.  
+
+Be sure to read the README.md file for instructions on how to watch the slideshow (it's not PowerPoint).

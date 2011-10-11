@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>form attributes</title>
+    <style type="text/css">
+        label { display: block; font-weight: bold; }
+        #rangeValue { font-size: .8em; }
+
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+
+            var range = document.getElementById("range");
+            var rangeValue = document.getElementById("rangeValue");
+            rangeValue.innerHTML = range.value;
+            range.onchange = function() {
+                rangeValue.innerHTML = range.value;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Form element attributes</h1>
+
+    <form>
+
+        <label>Placeholder</label>
+        <input name="licensePlate" type="text" placeholder="e.g. ABC-123" />
+
+        <label>Autofocus</label>
+        <input name="autofocus" type="text" autofocus />
+
+        <label>Min/Max (1, 100)</label>
+        <input id="range" name="range" type="range" min="1" max="100" value="1" />
+        <span id="rangeValue"></span>
+
+        <label>Required</label>
+        <input name="required" type="text" required /> 
+
+        <label>Pattern (zip code)</label>
+        <input name="pattern" type="text" pattern="^[\d]{5}$" />
+
+        <label>List</label>
+        <datalist id="sizes">
+            <option value="S" label="Small">
+            <option value="M" label="Medium">
+            <option value="L" label="Large">
+        </datalist>
+        <input id="shirtSize" type="text" list="sizes" />
+
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+
+</body>
+</html>

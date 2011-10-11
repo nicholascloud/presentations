@@ -1,0 +1,15 @@
+﻿@using GrokMob.Mvc
+@using GrokMob.ReadModel
+@model IEnumerable<MeetingComment>
+
+@foreach (var comment in Model) {
+<div class="recentActivity">
+  <img src="/assets/icons/chat-.png" />
+  <label>@comment.MemberHandle @comment.CreatedAt</label><br />
+  <label>@comment.Comment.Chop(50)</label>
+</div>
+}
+
+@if(!Model.Any()) {
+  <h4>No comments</h4>
+}

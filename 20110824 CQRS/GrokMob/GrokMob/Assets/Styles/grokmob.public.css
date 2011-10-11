@@ -1,0 +1,138 @@
+body, h1, h2, h3, h4, h5, h6, p, div, ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 13px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5em;
+  color: rgb(255, 0, 71);
+}
+h2 { font-size: 2.0em; }
+h3 { font-size: 1.4em; }
+h4 { font-size: 1.0em; }
+h5 { font-size: 1.0em; }
+h6 { font-size: 1.0em; }
+
+div#header {
+  background-color: rgb(224, 224, 224);
+  padding: 5px;
+}
+
+div#bigContent {
+  width: 960px;
+  margin: auto;
+  padding-top: 10px;
+}
+
+div#bigLeft {
+  width: 130px;
+  float: left;
+  /*background-color: yellow;*/
+  padding-left: 10px;
+}
+
+div.leftBlock {
+  margin-bottom: 20px;
+}
+
+div#bigRight {
+  width: 780px;
+  float: left;
+  /*background-color: yellowgreen;*/
+  padding-left: 9px;
+  border-left: solid 1px gainsboro;
+}
+
+fieldset {
+  border: 0px;
+  padding: 10px;
+}
+
+/* --------------------------------------------------------------------- */
+
+.quickMeeting {
+  width: 500px;
+}
+
+.quickMeeting input, textarea, select {
+  width: 300px;
+}
+
+.quickMeeting textarea {
+  height: 150px;
+}
+
+#dashboardLeft {
+  float: left;
+  width: 380px;
+}
+
+#dashboardRight {
+  margin-left: 380px;
+}
+
+/* --------------------------------------------------------------------- */
+
+.meetingSummary {
+  margin: 5px 0 5px 0;
+}
+
+/* Home/_QuickMeeting -------------------------------------------------- */
+
+#quickMeeting img {
+  float: left;
+}
+
+#quickMeeting h2 {
+  padding-bottom: 5px;
+  float: right;
+}
+
+#quickMeeting ul {
+  clear: both;
+  margin-top: 5px;
+}
+
+/* Home/_Comments ------------------------------------------------------ */
+
+.recentActivity {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.recentActivity img {
+  float: left;
+  padding-right: 10px;
+}
+
+.recentActivity label {
+  font-weight: bold;
+}
+
+/* Home/_FutureMeetings ------------------------------------------------ */
+
+.meetingSummary img {
+  float: left;
+}
+
+.meetingSummary div {
+  margin-left:35px;
+}
+
+/* Home/Meeting -------------------------------------------------------- */
+
+#addCommentFields label {
+  float: left;
+}
+
+#addCommentFields textarea {
+  height: 100px;
+}
+
+#addCommentFields button {
+  margin-left: 70px;
+}

@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+		<location type="CITY">
+		<termsofservice link="http://www.wunderground.com/members/tos.asp#api" />
+		<country>US</country>
+  <state>MO</state>
+  <city>Florissant</city>
+  <tz_short>CDT</tz_short>
+  <tz_unix>America/Chicago</tz_unix>
+  <lat>38.80436707</lat>
+  <lon>-90.34403229</lon>
+  <zip>63031</zip>
+  <magic>1</magic>
+  <wmo>99999</wmo>
+		<requesturl>/US/MO/Florissant.html</requesturl>
+		<wuiurl>http://www.wunderground.com/US/MO/Florissant.html</wuiurl>
+		<radar>
+		<image_url><![CDATA[http://resize.wunderground.com/cgi-bin/resize_convert?ox=gif&url=radblast/cgi-bin/radar/WUNIDS_composite%3Fcenterlat=38.80436707%26centerlon=-90.34403229%26radius=15%26newmaps=1%26smooth=1]]></image_url>
+		<url><![CDATA[http://www.wunderground.com/radar/radblast.asp?ID=LSX&region=b3&lat=38.80436707&lon=-90.34403229]]></url>
+		</radar>
+		<webcams>
+		<cam>
+  <handle>ParkerSTL</handle>
+  <camid>ParkerSTLCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp|0</type>
+  <assoc_station_id></assoc_station_id>
+  <link></link>
+  <linktext>Eyeball</linktext>
+  <cameratype>D-Link DCS-930L</cameratype>
+  <organization></organization>
+  <neighborhood>Brown Rd</neighborhood>
+  <zip>63114</zip>
+  <city>Overland</city>
+  <state>MO</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>3</hexant>
+  <hexid>18449</hexid>
+  <lat>38.69086838</lat>
+  <lon>-90.35980225</lon>
+  <updated>2011-04-26 21:57:45</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>59a78603be84cb6c8ea3459e9579e5484e7d68b0</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/p/a/ParkerSTL/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/p/a/ParkerSTL/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/ParkerSTL/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>Squibbie</handle>
+  <camid>SquibbieCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp</type>
+  <assoc_station_id>KMOCREVE2</assoc_station_id>
+  <link>http://www.hootsandtoots.com</link>
+  <linktext></linktext>
+  <cameratype>Sharx Security 2607</cameratype>
+  <organization></organization>
+  <neighborhood></neighborhood>
+  <zip>63146</zip>
+  <city>St. Louis</city>
+  <state>MO</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>3</hexant>
+  <hexid>18449</hexid>
+  <lat>38.67916870</lat>
+  <lon>-90.43299866</lon>
+  <updated>2011-04-26 21:58:14</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>86d3b2ff00f6d88dc0134db8d2000103c5b27d2f</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/s/q/Squibbie/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/s/q/Squibbie/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/Squibbie/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>dchamb</handle>
+  <camid>dchambCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp|0</type>
+  <assoc_station_id>KILBRIGH4</assoc_station_id>
+  <link>http://www.dchamberlain.net/astronomy_page.htm</link>
+  <linktext>Chamberlain Observatory</linktext>
+  <cameratype>Logitech Quickcam Pro 9000</cameratype>
+  <organization></organization>
+  <neighborhood></neighborhood>
+  <zip>62012</zip>
+  <city>Brighton</city>
+  <state>IL</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>1</hexant>
+  <hexid>18449</hexid>
+  <lat>39.00289917</lat>
+  <lon>-90.16362000</lon>
+  <updated>2011-04-26 21:12:51</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>5a99f198ffdfcbe4415ca00c9e9b45d0555c1926</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/d/c/dchamb/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/d/c/dchamb/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/dchamb/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>tstolze</handle>
+  <camid>tstolzeCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp|0</type>
+  <assoc_station_id>KMOOFALL7</assoc_station_id>
+  <link>http://ofallonweather.org/</link>
+  <linktext>Ofallon Weather</linktext>
+  <cameratype>Sharx SCNC3606</cameratype>
+  <organization>ofallonweather.org</organization>
+  <neighborhood>Ofallon, MO</neighborhood>
+  <zip>63366</zip>
+  <city>O'Fallon</city>
+  <state>MO</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>4</hexant>
+  <hexid>18449</hexid>
+  <lat>38.83909225</lat>
+  <lon>-90.72872925</lon>
+  <updated>2011-04-26 21:57:53</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>20b51382896bed4554958310005a54d052a9e521</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/t/s/tstolze/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/t/s/tstolze/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/tstolze/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>tstolze</handle>
+  <camid>tstolzeCAM2</camid>
+  <camindex>2</camindex>
+  <type>ftp|0</type>
+  <assoc_station_id>KMOOFALL7</assoc_station_id>
+  <link>http://ofallonweather.org/</link>
+  <linktext>Ofallon Weather</linktext>
+  <cameratype>Sharx SCNC 3606</cameratype>
+  <organization>ofallonweather.org</organization>
+  <neighborhood>O'fallon</neighborhood>
+  <zip>63366</zip>
+  <city>O'Fallon</city>
+  <state>MO</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>4</hexant>
+  <hexid>18449</hexid>
+  <lat>38.83909225</lat>
+  <lon>-90.72872925</lon>
+  <updated>2011-04-26 21:52:18</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>329406a025b7bca78038f887e88b33e9b9536908</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/t/s/tstolze/2/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/t/s/tstolze/2/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/tstolze/2/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>Billm1961</handle>
+  <camid>Billm1961CAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp</type>
+  <assoc_station_id></assoc_station_id>
+  <link>http://www.litchfieldil.com</link>
+  <linktext>The Litchfield Home Page</linktext>
+  <cameratype></cameratype>
+  <organization>WAM Computers</organization>
+  <neighborhood>Downtown Litchfield, IL</neighborhood>
+  <zip>62056</zip>
+  <city>Litchfield</city>
+  <state>IL</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>5</hexant>
+  <hexid>18450</hexid>
+  <lat>39.17590332</lat>
+  <lon>-89.65546417</lon>
+  <updated>2011-04-26 21:56:02</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>cfc7a23b079b01e320a5b0d1696fbe25f2f646ce</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/b/i/Billm1961/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/b/i/Billm1961/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/Billm1961/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>AH1977</handle>
+  <camid>AH1977CAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp</type>
+  <assoc_station_id>KILMARYV4</assoc_station_id>
+  <link>http://www.andersonhospital.org</link>
+  <linktext>Anderson Hospital</linktext>
+  <cameratype></cameratype>
+  <organization>Anderson Hospital</organization>
+  <neighborhood></neighborhood>
+  <zip>62062</zip>
+  <city>Maryville</city>
+  <state>IL</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>4</hexant>
+  <hexid>18450</hexid>
+  <lat>38.73681259</lat>
+  <lon>-89.94557953</lon>
+  <updated>2011-04-26 21:59:18</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>44d97e336657c54c34b8cd6393bc74b19466a024</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/a/h/AH1977/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/a/h/AH1977/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/AH1977/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>lawnboy</handle>
+  <camid>lawnboyCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp|0</type>
+  <assoc_station_id>KILCHEST2</assoc_station_id>
+  <imageurl>http://webcam.wunderground.com </imageurl>
+  <link></link>
+  <linktext></linktext>
+  <cameratype>BB-HCM371A Panasonic</cameratype>
+  <organization>COWP</organization>
+  <neighborhood>Scott's Backyard</neighborhood>
+  <zip>62233</zip>
+  <city>Chester</city>
+  <state>IL</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>2</hexant>
+  <hexid>18810</hexid>
+  <lat>37.89488983</lat>
+  <lon>-89.81122589</lon>
+  <updated>2011-04-26 21:49:00</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>5aa01ab115827b8bed70a5893441ede825198c25</hash>
+  <isrecent>1</isrecent>
+  <frequency>600</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/l/a/lawnboy/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/l/a/lawnboy/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/lawnboy/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>Arbini</handle>
+  <camid>ArbiniCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp</type>
+  <assoc_station_id>KMOFENTO4</assoc_station_id>
+  <link>http://home.swbell.net/darbini</link>
+  <linktext></linktext>
+  <cameratype>D-Link</cameratype>
+  <organization></organization>
+  <neighborhood>Winter Valley Subdivision</neighborhood>
+  <zip>63026</zip>
+  <city>Fenton</city>
+  <state>MO</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>5</hexant>
+  <hexid>18810</hexid>
+  <lat>38.49070740</lat>
+  <lon>-90.43111420</lon>
+  <updated>2011-04-26 21:56:34</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>d4fab061711dbacca0eae9f7cde3bd76aac50774</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/a/r/Arbini/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/a/r/Arbini/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/Arbini/1/show.html</CAMURL>
+  </cam>
+		<cam>
+  <handle>XDS</handle>
+  <camid>XDSCAM1</camid>
+  <camindex>1</camindex>
+  <type>ftp</type>
+  <assoc_station_id>KMOIMPER1</assoc_station_id>
+  <link>http://weather.xsintrk.net</link>
+  <linktext>Weather Cam</linktext>
+  <cameratype>4XEM IP7330 Outdoor Network Camera</cameratype>
+  <organization></organization>
+  <neighborhood></neighborhood>
+  <zip>63052</zip>
+  <city>Imperial</city>
+  <state>MO</state>
+  <country>US</country>
+  <tzname>America/Chicago</tzname>
+  <hexant>5</hexant>
+  <hexid>18810</hexid>
+  <lat>38.36534882</lat>
+  <lon>-90.37997437</lon>
+  <updated>2011-04-26 21:56:51</updated>
+  <downloaded>0000-00-00 00:00:00</downloaded>
+  <hash>97bb5b2b0cb350dc790e4a462ae1839bbd095606</hash>
+  <isrecent>1</isrecent>
+  <frequency>300</frequency>
+  <CURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/x/d/XDS/1/current.jpg?t=1303869576</CURRENTIMAGEURL>
+  <WIDGETCURRENTIMAGEURL>http://icons.wunderground.com/webcamramdisk/x/d/XDS/1/widget.jpg?t=1303869576</WIDGETCURRENTIMAGEURL>
+  <CAMURL>http://www.wunderground.com/webcams/XDS/1/show.html</CAMURL>
+  </cam>
+  </webcams>
+		<nearby_weather_stations>
+<airport>
+  <station>
+  <city>St. Louis</city>
+  <state>MO</state>
+  <country>US</country>
+  <icao>KSTL</icao>
+  <lat>38.75000000</lat>
+  <lon>-90.36000061</lon>
+  </station>
+  <station>
+  <city>St. Charles</city>
+  <state>MO</state>
+  <country>US</country>
+  <icao>KSET</icao>
+  <lat>38.93000031</lat>
+  <lon>-90.43000031</lon>
+  </station>
+  <station>
+  <city>Alton</city>
+  <state>IL</state>
+  <country>US</country>
+  <icao>KALN</icao>
+  <lat>38.88999939</lat>
+  <lon>-90.05000305</lon>
+  </station>
+  <station>
+  <city>Cahokia</city>
+  <state>IL</state>
+  <country>US</country>
+  <icao>KCPS</icao>
+  <lat>38.56999969</lat>
+  <lon>-90.16000366</lon>
+  </station>
+</airport>
+<pws>
+  <station>
+  <neighborhood><![CDATA[1 Mile South of St. Louis Lambert  Airport]]></neighborhood>
+  <city><![CDATA[Woodson Terrace]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU23]]></id>
+  <distance_km><![CDATA[8]]></distance_km>
+  <distance_mi><![CDATA[5]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Fox Hill]]></neighborhood>
+  <city><![CDATA[Saint Charles]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSAINT13]]></id>
+  <distance_km><![CDATA[12]]></distance_km>
+  <distance_mi><![CDATA[7]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[]]></neighborhood>
+  <city><![CDATA[Maryland Heights]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOMARYL5]]></id>
+  <distance_km><![CDATA[13]]></distance_km>
+  <distance_mi><![CDATA[8]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[APRSWXNET Olivette                   MO US]]></neighborhood>
+  <city><![CDATA[Saint Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[MD1379]]></id>
+  <distance_km><![CDATA[14]]></distance_km>
+  <distance_mi><![CDATA[8]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Quiet Village]]></neighborhood>
+  <city><![CDATA[Creve Coeur]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOCREVE2]]></id>
+  <distance_km><![CDATA[15]]></distance_km>
+  <distance_mi><![CDATA[9]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Alton - Christian Hill Area]]></neighborhood>
+  <city><![CDATA[Alton]]></city>
+  <state><![CDATA[IL]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KILALTON5]]></id>
+  <distance_km><![CDATA[16]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Creve Coeur]]></neighborhood>
+  <city><![CDATA[St. Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU10]]></id>
+  <distance_km><![CDATA[16]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Old Farm Estates]]></neighborhood>
+  <city><![CDATA[St. Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU12]]></id>
+  <distance_km><![CDATA[16]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Whispering Hills]]></neighborhood>
+  <city><![CDATA[Creve Coeur]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOCREVE3]]></id>
+  <distance_km><![CDATA[17]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Saint Charles Hills]]></neighborhood>
+  <city><![CDATA[Saint Charles]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSAINT4]]></id>
+  <distance_km><![CDATA[17]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Ladue Meadows]]></neighborhood>
+  <city><![CDATA[Creve Coeur]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOCREVE4]]></id>
+  <distance_km><![CDATA[17]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[APRSWXNET Creve Coeur                MO US]]></neighborhood>
+  <city><![CDATA[Saint Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[MD6357]]></id>
+  <distance_km><![CDATA[18]]></distance_km>
+  <distance_mi><![CDATA[10]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Timber Ridge]]></neighborhood>
+  <city><![CDATA[Godfrey]]></city>
+  <state><![CDATA[IL]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KILGODFR2]]></id>
+  <distance_km><![CDATA[18]]></distance_km>
+  <distance_mi><![CDATA[11]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Chesterfield (East)]]></neighborhood>
+  <city><![CDATA[Chesterfield]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOCHEST2]]></id>
+  <distance_km><![CDATA[18]]></distance_km>
+  <distance_mi><![CDATA[11]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[APRSWXNET Saint Charles              MO US]]></neighborhood>
+  <city><![CDATA[Saint Charles]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[MC2149]]></id>
+  <distance_km><![CDATA[19]]></distance_km>
+  <distance_mi><![CDATA[11]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Cheltenham]]></neighborhood>
+  <city><![CDATA[St. Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU25]]></id>
+  <distance_km><![CDATA[20]]></distance_km>
+  <distance_mi><![CDATA[12]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[West Drive]]></neighborhood>
+  <city><![CDATA[St. Peters]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTPET3]]></id>
+  <distance_km><![CDATA[20]]></distance_km>
+  <distance_mi><![CDATA[12]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[APRSWXNET Saint Peters                 MO US]]></neighborhood>
+  <city><![CDATA[Saint Peters]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[MAS824]]></id>
+  <distance_km><![CDATA[21]]></distance_km>
+  <distance_mi><![CDATA[12]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Alton - Rock Gate Estates]]></neighborhood>
+  <city><![CDATA[Alton]]></city>
+  <state><![CDATA[IL]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KILALTON1]]></id>
+  <distance_km><![CDATA[22]]></distance_km>
+  <distance_mi><![CDATA[13]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[APRSWXNET Manchester               MO US]]></neighborhood>
+  <city><![CDATA[Chesterfield]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[MAP431]]></id>
+  <distance_km><![CDATA[22]]></distance_km>
+  <distance_mi><![CDATA[13]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Shaw/Tower Grove]]></neighborhood>
+  <city><![CDATA[St. Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU11]]></id>
+  <distance_km><![CDATA[22]]></distance_km>
+  <distance_mi><![CDATA[13]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Carrington Place]]></neighborhood>
+  <city><![CDATA[St Peters]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTPET4]]></id>
+  <distance_km><![CDATA[22]]></distance_km>
+  <distance_mi><![CDATA[13]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Lindenwood Park]]></neighborhood>
+  <city><![CDATA[St Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU24]]></id>
+  <distance_km><![CDATA[23]]></distance_km>
+  <distance_mi><![CDATA[13]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Tower Grove Spring/Humphrey]]></neighborhood>
+  <city><![CDATA[St Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU21]]></id>
+  <distance_km><![CDATA[24]]></distance_km>
+  <distance_mi><![CDATA[14]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Rosewood Heights]]></neighborhood>
+  <city><![CDATA[East Alton]]></city>
+  <state><![CDATA[IL]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KILEASTA1]]></id>
+  <distance_km><![CDATA[25]]></distance_km>
+  <distance_mi><![CDATA[15]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[]]></neighborhood>
+  <city><![CDATA[Des Peres]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMODESPE3]]></id>
+  <distance_km><![CDATA[26]]></distance_km>
+  <distance_mi><![CDATA[15]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Holly Hills]]></neighborhood>
+  <city><![CDATA[St Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU20]]></id>
+  <distance_km><![CDATA[26]]></distance_km>
+  <distance_mi><![CDATA[15]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Jersey County along IL 111]]></neighborhood>
+  <city><![CDATA[Brighton]]></city>
+  <state><![CDATA[IL]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KILBRIGH4]]></id>
+  <distance_km><![CDATA[27]]></distance_km>
+  <distance_mi><![CDATA[16]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Big Bend and I-270]]></neighborhood>
+  <city><![CDATA[Kirkwood]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOKIRKW3]]></id>
+  <distance_km><![CDATA[27]]></distance_km>
+  <distance_mi><![CDATA[16]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Grantwood Village]]></neighborhood>
+  <city><![CDATA[St Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU16]]></id>
+  <distance_km><![CDATA[27]]></distance_km>
+  <distance_mi><![CDATA[16]]></distance_mi>
+  </station>
+  <station>
+  <neighborhood><![CDATA[Sunset Hills]]></neighborhood>
+  <city><![CDATA[St Louis]]></city>
+  <state><![CDATA[MO]]></state>
+  <country><![CDATA[US]]></country>
+  <id><![CDATA[KMOSTLOU22]]></id>
+  <distance_km><![CDATA[28]]></distance_km>
+  <distance_mi><![CDATA[16]]></distance_mi>
+  </station>
+</pws>
+</nearby_weather_stations>
+		</location>

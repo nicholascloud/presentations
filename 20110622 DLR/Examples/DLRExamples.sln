@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLRExamples", "DLRExamples\DLRExamples.csproj", "{3E53C45B-6294-47BE-9FE9-4BDCA9C44383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonScriptEngineExample", "PythonScriptEngineExample\PythonScriptEngineExample.csproj", "{A47BA214-F4DC-491B-9FE7-D85C2A09DA27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLRExpressionExample", "DLRExpressionExample\DLRExpressionExample.csproj", "{22A696E9-8681-4567-9FB0-C045713114D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallSiteBinderExample", "CallSiteBinderExample\CallSiteBinderExample.csproj", "{49A20C86-7848-44F9-93C8-9CDC0242871B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageInteropExample", "LanguageInteropExample\LanguageInteropExample.csproj", "{406438EC-064E-4A68-BE52-A75A46E7BDD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicObjectsExample", "DynamicObjectsExample\DynamicObjectsExample.csproj", "{802B98AA-E50C-446C-8B4D-EDDCD63DB0A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLRAOPExample", "DLRAOPExample\DLRAOPExample.csproj", "{47C5561D-91E0-4A6A-8145-2AE4C6551C0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E53C45B-6294-47BE-9FE9-4BDCA9C44383}.Debug|x86.ActiveCfg = Debug|x86
+		{3E53C45B-6294-47BE-9FE9-4BDCA9C44383}.Debug|x86.Build.0 = Debug|x86
+		{3E53C45B-6294-47BE-9FE9-4BDCA9C44383}.Release|x86.ActiveCfg = Release|x86
+		{3E53C45B-6294-47BE-9FE9-4BDCA9C44383}.Release|x86.Build.0 = Release|x86
+		{A47BA214-F4DC-491B-9FE7-D85C2A09DA27}.Debug|x86.ActiveCfg = Debug|x86
+		{A47BA214-F4DC-491B-9FE7-D85C2A09DA27}.Debug|x86.Build.0 = Debug|x86
+		{A47BA214-F4DC-491B-9FE7-D85C2A09DA27}.Release|x86.ActiveCfg = Release|x86
+		{A47BA214-F4DC-491B-9FE7-D85C2A09DA27}.Release|x86.Build.0 = Release|x86
+		{22A696E9-8681-4567-9FB0-C045713114D5}.Debug|x86.ActiveCfg = Debug|x86
+		{22A696E9-8681-4567-9FB0-C045713114D5}.Debug|x86.Build.0 = Debug|x86
+		{22A696E9-8681-4567-9FB0-C045713114D5}.Release|x86.ActiveCfg = Release|x86
+		{22A696E9-8681-4567-9FB0-C045713114D5}.Release|x86.Build.0 = Release|x86
+		{49A20C86-7848-44F9-93C8-9CDC0242871B}.Debug|x86.ActiveCfg = Debug|x86
+		{49A20C86-7848-44F9-93C8-9CDC0242871B}.Debug|x86.Build.0 = Debug|x86
+		{49A20C86-7848-44F9-93C8-9CDC0242871B}.Release|x86.ActiveCfg = Release|x86
+		{49A20C86-7848-44F9-93C8-9CDC0242871B}.Release|x86.Build.0 = Release|x86
+		{406438EC-064E-4A68-BE52-A75A46E7BDD1}.Debug|x86.ActiveCfg = Debug|x86
+		{406438EC-064E-4A68-BE52-A75A46E7BDD1}.Debug|x86.Build.0 = Debug|x86
+		{406438EC-064E-4A68-BE52-A75A46E7BDD1}.Release|x86.ActiveCfg = Release|x86
+		{406438EC-064E-4A68-BE52-A75A46E7BDD1}.Release|x86.Build.0 = Release|x86
+		{802B98AA-E50C-446C-8B4D-EDDCD63DB0A2}.Debug|x86.ActiveCfg = Debug|x86
+		{802B98AA-E50C-446C-8B4D-EDDCD63DB0A2}.Debug|x86.Build.0 = Debug|x86
+		{802B98AA-E50C-446C-8B4D-EDDCD63DB0A2}.Release|x86.ActiveCfg = Release|x86
+		{802B98AA-E50C-446C-8B4D-EDDCD63DB0A2}.Release|x86.Build.0 = Release|x86
+		{47C5561D-91E0-4A6A-8145-2AE4C6551C0A}.Debug|x86.ActiveCfg = Debug|x86
+		{47C5561D-91E0-4A6A-8145-2AE4C6551C0A}.Debug|x86.Build.0 = Debug|x86
+		{47C5561D-91E0-4A6A-8145-2AE4C6551C0A}.Release|x86.ActiveCfg = Release|x86
+		{47C5561D-91E0-4A6A-8145-2AE4C6551C0A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drag-n-drop</title>
+    <script lang="javascript">
+        window.onload = function() {
+            var target = document.getElementById("box1");
+            target.ondragover = function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            target.ondrop = function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log(event.dataTransfer.files);
+
+                var file = event.dataTransfer.files[0];
+                var img = document.createElement("img");
+                img.src = file.webkitRelativePath + file.name;
+                document.body.appendChild(img);
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div id="box1" style="border: solid 1px black; width: 100px; height: 100px;"></div>
+
+</body>
+</html>

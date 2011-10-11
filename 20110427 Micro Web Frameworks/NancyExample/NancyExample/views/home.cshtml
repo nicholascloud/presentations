@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Information</title>
+    <script language="javascript" type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/home.js"></script>
+</head>
+<body>
+    <h1>Weather Information</h1>
+
+    <form method="post" action="/weather">
+        <fieldset>
+            <label>Zip Code</label>
+            <input type="text" name="zip" />
+            <select name="dataType">
+                <option value="1">Alerts</option>
+                <option value="2">Forecast</option>
+                <option value="3">Cams</option>
+            </select>
+            <input type="submit" value="Go" />
+        </fieldset>
+    </form>
+
+    <div id="loader">
+        <img src="/img/ajax-loader.gif" style="display: block; margin: auto;" />
+    </div>
+
+    <div id="howto" style="display: none;"></div>
+
+</body>
+</html>

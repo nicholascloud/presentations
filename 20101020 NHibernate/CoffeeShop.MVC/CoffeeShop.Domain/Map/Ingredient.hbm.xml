@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="CoffeeShop.Domain" namespace="CoffeeShop.Domain.Entity">
+    <class name="Ingredient">
+        <id name="Id" column="IngredientID">
+            <generator class="guid" />
+        </id>
+
+        <property name="Name" column="`Name`" />
+        <property name="Upcharge" />
+    </class>
+</hibernate-mapping>

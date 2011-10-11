@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>web sql</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            function onError(tx, error) {
+                alert("ERROR: " + error.code + " : " + error.message);
+                return true;
+            }
+
+            var db = openDatabase("mydb", "1.0", "customer db", 1024);
+            db.transaction(function (tx) {
+                var customerTableCreated = false;
+                tx.executeSql("CREATE TABLE IF NOT EXISTS customer (id, name, job);", [],
+                function (tx, results) {
+                    customerTableCreated = true;
+                },
+                onError);
+                if(customerTableCreated) {
+                    //initial data population
+                    tx.executeSql("INSERT INTO customer (id, name, job) VALUES (?, ?, ?);", [1, "Bob", "accountant"], null, onError);
+                    tx.executeSql("INSERT INTO customer (id, name, job) VALUES (?, ?, ?);", [2, "Jane", "chemist"], null, onError);
+                    tx.executeSql("INSERT INTO customer (id, name, job) VALUES (?, ?, ?);", [3, "Herbert", "dentist"], null, onError);
+                }
+            });
+
+            var names = $("#names");
+
+            $("#queryJob").click(function() {
+                var selectedName = names.val();
+                db.transaction(function (tx) {
+                    tx.executeSql("SELECT job FROM customer WHERE name = ?;", [selectedName],
+                    function(tx, results) {
+                        alert(selectedName + " is a " + results.rows.item(0).job);
+                    },
+                    onError);
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+    <div>
+        <select id="names">
+            <option value="Bob">Bob</option>
+            <option value="Jane">Jane</option>
+            <option value="Herbert">Herbert</option>
+        </select>
+        <button id="queryJob">What do they do?</button>
+    </div>
+
+</body>
+</html>

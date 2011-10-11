@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImpromptuInterface.MVVM</name>
+    </assembly>
+    <members>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel`1">
+            <summary>
+            View Model that uses a Dynamic Implementation to remove boilerplate for Two-Way bound properties and commands to methods. 
+            If you specific a TInterface it provides a guide to the dynamic properties
+            </summary>
+            <typeparam name="TInterfaceContract">The type of the interface.</typeparam>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel">
+            <summary>
+            View Model that uses a Dynamic Implementation to remove boilerplate for Two-Way bound properties and commands to methods
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.ChangedHandler(System.ComponentModel.PropertyChangedEventHandler)">
+            <summary>
+            Properties the changed.
+            </summary>
+            <param name="delegate">The @delegate.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.DependencyLink(System.String,System.String)">
+            <summary>
+            Links a property to a dependency.
+            </summary>
+            <param name="property">The property.</param>
+            <param name="dependency">To.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.DependencyUnlink(System.String,System.String)">
+            <summary>
+            Unlinks a dependencies.
+            </summary>
+            <param name="property">The property.</param>
+            <param name="dependency">The dependency.</param>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.Dynamic">
+            <summary>
+            Convenient access to Dynamic Properties. When subclassing you can use Dynamic.PropertyName = x, etc.
+            </summary>
+            <value>The command.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.Command">
+            <summary>
+            Gets the command for binding. usage: {Binding Command.MethodName} for <code>void MethodName(object parmeter)</code> and optionally <code>bool CanMethodName(object parameter)</code>.
+            </summary>
+            <value>The command.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.Events">
+            <summary>
+            Gets the EventBinder to bind events to this model.
+            </summary>
+            <value>The events.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.Dependencies">
+            <summary>
+            Sets up dependency relations amoung dependenant properties
+            </summary>
+            <value>The dependencies.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.OnChanged">
+            <summary>
+            Subscribe to OnProeprtyChanged notififcations of specific properties
+            </summary>
+            <value>The on changed.</value>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel.PropertyDepends">
+            <summary>
+            Trampoline object to choose property
+            </summary>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel.DependsOn">
+            <summary>
+            Trampoline object to add dependency
+            </summary>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel.LinkFinal">
+            <summary>
+            Trampoline object to finish dependency link
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.LinkFinal.Link">
+            <summary>
+            Links the property with the dependency.
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.LinkFinal.Unlink">
+            <summary>
+            Unlinks the property with the dependency.
+            </summary>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware">
+            <summary>
+            Dependency aware version of FireOnPropertyChangedDependencyAware
+            </summary>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.FireOnPropertyChanged">
+            <summary>
+            Proxy that gives a syntax for setting property changes calls for specific properties.
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.FireOnPropertyChanged.#ctor(System.ComponentModel.INotifyPropertyChanged)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.FireOnPropertyChanged"/> class.
+            </summary>
+            <param name="parent">The parent.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.FireOnPropertyChanged.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Called when receives [property changed] event.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.#ctor(ImpromptuInterface.MVVM.ImpromptuViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware"/> class.
+            </summary>
+            <param name="parent">The parent.</param>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove`1">
+            <summary>
+            Proxy to track add and remove of delegates
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove`1.op_Addition(ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove{`0},`0)">
+            <summary>
+            Implements the operator +.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove`1.op_Subtraction(ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove{`0},`0)">
+            <summary>
+            Implements the operator -.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove`1.Delegate">
+            <summary>
+            Gets or sets the delegate.
+            </summary>
+            <value>The delegate.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel.FireOnPropertyChangedDependencyAware.DelegateAddRemove`1.IsAdding">
+            <summary>
+            Gets or sets a value indicating whether this instance is adding.
+            </summary>
+            <value><c>true</c> if this instance is adding; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuViewModel`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuViewModel`1"/> class.
+            </summary>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel`1.Static">
+            <summary>
+            Convenient access to Dynamic Properties but represented by a Static Interface.
+             When subclassing you can use Static.PropertyName = x, etc
+            </summary>
+            <value>The static.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpromptuViewModel`1.Contract">
+            <summary>
+            Convenient access to Dynamic Properties but represented by a Static Interface.
+             When subclassing you can use Contract.PropertyName = x, etc
+            </summary>
+            <value>The contract interface.</value>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuToStringExtensions">
+            <summary>
+            Extension methods to create ImpromptuToString proxies;
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuToStringExtensions.ProxyToString``1(``0,System.Func{``0,System.String})">
+            <summary>
+            Proxies everything to replace the ToString Method
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The target.</param>
+            <param name="toStringDelegate">To string delegate.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuToStringExtensions.ProxyAllToString``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String})">
+            <summary>
+            Proxies all items to replace the ToString Method
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="targets">The targets.</param>
+            <param name="toStringDelegate">To string delegate.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuResultToString">
+            <summary>
+            Proxies Result to String
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuResultToString.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuResultToString"/> class.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="toStringDelegate">To string delegate.</param>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuToString`1">
+            <summary>
+            Proxy to override to string
+            </summary>
+            <typeparam name="TTarget">The type of the target.</typeparam>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuToString`1.NullValue(System.String)">
+            <summary>
+            Null value representative object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuToString`1.NullValue(System.Func{`0,System.String})">
+            <summary>
+            Null  value representative object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuToString`1.op_Implicit(ImpromptuInterface.MVVM.ImpromptuToString{`0})~`0">
+            <summary>
+            Performs an implicit conversion from <see cref="T:ImpromptuInterface.MVVM.ImpromptuToString`1"/> to <see cref="!:TTarget"/>.
+            </summary>
+            <param name="proxy">The proxy.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuToString`1.#ctor(`0,System.Func{`0,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuToString`1"/> class.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="toStringDelegate">To string delegate.</param>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuBindingList">
+            <summary>
+            Supports Providing Property info to Binding things like DataGrids that refresh with bindings
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuBindingList.#ctor(System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuBindingList"/> class.
+            </summary>
+            <param name="contents">The contents.</param>
+            <param name="members">The members.</param>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpromptuRelayCommand">
+            <summary>
+            Command that relays to a target and method name.
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuRelayCommand.#ctor(System.Object,ImpromptuInterface.String_OR_InvokeMemberName)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuRelayCommand"/> class.
+            </summary>
+            <param name="executeTarget">The execute target.</param>
+            <param name="executeName">Name of the execute.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuRelayCommand.#ctor(System.Object,ImpromptuInterface.String_OR_InvokeMemberName,System.Object,ImpromptuInterface.String_OR_InvokeMemberName)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.ImpromptuRelayCommand"/> class.
+            </summary>
+            <param name="executeTarget">The execute target.</param>
+            <param name="executeName">Name of the execute method.</param>
+            <param name="canExecuteTarget">The can execute target.</param>
+            <param name="canExecuteName">Name of the can execute method.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.ImpromptuRelayCommand.RaiseCanExecuteChanged">
+            <summary>
+            Raises the can execute changed.
+            </summary>
+        </member>
+        <member name="E:ImpromptuInterface.MVVM.ImpromptuRelayCommand.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.ImpropmtuCommandBinder">
+            <summary>
+            Trampoline object to give access to methods as Commands of original viewmodal
+            </summary>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.ImpropmtuCommandBinder.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:ImpromptuInterface.MVVM.ImpromptuRelayCommand"/> with the specified key.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.Event">
+            <summary>
+            Attached Property Class
+            </summary>
+        </member>
+        <member name="F:ImpromptuInterface.MVVM.Event.BindProperty">
+            <summary>
+            Property to Describe binding Events in DataContext
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.Event.SetBind(System.Windows.DependencyObject,ImpromptuInterface.MVVM.EventBinder)">
+            <summary>
+            Sets the bind.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.Event.GetBind(System.Windows.DependencyObject)">
+            <summary>
+            Gets the bind.
+            </summary>
+            <param name="element">The element.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.Event.GenerateEventHandler(System.Type,System.String)">
+            <summary>
+            Generates the event handler.
+            </summary>
+            <param name="delType">Type of the del.</param>
+            <param name="membername">The membername.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.Event.BinderEventHandlerMemberName">
+            <summary>
+            Object with method to create latebound eventhandler delegates
+            </summary>
+        </member>
+        <member name="F:ImpromptuInterface.MVVM.Event.BinderEventHandlerMemberName.InvokeMethodInfo">
+            <summary>
+            The Invoke Method's Info
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.Event.BinderEventHandlerMemberName.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.Event.BinderEventHandlerMemberName"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.Event.BinderEventHandlerMemberName.Invoke(System.Object,System.Object)">
+            <summary>
+            Invokes the eventhandler
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The e.</param>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.EventBinder">
+            <summary>
+            Helper Object to create event bindings.
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.EventBinder.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.EventBinder"/> class.
+            </summary>
+            <param name="target">The target.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.EventBinder.Register(System.Object)">
+            <summary>
+            Registers the events on the  specified source.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.EventBinder.UnRegister(System.Object)">
+            <summary>
+            Unregisters the events on the specified source.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.EventBinder.RegisterUnRegister(System.Boolean,System.Object,System.String,System.String)">
+            <summary>
+            Registers or unregister.
+            </summary>
+            <param name="un">if set to <c>true</c> [un].</param>
+            <param name="source">The source.</param>
+            <param name="eventName">Name of the event.</param>
+            <param name="targetName">Name of the target.</param>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.EventBinder.Target">
+            <summary>
+            Gets or sets the target.
+            </summary>
+            <value>The target.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.EventBinder.To">
+            <summary>
+            To is used to specify what the event is going to bind to
+            </summary>
+            <value>To.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.EventBinder.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Object"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ImpromptuInterface.MVVM.EventBinder.EventBinderTo">
+            <summary>
+            Helper Object to create event bindings.
+            </summary>
+        </member>
+        <member name="M:ImpromptuInterface.MVVM.EventBinder.EventBinderTo.#ctor(System.Object,ImpromptuInterface.MVVM.EventBinder)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImpromptuInterface.MVVM.EventBinder.EventBinderTo"/> class.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="parent">The parent.</param>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.EventBinder.EventBinderTo.Parent">
+            <summary>
+            Gets or sets the parent.
+            </summary>
+            <value>The parent.</value>
+        </member>
+        <member name="P:ImpromptuInterface.MVVM.EventBinder.EventBinderTo.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Object"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+    </members>
+</doc>

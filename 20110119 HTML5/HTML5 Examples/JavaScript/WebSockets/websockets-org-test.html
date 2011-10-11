@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>websockets.org test</title>
+    <script type="text/javascript">
+
+        window.addEventListener("load", function() {
+
+            var url = "ws://echo.websocket.org";
+            //var url = "ws://localhost:2011/sample";
+            var ws;
+            var isOpen = false;
+
+            var openButton = document.getElementById("open");
+            var closeButton = document.getElementById("close");
+
+            var sendText = document.getElementById("sendText");
+            var sendButton = document.getElementById("sendButton");
+            var receiveText = document.getElementById("receiveText");
+
+            openButton.onclick = function() {
+                if(isOpen) return;
+
+                ws = new WebSocket(url);
+                ws.onopen = function (event) {
+                    receiveText.value += "CONNECTED\n";
+                };
+
+                ws.onclose = function (event) {
+                    receiveText.value += "DISCONNECTED\n";
+                };
+
+                ws.onmessage = function (event) {
+                    receiveText.value += event.data + "\n";
+                };
+
+                ws.onerror = function (event) {
+                    receiveText.value += "ERROR: " + event.data + "\n";
+                };
+
+                sendButton.onclick = function() {
+                    ws.send(sendText.value);
+                    sendText.value = "";
+                };
+
+                sendText.disabled = false;
+                sendButton.disabled = false;
+                
+                closeButton.disabled = false;
+                openButton.disabled = true;
+
+                isOpen = true;
+            };
+
+            closeButton.onclick = function() {
+                if(!isOpen) return;
+
+                ws.close();
+
+                sendText.disabled = true;
+                sendButton.disabled = true;
+
+                closeButton.disabled = true;
+                openButton.disabled = false;
+
+                isOpen = false;
+            };
+
+        }, false);
+
+    </script>
+</head>
+<body>
+
+    <h1>Send</h1>
+    <div>
+        <textarea id="sendText" cols="100" rows="10" disabled></textarea>
+    </div>
+    <button id="sendButton" disabled>Send!</button>
+
+    <h1>Receive</h1>
+    <div>
+        <textarea id="receiveText" cols="100" rows="10"></textarea>
+    </div>
+
+    <button id="open">Open Connection</button>
+    <button id="close" disabled>Close Connection</button>
+
+</body>
+</html>

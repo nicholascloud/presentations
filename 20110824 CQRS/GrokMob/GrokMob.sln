@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob", "GrokMob\GrokMob.csproj", "{D598DD17-2BB1-4596-96C3-E9890CD46500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Commands", "GrokMob.Commands\GrokMob.Commands.csproj", "{D5B6C217-1A04-4ED4-A78E-BC09AF1495FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Events", "GrokMob.Events\GrokMob.Events.csproj", "{4BA0BD3D-C7FE-4DB7-ACFB-5FE654A8BBF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Mvc", "GrokMob.Mvc\GrokMob.Mvc.csproj", "{B5F8BD90-4F87-4C9D-B18F-BDF321BAA0B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Domain", "GrokMob.Domain\GrokMob.Domain.csproj", "{57761477-0586-4ECE-94D6-8529EFDCE0EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.CommandExecutors", "GrokMob.CommandExecutors\GrokMob.CommandExecutors.csproj", "{FD774753-0355-45B2-B621-4CAEDC61E39D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.ReadModel", "GrokMob.ReadModel\GrokMob.ReadModel.csproj", "{A5C6DA7D-E24B-43FD-A272-EB352CF8D1CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B6C217-1A04-4ED4-A78E-BC09AF1495FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B6C217-1A04-4ED4-A78E-BC09AF1495FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B6C217-1A04-4ED4-A78E-BC09AF1495FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B6C217-1A04-4ED4-A78E-BC09AF1495FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BA0BD3D-C7FE-4DB7-ACFB-5FE654A8BBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BA0BD3D-C7FE-4DB7-ACFB-5FE654A8BBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BA0BD3D-C7FE-4DB7-ACFB-5FE654A8BBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BA0BD3D-C7FE-4DB7-ACFB-5FE654A8BBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F8BD90-4F87-4C9D-B18F-BDF321BAA0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F8BD90-4F87-4C9D-B18F-BDF321BAA0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F8BD90-4F87-4C9D-B18F-BDF321BAA0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F8BD90-4F87-4C9D-B18F-BDF321BAA0B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD774753-0355-45B2-B621-4CAEDC61E39D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD774753-0355-45B2-B621-4CAEDC61E39D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD774753-0355-45B2-B621-4CAEDC61E39D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD774753-0355-45B2-B621-4CAEDC61E39D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C6DA7D-E24B-43FD-A272-EB352CF8D1CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C6DA7D-E24B-43FD-A272-EB352CF8D1CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C6DA7D-E24B-43FD-A272-EB352CF8D1CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C6DA7D-E24B-43FD-A272-EB352CF8D1CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

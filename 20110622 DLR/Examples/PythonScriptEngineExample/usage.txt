@@ -1,0 +1,4 @@
+﻿PythonScriptEngineExample (c) 2011 STL ALT.NET
+
+    calctax [amount spent]
+        - [amount spent] must be a decimal value

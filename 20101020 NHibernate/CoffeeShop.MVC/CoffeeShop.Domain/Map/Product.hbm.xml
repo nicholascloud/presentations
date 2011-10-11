@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="CoffeeShop.Domain" namespace="CoffeeShop.Domain.Entity">
+    <class name="Product" abstract="true">
+        <id name="Id" column="ProductID">
+            <generator class="guid" />
+        </id>
+
+        <property name="Name" column="`Name`" />
+        <property name="BasePrice" />
+
+        <joined-subclass name="Drink">
+            <key column="DrinkID" />
+
+            <many-to-one name="Size" column="CupSizeID" fetch="join" />
+            <many-to-one name="Blend" column="BlendID" fetch="join" />
+            
+            <set name="OptionalIngredients" table="DrinkIngredient">
+                <key column="DrinkID" />
+                <many-to-many class="Ingredient" column="IngredientID" />
+            </set>
+        </joined-subclass>
+    </class>
+</hibernate-mapping>

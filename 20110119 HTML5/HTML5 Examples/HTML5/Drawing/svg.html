@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>svg</title>
+    <script type="text/javascript">
+        window.addEventListener("load", function() {
+            var rect = document.getElementById("myRect");
+            rect.style.fill = "green";
+            rect.onclick = function() {
+                alert("myRect clicked");
+            };
+        }, false);
+    </script>
+</head>
+<body>
+
+    <svg width="200" height="200">
+        <rect id="myRect" x="0" y="0" width="300" height="300" fill="blue" stroke="red" stroke-width="5" rx="20" ry="20">
+            no rectangle for you!
+        </rect>
+        <circle id="myCircle" cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red">
+            no circle for you!
+        </circle>
+    </svg>
+
+</body>
+</html>
