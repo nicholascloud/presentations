@@ -1,3 +1,7 @@
 [submodule "20110727 AssetMangement"]
 	path = 20110727 AssetMangement
 	url = git@github.com:MarkBorcherding/altnet-stl-assets-presentation.git
+	
+[submodule "20110223 Git/MarkBorcherding.Slides"]
+	path = 20110223 Git/MarkBorcherding.Slides
+	url = git@github.com:MarkBorcherding/altnet-stl-git-presentation.git
