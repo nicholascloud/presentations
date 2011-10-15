@@ -1,0 +1,8 @@
+﻿
+@helper Css(string cssFile, string media = "screen") {
+  <link rel="stylesheet" href="/Assets/Styles/@cssFile" type="text/css" media="@media" />
+}
+
+@helper Script(string scriptFile) {
+  <script language="javascript" type="text/javascript" src="/Assets/Scripts/@scriptFile"></script>
+}

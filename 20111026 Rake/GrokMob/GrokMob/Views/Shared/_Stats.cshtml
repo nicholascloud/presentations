@@ -1,0 +1,18 @@
+﻿@using GrokMob.ReadModel
+@model IEnumerable<Stat>
+         
+<h3>Stats</h3>
+<!--
+<p>1 future meeting</p>
+<p>7 past meetings</p>
+<p>25 members</p>
+<p>15 sponsors</p>
+-->
+
+@foreach (var stat in Model) {
+  <p>@stat.Value @stat.Label</p>
+}
+
+@if (!Model.Any()) {
+<p>No available stats</p>
+}
