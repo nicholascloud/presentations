@@ -6,7 +6,7 @@ using FluentMigrator;
 
 namespace GrokMob.SchemaMigration {
   [Migration(2)]
-  class Migration2 : Migration {
+  public class Migration2 : Migration {
     public override void Up() {
       Create.Table("Stat")
         .WithColumn("Id").AsGuid().NotNullable().PrimaryKey("PK_Stat.Id")

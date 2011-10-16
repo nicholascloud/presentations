@@ -40,12 +40,25 @@ desc 'Deploys the site'
 output :deploy do |o|
 end
 
-desc 'Migrates the database'
-fluentmigrator :migrate do |migrator|
-  mode = ENV['mode'] || :Debug
-  migrator.command = './GrokMob/packages/FluentMigrator.1.0.1./tools/Migrate.exe'
-  migrator.provider = 'mssql'
-  migrator.target = "./GrokMob/GrokMob.SchemaMigration/bin/#{mode}/GrokMob.SchemaMigration.dll"
-  migrator.connection = "SQL CONN STR"
-  migrator.verbose = true
+
+
+task :db do
+
+  task :up do
+  end
+
+  task :down do
+  end
+
+  desc 'Migrates the database'
+  fluentmigrator :migrate, :task do |mig, args|
+    mode = ENV['mode'] || :Debug
+    mig.command = './GrokMob/packages/FluentMigrator.Tools.1.0.1.0/tools/AnyCPU/40/Migrate.exe'
+    mig.provider = 'sqlserver2008'
+    mig.target = "./GrokMob/GrokMob.SchemaMigration/bin/#{mode}/GrokMob.SchemaMigration.dll"
+    mig.connection = 'Server=localhost\sqlexpress;Database=GrokMob;Trusted_Connection=True;'
+    mig.verbose = true
+    mig.task = ENV['task'] || 'migrate:up'
+  end
+
 end
