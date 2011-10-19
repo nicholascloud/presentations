@@ -16,6 +16,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F73974
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.SchemaMigration", "GrokMob.SchemaMigration\GrokMob.SchemaMigration.csproj", "{B1B179AF-0E5C-4D13-AE72-43EBCCC2D45F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prod", "prod", "{94B41E31-7A0B-4509-9567-4DFDBAA439E4}"
+	ProjectSection(SolutionItems) = preProject
+		Configuration\prod\appSettings.config = Configuration\prod\appSettings.config
+		Configuration\prod\connectionStrings.config = Configuration\prod\connectionStrings.config
+		Configuration\prod\log4net.config = Configuration\prod\log4net.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dev", "dev", "{0F2AA0EA-3607-4B52-95B7-5163AC092B48}"
+	ProjectSection(SolutionItems) = preProject
+		Configuration\dev\appSettings.config = Configuration\dev\appSettings.config
+		Configuration\dev\connectionStrings.config = Configuration\dev\connectionStrings.config
+		Configuration\dev\log4net.config = Configuration\dev\log4net.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +60,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{90F6A882-6A2B-45F5-9AED-0EE43ED217CD} = {647D42B1-DC83-4093-88C4-337614163B8C}
+		{94B41E31-7A0B-4509-9567-4DFDBAA439E4} = {4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}
+		{0F2AA0EA-3607-4B52-95B7-5163AC092B48} = {4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}
 	EndGlobalSection
 EndGlobal

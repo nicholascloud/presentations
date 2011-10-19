@@ -226,12 +226,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Assets\Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Assets\Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Assets\Scripts\jquery.validate.unobtrusive.js" />

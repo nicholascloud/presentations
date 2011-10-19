@@ -1,21 +1,70 @@
 #  Rakefile
 require 'albacore'
+require 'FileUtils'
 
 task :default do
   puts 'Helpful info here'
 end
 
 desc 'Builds the solution'
-msbuild :build => :assemblyinfo do |msb|
+msbuild :build => [:assemblyinfo, :configure] do |msb|
   msb.properties :configuration => ENV['mode'] || :Debug
   msb.targets :Clean, :Build
   msb.solution = "GrokMob/GrokMob.sln"
 end
 
-aspnetcompiler :publish => :build do |asp|
-  asp.physical_path = './GrokMob/GrokMob'
-  asp.target_path = './Publish'
-  asp.updateable = true
+namespace :configure do
+
+  task :dev do
+    Rake::Task['configure:copy_config_files'].invoke('dev')
+  end
+
+  task :prod do
+    Rake::Task['configure:copy_config_files'].invoke('prod')
+  end
+
+  desc 'Copies configuration files to the web directory'
+  task :copy_config_files, :env do |t, args|
+    env = (args[:env] || ENV['env'] || 'dev').downcase
+    source = "./GrokMob/Configuration/#{env}"
+    dest = './GrokMob/GrokMob'
+    files = []
+    files << "#{source}/appSettings.config"
+    files << "#{source}/connectionStrings.config"
+    files << "#{source}/log4net.config"
+    files.each do |file|
+      FileUtils.cp file, dest, :verbose => true
+    end
+  end
+end
+
+desc 'Builds a common assembly info file'
+assemblyinfo :assemblyinfo do |asm|
+  shared_info = './GrokMob/Common/SharedAssemblyInfo.cs'
+  asm.input_file = shared_info
+  asm.output_file = shared_info
+  # M.m.B.R
+  asm.version = ENV['version'] || '1.0.0.0'
+  asm.file_version = ENV['file_version'] || ENV['version'] || '1.0.0.0'
+end
+
+desc "Publishes web application"
+msbuild :publish do |msb|
+  msb.properties :configuration => :Release, :webprojectoutputdir => '../../Publish/GrokMob/', :outdir => '../../Publish/GrokMob/'
+  msb.targets :ResolveReferences, :_CopyWebApplication
+  msb.solution = './GrokMob/GrokMob/GrokMob.csproj'
+end
+
+desc 'Compress the build output'
+zip :compress do |zip|
+  zip.directories_to_zip = ['./Publish/GrokMob']
+  zip.additional_files = './Documentation/gpl-3.0.txt', './Documentation/README.md'
+  zip.output_file = 'GrokMob.zip'
+  zip.output_path = './Publish'
+end
+
+desc 'Deploys the site'
+task :deploy => [:publish, :compress] do |t|
 end
 
 namespace :test do
@@ -30,16 +79,6 @@ namespace :test do
     nunit.assemblies << "#{test_root}/GrokMob.Domain.UnitTests/bin/#{mode}/GrokMob.Domain.UnitTests.dll"
   end
 
-end
-
-desc 'Builds a common assembly info file'
-assemblyinfo :assemblyinfo do |asm|
-  shared_info = './GrokMob/Common/SharedAssemblyInfo.cs'
-  asm.input_file = shared_info
-  asm.output_file = shared_info
-  # M.m.B.R
-  asm.version = ENV['version'] || '1.0.0.0'
-  asm.file_version = ENV['file_version'] || ''
 end
 
 desc 'Database migration tasks'
@@ -90,8 +129,4 @@ namespace :db do
     
   end
 
-end
-
-desc 'Deploys the site'
-output :deploy do |o|
 end
