@@ -8,6 +8,9 @@ namespace GrokMob.SchemaMigration {
   [Migration(1)]
   public class Migration1 : Migration {
     public override void Up() {
+
+      // MEETING ----------------------------------------------------------------------------------
+
       Create.Table("Meeting")
         .WithColumn("Id").AsGuid().NotNullable().PrimaryKey("PK_Meeting.Id")
         .WithColumn("Title").AsString().NotNullable()
@@ -15,10 +18,14 @@ namespace GrokMob.SchemaMigration {
         .WithColumn("ScheduledFor").AsDateTime().NotNullable()
         .WithColumn("Location").AsString().NotNullable();
 
+      Execute.Sql(Resource.Data("Meeting"));
+
+      // COMMENT ----------------------------------------------------------------------------------
+
       Create.Table("Comment")
         .WithColumn("Id").AsGuid().NotNullable().PrimaryKey("PK_Comment.Id")
         .WithColumn("MeetingId").AsGuid().NotNullable()
-        .WithColumn("MemberHandle").AsString().NotNullable()
+        .WithColumn("MemberHandle").AsString().NotNullable()  
         .WithColumn("Content").AsString().NotNullable()
         .WithColumn("CreatedAt").AsDateTime().NotNullable();
       Create.ForeignKey("FK_Comment.MeetingId-Meeting.Id")
@@ -28,6 +35,7 @@ namespace GrokMob.SchemaMigration {
         .OnTable("Comment").OnColumn("MemberHandle")
         .Ascending().WithOptions().NonClustered();
 
+      Execute.Sql(Resource.Data("Comment"));
     }
 
     public override void Down() {

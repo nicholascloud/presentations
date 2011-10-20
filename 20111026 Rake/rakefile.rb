@@ -7,18 +7,26 @@ task :default do
 end
 
 desc 'Builds the solution'
-msbuild :build => [:assemblyinfo, :configure] do |msb|
+msbuild :build => [:assemblyinfo, 'configure:copy_config_files'] do |msb|
   msb.properties :configuration => ENV['mode'] || :Debug
   msb.targets :Clean, :Build
   msb.solution = "GrokMob/GrokMob.sln"
 end
 
+msbuild :build_schema do |msb|
+  msb.properties :configuration => ENV['mode'] || :Debug
+  msb.targets :Clean, :Build
+  msb.solution = "GrokMob/GrokMob.SchemaMigration.sln"
+end
+
 namespace :configure do
 
+  desc 'Convenience configuration task for dev environment'
   task :dev do
     Rake::Task['configure:copy_config_files'].invoke('dev')
   end
 
+  desc 'Convenience configuration task for prod environment'
   task :prod do
     Rake::Task['configure:copy_config_files'].invoke('prod')
   end
@@ -50,6 +58,9 @@ end
 
 desc "Publishes web application"
 msbuild :publish do |msb|
+  ENV['mode'] = ENV['mode'] || 'release'
+  ENV['env'] = ENV['env'] || 'prod'
+  Rake::Task['build'].invoke
   msb.properties :configuration => :Release, :webprojectoutputdir => '../../Publish/GrokMob/', :outdir => '../../Publish/GrokMob/'
   msb.targets :ResolveReferences, :_CopyWebApplication
   msb.solution = './GrokMob/GrokMob/GrokMob.csproj'
@@ -110,13 +121,15 @@ namespace :db do
   end
 
   desc 'Migrates the database'
-  fluentmigrator :migrate, :task, :version, :steps do |mig, args|
+  fluentmigrator :migrate, [:task, :version, :steps] => [:build_schema] do |mig, args|
     args.with_defaults(:task => ENV['task'] || 'migrate:up', :preview => (ENV['preview'] == 'true') || false)
     mode = ENV['mode'] || :Debug
+    instance = ENV['instance'] || 'sqlexpress'
     mig.command = './GrokMob/packages/FluentMigrator.Tools.1.0.1.0/tools/AnyCPU/40/Migrate.exe'
     mig.provider = 'sqlserver2008'
     mig.target = "./GrokMob/GrokMob.SchemaMigration/bin/#{mode}/GrokMob.SchemaMigration.dll"
-    mig.connection = 'Server=localhost\sqlexpress;Database=GrokMob;Trusted_Connection=True;'
+    #mig.connection = "Server=localhost\\#{instance};Database=GrokMob;Trusted_Connection=True;"
+    mig.connection = "Server=localhost;Database=GrokMob;Trusted_Connection=True;"
     mig.verbose = true
     mig.task = args[:task]
     mig.preview = args[:preview]

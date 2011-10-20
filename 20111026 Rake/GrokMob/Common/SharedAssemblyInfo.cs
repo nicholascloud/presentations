@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("GrokMob")]
 [assembly: AssemblyCopyright("Copyright © STL ALT.NET 2011")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: ComVisible(false)]
 
@@ -14,6 +14,20 @@ using System.Runtime.InteropServices;
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
