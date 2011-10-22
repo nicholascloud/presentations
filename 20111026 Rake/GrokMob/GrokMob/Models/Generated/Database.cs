@@ -130,207 +130,6 @@ namespace GrokMob
 	
 
     
-	[TableName("Comment")]
-	[PrimaryKey("Id", autoIncrement=false)]
-	[ExplicitColumns]
-    public partial class Comment : GrokMobDB.Record<Comment>  
-    {
-        [Column] 
-		public Guid Id 
-		{ 
-			get
-			{
-				return _Id;
-			}
-			set
-			{
-				_Id = value;
-				MarkColumnModified("Id");
-			}
-		}
-		Guid _Id;
-
-        [Column] 
-		public Guid MeetingId 
-		{ 
-			get
-			{
-				return _MeetingId;
-			}
-			set
-			{
-				_MeetingId = value;
-				MarkColumnModified("MeetingId");
-			}
-		}
-		Guid _MeetingId;
-
-        [Column] 
-		public string MemberHandle 
-		{ 
-			get
-			{
-				return _MemberHandle;
-			}
-			set
-			{
-				_MemberHandle = value;
-				MarkColumnModified("MemberHandle");
-			}
-		}
-		string _MemberHandle;
-
-        [Column] 
-		public string Content 
-		{ 
-			get
-			{
-				return _Content;
-			}
-			set
-			{
-				_Content = value;
-				MarkColumnModified("Content");
-			}
-		}
-		string _Content;
-
-        [Column] 
-		public DateTime CreatedAt 
-		{ 
-			get
-			{
-				return _CreatedAt;
-			}
-			set
-			{
-				_CreatedAt = value;
-				MarkColumnModified("CreatedAt");
-			}
-		}
-		DateTime _CreatedAt;
-
-	}
-    
-	[TableName("Stat")]
-	[PrimaryKey("Id", autoIncrement=false)]
-	[ExplicitColumns]
-    public partial class Stat : GrokMobDB.Record<Stat>  
-    {
-        [Column] 
-		public Guid Id 
-		{ 
-			get
-			{
-				return _Id;
-			}
-			set
-			{
-				_Id = value;
-				MarkColumnModified("Id");
-			}
-		}
-		Guid _Id;
-
-        [Column] 
-		public string Moniker 
-		{ 
-			get
-			{
-				return _Moniker;
-			}
-			set
-			{
-				_Moniker = value;
-				MarkColumnModified("Moniker");
-			}
-		}
-		string _Moniker;
-
-        [Column] 
-		public string Label 
-		{ 
-			get
-			{
-				return _Label;
-			}
-			set
-			{
-				_Label = value;
-				MarkColumnModified("Label");
-			}
-		}
-		string _Label;
-
-        [Column] 
-		public int Value 
-		{ 
-			get
-			{
-				return _Value;
-			}
-			set
-			{
-				_Value = value;
-				MarkColumnModified("Value");
-			}
-		}
-		int _Value;
-
-	}
-    
-	[TableName("Venue")]
-	[PrimaryKey("Id", autoIncrement=false)]
-	[ExplicitColumns]
-    public partial class Venue : GrokMobDB.Record<Venue>  
-    {
-        [Column] 
-		public Guid Id 
-		{ 
-			get
-			{
-				return _Id;
-			}
-			set
-			{
-				_Id = value;
-				MarkColumnModified("Id");
-			}
-		}
-		Guid _Id;
-
-        [Column] 
-		public string Name 
-		{ 
-			get
-			{
-				return _Name;
-			}
-			set
-			{
-				_Name = value;
-				MarkColumnModified("Name");
-			}
-		}
-		string _Name;
-
-        [Column] 
-		public string Address 
-		{ 
-			get
-			{
-				return _Address;
-			}
-			set
-			{
-				_Address = value;
-				MarkColumnModified("Address");
-			}
-		}
-		string _Address;
-
-	}
-    
 	[TableName("VersionInfo")]
 	[ExplicitColumns]
     public partial class VersionInfo : GrokMobDB.Record<VersionInfo>  
@@ -352,13 +151,80 @@ namespace GrokMob
 
 	}
     
+	[TableName("Member")]
+	[PrimaryKey("Handle", autoIncrement=false)]
+	[ExplicitColumns]
+    public partial class Member : GrokMobDB.Record<Member>  
+    {
+        [Column] 
+		public string Handle 
+		{ 
+			get
+			{
+				return _Handle;
+			}
+			set
+			{
+				_Handle = value;
+				MarkColumnModified("Handle");
+			}
+		}
+		string _Handle;
+
+        [Column] 
+		public string Name 
+		{ 
+			get
+			{
+				return _Name;
+			}
+			set
+			{
+				_Name = value;
+				MarkColumnModified("Name");
+			}
+		}
+		string _Name;
+
+        [Column] 
+		public string Technologies 
+		{ 
+			get
+			{
+				return _Technologies;
+			}
+			set
+			{
+				_Technologies = value;
+				MarkColumnModified("Technologies");
+			}
+		}
+		string _Technologies;
+
+        [Column] 
+		public DateTime JoinedAt 
+		{ 
+			get
+			{
+				return _JoinedAt;
+			}
+			set
+			{
+				_JoinedAt = value;
+				MarkColumnModified("JoinedAt");
+			}
+		}
+		DateTime _JoinedAt;
+
+	}
+    
 	[TableName("Meeting")]
-	[PrimaryKey("Id", autoIncrement=false)]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
     public partial class Meeting : GrokMobDB.Record<Meeting>  
     {
         [Column] 
-		public Guid Id 
+		public int Id 
 		{ 
 			get
 			{
@@ -370,7 +236,7 @@ namespace GrokMob
 				MarkColumnModified("Id");
 			}
 		}
-		Guid _Id;
+		int _Id;
 
         [Column] 
 		public string Title 
@@ -431,6 +297,192 @@ namespace GrokMob
 			}
 		}
 		string _Location;
+
+	}
+    
+	[TableName("Comment")]
+	[PrimaryKey("Id")]
+	[ExplicitColumns]
+    public partial class Comment : GrokMobDB.Record<Comment>  
+    {
+        [Column] 
+		public int Id 
+		{ 
+			get
+			{
+				return _Id;
+			}
+			set
+			{
+				_Id = value;
+				MarkColumnModified("Id");
+			}
+		}
+		int _Id;
+
+        [Column] 
+		public int MeetingId 
+		{ 
+			get
+			{
+				return _MeetingId;
+			}
+			set
+			{
+				_MeetingId = value;
+				MarkColumnModified("MeetingId");
+			}
+		}
+		int _MeetingId;
+
+        [Column] 
+		public string MemberHandle 
+		{ 
+			get
+			{
+				return _MemberHandle;
+			}
+			set
+			{
+				_MemberHandle = value;
+				MarkColumnModified("MemberHandle");
+			}
+		}
+		string _MemberHandle;
+
+        [Column] 
+		public string Content 
+		{ 
+			get
+			{
+				return _Content;
+			}
+			set
+			{
+				_Content = value;
+				MarkColumnModified("Content");
+			}
+		}
+		string _Content;
+
+        [Column] 
+		public DateTime CreatedAt 
+		{ 
+			get
+			{
+				return _CreatedAt;
+			}
+			set
+			{
+				_CreatedAt = value;
+				MarkColumnModified("CreatedAt");
+			}
+		}
+		DateTime _CreatedAt;
+
+	}
+    
+	[TableName("Venue")]
+	[PrimaryKey("Id")]
+	[ExplicitColumns]
+    public partial class Venue : GrokMobDB.Record<Venue>  
+    {
+        [Column] 
+		public int Id 
+		{ 
+			get
+			{
+				return _Id;
+			}
+			set
+			{
+				_Id = value;
+				MarkColumnModified("Id");
+			}
+		}
+		int _Id;
+
+        [Column] 
+		public string Name 
+		{ 
+			get
+			{
+				return _Name;
+			}
+			set
+			{
+				_Name = value;
+				MarkColumnModified("Name");
+			}
+		}
+		string _Name;
+
+        [Column] 
+		public string Address 
+		{ 
+			get
+			{
+				return _Address;
+			}
+			set
+			{
+				_Address = value;
+				MarkColumnModified("Address");
+			}
+		}
+		string _Address;
+
+	}
+    
+	[TableName("Sponsor")]
+	[PrimaryKey("Id")]
+	[ExplicitColumns]
+    public partial class Sponsor : GrokMobDB.Record<Sponsor>  
+    {
+        [Column] 
+		public int Id 
+		{ 
+			get
+			{
+				return _Id;
+			}
+			set
+			{
+				_Id = value;
+				MarkColumnModified("Id");
+			}
+		}
+		int _Id;
+
+        [Column] 
+		public string Name 
+		{ 
+			get
+			{
+				return _Name;
+			}
+			set
+			{
+				_Name = value;
+				MarkColumnModified("Name");
+			}
+		}
+		string _Name;
+
+        [Column] 
+		public string Sponsorship 
+		{ 
+			get
+			{
+				return _Sponsorship;
+			}
+			set
+			{
+				_Sponsorship = value;
+				MarkColumnModified("Sponsorship");
+			}
+		}
+		string _Sponsorship;
 
 	}
 }

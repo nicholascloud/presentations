@@ -1,0 +1,26 @@
+﻿@using GrokMob.Models
+@model DashboardViewData
+
+@Html.Partial("_QuickMeeting", Model.Venues)
+
+<hr />
+
+<div id="dashboardLeft">
+  <h3>Recent Comments</h3>
+  @Html.Partial("_Comments", Model.RecentComments)
+</div>
+
+<div id="dashboardRight">
+  <h3>Future Meetings</h3>
+  @if (!Model.FutureMeetings.Any()) {
+  <h4>No future meetings scheduled</h4>
+  }
+  @Html.Partial("_MeetingSummary", Model.FutureMeetings)
+</div>
+
+<hr />
+
+<h2>And in other news!</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lectus nisl, convallis a posuere et, ornare non diam. Suspendisse vehicula vestibulum diam, quis imperdiet urna sagittis in. Suspendisse cursus, augue ac fringilla facilisis, lacus lorem ornare arcu, eget sollicitudin risus dui vestibulum massa.</p>
+
+@section BigLeft{}

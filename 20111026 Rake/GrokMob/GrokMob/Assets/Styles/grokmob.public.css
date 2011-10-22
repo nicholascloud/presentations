@@ -97,7 +97,7 @@ fieldset {
   margin-top: 5px;
 }
 
-/* Home/_Comments ------------------------------------------------------ */
+/* Comments -----------------------------------*/
 
 .recentActivity {
   margin-bottom: 5px;
@@ -113,7 +113,7 @@ fieldset {
   font-weight: bold;
 }
 
-/* Home/_FutureMeetings ------------------------------------------------ */
+/* Meetings -----------------------------------*/
 
 .meetingSummary img {
   float: left;
@@ -122,8 +122,6 @@ fieldset {
 .meetingSummary div {
   margin-left:35px;
 }
-
-/* Home/Meeting -------------------------------------------------------- */
 
 #addCommentFields label {
   float: left;
@@ -135,4 +133,26 @@ fieldset {
 
 #addCommentFields button {
   margin-left: 70px;
+}
+
+/* Members ------------------------------------*/
+
+.member-table {
+  width: 80%;
+}
+
+.member-table th.header-handle {
+  width: 20%;
+}
+
+.member-table th.header-name {
+  width: 25%;
+}
+
+.member-table th.header-technologies {
+  width: 40%;
+}
+
+.member-table th.header-join-date {
+  width: 15%;
 }

@@ -1,0 +1,25 @@
+﻿@using GrokMob.Models
+@model AlphabetSection
+
+<h3>[ @Model.Letter ]</h3>
+
+<table class="member-table">
+  <thead>
+    <tr>
+      <th class="header-handle">Handle</th>
+      <th class="header-name">Name</th>
+      <th class="header-technologies">Technologies</th>
+      <th class="header-join-date">Join Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var member in Model.Members) {
+    <tr>
+      <td>@member.Handle</td>
+      <td>@member.Name</td>
+      <td>@member.Technologies</td>
+      <td>@member.JoinedAt.ToString("MM-dd-yyyy")</td>
+    </tr>                                             
+    }
+  </tbody>
+</table>

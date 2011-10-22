@@ -1,6 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using GrokMob.ActionFilters;
+using GrokMob.Controllers;
 
 namespace GrokMob {
   public class MvcApplication : HttpApplication {
@@ -10,17 +12,25 @@ namespace GrokMob {
 
     public static void RegisterRoutes(RouteCollection routes) {
       routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+      routes.IgnoreRoute("{resource}.ico/{*pathInfo}");
 
+//      routes.MapRoute(
+//        "root",
+//        "",
+//        new { controller = "home", action = "dashboard" }
+//        );
+//
       routes.MapRoute(
-        "Meeting",
-        "meeting/{id}",
-        new { controller = "home", action = "meeting", id = (string) null }
+        "index",
+        "{controller}",
+        new { action = "index" }
         );
 
       routes.MapRoute(
-        "Level1",
+        "default",
         "{controller}/{action}/{id}",
-        new { controller = "home", action = "dashboard", id = UrlParameter.Optional }
+        new { controller = "dashboard", action = "index", id = UrlParameter.Optional },
+        new { id = @"\d?" }
         );
     }
 

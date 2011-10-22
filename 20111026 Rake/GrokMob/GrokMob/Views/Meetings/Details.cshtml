@@ -1,0 +1,40 @@
+﻿@using GrokMob.Models
+@model MeetingDetails
+
+@if (ViewBag.Error != null) {
+  <div class="ui-state-error">
+    <p class="ui-state-error-text">@ViewBag.Error</p>
+  </div>
+}
+
+<h2>@Model.Meeting.ScheduledFor.ToString("MMM. yyyy") - @Model.Meeting.Title</h2>
+
+<p>@Model.Meeting.Description</p>
+
+<p>
+  <label>When:</label>&nbsp;@Model.Meeting.ScheduledFor
+</p>
+
+<p>
+  <label>Where:</label>&nbsp;@Model.Meeting.Location
+</p>
+
+@using (Html.BeginForm("comment", "meetings", FormMethod.Post)) {
+<fieldset id="addCommentFields">
+  <div>
+    <input type="hidden" name="meetingId" value="@Model.Meeting.Id"/>
+    <input type="hidden" name="memberHandle" value="@ViewBag.CurrentUser"/>
+    <label><em>Comment</em></label>&nbsp;
+    <textarea name="comment"></textarea>
+  </div>
+  <button id="addComment">Comment</button>
+</fieldset>
+}
+
+<hr />
+
+<div>
+  @Html.Partial("_Comments", @Model.Comments)
+</div>
+
+@section BigLeft{}

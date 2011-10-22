@@ -1,0 +1,38 @@
+﻿@using GrokMob.Models
+@model MembersCollection
+
+<h2>Members</h2>
+
+@if (!Model.Any()) {
+<p>No registered members at this time.</p>                     
+}
+
+@foreach (var alpha in Model) {
+  @Html.Partial("_DirectorySection", alpha)
+}
+
+<script type="text/javascript">
+  $().ready(function() {
+    $(".member-table th").each(function() {
+      $(this).addClass("ui-state-default");
+    });
+
+    $(".member-table td").each(function() {
+      $(this).addClass("ui-widget-content");
+    });
+
+    $("member-table tr").hover(
+      function() {
+        $(this).children("td").addClass("ui-state-hover");
+      },
+      function() {
+        $(this).children("td").removeClass("ui-state-hover");
+      }
+    );
+    $(".member-table tr").click(function() {
+      $(this).children("td").toggleClass("ui-state-highlight");
+    });
+  });
+</script>
+
+@section BigLeft{}

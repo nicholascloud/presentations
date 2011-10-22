@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob", "GrokMob\GrokMob.csproj", "{D598DD17-2BB1-4596-96C3-E9890CD46500}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Domain", "GrokMob.Domain\GrokMob.Domain.csproj", "{57761477-0586-4ECE-94D6-8529EFDCE0EE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Domain.UnitTests", "UnitTests\GrokMob.Domain.UnitTests\GrokMob.Domain.UnitTests.csproj", "{90F6A882-6A2B-45F5-9AED-0EE43ED217CD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{647D42B1-DC83-4093-88C4-337614163B8C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F7397401-5510-46AD-9BB2-3E66559DF9E2}"
@@ -32,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dev", "dev", "{0F2AA0EA-360
 		Configuration\dev\log4net.config = Configuration\dev\log4net.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.UnitTests", "UnitTests\GrokMob.UnitTests\GrokMob.UnitTests.csproj", "{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,24 +40,20 @@ Global
 		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D598DD17-2BB1-4596-96C3-E9890CD46500}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57761477-0586-4ECE-94D6-8529EFDCE0EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90F6A882-6A2B-45F5-9AED-0EE43ED217CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90F6A882-6A2B-45F5-9AED-0EE43ED217CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90F6A882-6A2B-45F5-9AED-0EE43ED217CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90F6A882-6A2B-45F5-9AED-0EE43ED217CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B1B179AF-0E5C-4D13-AE72-43EBCCC2D45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1B179AF-0E5C-4D13-AE72-43EBCCC2D45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B179AF-0E5C-4D13-AE72-43EBCCC2D45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B179AF-0E5C-4D13-AE72-43EBCCC2D45F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{90F6A882-6A2B-45F5-9AED-0EE43ED217CD} = {647D42B1-DC83-4093-88C4-337614163B8C}
+		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE} = {647D42B1-DC83-4093-88C4-337614163B8C}
 		{94B41E31-7A0B-4509-9567-4DFDBAA439E4} = {4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}
 		{0F2AA0EA-3607-4B52-95B7-5163AC092B48} = {4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}
 	EndGlobalSection

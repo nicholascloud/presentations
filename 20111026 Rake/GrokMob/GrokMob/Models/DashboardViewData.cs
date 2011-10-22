@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using GrokMob.Domain;
 
 namespace GrokMob.Models {
   public class DashboardViewData {
@@ -8,20 +8,21 @@ namespace GrokMob.Models {
       IEnumerable<Venue> venues,
       IEnumerable<Comment> recentComments,
       IEnumerable<Meeting> futureMeetings) {
-      
-      Venues = new HashSet<SelectListItem>();
-      foreach (Venue venue in venues) {
-        Venues.Add(new SelectListItem { Text = venue.Name, Value = venue.Name });
-      }
 
-      RecentComments = new HashSet<Comment>(recentComments);
-      FutureMeetings = new HashSet<Meeting>(futureMeetings);
+      Venues = venues.OrderBy(v => v.Name)
+        .Select(v => new SelectListItem {
+          Text = v.Name,
+          Value = v.Name
+        }).ToList();
+
+      RecentComments = new List<Comment>(recentComments);
+      FutureMeetings = new List<Meeting>(futureMeetings);
     }
 
-    public ISet<SelectListItem> Venues { get; private set; }
+    public ICollection<SelectListItem> Venues { get; private set; }
 
-    public ISet<Meeting> FutureMeetings { get; private set; }
+    public ICollection<Meeting> FutureMeetings { get; private set; }
 
-    public ISet<Comment> RecentComments { get; private set; }
+    public ICollection<Comment> RecentComments { get; private set; }
   }
 }

@@ -1,0 +1,18 @@
+﻿@using GrokMob.Models
+@model MeetingsCollection
+
+<h2>Future Meetings</h2>
+
+@if (!Model.FutureMeetings.Any()) {
+<p>There are no future meetings.</p>                                      
+}
+@Html.Partial("_MeetingSummary", Model.FutureMeetings)
+
+<h2>Past Meetings</h2>
+
+@if (!Model.PastMeetings.Any()) {
+<p>There are no past meetings.</p>                                  
+}
+@Html.Partial("_MeetingSummary", Model.PastMeetings)
+
+@section BigLeft{}

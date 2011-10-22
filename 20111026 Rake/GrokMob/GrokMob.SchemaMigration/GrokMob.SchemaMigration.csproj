@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Migration1.cs" />
     <Compile Include="Migration2.cs" />
+    <Compile Include="Migration3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
   </ItemGroup>
@@ -53,10 +54,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Activity.sql" />
     <EmbeddedResource Include="Data\Meeting.sql" />
     <EmbeddedResource Include="Data\Comment.sql" />
-    <EmbeddedResource Include="Data\Stat.sql" />
     <EmbeddedResource Include="Data\Venue.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

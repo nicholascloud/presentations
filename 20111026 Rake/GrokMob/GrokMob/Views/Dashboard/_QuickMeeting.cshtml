@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SelectListItem>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#scheduledFor').datetimepicker();
+    $('#save').click(function () {
+      $(this).closest('form').submit();
+    });
+  });
+</script>
+
+<form class="quickMeeting" action="/meetings/quick" method="post">
+  <fieldset id="quickMeeting" class="ui-widget">
+
+    <div style="float: right;">
+      <img alt="QuickMeet" src="/assets/icons/calendar.png" />
+      <h2>QuickMeet</h2>
+      <ul>
+        <li><a id="save" href="#">Save</a></li>
+      </ul>
+    </div>
+
+    <p>Title</p>
+    <input name="title" type="text"/>
+
+    <p>Description</p>
+    <input name="description" type="text"/>
+
+    <p>Scheduled For</p>
+    <input id="scheduledFor" name="scheduledFor" type="text" />
+
+    <p>Location</p>
+    @Html.DropDownList("location", Model)
+
+  </fieldset>
+</form>

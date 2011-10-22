@@ -35,7 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -59,18 +68,29 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="WebActivator">
-      <HintPath>..\packages\WebActivator.1.4.2\lib\net40\WebActivator.dll</HintPath>
+    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ActionFilters\StatsActionFilterAttribute.asax.cs" />
-    <Compile Include="ActionFilters\UserActionFilterAttribute.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ActionFilters\StatsViewDataAttribute.cs" />
+    <Compile Include="Controllers\MeetingsController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Models\CommentCollection.cs" />
+    <Compile Include="Models\MeetingsCollection.cs" />
+    <Compile Include="Models\CommentPostData.cs" />
+    <Compile Include="Models\AlphabetSection.cs" />
+    <Compile Include="Models\MembersCollection.cs" />
+    <Compile Include="Models\QuickMeetingPostData.cs" />
+    <Compile Include="Models\Stats.cs" />
+    <Compile Include="ActionFilters\UserViewDataAttribute.cs" />
+    <Compile Include="App_Start\NinjectMVC3.cs" />
+    <Compile Include="Controllers\GrokMobController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\DashboardViewData.cs" />
     <Compile Include="Models\Generated\Database.cs">
@@ -78,9 +98,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MeetingViewData.cs" />
+    <Compile Include="Models\MeetingDetails.cs" />
     <Compile Include="Models\PetaPoco.cs" />
-    <Compile Include="Models\QuickMeetViewData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,12 +265,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Start\" />
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\" />
     <Folder Include="Modules\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -262,13 +277,10 @@
     <Content Include="App_Code\Markup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Views\Shared\_MeetingSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_FutureMeetings.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -283,30 +295,30 @@
     <Content Include="Views\Shared\_Stats.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_QuickMeeting.cshtml" />
+    <Content Include="Views\Dashboard\_QuickMeeting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Icons\open-source-icons.zip" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\_Comments.cshtml" />
+    <Content Include="Views\Shared\_Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Meeting.cshtml" />
+    <Content Include="Views\Meetings\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GrokMob.Domain\GrokMob.Domain.csproj">
-      <Project>{57761477-0586-4ECE-94D6-8529EFDCE0EE}</Project>
-      <Name>GrokMob.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="appSettings.config" />
+    <Content Include="connectionStrings.config" />
+    <Content Include="log4net.config" />
     <None Include="Models\Generated\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </None>
     <None Include="Models\Generated\PetaPoco.Core.ttinclude" />
     <None Include="Models\Generated\PetaPoco.Generator.ttinclude" />
+    <Content Include="Views\Meetings\Index.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Members\_DirectorySection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
