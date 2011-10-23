@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GrokMob.ReadModel")]
+[assembly: AssemblyTitle("GrokMob.Pester")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("GrokMob.ReadModel")]
+[assembly: AssemblyProduct("GrokMob.Pester")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fbc1d37e-b4e1-4bde-a80f-89e55f030525")]
+[assembly: Guid("05f610ac-527e-4cff-9cb7-ce4c01bf6434")]
 
 // Version information for an assembly consists of the following four values:
 //

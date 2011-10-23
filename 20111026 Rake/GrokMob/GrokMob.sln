@@ -30,6 +30,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dev", "dev", "{0F2AA0EA-360
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.UnitTests", "UnitTests\GrokMob.UnitTests\GrokMob.UnitTests.csproj", "{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Pester", "GrokMob.Pester\GrokMob.Pester.csproj", "{4604D636-3458-4284-92C2-942E083E3A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Domain", "GrokMob.Domain\GrokMob.Domain.csproj", "{B59B1F14-8A53-475C-8147-0152DEF8E1A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,14 @@ Global
 		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4604D636-3458-4284-92C2-942E083E3A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4604D636-3458-4284-92C2-942E083E3A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4604D636-3458-4284-92C2-942E083E3A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4604D636-3458-4284-92C2-942E083E3A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B59B1F14-8A53-475C-8147-0152DEF8E1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B59B1F14-8A53-475C-8147-0152DEF8E1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B59B1F14-8A53-475C-8147-0152DEF8E1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B59B1F14-8A53-475C-8147-0152DEF8E1A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

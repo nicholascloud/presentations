@@ -3,7 +3,7 @@ require 'albacore'
 require 'FileUtils'
 
 task :default do
-  puts 'Helpful info here'
+  puts 'If you need help, run the command `rake -T` to list all available tasks.'
 end
 
 desc 'Builds the solution'
@@ -94,6 +94,27 @@ end
 
 desc 'Database migration tasks'
 namespace :db do
+
+  desc 'Creates the database'
+  sqlcmd :create do |sql|
+    sql.command = 'sqlcmd.exe'
+    sql.server = 'localhost'
+    # sql.database = 'some_database'
+    # sql.username = 'some_user'
+    # sql.password = "SHH!!! it's a secret!"
+    # sql.variables :New_DB_Name => "Albacore_Test"
+    sql.scripts './GrokMob/GrokMob.SchemaMigration/Scripts/CreateDatabase.sql'
+  end
+
+  sqlcmd :drop do |sql|
+    sql.command = 'sqlcmd.exe'
+    sql.server = 'localhost'
+    # sql.database = 'some_database'
+    # sql.username = 'some_user'
+    # sql.password = "SHH!!! it's a secret!"
+    # sql.variables :New_DB_Name => "Albacore_Test"
+    sql.scripts './GrokMob/GrokMob.SchemaMigration/Scripts/DropDatabase.sql'
+  end
 
   desc 'Migrates the database up to its greatest version'
   task :up do

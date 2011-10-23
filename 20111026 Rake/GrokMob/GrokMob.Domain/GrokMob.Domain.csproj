@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{57761477-0586-4ECE-94D6-8529EFDCE0EE}</ProjectGuid>
+    <ProjectGuid>{B59B1F14-8A53-475C-8147-0152DEF8E1A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GrokMob.Domain</RootNamespace>
@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Growl.Connector">
+      <HintPath>..\packages\Growl.0.6\lib\Growl.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="Growl.CoreLibrary">
+      <HintPath>..\packages\Growl.0.6\lib\Growl.CoreLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,17 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Meeting.cs" />
-    <Compile Include="Comment.cs" />
+    <Compile Include="EmailPester.cs" />
+    <Compile Include="GrowlMessage.cs" />
+    <Compile Include="GrowlPesterQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stat.cs" />
-    <Compile Include="Venue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="license.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GrokMob.Pester\GrokMob.Pester.csproj">
+      <Project>{4604D636-3458-4284-92C2-942E083E3A22}</Project>
+      <Name>GrokMob.Pester</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

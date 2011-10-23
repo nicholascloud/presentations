@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A5C6DA7D-E24B-43FD-A272-EB352CF8D1CE}</ProjectGuid>
+    <ProjectGuid>{4604D636-3458-4284-92C2-942E083E3A22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GrokMob.ReadModel</RootNamespace>
-    <AssemblyName>GrokMob.ReadModel</AssemblyName>
+    <RootNamespace>GrokMob.Pester</RootNamespace>
+    <AssemblyName>GrokMob.Pester</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,16 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Meeting.cs" />
-    <Compile Include="MeetingComment.cs" />
+    <Compile Include="CanPester.cs" />
+    <Compile Include="PesterQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stat.cs" />
-    <Compile Include="Venue.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="Package.nuspec" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

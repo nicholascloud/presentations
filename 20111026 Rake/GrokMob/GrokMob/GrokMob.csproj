@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Growl.Connector">
+      <HintPath>..\packages\Growl.0.6\lib\Growl.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="Growl.CoreLibrary">
+      <HintPath>..\packages\Growl.0.6\lib\Growl.CoreLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -81,6 +87,7 @@
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Models\CommentCollection.cs" />
+    <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\MeetingsCollection.cs" />
     <Compile Include="Models\CommentPostData.cs" />
     <Compile Include="Models\AlphabetSection.cs" />
@@ -248,6 +255,7 @@
     <Content Include="Assets\Scripts\jquery.validate.min.js" />
     <Content Include="Assets\Scripts\modernizr-1.7.js" />
     <Content Include="Assets\Scripts\modernizr-1.7.min.js" />
+    <Content Include="license.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -266,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
-    <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -322,6 +329,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GrokMob.Domain\GrokMob.Domain.csproj">
+      <Project>{B59B1F14-8A53-475C-8147-0152DEF8E1A8}</Project>
+      <Name>GrokMob.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GrokMob.Pester\GrokMob.Pester.csproj">
+      <Project>{4604D636-3458-4284-92C2-942E083E3A22}</Project>
+      <Name>GrokMob.Pester</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

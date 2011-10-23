@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
+using GrokMob.Domain;
 using GrokMob.Models;
+using Growl.Connector;
 using PetaPoco;
 
 namespace GrokMob.Controllers {
@@ -47,6 +51,22 @@ namespace GrokMob.Controllers {
       };
 
       DB.Insert(meeting);
+
+      GrowlConnector connector = new GrowlConnector();
+      Application growlApp = new Application("GrokMob");
+      NotificationType type = new NotificationType("grokmob-quick-meeting");
+      connector.Register(growlApp, new[] { type });
+
+      var growlPester = new GrowlPesterQueue(growlApp.Name, connector);
+      growlPester.QueueUp(new GrowlMessage("New meeting cheduled", meeting.ToString()));
+      var pesterQueue = new Pester.PesterQueue();
+      pesterQueue.Enqueue(growlPester);
+
+      var emailPester = new EmailPester(
+        new MailMessage("grokmob@stlalt.net", "meetings@stlalt.net", "New meeting!", meeting.ToString()));
+      pesterQueue.Enqueue(emailPester);
+      
+      pesterQueue.LetEmHaveIt();
 
       return Redirect(Url.Action("index", "dashboard"));
     }
