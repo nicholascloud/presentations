@@ -56,7 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GrokMob.Versioner\GrokMob.Versioner.csproj">
+    <ProjectReference Include="..\..\GrokMob.Versioner\GrokMob.Versioner.csproj">
       <Project>{4CF8E46B-E0AD-4DC2-8D7A-056488A20781}</Project>
       <Name>GrokMob.Versioner</Name>
     </ProjectReference>

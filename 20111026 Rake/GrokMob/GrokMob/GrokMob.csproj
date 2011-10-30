@@ -98,7 +98,6 @@
     <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="Controllers\GrokMobController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\DashboardViewData.cs" />
     <Compile Include="Models\Generated\Database.cs">
       <AutoGen>True</AutoGen>
@@ -274,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

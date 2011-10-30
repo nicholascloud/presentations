@@ -1,6 +1,6 @@
 using System;
 
-namespace GrokMob.Versioning {
+namespace GrokMob.Domain {
   internal static class ArrayExtensions {
     
     public static T At<T>(this T[] @this, int index, T @default) {
@@ -10,12 +10,16 @@ namespace GrokMob.Versioning {
       return @this[index];
     }
 
-    public static TTo[] Convert<TTo, TFrom>(this TFrom[] @this, Func<TFrom, TTo> convertTo) {
+    public static TTo[] Map<TTo, TFrom>(this TFrom[] @this, Func<TFrom, TTo> convertTo) {
       TTo[] to = new TTo[@this.Length];
       for (int i = 0; i < @this.Length; i++) {
         to[i] = convertTo(@this[i]);
       }
       return to;
+    }
+
+    public static void Each<T>(this T[] @this, Action<T> action) {
+      Array.ForEach(@this, action);
     }
   }
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using GrokMob.Extensions;
+using GrokMob.Domain;
 using GrokMob.Models;
 
 namespace GrokMob.Controllers {
