@@ -58,6 +58,20 @@ namespace GrokMob.Versioning {
       return us[index] > them[index];
     }
 
+    public override bool Equals(object obj) {
+      if(ReferenceEquals(this, obj)) {
+        return true;
+      }
+      if(!(obj is RedmondVersion)) {
+        return false;
+      }
+      var other = obj as RedmondVersion;
+      return Major == other.Major &&
+        Minor == other.Minor &&
+          Build == other.Build &&
+            Revision == other.Revision;
+    }
+
     public static bool operator >(RedmondVersion v1, RedmondVersion v2) {
       return v1.IsGreaterThan(v2);
     }

@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Domain", "GrokMob.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Versioner", "GrokMob.Versioner\GrokMob.Versioner.csproj", "{4CF8E46B-E0AD-4DC2-8D7A-056488A20781}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrokMob.Versioner.UnitTests", "GrokMob.Versioner.UnitTests\GrokMob.Versioner.UnitTests.csproj", "{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,12 +108,23 @@ Global
 		{4CF8E46B-E0AD-4DC2-8D7A-056488A20781}.Release|Mixed Platforms.Build.0 = Release|x86
 		{4CF8E46B-E0AD-4DC2-8D7A-056488A20781}.Release|x86.ActiveCfg = Release|x86
 		{4CF8E46B-E0AD-4DC2-8D7A-056488A20781}.Release|x86.Build.0 = Release|x86
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9DF3A1A-0FFD-431F-B864-2B416F9A3AAE} = {647D42B1-DC83-4093-88C4-337614163B8C}
+		{73D88FE3-2763-4EB0-823E-458AC8ECF2AB} = {647D42B1-DC83-4093-88C4-337614163B8C}
 		{94B41E31-7A0B-4509-9567-4DFDBAA439E4} = {4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}
 		{0F2AA0EA-3607-4B52-95B7-5163AC092B48} = {4F52A7C1-0F28-42C7-8CFD-8227CDE2234A}
 	EndGlobalSection
