@@ -1,6 +1,7 @@
 desc 'Database migration tasks'
 namespace :db do
 
+  desc 'Builds the database migration project'
   msbuild :build do |msb|
     msb.properties :configuration => ENV['mode'] || :Debug
     msb.targets :Clean, :Build
@@ -54,7 +55,7 @@ namespace :db do
   end
 
   desc 'Migrates the database'
-  fluentmigrator :migrate, [:task, :version, :steps] => [:build_schema] do |mig, args|
+  fluentmigrator :migrate, [:task, :version, :steps] => ['db:build'] do |mig, args|
     args.with_defaults(:task => ENV['task'] || 'migrate:up', :preview => (ENV['preview'] == 'true') || false)
     mode = ENV['mode'] || :Debug
     instance = ENV['instance'] || 'sqlexpress'

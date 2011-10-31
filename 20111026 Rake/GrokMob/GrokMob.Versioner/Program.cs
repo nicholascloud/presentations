@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using GrokMob.Domain;
 
 namespace GrokMob.Versioner {
   class Program {
@@ -12,7 +11,7 @@ namespace GrokMob.Versioner {
       var arguments = new Arguments(args);
       if(arguments.InvalidArgs().Any()) {
         foreach(var arg in arguments.InvalidArgs()) {
-          Console.WriteLine("--{0} : {1}", arg.Key, arg.Value);
+          Console.WriteLine("--{0} : {1}", arg.Item1, arg.Item2);
         }
         return;
       }
@@ -36,7 +35,7 @@ namespace GrokMob.Versioner {
           break;
       }
 
-      Console.Write(version.ToString());
+      File.WriteAllText(arguments.File, version.ToString());
     }
   }
 }

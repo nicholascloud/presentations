@@ -1,7 +1,8 @@
 using System;
 using System.Text.RegularExpressions;
+using GrokMob.Core;
 
-namespace GrokMob.Domain {
+namespace GrokMob.Versioner {
 
   public sealed class RedmondVersion {
     public RedmondVersion(Int32 major, Int32 minor, Int32 build, Int32 revision)
@@ -28,7 +29,7 @@ namespace GrokMob.Domain {
       const String version_pattern = @"^\d{1,P}(\.\d{1,P}(\.\d{1,P}(\.\d{1,P}){0,1}){0,1}){0,1}$";
       String v = version.Trim();
       if(!Regex.IsMatch(v, version_pattern.Replace("P", places.ToString()))) {
-        throw new Exception("//TODO: message");
+        throw new Exception("Malformed version file contents");
       }
 
       Int32[] parts = v.Split('.')

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using InvalidArg = System.Tuple<System.String, System.String>;
 
 namespace GrokMob.Versioner {
   internal class Arguments : Dictionary<string, string> {
 
     public Arguments(String[] args) {
       Array.ForEach(args, a => {
-        String[] parts = a.Split(':');
+        String[] parts = a.Split('=');
         Add(parts[0], (parts.Length == 2 ? parts[1] : String.Empty));
       });
     }
@@ -24,19 +25,19 @@ namespace GrokMob.Versioner {
       }
     }
 
-    public IDictionary<String, String> InvalidArgs() {
-      var invalid = new Dictionary<String, String>();
+    public Tuple<String, String>[] InvalidArgs() {
+      var invalidArgs = new List<Tuple<String, String>>();
       if(!ContainsKey("--file")) {
-        invalid.Add("file", "You must specify a file");
+        invalidArgs.Add(new InvalidArg("file", "You must specify a file"));
       } else {
         if(String.IsNullOrEmpty(this["--file"])) {
-          invalid.Add("file", "You must specify a valid file");
+          invalidArgs.Add(new InvalidArg("file", "You must specify a valid file"));
         }
         if(!System.IO.File.Exists(this["--file"])) {
-          invalid.Add("file", "The file does not exist");
+          invalidArgs.Add(new InvalidArg("file", "The file does not exist"));
         }
       }
-      return invalid;
-    } 
+      return invalidArgs.ToArray();
+    }
   }
 }

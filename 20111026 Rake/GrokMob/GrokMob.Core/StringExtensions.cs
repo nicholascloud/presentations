@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace GrokMob.Domain {
+namespace GrokMob.Core {
   public static class StringExtensions {
     public static String Chop(this String @this, int length, bool includeElipses = true) {
       const String elipses = "...";

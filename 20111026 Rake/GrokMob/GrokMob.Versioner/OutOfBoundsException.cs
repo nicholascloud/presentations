@@ -1,6 +1,6 @@
 using System;
 
-namespace GrokMob.Domain {
+namespace GrokMob.Versioner {
   public class OutOfBoundsException : Exception {
     public OutOfBoundsException(Int32 lower, Int32 upper)
       : this(MESSAGE, lower, upper) {

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using NUnit.Framework;
 
-namespace GrokMob.Domain.UnitTests {
+namespace GrokMob.Versioner.UnitTests {
   [TestFixture]
   public class RedmondVersionUnitTests {
 

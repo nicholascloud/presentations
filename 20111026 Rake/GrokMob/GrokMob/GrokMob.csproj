@@ -271,10 +271,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\" />
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
@@ -331,6 +328,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GrokMob.Core\GrokMob.Core.csproj">
+      <Project>{0A336D08-50AE-4738-9725-CD2E2428A827}</Project>
+      <Name>GrokMob.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GrokMob.Domain\GrokMob.Domain.csproj">
       <Project>{B59B1F14-8A53-475C-8147-0152DEF8E1A8}</Project>
       <Name>GrokMob.Domain</Name>

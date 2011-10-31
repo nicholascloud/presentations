@@ -1,9 +1,11 @@
-desc "Publishes web application"
+desc 'Publishes web application to /Publish/[version]'
 msbuild :publish do |msb|
   ENV['mode'] = ENV['mode'] || 'release'
   ENV['env'] = ENV['env'] || 'prod'
   Rake::Task['build'].invoke
-  msb.properties :configuration => :Release, :webprojectoutputdir => '../../Publish/GrokMob/', :outdir => '../../Publish/GrokMob/'
+  version = GrokMob::current_version()
+  msb.properties :configuration => :Release, :webprojectoutputdir => "../../Publish/#{version}/", 
+    :outdir => "../../Publish/#{version}/"
   msb.targets :ResolveReferences, :_CopyWebApplication
   msb.solution = './GrokMob/GrokMob/GrokMob.csproj'
 end

@@ -1,7 +1,7 @@
 using System;
 
-namespace GrokMob.Domain {
-  internal static class ArrayExtensions {
+namespace GrokMob.Core {
+  public static class ArrayExtensions {
     
     public static T At<T>(this T[] @this, int index, T @default) {
       if(index < 0 || index >= @this.Length) {
