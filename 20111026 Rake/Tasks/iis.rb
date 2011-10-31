@@ -1,11 +1,21 @@
 class IISPath
+  TaskName = :iispath
   include Albacore::Task
   include Albacore::RunCommand
 
   attr_accessor :site, :physical_path
 
   def execute
-    run_command "IIS AppCmd", "set vdir \"#{site}/\" -physicalPath:\"#{physical_path}\""
+    command_parameters = []
+    command_parameters << 'set'
+    command_parameters << 'vdir'
+    command_parameters << "\"#{site}/\""
+    command_parameters << "-physicalPath:\"#{physical_path}\""
+
+    result = run_command "AppCmd.exe", command_parameters.join(' ')
+
+    failure_message = "Could not change the virtual directory"
+    fail_with_message failure_message if !result
   end
 end
 
