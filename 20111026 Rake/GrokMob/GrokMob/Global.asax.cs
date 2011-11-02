@@ -14,12 +14,6 @@ namespace GrokMob {
       routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
       routes.IgnoreRoute("{resource}.ico/{*pathInfo}");
 
-//      routes.MapRoute(
-//        "root",
-//        "",
-//        new { controller = "home", action = "dashboard" }
-//        );
-//
       routes.MapRoute(
         "index",
         "{controller}",

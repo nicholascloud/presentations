@@ -16,6 +16,8 @@ class IISPath
 
     failure_message = "Could not change the virtual directory"
     fail_with_message failure_message if !result
+
+    puts physical_path
   end
 end
 
@@ -25,7 +27,7 @@ namespace :iis do
   iispath :update do |i|
     version = GrokMob::current_version()
     i.command = "appcmd"
-    i.site = "grokmob"
-    i.physical_path = File.expand_path("./Publish/#{version}")
+    i.site = "grokmob.localhost.com"
+    i.physical_path = File.expand_path("./Publish/#{version}").gsub('/', '\\')
   end
 end

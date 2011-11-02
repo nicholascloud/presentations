@@ -46,4 +46,9 @@ namespace :version do
     end
     FileUtils.cp_r(build_path, output_path)
   end
+
+  desc 'Prints the current version'
+  task :current do
+    puts GrokMob::current_version()
+  end
 end
