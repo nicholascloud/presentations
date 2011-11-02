@@ -4,8 +4,8 @@ msbuild :publish do |msb|
   ENV['env'] = ENV['env'] || 'prod'
   Rake::Task['build'].invoke
   version = GrokMob::current_version()
-  msb.properties :configuration => :Release, :webprojectoutputdir => "../../Publish/#{version}/", 
-    :outdir => "../../Publish/#{version}/"
-  msb.targets :ResolveReferences, :_CopyWebApplication
+  webdir = "../../Publish/#{version}/"
+  msb.properties :Configuration => :Release, :WebProjectOutputDir => webdir, :OutDir => "#{webdir}/bin/"
+  msb.targets :Rebuild
   msb.solution = './GrokMob/GrokMob/GrokMob.csproj'
 end
