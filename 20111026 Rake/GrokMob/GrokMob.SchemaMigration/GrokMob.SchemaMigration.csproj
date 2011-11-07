@@ -61,8 +61,10 @@
     <EmbeddedResource Include="Data\Comment.sql" />
     <EmbeddedResource Include="Data\Venue.sql" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <Content Include="Scripts\CreateDatabase.sql" />
+    <Content Include="Scripts\DropDatabase.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
