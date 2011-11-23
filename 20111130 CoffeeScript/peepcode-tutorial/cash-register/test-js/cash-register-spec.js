@@ -1,4 +1,4 @@
-(function() {
+
   describe("Dish", function() {
     describe("constructor", function() {
       beforeEach(function() {
@@ -52,6 +52,7 @@
       });
     });
   });
+
   describe("Money", function() {
     return describe("constructor", function() {
       describe("valid value", function() {
@@ -77,6 +78,7 @@
       });
     });
   });
+
   describe("Meal", function() {
     beforeEach(function() {
       this.donut = new Dish('Maple Bacon Donut $1.99 #breakfast');
@@ -108,4 +110,3 @@
       });
     });
   });
-}).call(this);

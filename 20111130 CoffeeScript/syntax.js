@@ -11,7 +11,7 @@
     anonymous function closure.
   */
 
-  var meaningOfLife;
+  var global, meaningOfLife;
 
   meaningOfLife = 42;
 
@@ -19,5 +19,13 @@
     Global variables can be forced by explicitly accessing
     the `this` variable in global scope.
   */
+
+  global = this;
+
+  global.meaningOfLife = 42;
+
+  sum(function(a, b) {
+    return a + b;
+  });
 
 }).call(this);

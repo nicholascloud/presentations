@@ -1,4 +1,4 @@
-(function() {
+
   jQuery(function() {
     var meal, source, template;
     meal = new Meal;
@@ -14,4 +14,3 @@
       return ($('#entry')).val('');
     });
   });
-}).call(this);
