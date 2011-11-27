@@ -5,9 +5,9 @@ window.syntax.comments = ->
     Comments
   ###
   
-  console.title '# a hash symbol is a comment!'
+  console.log '# a hash symbol is a comment!'
   
-  console.title """
+  console.log """
   ###
     Three hash symbols
     form a multi-line comment
