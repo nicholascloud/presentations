@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <script type="text/javascript" src="../jquery-1.7.min.js"></script>
+    <script type="text/javascript">
+        console.title = function(title) {
+            console.log('=== ' + title + ' ===');
+        }
+        $().ready(function() {
+            var $ul = $('#commands');
+            for(name in window.syntax) {
+                var $li = $('<li></li>').text('window.syntax.' + name + '()');
+                $ul.append($li);
+            }
+        });
+    </script>
+    <script type="text/javascript" src="_test.js"></script>
+    <script type="text/javascript" src="array.js"></script>
+    <script type="text/javascript" src="class.js"></script>
+    <script type="text/javascript" src="comprehension.js"></script>
+    <script type="text/javascript" src="controlflow.js"></script>
+    <script type="text/javascript" src="destructuring.js"></script>
+    <script type="text/javascript" src="loop.js"></script>
+    <script type="text/javascript" src="hash.js"></script>
+    <script type="text/javascript" src="scope.js"></script
+    
+</head>
+<body>
+    <p>Uuse the JavaScript console to execute a function.</p>
+    <ul id="commands"></ul>
+</body>
