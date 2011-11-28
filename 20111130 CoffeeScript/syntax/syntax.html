@@ -5,6 +5,15 @@
         console.title = function(title) {
             console.log('=== ' + title + ' ===');
         }
+        console.debug = function(obj, lbl) {
+        	if(lbl) {
+        		console.log('+++ DEBUG [' + lbl + '] +++');
+        	} else {
+	        	console.log('+++ DEBUG +++');
+	        }
+        	console.log(obj);
+        	console.log('--- DEBUG ---');
+        }
         $().ready(function() {
             var $ul = $('#commands');
             for(name in window.syntax) {
