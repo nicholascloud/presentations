@@ -34,7 +34,7 @@
     instancevar = 0;
 
     MySuperclass.prototype.prototypeMethod = function() {
-      return '<prototype method invoked>';
+      return "<prototype method invoked, value of instancevar = " + (instancevar != null ? instancevar : '<whoops, undefined>') + ">";
     };
 
     MySuperclass.classMethod = function() {

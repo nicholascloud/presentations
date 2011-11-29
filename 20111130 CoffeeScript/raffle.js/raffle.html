@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <style type="text/css">
+      
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      window.raffle = {
+        participants: ['Nick', 'Mark', 'Tom', 'Jane'],
+        prizes: ['Book', 'License', 'Video'] 
+      }
+    </script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body>
+    
+    <div class="container">
+      <div class="content">
+        
+        <div class="page-header">
+          <h1>Raffle.js</h1>
+        </div>
+  
+        <form>
+          
+          <div class="row">
+            <div id="participant_list" class="span7">
+              <!--
+              <div class="clearfix">
+                <label for="participant_0">Participant</label>
+                <div class="input">
+                  <input type="text" id="participant_0" class="span3" />
+                  <input type="button" value=" + " id="add_participant" class="btn" />
+                  <input type="button" value=" - " class="btn remove" />
+                </div>
+              </div>
+              
+              <div class="clearfix">
+                <label for="participant_1">Participant</label>
+                <div class="input">
+                  <input type="text" id="participant_1" class="span3" />
+                  <input type="button" value=" - " class="btn remove" />
+                </div>
+              </div>
+              
+              <div class="clearfix">
+                <label for="participant_2">Participant</label>
+                <div class="input">
+                  <input type="text" id="participant_2" class="span3" />
+                  <input type="button" value=" + " id="add_participant" class="btn" />
+                </div>
+              </div>
+              -->
+              
+            </div>
+            <!-- end left column -->
+            
+            <div class="span7">
+              
+              <div class="clearfix">
+                <label for="prize_0">Prize</label>
+                <div class="input">
+                  <input type="text" id="prize_0" class="span3" />
+                  <input type="button" value=" + " id="add_prize" class="btn" />
+                </div>
+              </div>
+  
+            </div>
+            <!-- end right column -->
+            
+          </div>
+          <!-- end row -->
+          
+          <div class="row">
+            <div class="span14">
+              <div class="well">
+                <a href="#" class="btn large primary">Roll the Dice!</a>
+              </div>      
+            </div>
+          </div>
+          <!-- end row -->
+          
+          <div class="row">
+            <div class="span14">
+              
+              <div class="alert-message success">
+                <a class="close" href="#">X</a>
+                <p><span id="participant_name"><strong>so-and-so</strong></span> has won 
+                  <span id="prize"><strong>such-and-such</strong></span></p>
+              </div>
+  
+            </div>
+          </div>
+          <!-- end row -->
+          
+        </form>
+  
+      </div>
+    </div>
+    
+  </body>
+</html>

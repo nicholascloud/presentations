@@ -12,14 +12,14 @@ window.syntax.hash = ->
   console.title 'hashes without braces'
   h1 =
     name: 'Arnie'
-    weapon: 'Machine Gun',
+    weapon: 'Machine Gun'
     shouts: ["It's showtime!", "I'll be back."]
   console.log h1
   
   console.title 'testing for key in hash'
   h1 =
     name: 'Arnie'
-    weapon: 'Machine Gun',
+    weapon: 'Machine Gun'
     shouts: ["It's showtime!", "I'll be back."]
   console.log 'true' if 'name' of h1
   

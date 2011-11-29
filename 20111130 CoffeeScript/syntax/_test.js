@@ -1,20 +1,16 @@
-function outer() {
-	
-	//outer.foo = function() {return "outer.foo";}
-	
-	function inner() {
-	  //this.foo = function() {return "inner.foo";}
-		
-    this.log = function() {
-      console.log('inner');
-      console.log(this);
-    };
-	};
-	
-	outer.log = function() {
-	  console.log('outer');
-	  console.log(this);
-	};
-	
-	return new inner();
-};
+var MyFunc = (function () {
+  
+  function MyFunc1() {
+    console.log(typeof(this));
+  }
+  
+  MyFunc1.prototype.bar = function() {
+    console.log(typeof(this));
+  }
+  
+  return MyFunc1;
+  
+})();
+
+var f = new MyFunc();
+console.log(f.bar());
