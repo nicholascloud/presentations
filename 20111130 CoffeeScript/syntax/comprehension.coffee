@@ -25,3 +25,7 @@ window.syntax.comprehension = ->
   a = ['A', 'C', 'D']
   r = (key for key, value of h when value in a)
   console.log r
+  
+  console.title 'stepping over values'
+  evens = (i for i in [2..10] by 2)
+  console.log evens

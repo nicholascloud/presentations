@@ -14,6 +14,15 @@ window.syntax.loops = ->
   ###
     For loop
   ###
+  console.title '`for` loop iterates over an array with the `in` keyword'
+  captains = ['Kirk', 'Picard', 'Janeway', 'Cisco', 'Archer']
+  for c in captains
+    console.log c
+    
+  console.title '`for` loop iterates over properties in an object/hash with the `of` keyword'
+  ship = { captain: 'Picard', designation: 'NCC 1701D', classification: 'Galaxy' }
+  for key, value of ship
+    console.log "#{key} = #{value}"
   
   ###
     While loop

@@ -14,8 +14,6 @@ window.syntax.klass = ->
   subclass1.log()
   subclass2.log()
  
-  
-
 
 ###
   classes

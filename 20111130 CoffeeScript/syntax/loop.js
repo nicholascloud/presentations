@@ -5,7 +5,7 @@
     /*
         Loop
     */
-    var count, log, _results;
+    var c, captains, count, key, log, ship, value, _i, _len, _results;
     console.title('`loop` will execute until a break statement');
     count = 99;
     while (true) {
@@ -16,6 +16,22 @@
     /*
         For loop
     */
+    console.title('`for` loop iterates over an array with the `in` keyword');
+    captains = ['Kirk', 'Picard', 'Janeway', 'Cisco', 'Archer'];
+    for (_i = 0, _len = captains.length; _i < _len; _i++) {
+      c = captains[_i];
+      console.log(c);
+    }
+    console.title('`for` loop iterates over properties in an object/hash with the `of` keyword');
+    ship = {
+      captain: 'Picard',
+      designation: 'NCC 1701D',
+      classification: 'Galaxy'
+    };
+    for (key in ship) {
+      value = ship[key];
+      console.log("" + key + " = " + value);
+    }
     /*
         While loop
     */
