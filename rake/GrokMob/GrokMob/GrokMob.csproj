@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D598DD17-2BB1-4596-96C3-E9890CD46500}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrokMob</RootNamespace>
+    <AssemblyName>GrokMob</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Growl.Connector">
+      <HintPath>..\packages\Growl.0.6\lib\Growl.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="Growl.CoreLibrary">
+      <HintPath>..\packages\Growl.0.6\lib\Growl.CoreLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ActionFilters\StatsViewDataAttribute.cs" />
+    <Compile Include="Controllers\MeetingsController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Models\CommentCollection.cs" />
+    <Compile Include="Models\Meeting.cs" />
+    <Compile Include="Models\MeetingsCollection.cs" />
+    <Compile Include="Models\CommentPostData.cs" />
+    <Compile Include="Models\AlphabetSection.cs" />
+    <Compile Include="Models\MembersCollection.cs" />
+    <Compile Include="Models\QuickMeetingPostData.cs" />
+    <Compile Include="Models\Stats.cs" />
+    <Compile Include="ActionFilters\UserViewDataAttribute.cs" />
+    <Compile Include="App_Start\NinjectMVC3.cs" />
+    <Compile Include="Controllers\GrokMobController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Models\DashboardViewData.cs" />
+    <Compile Include="Models\Generated\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MeetingDetails.cs" />
+    <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Icons\add-item.png" />
+    <Content Include="Assets\Icons\addressbook.png" />
+    <Content Include="Assets\Icons\agent.png" />
+    <Content Include="Assets\Icons\apple.png" />
+    <Content Include="Assets\Icons\arrow-round.png" />
+    <Content Include="Assets\Icons\badge.png" />
+    <Content Include="Assets\Icons\bar-chart-02.png" />
+    <Content Include="Assets\Icons\bar-chart.png" />
+    <Content Include="Assets\Icons\battery-full.png" />
+    <Content Include="Assets\Icons\bird.png" />
+    <Content Include="Assets\Icons\boat.png" />
+    <Content Include="Assets\Icons\bookmark.png" />
+    <Content Include="Assets\Icons\briefcase.png" />
+    <Content Include="Assets\Icons\calculator.png" />
+    <Content Include="Assets\Icons\calendar.png" />
+    <Content Include="Assets\Icons\cassette.png" />
+    <Content Include="Assets\Icons\chain.png" />
+    <Content Include="Assets\Icons\chat-.png" />
+    <Content Include="Assets\Icons\chat-02.png" />
+    <Content Include="Assets\Icons\cloud-filled.png" />
+    <Content Include="Assets\Icons\cloud-outline.png" />
+    <Content Include="Assets\Icons\computer.png" />
+    <Content Include="Assets\Icons\configuration.png" />
+    <Content Include="Assets\Icons\configuration02.png" />
+    <Content Include="Assets\Icons\connected.png" />
+    <Content Include="Assets\Icons\connections.png" />
+    <Content Include="Assets\Icons\container.png" />
+    <Content Include="Assets\Icons\copy-item.png" />
+    <Content Include="Assets\Icons\database.png" />
+    <Content Include="Assets\Icons\delete-item.png" />
+    <Content Include="Assets\Icons\disc.png" />
+    <Content Include="Assets\Icons\dollar.png" />
+    <Content Include="Assets\Icons\download.png" />
+    <Content Include="Assets\Icons\edit.png" />
+    <Content Include="Assets\Icons\email.png" />
+    <Content Include="Assets\Icons\fan.png" />
+    <Content Include="Assets\Icons\fancy-globe.png" />
+    <Content Include="Assets\Icons\female-user.png" />
+    <Content Include="Assets\Icons\fire.png" />
+    <Content Include="Assets\Icons\first-aid.png" />
+    <Content Include="Assets\Icons\flag.png" />
+    <Content Include="Assets\Icons\flower.png" />
+    <Content Include="Assets\Icons\full-screen.png" />
+    <Content Include="Assets\Icons\glasses.png" />
+    <Content Include="Assets\Icons\globe.png" />
+    <Content Include="Assets\Icons\happy-face.png" />
+    <Content Include="Assets\Icons\headphone.png" />
+    <Content Include="Assets\Icons\heart.png" />
+    <Content Include="Assets\Icons\home.png" />
+    <Content Include="Assets\Icons\ID.png" />
+    <Content Include="Assets\Icons\ipod.png" />
+    <Content Include="Assets\Icons\lab.png" />
+    <Content Include="Assets\Icons\lady.png" />
+    <Content Include="Assets\Icons\lamp.png" />
+    <Content Include="Assets\Icons\leaves.png" />
+    <Content Include="Assets\Icons\light.png" />
+    <Content Include="Assets\Icons\line-globe.png" />
+    <Content Include="Assets\Icons\lock.png" />
+    <Content Include="Assets\Icons\lookup.png" />
+    <Content Include="Assets\Icons\male-user.png" />
+    <Content Include="Assets\Icons\microphone.png" />
+    <Content Include="Assets\Icons\mobile.png" />
+    <Content Include="Assets\Icons\mobile2.png" />
+    <Content Include="Assets\Icons\mouse.png" />
+    <Content Include="Assets\Icons\multi-agents.png" />
+    <Content Include="Assets\Icons\music-node.png" />
+    <Content Include="Assets\Icons\network-pc.png" />
+    <Content Include="Assets\Icons\network.png" />
+    <Content Include="Assets\Icons\next-item.png" />
+    <Content Include="Assets\Icons\phone.png" />
+    <Content Include="Assets\Icons\pie-chart.png" />
+    <Content Include="Assets\Icons\pin.png" />
+    <Content Include="Assets\Icons\plane.png" />
+    <Content Include="Assets\Icons\print.png" />
+    <Content Include="Assets\Icons\processing-02.png" />
+    <Content Include="Assets\Icons\processing.png" />
+    <Content Include="Assets\Icons\push-pin.png" />
+    <Content Include="Assets\Icons\recycle-empty.png" />
+    <Content Include="Assets\Icons\recycle-full.png" />
+    <Content Include="Assets\Icons\reload.png" />
+    <Content Include="Assets\Icons\rss.png" />
+    <Content Include="Assets\Icons\satellite.png" />
+    <Content Include="Assets\Icons\save.png" />
+    <Content Include="Assets\Icons\scale.png" />
+    <Content Include="Assets\Icons\Scissors.png" />
+    <Content Include="Assets\Icons\screen.png" />
+    <Content Include="Assets\Icons\search.png" />
+    <Content Include="Assets\Icons\server.png" />
+    <Content Include="Assets\Icons\shield.png" />
+    <Content Include="Assets\Icons\shut-down.png" />
+    <Content Include="Assets\Icons\star.png" />
+    <Content Include="Assets\Icons\tag.png" />
+    <Content Include="Assets\Icons\tap.png" />
+    <Content Include="Assets\Icons\tree.png" />
+    <Content Include="Assets\Icons\umbrella.png" />
+    <Content Include="Assets\Icons\unlock.png" />
+    <Content Include="Assets\Icons\usb.png" />
+    <Content Include="Assets\Icons\van.png" />
+    <Content Include="Assets\Icons\wifi.png" />
+    <Content Include="Assets\Icons\world.png" />
+    <Content Include="Assets\Scripts\jquery-1.6.2.min.js" />
+    <Content Include="Assets\Scripts\jquery-ui-1.8.15.custom.min.js" />
+    <Content Include="Assets\Scripts\jquery-ui-timepicker-addon.js" />
+    <Content Include="Assets\Styles\grokmob.admin.css" />
+    <Content Include="Assets\Themes\jquery-ui-timepicker.css" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Assets\Themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\Themes\smoothness\jquery-ui-1.8.15.custom.css" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_diagonals-small_50_262626_40x40.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_flat_0_303030_40x100.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_flat_0_4c4c4c_40x100.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_glass_40_0a0a0a_1x400.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_glass_55_f1fbe5_1x400.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_glass_60_000000_1x400.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_gloss-wave_55_000000_500x100.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_gloss-wave_85_9fda58_500x100.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-bg_gloss-wave_95_f6ecd5_500x100.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-icons_000000_256x240.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-icons_1f1f1f_256x240.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-icons_9fda58_256x240.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-icons_b8ec79_256x240.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\Themes\trontastic\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\Themes\trontastic\jquery-ui-1.8.15.custom.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Assets\Styles\grokmob.public.css" />
+    <Content Include="Assets\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Assets\Scripts\jquery.validate.js" />
+    <Content Include="Assets\Scripts\jquery.validate.min.js" />
+    <Content Include="Assets\Scripts\modernizr-1.7.js" />
+    <Content Include="Assets\Scripts\modernizr-1.7.min.js" />
+    <Content Include="license.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Assets\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Assets\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Assets\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Assets\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Assets\Scripts\MicrosoftAjax.js" />
+    <Content Include="Assets\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Assets\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Assets\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Assets\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Assets\Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\Markup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_MeetingSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dashboard\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Navigation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Stats.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dashboard\_QuickMeeting.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Icons\open-source-icons.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Comments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Meetings\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appSettings.config" />
+    <Content Include="connectionStrings.config" />
+    <Content Include="log4net.config" />
+    <None Include="Models\Generated\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </None>
+    <None Include="Models\Generated\PetaPoco.Core.ttinclude" />
+    <None Include="Models\Generated\PetaPoco.Generator.ttinclude" />
+    <Content Include="Views\Meetings\Index.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Members\_DirectorySection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GrokMob.Core\GrokMob.Core.csproj">
+      <Project>{0A336D08-50AE-4738-9725-CD2E2428A827}</Project>
+      <Name>GrokMob.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GrokMob.Domain\GrokMob.Domain.csproj">
+      <Project>{B59B1F14-8A53-475C-8147-0152DEF8E1A8}</Project>
+      <Name>GrokMob.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GrokMob.Pester\GrokMob.Pester.csproj">
+      <Project>{4604D636-3458-4284-92C2-942E083E3A22}</Project>
+      <Name>GrokMob.Pester</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>51155</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
