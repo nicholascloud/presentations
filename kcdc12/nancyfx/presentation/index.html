@@ -1,31 +1,30 @@
 <!doctype html>  
 <html lang="en">
-	
 	<head>
 		<meta charset="utf-8">
-		
-		<title>reveal.js</title>
-
-		<meta name="description" content="An easy to use CSS 3D slideshow tool for quickly creating good looking HTML presentations.">
-		<meta name="author" content="Hakim El Hattab">
-		
+		<title>The Nancy Micro Web Framework</title>
+		<meta name="description" content="In which I discuss Nancy, the open source .NET micro web framework!">
+		<meta name="author" content="Nicholas Cloud">
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css">
-
 		<link rel="stylesheet" href="lib/zenburn.css">
+		<style type="text/css">
+			#reveal #nancy-logo {background-color:#000000; width:100%;}
+			#reveal #nancy-logo img {border:0px; padding:none; margin:none;}
+			#reveal pre {font-size:25px;}
+		</style>
 	</head>
-	
 	<body>
-		
 		<div id="reveal">
-			
-			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>Reveal.js</h1>
-					<h3 class="inverted">A CSS 3D Slideshow</h3>
+
+				<section id="title">
+					<div id="nancy-logo">
+						<img src="img/nancy-logo.png" alt="NancyFX" />
+					</div>
+					<br /><hr />
+					<h3>Micro Web Framework</h3>
 					<script>
 						// Delicously hacky. Look away.
 						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
@@ -33,6 +32,74 @@
 					</script>
 				</section>
 				
+				<section id="wat">
+					<h2>WAT?</h2>
+					<ul>
+						<li>open source</li>
+						<li>lightweight website framework</li>
+						<li>spiritual successor to Sinatra</li>
+						<li>low ceremony coding</li>
+						<li>simple setup</li>
+						<li>extensible API</li>
+					</ul>
+				</section>
+
+				<section id="http-handlers">
+					<h2>HTTP Handler</h2>
+					<ul>
+						<li>GET</li>
+						<li>HEAD</li>
+						<li>PUT</li>
+						<li>POST</li>
+						<li>DELETE</li>
+						<li>OPTIONS</li>
+						<li>PATCH</li>
+					</ul>
+				</section>
+
+				<section id="hosting-options">
+					<h2>Hosting Options</h2>
+					<ul>
+						<li>IIS</li>
+						<li>WCF</li>
+						<li>OWIN</li>
+						<li>custom process</li>
+					</ul>
+				</section>
+
+				<section id="view-engines">
+					<h2>More view engines</h2>
+					<h3>than you can shake a stick at!</h3>
+					<ul>
+						<li>Razor</li>
+						<li>Spark</li>
+						<li>NDjango</li>
+						<li>dotLiquid</li>
+						<li>SuperSimpleViewEngine (default)</li>
+					</ul>
+				</section>
+
+				<section id="setup">
+					<h2>Setup</h2>
+					<ul>
+						<li>create a new ASP.NET web project (or however you intend to host)</li>
+						<li>nuget that shit</li>
+						<li>tweak web.config</li>
+						<li>profit</li>
+					</ul>
+					<p>&nbsp;</p>
+					<pre><code>
+PM&gt; install-package nancy
+PM&gt; install-package nancy.hosting.aspnet
+					</code></pre>
+				</section>
+
+
+
+
+
+
+
 				<section>
 					<h2>Heads Up</h2>
 					<p>
@@ -242,6 +309,5 @@
 
 			hljs.initHighlightingOnLoad();
 		</script>
-
 	</body>
 </html>
