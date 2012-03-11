@@ -1,0 +1,207 @@
+<!doctype html>  
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Introduction to CoffeeScript</title>
+		<meta name="description" content="An introduction to CoffeeScript, presented at KCDC 2012">
+		<meta name="author" content="Nicholas Cloud">
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="lib/zenburn.css">
+		<style type="text/css">
+		strong.underline {text-decoration:underline;}
+		#reveal pre {font-size:25px; font-weight:bold;}
+		</style>
+	</head>
+	<body>
+		<div id="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section id="title">
+					<h1>Introduction to CoffeeScript</h1>
+					<h3>&nbsp;</h3>
+					<hr />
+					<blockquote cite="">
+						There is no such thing as strong coffee; only weak people.
+					</blockquote>
+					<br />
+					<p><small><em>--Unknown</em></small></p>
+					<script>
+						// Delicously hacky. Look away.
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				</section>
+				
+				<section id="what-is-coffeescript">
+					<h2>What is CoffeeScript?</h2>
+					<ul>
+						<li>A language</li>
+						<li>An abstraction of JavaScript</li>
+						<li>Compiles down to JavaScript</li>
+						<li>Objeys JavaScript rules</li>
+						<li>Obscures JavaScript flaws</li>
+					</ul>
+				</section>
+
+				<section id="caffeinated-advantages">
+					<h2>Caffeinated Advantages!</h2>
+					<ul>
+						<li>Terse syntax</li>
+						<li>Language features borrowed from Ruby, Python, etc.</li>
+						<li>Familiar OOP-style syntax if you want to work with classes</li>
+						<li>Prevents you from creating variables in the global scope</li>
+						<li>Existing JavaScript libraries can be leveraged in CoffeeScript</li>
+						<li>Generated JavaScript can run as fast, or faster, than hand-written code</li>
+						<li>REPL console</li>
+					</ul>
+				</section>
+
+				<section id="caffeinated-disadvantages">
+					<h2>Decaffeinated Disdvantages!</h2>
+					<ul>
+						<li>You need to understand <strong class="underline">two</strong> languages, not just one</li>
+						<li>Runtime errors occur in compiled JavaScript, <strong class="underline">not</strong> CoffeeScript source</li>
+						<li>OOP-style syntax still obeys JavaScript scoping rules (this will mess with your head)</li>
+						<li>CoffeeScript compiler doesn’t generate the best error messages</li>
+					</ul>
+				</section>
+
+				<section id="windows-setup-1">
+					<h2>Windows Setup</h2>
+					<ul>
+						<li>Node.js installer (now with npm)</li>
+						<li>Paths</li>
+					</ul>
+					<p>&nbsp;</p>
+					<pre><code class="dos">
+&gt; npm install coffee-script
+					</pre></code>
+					<pre><code>
+%PROGRAMFILES(X86)%\nodejs
+%APPDATA%\npm
+					</pre></code>
+				</section>
+
+				<section id="windows-setup-2">
+					<h2>Windows Setup</h2>
+					<ul>
+						<li>Default extension for CoffeeScript files is `.coffee`</li>
+					</ul>
+					<p>&nbsp;</p>
+					<pre><code class="dos">
+&gt; coffee
+&gt; coffee --compile file.coffee
+&gt; coffee --watch --compile dir1 [dirn...]
+					</pre></code>
+				</section>
+
+				<section id="how-do-i-brew-it">
+					<h2>How do I brew it?</h2>
+					<ul>
+						<li>Compiled JavaScript can be referenced normally</li>
+						<li>CoffeeScript can be compiled "on the fly" in web pages by including a special script</li>
+					</ul>
+					<p>&nbsp;</p>
+					<pre style="font-size:20px;"><code class="html">
+&lt;script type="text/javascript" src="coffee-script.js"&gt;&lt;/script&gt;
+&lt;script type="text/coffeescript" src="my.coffee"&gt;&lt;/script&gt;
+					</pre></code>
+				</section>
+
+				<section id="show-all-teh-code">
+					<h1>SHOW ALL TEH CODEZ</h1>
+				</section>
+
+				<section id="should-i-brew-it">
+					<h2>Should I brew it?</h2>
+					<blockquote cite="http://en.wikisource.org/wiki/Women's_Petition_against_Coffee">
+						...how ellse is't possible they should <em>Apostatize</em> from the good old primitve way of Ale-drinking, to run a <em>whoring</em> after such variety of distructive <em>Foreign Liquors</em>, to trifle away their <em>time</em>, scald their <em>Chops</em>, and spend their <em>Money</em>, all for a little <em>base, black, thick, nasty, bitter, stinking, nauseous</em> Puddle-water...
+					</blockquote>
+					<br />
+					<p><small><em>The Women's Petition Against Coffee</em><br />London, Printed 1674</small></p>
+				</section>
+
+				<section id="resources-1">
+					<h2>Resources</h2>
+					<ul>
+						<li>CoffeeScript website<br />
+							<small><a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></small></li>
+						<li>Little Book of CoffeeScript<br />
+							<small><a href="http://arcturo.github.com/library/coffeescript/">http://arcturo.github.com/library/coffeescript/</a></small></li>
+						<li>CoffeeScript: JavaScript without the Fail<br />
+							<small><a href="http://bodil.github.com/coffeescript/#landing-slide">http://bodil.github.com/coffeescript/#landing-slide</a></small></li>
+						<li>CoffeeScript in the Wild<br />
+							<small><a href="https://github.com/jashkenas/coffee-script/wiki/In-The-Wild">https://github.com/jashkenas/coffee-script/wiki/In-The-Wild</a></small></li>
+					</ul>
+				</section>
+
+				<section id="resources-2">
+					<h2>Resources</h2>
+					<img src="img/tbcoffee.jpg" style="max-height:400px;" />
+				</section>
+
+				<section id="narcissism">
+					<h2>Narcissism</h2>
+					<ul>
+						<li><a href="http://nicholascloud.com">nicholascloud.com</a></li>
+						<li><a href="http://twitter.com/nicholascloud">@nicholascloud</a></li>
+						<li><a href="http://github.com/nicholascloud">github.com/nicholascloud</a></li>
+						<li><a href="http://stlalt.net">stlalt.net</a></li>
+					</ul>
+				</section>
+
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: false,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: true,
+
+				// UI style
+				theme: query.theme || 'default', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+
+	</body>
+</html>

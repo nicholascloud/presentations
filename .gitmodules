@@ -1,7 +1,7 @@
-[submodule "20110727 AssetMangement"]
-	path = 20110727 AssetMangement
+[submodule "mborcherding-asset-management"]
+	path = stlaltdotnet/asset-management
 	url = git@github.com:MarkBorcherding/altnet-stl-assets-presentation.git
 	
-[submodule "20110223 Git/MarkBorcherding.Slides"]
-	path = 20110223 Git/MarkBorcherding.Slides
+[submodule "mborcherding-git"]
+	path = stlaltdotnet/git
 	url = git@github.com:MarkBorcherding/altnet-stl-git-presentation.git

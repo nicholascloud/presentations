@@ -1,0 +1,107 @@
+	<current_observation>
+		<credit>Weather Underground NOAA Weather Station</credit>
+		<credit_URL>http://wunderground.com/</credit_URL>
+		<termsofservice link="http://www.wunderground.com/members/tos.asp#api" />
+		<image>
+		<url>http://icons-ecast.wxug.com/graphics/wu2/logo_130x80.png</url>
+		<title>Weather Underground</title>
+		<link>http://wunderground.com/</link>
+		</image>
+  <display_location>
+  <full>Lambert-Saint Louis International, MO</full>
+  <city>Lambert-Saint Louis International</city>
+  <state>MO</state>
+  <state_name>Missouri</state_name>
+  <country>US</country>
+  <country_iso3166>US</country_iso3166>
+  <zip>63145</zip>
+  <latitude>38.74750137</latitude>
+  <longitude>-90.35972595</longitude>
+  <elevation>184.00000000 ft</elevation>
+  </display_location>
+		<observation_location>
+		<full>St. Louis, Missouri</full>
+		<city>St. Louis</city>
+		<state>Missouri</state>
+		<country>US</country>
+		<country_iso3166>US</country_iso3166>
+		<latitude>38.75000000</latitude>
+		<longitude>-90.36000061</longitude>
+		<elevation>604 ft</elevation>
+		</observation_location>
+		<station_id>KSTL</station_id>
+		<observation_time>Last Updated on April 26, 8:51 PM CDT</observation_time>
+		<observation_time_rfc822>Wed, 27 Apr 2011 01:51:00 GMT</observation_time_rfc822>
+		<observation_epoch>1303869060</observation_epoch>
+		<local_time>April 26, 9:07 PM CDT</local_time>
+		<local_time_rfc822>Wed, 27 Apr 2011 02:07:05 GMT</local_time_rfc822>
+		<local_epoch>1303870025</local_epoch>
+		<weather>Mostly Cloudy</weather>
+		<temperature_string>63 F (17 C)</temperature_string>
+		<temp_f>63</temp_f>
+		<temp_c>17</temp_c>
+		<relative_humidity>63%</relative_humidity>
+		<wind_string>Calm</wind_string>
+		<wind_dir>North</wind_dir>
+		<wind_degrees>0</wind_degrees>
+		<wind_mph>0</wind_mph>
+		<wind_gust_mph></wind_gust_mph>
+		<pressure_string>29.58 in (1002 mb)</pressure_string>
+		<pressure_mb>1002</pressure_mb>
+		<pressure_in>29.58</pressure_in>
+		<dewpoint_string>50 F (10 C)</dewpoint_string>
+		<dewpoint_f>50</dewpoint_f>
+		<dewpoint_c>10</dewpoint_c>
+		
+		<heat_index_string>NA</heat_index_string>
+		<heat_index_f>NA</heat_index_f>
+		<heat_index_c>NA</heat_index_c>
+		
+		
+		<windchill_string>NA</windchill_string>
+		<windchill_f>NA</windchill_f>
+		<windchill_c>NA</windchill_c>
+		
+		<visibility_mi>10.0</visibility_mi>
+		<visibility_km>16.1</visibility_km>
+		<icons>
+			<icon_set name="Default">
+				<icon_url>http://icons-ecast.wxug.com/i/c/a/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Smiley">
+				<icon_url>http://icons-ecast.wxug.com/i/c/b/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Generic">
+				<icon_url>http://icons-ecast.wxug.com/i/c/c/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Old School">
+				<icon_url>http://icons-ecast.wxug.com/i/c/d/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Cartoon">
+				<icon_url>http://icons-ecast.wxug.com/i/c/e/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Mobile">
+				<icon_url>http://icons-ecast.wxug.com/i/c/f/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Simple">
+				<icon_url>http://icons-ecast.wxug.com/i/c/g/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Contemporary">
+				<icon_url>http://icons-ecast.wxug.com/i/c/h/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Helen">
+				<icon_url>http://icons-ecast.wxug.com/i/c/i/mostlycloudy.gif</icon_url>
+			</icon_set>
+			<icon_set name="Incredible">
+				<icon_url>http://icons-ecast.wxug.com/i/c/k/mostlycloudy.gif</icon_url>
+			</icon_set>
+		</icons>
+		<icon_url_base>http://icons-ecast.wxug.com/graphics/conds/</icon_url_base>
+		<icon_url_name>.GIF</icon_url_name>
+		<icon>mostlycloudy</icon>
+		<forecast_url>http://www.wunderground.com/US/MO/Lambert-Saint_Louis_International.html</forecast_url>
+		<history_url>http://www.wunderground.com/history/airport/KSTL/2011/4/26/DailyHistory.html</history_url>
+		<ob_url>http://www.wunderground.com/cgi-bin/findweather/getForecast?query=38.75000000,-90.36000061</ob_url>
+	</current_observation>
+
+<!-- 0.048:0 -->

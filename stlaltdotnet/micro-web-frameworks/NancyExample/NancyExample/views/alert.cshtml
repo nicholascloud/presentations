@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Alerts</title>
+</head>
+<body>
+    <p><a href="/">Home</a></p>
+    <h1>Weather Alerts</h1>
+
+    @foreach (var alert in @Model) {
+    <div>
+        <h2>@alert.Description</h2>
+        <ul>
+            <li>Type: @alert.Type</li>
+            <li>Date: @alert.Date</li>
+            <li>Expires: @alert.Expires</li>
+            <li>Phenomena: @alert.Phenomena</li>
+            <li>Signficance: @alert.Significance</li>
+        </ul>
+        <p style="font-size: larger;">@alert.Message</p>
+    </div>
+    }
+</body>
+</html>

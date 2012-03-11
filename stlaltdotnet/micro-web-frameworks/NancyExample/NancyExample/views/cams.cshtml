@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Cams</title>
+    <script language="javascript" type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/preview.js"></script>
+    <link type="text/css" rel="Stylesheet" href="/style/weather.css"></link>
+    <style type="text/css">
+    #preview {
+    	position:absolute;
+    	border:1px solid #ccc;
+    	background:#333;
+    	padding:5px;
+    	display:none;
+    	color:#fff;
+	}
+    </style>
+</head>
+<body>
+    <p><a href="/">Home</a></p>
+    <h1>Weather Cams</h1>
+
+    @foreach (var cam in @Model) {
+    <div class="stackItem">
+        <h2><a href="@cam.CamURL">@cam.Handle</a></h2>
+        <a href="@cam.CurrentImageURL" class="preview"><img src="@cam.WidgetImageURL" /></a>
+        <ul>
+            <li>CamID: @cam.CamID</li>
+            <li>Type: @cam.CamType</li>
+            <li>Location: @cam.Neighborhood, @cam.City, @cam.State @cam.Zip @cam.Country</li>
+            <li>Time zone: @cam.TimeZone</li>
+            <li>Lat/Lon: @cam.Lat/@cam.Lon</li>
+            <li>Updated: @cam.Updated</li>
+        </ul>
+    </div>
+    }
+</body>
+</html>

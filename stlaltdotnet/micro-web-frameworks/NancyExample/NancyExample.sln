@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NancyExample", "NancyExample\NancyExample.csproj", "{D0002485-AB8C-4A80-8634-92987AE23C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather", "Weather\Weather.csproj", "{F63D916F-C880-43E6-AA82-D6C37E9ABC4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.ViewEngine.Markdown", "Nancy.ViewEngine.Markdown\Nancy.ViewEngine.Markdown.csproj", "{437D4B32-6EC0-4D35-A05E-04F1EA21BCBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0002485-AB8C-4A80-8634-92987AE23C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0002485-AB8C-4A80-8634-92987AE23C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0002485-AB8C-4A80-8634-92987AE23C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0002485-AB8C-4A80-8634-92987AE23C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63D916F-C880-43E6-AA82-D6C37E9ABC4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63D916F-C880-43E6-AA82-D6C37E9ABC4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63D916F-C880-43E6-AA82-D6C37E9ABC4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63D916F-C880-43E6-AA82-D6C37E9ABC4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437D4B32-6EC0-4D35-A05E-04F1EA21BCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437D4B32-6EC0-4D35-A05E-04F1EA21BCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437D4B32-6EC0-4D35-A05E-04F1EA21BCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437D4B32-6EC0-4D35-A05E-04F1EA21BCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
