@@ -4,6 +4,8 @@ Below is a list of presentations given at [STL ALT .NET](http://www.meetup.com/s
 
 Many presentations have corredponding notes or sample projects in this repository.  Where applicable, links to external repositories or presentation materials are provided.
 
+A few presentations are included as submodules, so be sure to initialize and update them 
+
 ## Presentations: ##
 
 - 10/20/2010 Introduction to NHibernate (Nicholas Cloud)
@@ -19,4 +21,4 @@ Many presentations have corredponding notes or sample projects in this repositor
 - 11/02/2011 Using Rake to Make Your Builds Majestic (Nicholas Cloud)
 - 11/30/2011 Introduction to CoffeeScript (Nicholas Cloud) and Hubot (Mark Borcherding)
 - 01/25/2012 How Ruby is Making Me a Stronger C# Developer and a Better Man ([Darren Cauthon](http://vimeo.com/25755615))
-- 02/22/2012 Powerful Pattern Matching in F# ([Jessica Kerr](http://jessitron.blogspot.com/))/ UX Techniques (Jake Truemper)
+- 02/22/2012 Powerful Pattern Matching in F# ([Jessica Kerr](http://jessitron.blogspot.com/)) / UX Techniques (Jake Truemper)

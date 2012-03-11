@@ -1,7 +1,0 @@
-[submodule "mborcherding-asset-management"]
-	path = stlaltdotnet/asset-management
-	url = git@github.com:MarkBorcherding/altnet-stl-assets-presentation.git
-	
-[submodule "mborcherding-git"]
-	path = stlaltdotnet/git
-	url = git@github.com:MarkBorcherding/altnet-stl-git-presentation.git
