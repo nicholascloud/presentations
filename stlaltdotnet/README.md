@@ -20,4 +20,4 @@ Many presentations have corredponding notes or sample projects in this repositor
 - 11/02/2011 Using Rake to Make Your Builds Majestic (Nicholas Cloud)
 - 11/30/2011 Introduction to CoffeeScript (Nicholas Cloud) and Hubot (Mark Borcherding > [slides, code](https://github.com/MarkBorcherding/altnet-stl-hubot-presentation))
 - 01/25/2012 How Ruby is Making Me a Stronger C# Developer and a Better Man (Darren Cauthon > [video](http://vimeo.com/25755615))
-- 02/22/2012 Powerful Pattern Matching in F# (Jessica Kerr > [slides](http://prezi.com/eyeopqpkcw5s/powerful-pattern-matching-in-f/), [code](https://github.com/jessitron/FSharpPatternMatchingExamples)) and UX Techniques (Jake Truemper)
+- 02/22/2012 Powerful Pattern Matching in F# (Jessica Kerr > [slides](http://prezi.com/eyeopqpkcw5s/powerful-pattern-matching-in-f/), [code](https://github.com/jessitron/FSharpPatternMatchingExamples)) and UX Techniques (Jake Truemper > [slides](http://www.slideshare.net/jtruemper/ux-techniques-11978384))
