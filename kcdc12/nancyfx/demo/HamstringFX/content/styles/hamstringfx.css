@@ -1,0 +1,61 @@
+* {font-size:100%;}
+
+/* base elements ------------------------------------------ */
+
+body {
+  background-color:#DACBAE;
+  width:60%;
+  margin:auto;
+}
+
+h1,h2,h3 { margin:0.5em 0; }
+h1 {font-size:2em;}
+h2 {font-size:1.8em;}
+h3 {font-size:1.6em;}
+
+/* page divisions ----------------------------------------- */
+
+#content {
+  width:100%;
+}
+
+#quickactions {
+  width:30%;
+  float:left;
+}
+
+#contentfocus {
+  width:70%;
+  float:right;
+}
+
+
+footer {
+  clear:both;
+}
+
+/* runs --------------------------------------------------- */
+
+#contentfocus .run {
+  min-height:20em;
+  max-width:70%;
+  position:relative;
+}
+#contentfocus .run:after {
+  content:".";
+  display:none;
+  clear:both;
+}
+#contentfocus .run dl {
+  position:absolute;
+  right:0;
+  top:0;
+  line-height:1.2em;
+  font-size:1.5em;
+}
+#contentfocus .run dt {
+  font-weight:bold;
+}
+#contentfocus .run dd {
+
+}

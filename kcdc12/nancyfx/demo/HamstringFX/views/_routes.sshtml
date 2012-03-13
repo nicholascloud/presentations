@@ -1,0 +1,9 @@
+<!-- _routes.sshtml -->
+
+<section id="runningroutes">
+<ul>
+@Each.RunningRoutes
+  <li>@Current</li>
+@EndEach
+</ul>
+</section>

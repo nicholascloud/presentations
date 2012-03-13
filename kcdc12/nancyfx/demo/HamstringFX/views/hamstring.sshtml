@@ -1,0 +1,13 @@
+@Master['master']
+
+@Section['quickactions']
+  <!-- hamstring.sshtml -->
+  @Partial['_routes', Model]
+@EndSection
+
+@Section['contentfocus']
+  <!-- hamstring.sshtml -->
+  <section id="myruns">
+    @Partial['_runs', Model]
+  </section>
+@EndSection
