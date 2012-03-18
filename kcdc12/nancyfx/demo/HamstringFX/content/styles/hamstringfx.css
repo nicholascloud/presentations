@@ -1,22 +1,106 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+
 * {font-size:100%;}
 
 /* base elements ------------------------------------------ */
 
+.clearfix:after {
+  content:".";
+  display:none;
+  clear:both;
+}
+
+.shiny {
+  background: #f1f1f1; /* Old browsers */
+  background: -moz-linear-gradient(top,  #f1f1f1 0%, #ffffff 48%, #ffffff 50%, #f1f1f1 58%, #e8e8e8 99%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f1f1f1), color-stop(48%,#ffffff), color-stop(50%,#ffffff), color-stop(58%,#f1f1f1), color-stop(99%,#e8e8e8)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #f1f1f1 0%,#ffffff 48%,#ffffff 50%,#f1f1f1 58%,#e8e8e8 99%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #f1f1f1 0%,#ffffff 48%,#ffffff 50%,#f1f1f1 58%,#e8e8e8 99%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #f1f1f1 0%,#ffffff 48%,#ffffff 50%,#f1f1f1 58%,#e8e8e8 99%); /* IE10+ */
+  background: linear-gradient(top,  #f1f1f1 0%,#ffffff 48%,#ffffff 50%,#f1f1f1 58%,#e8e8e8 99%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+}
+
+.shinyinv {
+  background: #e8e8e8; /* Old browsers */
+  background: -moz-linear-gradient(top,  #e8e8e8 1%, #f1f1f1 42%, #ffffff 50%, #ffffff 52%, #f1f1f1 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#e8e8e8), color-stop(42%,#f1f1f1), color-stop(50%,#ffffff), color-stop(52%,#ffffff), color-stop(100%,#f1f1f1)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #e8e8e8 1%,#f1f1f1 42%,#ffffff 50%,#ffffff 52%,#f1f1f1 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #e8e8e8 1%,#f1f1f1 42%,#ffffff 50%,#ffffff 52%,#f1f1f1 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #e8e8e8 1%,#f1f1f1 42%,#ffffff 50%,#ffffff 52%,#f1f1f1 100%); /* IE10+ */
+  background: linear-gradient(top,  #e8e8e8 1%,#f1f1f1 42%,#ffffff 50%,#ffffff 52%,#f1f1f1 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#f1f1f1',GradientType=0 ); /* IE6-9 */
+}
+
 body {
-  background-color:#DACBAE;
+  background-color:#FFFFFF;
   width:60%;
   margin:auto;
+  font-family: 'Droid Sans', sans-serif;
 }
 
 h1,h2,h3 { margin:0.5em 0; }
-h1 {font-size:2em;}
+h1 {font-size:3em;}
+h2,h3 {color:#4F4F4F;}
 h2 {font-size:1.8em;}
 h3 {font-size:1.6em;}
 
+form a.submit {
+  text-shadow:1px 1px 1px #ABABAB;
+}
+
+form a.submit:link, form a.submit:visited {
+  border:1px solid #CCCCCC;
+  display:block;
+  width:6em;
+  line-height:1.4em;
+  padding:0.2em;
+  text-decoration:none;
+  text-align:center;
+  border-radius:0.5em;
+  color:#000000;
+  text-shadow:1px 1px 1px #ABABAB;
+}
+
+form a.submit:hover {
+
+}
+
+fieldset > div {
+  margin:2%;
+  padding:2%;
+}
+
+fieldset label {
+  display:block;
+}
+
 /* page divisions ----------------------------------------- */
+header {
+  border-top:1px solid #CCCCCC;
+  border-bottom:1px solid #CCCCCC;
+  margin:1% 0;
+  padding:2%;
+}
+
+header h1 {
+  text-shadow:1px 1px 1px #ABABAB;
+  font-weight:bold;
+}
 
 #content {
   width:100%;
+  padding-top:2%;
+  background-color:#F1F1F1;
+}
+
+#inner-content {
+  width:92%;
+  margin:auto;
+  padding:2%;
+  background-color:#FFFFFF;
+  border:1px solid #CCCCCC;
+  border-radius:0.5em;
 }
 
 #quickactions {
@@ -25,37 +109,57 @@ h3 {font-size:1.6em;}
 }
 
 #contentfocus {
-  width:70%;
+  width:65%;
   float:right;
 }
 
-
 footer {
   clear:both;
+  text-align:center;
+  font-size:0.6em;
+}
+
+/* */
+
+#addrun .timesegment {
+  width:3em;
 }
 
 /* runs --------------------------------------------------- */
 
 #contentfocus .run {
   min-height:20em;
-  max-width:70%;
   position:relative;
-}
-#contentfocus .run:after {
-  content:".";
-  display:none;
-  clear:both;
 }
 #contentfocus .run dl {
   position:absolute;
   right:0;
   top:0;
-  line-height:1.2em;
-  font-size:1.5em;
+  padding:5%;
+  background-color:#FFE9D1;
+  border:5px solid #FFBA6B;
+  border-radius:5%;
 }
 #contentfocus .run dt {
   font-weight:bold;
+  font-size:1.5em;
 }
 #contentfocus .run dd {
+  font-size:1.1em;
+  padding-left:8%;
+  line-height:1.8em;
+}
+
+/* playlists ---------------------------------------------- */
+
+.playlist {
+  clear:both;
+  padding:5% 0;
+}
+.playlist img {
+  float:left;
+  padding-right:5%;
+}
+.playlist label {
 
 }

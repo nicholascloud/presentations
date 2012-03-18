@@ -1,0 +1,27 @@
+<section id="addrun">
+  <form method="POST" action="">
+    <fieldset>
+      <div>
+        <label>When?</label>
+        <input type="text" />
+      </div>
+      <div>
+        <label>Where?</label>
+        <select name="location">
+          <option>Old Town Florissant</option>
+          <option>Creve Coeur Lake Park</option>
+          <option>Miller's Trail</option>
+          <option>The Bluffs</option>
+        </select>
+      </div>
+      <div>
+        <label>Your time?</label>
+        <input class="timesegment" name="min" type="text" />
+        <input class="timesegment" name="sec" type="text" />
+      </div>
+      <div>
+        <a href="#" class="submit shiny">Add Run</a>
+      </div>
+    </fieldset>
+  </form>
+</section>

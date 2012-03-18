@@ -2,7 +2,11 @@
 
 @Section['quickactions']
   <!-- hamstring.sshtml -->
+  @Partial['_addrun']
+  <hr />
   @Partial['_routes', Model]
+  <hr />
+  @Partial['_playlists', Model]
 @EndSection
 
 @Section['contentfocus']

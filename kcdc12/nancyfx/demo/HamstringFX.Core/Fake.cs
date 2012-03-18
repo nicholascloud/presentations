@@ -12,7 +12,8 @@ namespace HamstringFX.Core {
     public static dynamic HamstringModel () {
       var model = new {
         RunningRoutes = _routes,
-        Runs = new List<dynamic>()
+        Runs = new List<dynamic>(),
+        Playlists = new List<dynamic>()
       };
 
       for (var i = 0; i < 4; i++) {
@@ -25,6 +26,30 @@ namespace HamstringFX.Core {
           Difference = "2:00 mins."
         });
       }
+
+      model.Playlists.Add(new {
+        Name = "Thump Pop",
+        Length = "07:24:03",
+        Image = "playlist1.png"
+      });
+
+      model.Playlists.Add(new {
+        Name = "Groove",
+        Length = "25:40",
+        Image = "playlist2.png"
+      });
+
+      model.Playlists.Add(new {
+        Name = "Again With Feeling",
+        Length = "02:00:30",
+        Image = "playlist3.png"
+      });
+
+      model.Playlists.Add(new {
+        Name = "Noise Canon",
+        Length = "23:27",
+        Image = "playlist4.png"
+      });
 
       return model;
     }

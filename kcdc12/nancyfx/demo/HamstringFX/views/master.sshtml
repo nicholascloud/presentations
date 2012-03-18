@@ -6,23 +6,38 @@
     <link type="text/css" rel="stylesheet" href="/styles/hamstringfx.css" />
   </head>
   <body>
-    <header>
+    <header class="shiny">
       <h1>HamstringFX</h1>
     </header>
 
     <div id="content">
-      <div id="quickactions">
-        @Section['quickactions']
+      <div id="inner-content">
+        <div id="quickactions">
+          @Section['quickactions']
+        </div>
+        <div id="contentfocus">
+          @Section['contentfocus']
+        </div>
+        <footer>
+          <hr />
+          &copy; 2012 Awesome Sawse, LLC | Running faster with <a href="http://nancyfx.org">NancyFX</a>
+        </footer>
       </div>
-      <div id="contentfocus">
-        @Section['contentfocus']
-      </div>
-      <footer>
-        <p>&copy; 2012 Awesome Sawse, LLC<p>
-        <p>Running faster with <a href="http://nancyfx.org">NancyFX</a></p>
-      </footer>
     </div>
 
-    <script type="text/javscript" src="/scripts/hamstringfx.js"></script>
+    <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/hamstringfx.js"></script>
+    <script type="text/javascript">
+      $().ready(function () {
+        $('a.submit').hover(function () {
+          $(this).addClass('shinyinv')
+            .removeClass('shiny');
+        },
+        function () {
+          $(this).removeClass('shinyinv')
+            .addClass('shiny');
+        });
+      });
+    </script>
   </body>
 </html>

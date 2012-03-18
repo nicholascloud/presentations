@@ -1,0 +1,10 @@
+<section id="playlists">
+  <h2>Playlists</h2>
+  @Each.Playlists
+  <div class="playlist clearfix">
+    <img alt="@Current.Name" title="@Current.Name" src="/img/@Current.Image" />
+    <label><a href="#">@Current.Name</a></label><br />
+    <span class="timeframe">@Current.Length</span>
+  </div>
+  @EndEach
+</section>

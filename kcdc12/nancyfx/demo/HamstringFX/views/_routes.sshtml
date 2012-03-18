@@ -1,9 +1,9 @@
 <!-- _routes.sshtml -->
 
 <section id="runningroutes">
-<ul>
-@Each.RunningRoutes
-  <li>@Current</li>
-@EndEach
-</ul>
+  <h2>Routes</h2>
+  @Each.RunningRoutes
+    <li><a href="#">@Current</a></li>
+  @EndEach
+  </ul>
 </section>
