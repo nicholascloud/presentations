@@ -34,6 +34,15 @@
     <Reference Include="Nancy">
       <HintPath>..\packages\Nancy.0.10.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
+    <Reference Include="Simple.Data">
+      <HintPath>..\packages\Simple.Data.Core.0.14.0.3\lib\net40\Simple.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Ado">
+      <HintPath>..\packages\Simple.Data.Ado.0.14.0.3\lib\net40\Simple.Data.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.SqlCe40">
+      <HintPath>..\packages\Simple.Data.SqlCompact40.0.14.0.3\lib\net40\Simple.Data.SqlCe40.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +55,7 @@
     <Compile Include="extension\ArrayExtensions.cs" />
     <Compile Include="Fake.cs" />
     <Compile Include="modules\Hamstring.cs" />
+    <Compile Include="modules\Running.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

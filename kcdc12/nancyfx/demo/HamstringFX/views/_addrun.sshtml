@@ -3,11 +3,11 @@
     <fieldset>
       <div>
         <label>When?</label>
-        <input type="text" />
+        <input name="when" type="text" class="pickdate" />
       </div>
       <div>
         <label>Where?</label>
-        <select name="location">
+        <select name="where">
           <option>Old Town Florissant</option>
           <option>Creve Coeur Lake Park</option>
           <option>Miller's Trail</option>
@@ -16,11 +16,12 @@
       </div>
       <div>
         <label>Your time?</label>
-        <input class="timesegment" name="min" type="text" />
-        <input class="timesegment" name="sec" type="text" />
+        <input class="timesegment" name="hour" type="number" value="00" />
+        <input class="timesegment" name="min" type="number" value="00" />
+        <input class="timesegment" name="sec" type="number" value="00" />
       </div>
       <div>
-        <a href="#" class="submit shiny">Add Run</a>
+        <a href="#" class="button submit">Add Run</a>
       </div>
     </fieldset>
   </form>

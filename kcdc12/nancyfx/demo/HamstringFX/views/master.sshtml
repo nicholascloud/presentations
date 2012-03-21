@@ -3,6 +3,7 @@
   <head>
     <title>HamstringFX</title>
     <link type="text/css" rel="stylesheet" href="/styles/html5reset.css" />
+    <link type="text/css" rel="stylesheet" href="/styles/lib/jquery-ui-1.8.18.custom.css" />
     <link type="text/css" rel="stylesheet" href="/styles/hamstringfx.css" />
   </head>
   <body>
@@ -26,17 +27,11 @@
     </div>
 
     <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/lib/jquery-ui-1.8.18.custom.min.js"></script>
     <script type="text/javascript" src="/scripts/hamstringfx.js"></script>
     <script type="text/javascript">
       $().ready(function () {
-        $('a.submit').hover(function () {
-          $(this).addClass('shinyinv')
-            .removeClass('shiny');
-        },
-        function () {
-          $(this).removeClass('shinyinv')
-            .addClass('shiny');
-        });
+        $('.pickdate').datepicker();
       });
     </script>
   </body>

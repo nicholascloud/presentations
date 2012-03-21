@@ -3,6 +3,7 @@ using Nancy.Conventions;
 
 namespace HamstringFX {
   public class HamstringBootstrapper : DefaultNancyBootstrapper {
+
     protected override void ConfigureConventions (NancyConventions conventions) {
       base.ConfigureConventions (conventions);
 
@@ -12,6 +13,10 @@ namespace HamstringFX {
         StaticContentConventionBuilder.AddDirectory ("styles", @"content\styles"));
       conventions.StaticContentsConventions.Add (
         StaticContentConventionBuilder.AddDirectory ("img", @"content\img"));
+    }
+
+    protected override void ConfigureRequestContainer(TinyIoC.TinyIoCContainer container, NancyContext context) {
+      base.ConfigureRequestContainer(container, context);
     }
   }
 }

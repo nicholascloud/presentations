@@ -40,6 +40,7 @@
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\packages\Nancy.Hosting.Aspnet.0.10.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -57,6 +58,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\HamstringFX.sdf" />
     <Content Include="content\scripts\hamstringfx.js" />
     <Content Include="content\styles\hamstringfx.css" />
     <Content Include="Web.config" />
