@@ -6,8 +6,14 @@ using Nancy;
 
 namespace HamstringFX.Core.modules {
   public class Running : NancyModule {
+    private readonly IDataStore _db;
 
-    public Running() {
+    public Running(IDataStore db) {
+      _db = db;
+
+      Get["/run"] = parameters => {
+        return HttpStatusCode.NotFound;
+      };
 
       Post["/run"] = parameters => {
         try {
@@ -17,6 +23,10 @@ namespace HamstringFX.Core.modules {
 
           return HttpStatusCode.InternalServerError;
         }
+      };
+
+      Get["/runs"] = parameters => {
+        return HttpStatusCode.NotFound;
       };
     }
   }

@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using HamstringFX.Core;
+using Nancy;
 using Nancy.Conventions;
 
 namespace HamstringFX {
@@ -17,6 +18,8 @@ namespace HamstringFX {
 
     protected override void ConfigureRequestContainer(TinyIoC.TinyIoCContainer container, NancyContext context) {
       base.ConfigureRequestContainer(container, context);
+
+      container.Register<IDataStore, DataStore>().AsSingleton();
     }
   }
 }

@@ -40,11 +40,17 @@
     <Reference Include="Simple.Data.Ado">
       <HintPath>..\packages\Simple.Data.Ado.0.14.0.3\lib\net40\Simple.Data.Ado.dll</HintPath>
     </Reference>
-    <Reference Include="Simple.Data.SqlCe40">
-      <HintPath>..\packages\Simple.Data.SqlCompact40.0.14.0.3\lib\net40\Simple.Data.SqlCe40.dll</HintPath>
+    <Reference Include="Simple.Data.Sqlite">
+      <HintPath>..\packages\Simple.Data.Sqlite.0.12.2.4\lib\net40\Simple.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\packages\System.Data.SQLite.1.0.79.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\packages\System.Data.SQLite.1.0.79.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,8 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStore.cs" />
     <Compile Include="extension\ArrayExtensions.cs" />
     <Compile Include="Fake.cs" />
+    <Compile Include="IDataStore.cs" />
     <Compile Include="modules\Hamstring.cs" />
     <Compile Include="modules\Running.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
