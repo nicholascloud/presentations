@@ -3,7 +3,8 @@ using Simple.Data;
 namespace HamstringFX.Core {
   public sealed class DataStore : IDataStore {
     public dynamic Open() {
-      return Database.OpenFile("HamstringFX.sqlite");
+      //connection string defined in config
+      return Database.Open();
     }
   }
-}
+} 

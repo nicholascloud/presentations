@@ -8,10 +8,9 @@
       <div>
         <label>Where?</label>
         <select name="where">
-          <option>Old Town Florissant</option>
-          <option>Creve Coeur Lake Park</option>
-          <option>Miller's Trail</option>
-          <option>The Bluffs</option>
+          @Each.RunningRoutes
+          <option value="@Current.Id">@Current.Name</option>
+          @EndEach
         </select>
       </div>
       <div>

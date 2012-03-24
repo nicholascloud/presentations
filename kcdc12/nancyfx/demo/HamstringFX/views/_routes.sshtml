@@ -3,7 +3,7 @@
 <section id="runningroutes">
   <h2>Routes</h2>
   @Each.RunningRoutes
-    <li><a href="#">@Current</a></li>
+    <li><a href="/route/@Current.Id">@Current.Name</a></li>
   @EndEach
   </ul>
 </section>

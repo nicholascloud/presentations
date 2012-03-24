@@ -8,7 +8,8 @@ namespace HamstringFX.Core.modules {
       _db = db.Open();
 
       Get["/"] = parameters => {
-        return View["hamstring.sshtml", Fake.HamstringModel ()];
+        dynamic model = Fake.HamstringModel(_db);
+        return View["hamstring.sshtml", model];
       };
     }
   }

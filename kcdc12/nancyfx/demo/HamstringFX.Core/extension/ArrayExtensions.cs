@@ -9,6 +9,9 @@ namespace HamstringFX.Core.extension {
     private static readonly Random _random = new Random ();
 
     public static T Random<T>(this T[] @this) {
+      if (@this == null) {
+        throw new NullReferenceException();
+      }
       if (@this.Length == 0) {
         throw new IndexOutOfRangeException();
       }
