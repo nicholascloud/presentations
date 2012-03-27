@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using HamstringFX.Core.extension;
-using HamstringFX.Core.models;
-using PetaPoco;
+using System.Linq;
+using HamstringFX.data;
 
-namespace HamstringFX.Core {
+namespace HamstringFX {
   internal static class Fake {
 
 
@@ -13,11 +12,11 @@ namespace HamstringFX.Core {
       public Guid Id { get; set; }
     }
 
-    public static dynamic HamstringModel (Database db) {
+    public static dynamic HamstringModel (IHamstringData db) {
 
       var model = new {
-        RunningRoutes = db.Fetch<Route>("order by Name asc"),
-        Runs = db.Fetch<Run>("select rn.* from Runs as rn join Routes as rt on rn.RouteId = rt.id order by rn.ScheduledAt desc"),
+        RunningRoutes = db.Routes.OrderBy(r => r.Name),
+        Runs = new List<dynamic>(),
         Playlists = new List<dynamic>()
       };
 

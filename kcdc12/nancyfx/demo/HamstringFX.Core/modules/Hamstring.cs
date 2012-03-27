@@ -1,11 +1,12 @@
 ﻿using Nancy;
+using PetaPoco;
 
 namespace HamstringFX.Core.modules {
   public class Hamstring : NancyModule {
-    private readonly dynamic _db;
+    private readonly Database _db;
 
-    public Hamstring(IDataStore db) {
-      _db = db.Open();
+    public Hamstring(Database db) {
+
 
       Get["/"] = parameters => {
         dynamic model = Fake.HamstringModel(_db);

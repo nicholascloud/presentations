@@ -1,6 +1,7 @@
-﻿using HamstringFX.Core;
+﻿using HamstringFX.data;
 using Nancy;
 using Nancy.Conventions;
+using Nancy.Hosting.Aspnet;
 
 namespace HamstringFX {
   public class HamstringBootstrapper : DefaultNancyBootstrapper {
@@ -19,7 +20,7 @@ namespace HamstringFX {
     protected override void ConfigureRequestContainer(TinyIoC.TinyIoCContainer container, NancyContext context) {
       base.ConfigureRequestContainer(container, context);
 
-      container.Register<IDataStore, DataStore>().AsSingleton();
+      container.Register<IHamstringData, HamstringData>().AsPerRequestSingleton();
     }
   }
 }

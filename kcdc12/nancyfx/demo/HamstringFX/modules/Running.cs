@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Nancy;
-using PetaPoco;
 
-namespace HamstringFX.Core.modules {
+namespace HamstringFX.modules {
   public class Running : NancyModule {
-    private readonly Database _db;
 
-    public Running(Database db) {
+    public Running() {
 
       Get["/run"] = p => {
         return HttpStatusCode.NotFound;
