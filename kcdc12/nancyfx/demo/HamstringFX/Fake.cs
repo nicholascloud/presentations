@@ -15,8 +15,15 @@ namespace HamstringFX {
     public static dynamic HamstringModel (IHamstringData db) {
 
       var model = new {
+        BestRouteTime = TimeSpan.FromMinutes(25).ToString(),
         RunningRoutes = db.Routes.OrderBy(r => r.Name),
-        Runs = new List<dynamic>(),
+        Runs = db.Runs.OrderByDescending(r => r.ScheduledAt).Select(r => new {
+          r.Id,
+          r.Duration,
+          r.ScheduledAt,
+          RouteName = r.Route.Name, 
+          r.Route.Distance
+        }),
         Playlists = new List<dynamic>()
       };
 

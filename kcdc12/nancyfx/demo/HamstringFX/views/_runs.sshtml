@@ -1,13 +1,13 @@
 <!-- _runs.sshtml -->
 @Each.Runs
 <div class="run">
-  <h2>@Current.When</h2>
+  <h2>@Current.ScheduledAt</h2>
   <dl>
-    <dt>Your time:</dt><dd>@Current.YourTime</dd>
-    <dt>Best time:</dt><dd>@Current.BestRouteTime</dd>
-    <dt>Difference:</dt><dd>@Current.Difference</dd>
+    <dt>Your time:</dt><dd>@Current.Duration</dd>
+    <dt>Best time:</dt><dd>00:00:00</dd>
+    <dt>Difference:</dt><dd>00:00:00</dd>
   </dl>
-  <p>@Current.Distance</p>
-  <p>@Current.Where</p>
+  <p>@Current.Distance miles</p>
+  <p>@Current.RouteName</p>
 </div>
 @EndEach
