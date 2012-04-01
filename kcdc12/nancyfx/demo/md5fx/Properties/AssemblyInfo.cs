@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HamstringFX.Core")]
+[assembly: AssemblyTitle("md5fx")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HamstringFX.Core")]
+[assembly: AssemblyProduct("md5fx")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("edbd9262-2846-4496-aa70-e17f4a4206f9")]
+[assembly: Guid("f8b2e4a7-ac45-4ae1-8769-ca96d543b7c9")]
 
 // Version information for an assembly consists of the following four values:
 //

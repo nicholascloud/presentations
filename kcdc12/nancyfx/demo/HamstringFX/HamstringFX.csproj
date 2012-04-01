@@ -40,6 +40,9 @@
     <Reference Include="Nancy">
       <HintPath>..\packages\Nancy.0.10.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Forms">
+      <HintPath>..\packages\Nancy.Authentication.Forms.0.10.0\lib\net40\Nancy.Authentication.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\packages\Nancy.Hosting.Aspnet.0.10.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
@@ -62,8 +65,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="content\scripts\hamstringfx.js" />
-    <Content Include="content\styles\hamstringfx.css" />
+    <Content Include="public\scripts\hamstringfx.js" />
+    <Content Include="public\styles\hamstringfx.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -76,12 +79,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="data\HamstringData.cs" />
+    <Compile Include="data\HamstringUserIdentity.cs" />
+    <Compile Include="data\Member.cs" />
+    <Compile Include="modules\WebApp.cs" />
+    <Compile Include="security\AuthorizationResult.cs" />
+    <Compile Include="security\IHashStrategy.cs" />
+    <Compile Include="security\IMemberAuthorization.cs" />
+    <Compile Include="security\MD5Strategy.cs" />
+    <Compile Include="security\MemberAuthorization.cs" />
     <Compile Include="extension\ArrayExtensions.cs" />
     <Compile Include="Fake.cs" />
     <Compile Include="HamstringBootstrapper.cs" />
     <Compile Include="data\Route.cs" />
     <Compile Include="data\Run.cs" />
-    <Compile Include="modules\Hamstring.cs" />
+    <Compile Include="modules\Account.cs" />
     <Compile Include="modules\Running.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,6 +100,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="domain\" />
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>

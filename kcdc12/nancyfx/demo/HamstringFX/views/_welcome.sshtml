@@ -1,0 +1,6 @@
+<!-- _welcome.sshtml -->
+
+<section id="welcome">
+  <h2>Welcome @Model.MemberName!</h2>
+  <p><a href="/logout">(logout)</a></p>
+</section>

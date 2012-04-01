@@ -5,8 +5,9 @@
     <link type="text/css" rel="stylesheet" href="/styles/html5reset.css" />
     <link type="text/css" rel="stylesheet" href="/styles/lib/jquery-ui-1.8.18.custom.css" />
     <link type="text/css" rel="stylesheet" href="/styles/hamstringfx.css" />
+    @Section['styles']
   </head>
-  <body>
+  <body id="@Section['bodyid']">
     <header class="shiny">
       <h1>HamstringFX</h1>
     </header>
@@ -34,5 +35,6 @@
         $('.pickdate').datepicker();
       });
     </script>
+    @Section['scripts']
   </body>
 </html>

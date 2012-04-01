@@ -24,7 +24,9 @@ namespace HamstringFX {
           RouteName = r.Route.Name, 
           r.Route.Distance
         }),
-        Playlists = new List<dynamic>()
+        Playlists = new List<dynamic>(),
+        IsLoggedIn = true,
+        MemberName = "ncloud"
       };
 
       model.Playlists.Add(new {

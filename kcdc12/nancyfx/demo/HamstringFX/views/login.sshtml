@@ -1,0 +1,37 @@
+@Master['master']
+
+@Section['bodyid']login@EndSection
+
+@Section['quickactions']
+  <aside id="logininstructions">
+    <p>In order to access our member section, you must provide your user handle and password.</p>
+    <p>If you are not a current member <a href="#">please register</a> to gain access to member benefits!</p>
+    <p>If you forgot your handle or password you can always <a href="#">reset your credentials</a>.</p>
+  </aside>
+@EndSection
+
+@Section['contentfocus']
+  <h1>Login to HamstringFX</h1>
+  <p id="loginerror" class="message error" style="display:none;">
+  In order to access our member section, you must provide your user handle and password.
+  </p>
+  <form id="loginform" action="/login" method="POST">
+    <fieldset>
+      <div>
+        <label for="handle">Handle</label>
+        <input type="text" name="handle" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" />
+      </div>
+      <div>
+        <input type="checkbox" name="remember" />
+        Remember me
+      </div>
+      <div>
+        <a href="#" class="button submit">Submit</a>
+      </div>
+    </fieldset>
+  </form>
+@EndSection

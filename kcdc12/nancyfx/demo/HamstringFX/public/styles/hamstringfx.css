@@ -68,6 +68,14 @@ fieldset label {
   display:block;
 }
 
+.message.error {
+  border:2px solid #ED5959;
+  padding:1em;
+  background-color:#FDECEC;
+  border-radius:0.8em;
+  box-shadow:0px 0px 5px #888;
+}
+
 /* page divisions ----------------------------------------- */
 header {
   border-top:1px solid #CCCCCC;
@@ -132,6 +140,7 @@ footer {
   min-height:20em;
   position:relative;
 }
+
 #contentfocus .run dl {
   position:absolute;
   right:0;
@@ -141,10 +150,12 @@ footer {
   border:5px solid #FFBA6B;
   border-radius:5%;
 }
+
 #contentfocus .run dt {
   font-weight:bold;
   font-size:1.5em;
 }
+
 #contentfocus .run dd {
   font-size:1.1em;
   padding-left:8%;
@@ -163,4 +174,10 @@ footer {
 }
 .playlist label {
 
+}
+
+/* login ------------------------------------------------------*/
+#quickactions #logininstructions p {
+  line-height:1.5em;
+  margin-bottom:1.5em;
 }
