@@ -22,6 +22,18 @@ create table Members (
 );
 go
 
+if object_id('Privileges') > 0
+  drop table Privileges;
+go
+
+create table Privileges (
+  Id uniqueidentifier not null primary key nonclustered,
+  MemberId uniqueidentifier not null,
+  Claim nvarchar(100) not null
+  foreign key (MemberId) references Members(Id)
+);
+go
+
 if object_id('Routes') > 0
   drop table Route;
 go
@@ -68,6 +80,11 @@ go
 
 insert into Members (Id, Handle, PasswordHash) values
   ('71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'ncloud', '5f4dcc3b5aa765d61d8327deb882cf99');
+go
+
+insert into Privileges (Id, MemberId, Claim) values
+  ('F8D54F94-2C1A-4463-B8D7-56695DB530CF', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'login'),
+  ('C3E7BA56-9186-46E3-BD2D-A939CC1B49B4', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'add-run');
 go
 
 insert into Routes (Id, Name, Distance) values

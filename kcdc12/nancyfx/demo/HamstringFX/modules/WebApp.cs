@@ -6,9 +6,9 @@ using Nancy.Extensions;
 
 namespace HamstringFX.modules {
   public class WebApp : NancyModule {
-    private readonly IMemberAuthorization _auth;
+    private readonly IMemberAuthentication _auth;
 
-    public WebApp (IMemberAuthorization auth) {
+    public WebApp (IMemberAuthentication auth) {
       _auth = auth;
 
       Get["/"] = routeParams => View["hamstring.sshtml"];
@@ -19,7 +19,7 @@ namespace HamstringFX.modules {
 
         //TODO: discuss the difference between routeParams, Request.Form, Request.Query, etc.
 
-        AuthorizationResult authResult = auth.Authorize(Request.Form.handle, Request.Form.password);
+        AuthenticationResult authResult = auth.Authenticate(Request.Form.handle, Request.Form.password);
 
         if (!authResult.IsAuthenticated) {
           string redirect = "~/login?fail=true";

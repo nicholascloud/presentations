@@ -9,8 +9,11 @@ namespace HamstringFX.modules {
 
       this.RequiresAuthentication();
 
+      var user = Context.CurrentUser;
+
       Get["/myhamstring"] = parameters => {
-        dynamic model = Fake.HamstringModel(db);
+        
+        dynamic model = Fake.HamstringModel(db, user.UserName);
         return View["myhamstring.sshtml", model];
       };
     }

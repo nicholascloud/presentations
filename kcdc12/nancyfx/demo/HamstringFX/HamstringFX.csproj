@@ -81,12 +81,13 @@
     <Compile Include="data\HamstringData.cs" />
     <Compile Include="data\HamstringUserIdentity.cs" />
     <Compile Include="data\Member.cs" />
+    <Compile Include="data\Privilege.cs" />
     <Compile Include="modules\WebApp.cs" />
-    <Compile Include="security\AuthorizationResult.cs" />
+    <Compile Include="security\AuthenticationResult.cs" />
     <Compile Include="security\IHashStrategy.cs" />
-    <Compile Include="security\IMemberAuthorization.cs" />
+    <Compile Include="security\IMemberAuthentication.cs" />
     <Compile Include="security\MD5Strategy.cs" />
-    <Compile Include="security\MemberAuthorization.cs" />
+    <Compile Include="security\MemberAuthentication.cs" />
     <Compile Include="extension\ArrayExtensions.cs" />
     <Compile Include="Fake.cs" />
     <Compile Include="HamstringBootstrapper.cs" />

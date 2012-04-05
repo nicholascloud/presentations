@@ -1,21 +1,21 @@
 using System;
 
 namespace HamstringFX.security {
-  public class AuthorizationResult {
+  public class AuthenticationResult {
 
-    private AuthorizationResult() {
+    private AuthenticationResult() {
       MemberId = Guid.Empty;
       FailureMessage = String.Empty;
     }
 
-    public AuthorizationResult(String failureMessage) : this() {
+    public AuthenticationResult(String failureMessage) : this() {
       if (String.IsNullOrEmpty(failureMessage)) {
         throw new ArgumentException("An empty failure message is meaningless.", "failureMessage");
       }
       FailureMessage = failureMessage;
     }
 
-    public AuthorizationResult(Guid memberId) : this() {
+    public AuthenticationResult(Guid memberId) : this() {
       if (memberId == Guid.Empty) {
         throw new ArgumentException("Members cannot have an empty ID", "memberId");
       }
@@ -28,12 +28,12 @@ namespace HamstringFX.security {
       get { return MemberId != Guid.Empty; }
     }
 
-    public static AuthorizationResult InvalidHandle {
-      get { return new AuthorizationResult("No member exists for the provided handle."); }
+    public static AuthenticationResult InvalidHandle {
+      get { return new AuthenticationResult("No member exists for the provided handle."); }
     }
 
-    public static AuthorizationResult IncorrectPassword {
-      get { return new AuthorizationResult("An incorrect password was supplied."); }
+    public static AuthenticationResult IncorrectPassword {
+      get { return new AuthenticationResult("An incorrect password was supplied."); }
     }
   }
 }

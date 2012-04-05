@@ -32,8 +32,8 @@ namespace HamstringFX {
 
       container.Register<IHamstringData, HamstringData>().AsPerRequestSingleton();
       container.Register<IHashStrategy, MD5Strategy>();
-      container.Register<IUserMapper, MemberAuthorization>().AsPerRequestSingleton();
-      container.Register<IMemberAuthorization, MemberAuthorization>().AsPerRequestSingleton();
+      container.Register<IUserMapper, MemberAuthentication>().AsPerRequestSingleton();
+      container.Register<IMemberAuthentication, MemberAuthentication>().AsPerRequestSingleton();
     }
 
     protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context) {

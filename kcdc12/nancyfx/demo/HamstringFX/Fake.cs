@@ -12,7 +12,7 @@ namespace HamstringFX {
       public Guid Id { get; set; }
     }
 
-    public static dynamic HamstringModel (IHamstringData db) {
+    public static dynamic HamstringModel (IHamstringData db, string userName) {
 
       var model = new {
         BestRouteTime = TimeSpan.FromMinutes(25).ToString(),
