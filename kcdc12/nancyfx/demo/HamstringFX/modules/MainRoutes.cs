@@ -5,11 +5,9 @@ using Nancy.Authentication.Forms;
 using Nancy.Extensions;
 
 namespace HamstringFX.modules {
-  public class WebApp : NancyModule {
-    private readonly IMemberAuthentication _auth;
+  public class MainRoutes : NancyModule {
 
-    public WebApp (IMemberAuthentication auth) {
-      _auth = auth;
+    public MainRoutes (IMemberAuthentication auth) {
 
       Get["/"] = routeParams => View["hamstring.sshtml"];
 

@@ -4,7 +4,7 @@
   <div class="playlist clearfix">
     <img alt="@Current.Name" title="@Current.Name" src="/img/@Current.Image" />
     <label><a href="#">@Current.Name</a></label><br />
-    <span class="timeframe">@Current.Length</span>
+    <span class="duration">@Current.Duration</span>
   </div>
   @EndEach
 </section>

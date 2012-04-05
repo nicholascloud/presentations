@@ -69,9 +69,8 @@ create table Playlists (
   MemberId uniqueidentifier not null,
   Name nvarchar(100) not null,
   SongCount int not null default 0,
-  Hours int not null default 0,
-  Minutes int not null default 0,
-  Seconds int not null default 0
+  Duration nvarchar(100) not null default '00:00:00',
+  [Image] nvarchar(100) not null default 'default-playlist.png'
   foreign key (MemberId) references Members(Id)
 );
 go
@@ -101,4 +100,11 @@ insert into Runs (Id, MemberId, RouteId, ScheduledAt, Duration) values
   ('627965C5-321D-4C3C-9F9F-7AAFF6B976A3', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', '519002C9-6CA5-4B02-9572-4BA7A3FD8ADD', '2012-03-17', '00:20:00'),
   ('44DDF1BA-09B9-4AD2-9A81-CD1660A2EF7A', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', '519002C9-6CA5-4B02-9572-4BA7A3FD8ADD', '2012-03-15', '00:20:00'),
   ('F85246BB-3C34-4856-97B8-FB44C9424EAE', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'BB94B932-2D05-465B-800A-1E6AC505CFD1', '2012-03-15', '00:20:00');
+go
+
+insert into Playlists (Id, MemberId, Name, SongCount, Duration, [Image]) values
+  ('78A7B88A-1217-4877-8DC1-D4CEA5420C93', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'Thump Pop', 120, '7:23:15', 'playlist1.png'),
+  ('D67A1B3D-9BDF-4910-83B6-61ED62B5BA50', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'Noise Canon', 89, '6:54:10', 'playlist2.png'),
+  ('CD4B070E-E0FC-46CA-9FF0-41111DD85F8B', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'ours is the fury', 20, '1:14:33', 'playlist3.png'),
+  ('69DC1930-FC3E-429F-B34C-BCBC16F7895D', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'WAT', 45, '2:47:44', 'playlist4.png');
 go

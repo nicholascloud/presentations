@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Linq;
+using HamstringFX.data;
 using Nancy;
 using Nancy.Security;
 
 namespace HamstringFX.modules {
-  public class Running : NancyModule {
+  public class RunRoutes : NancyModule {
 
-    public Running() {
+    public RunRoutes(IHamstringData db) {
 
       //TODO: talk about extensions in Nancy.Security
       this.RequiresAuthentication();
-
-      var user = Context.CurrentUser;
 
       Get["/run"] = p => {
         return HttpStatusCode.NotFound;

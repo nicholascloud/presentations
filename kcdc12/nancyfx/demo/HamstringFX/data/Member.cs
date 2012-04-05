@@ -10,5 +10,6 @@ namespace HamstringFX.data {
     public String PasswordHash { get; set; }
 
     public virtual ICollection<Privilege> Privileges { get; set; }
+    public virtual ICollection<Playlist> Playlists { get; set; } 
   }
 }

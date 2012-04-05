@@ -81,8 +81,9 @@
     <Compile Include="data\HamstringData.cs" />
     <Compile Include="data\HamstringUserIdentity.cs" />
     <Compile Include="data\Member.cs" />
+    <Compile Include="data\Playlist.cs" />
     <Compile Include="data\Privilege.cs" />
-    <Compile Include="modules\WebApp.cs" />
+    <Compile Include="modules\MainRoutes.cs" />
     <Compile Include="security\AuthenticationResult.cs" />
     <Compile Include="security\IHashStrategy.cs" />
     <Compile Include="security\IMemberAuthentication.cs" />
@@ -93,8 +94,8 @@
     <Compile Include="HamstringBootstrapper.cs" />
     <Compile Include="data\Route.cs" />
     <Compile Include="data\Run.cs" />
-    <Compile Include="modules\Account.cs" />
-    <Compile Include="modules\Running.cs" />
+    <Compile Include="modules\AccountRoutes.cs" />
+    <Compile Include="modules\RunRoutes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -126,15 +126,44 @@ footer {
   clear:both;
   text-align:center;
   font-size:0.6em;
+  padding-top:2em;
 }
 
-/* */
+/* front page ---------------------------- */
+#contentfocus article {
+  font-size:1.2em;
+  margin-bottom:2em;
+}
+
+#contentfocus article h1 {
+  font-size:1.8em;
+  text-shadow:1px 1px 3px #ccc;
+}
+
+#contentfocus #anouncements dl {
+  margin:0;
+  padding:0;
+}
+
+#contentfocus #anouncements dl dt {
+  font-weight:bold;
+  margin:1em 0;
+}
+
+#contentfocus #anouncements dl dd {
+  padding-left:2%;
+}
+
+#contentfocus #upcoming ul {
+  list-style:disc;
+  padding-left:2em;
+}
+
+/* runs --------------------------------------------------- */
 
 #addrun .timesegment {
   width:3em;
 }
-
-/* runs --------------------------------------------------- */
 
 #contentfocus .run {
   min-height:20em;

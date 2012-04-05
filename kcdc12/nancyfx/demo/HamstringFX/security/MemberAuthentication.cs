@@ -16,6 +16,9 @@ namespace HamstringFX.security {
     private readonly IHamstringData _db;
     private readonly IHashStrategy _hashStrategy;
 
+    /// <summary>
+    /// Used by Nancy to get user information for Context.CurrentUser
+    /// </summary>
     public IUserIdentity GetUserFromIdentifier(Guid identifier) {
       var member = _db.Members
         .Include(m => m.Privileges)
@@ -29,6 +32,9 @@ namespace HamstringFX.security {
       };
     }
 
+    /// <summary>
+    /// Authenticates the user during login
+    /// </summary>
     public AuthenticationResult Authenticate(String handle, String password) {
 
       var member = _db.Members.SingleOrDefault(m => m.Handle == handle);
