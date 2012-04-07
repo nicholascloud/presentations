@@ -83,19 +83,25 @@
     <Compile Include="data\Member.cs" />
     <Compile Include="data\Playlist.cs" />
     <Compile Include="data\Privilege.cs" />
-    <Compile Include="modules\MainRoutes.cs" />
+    <Compile Include="model\IRaceServiceProxy.cs" />
+    <Compile Include="model\MainModelFactory.cs" />
+    <Compile Include="model\PortalModelFactory.cs" />
+    <Compile Include="model\IModelFactory.cs" />
+    <Compile Include="model\Race.cs" />
+    <Compile Include="model\RaceServiceProxy.cs" />
+    <Compile Include="modules\MainModule.cs" />
     <Compile Include="security\AuthenticationResult.cs" />
     <Compile Include="security\IHashStrategy.cs" />
     <Compile Include="security\IMemberAuthentication.cs" />
     <Compile Include="security\MD5Strategy.cs" />
     <Compile Include="security\MemberAuthentication.cs" />
     <Compile Include="extension\ArrayExtensions.cs" />
-    <Compile Include="Fake.cs" />
+    <Compile Include="model\Models.cs" />
     <Compile Include="HamstringBootstrapper.cs" />
     <Compile Include="data\Route.cs" />
     <Compile Include="data\Run.cs" />
-    <Compile Include="modules\AccountRoutes.cs" />
-    <Compile Include="modules\RunRoutes.cs" />
+    <Compile Include="modules\PortalModule.cs" />
+    <Compile Include="modules\RunModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

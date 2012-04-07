@@ -1,5 +1,5 @@
-﻿using System.Web.Configuration;
-using HamstringFX.data;
+﻿using HamstringFX.data;
+using HamstringFX.model;
 using HamstringFX.security;
 using Nancy;
 using Nancy.Authentication.Forms;
@@ -30,10 +30,14 @@ namespace HamstringFX {
 
       //TODO: explain container configuration in slideshow
 
+      string serviceEndpoint = "http://localhost:8087";
+
       container.Register<IHamstringData, HamstringData>().AsPerRequestSingleton();
+      container.Register<IRaceServiceProxy>(new RaceServiceProxy(serviceEndpoint));
       container.Register<IHashStrategy, MD5Strategy>();
       container.Register<IUserMapper, MemberAuthentication>().AsPerRequestSingleton();
       container.Register<IMemberAuthentication, MemberAuthentication>().AsPerRequestSingleton();
+      container.Register<Models, Models>().AsSingleton();
     }
 
     protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context) {
@@ -41,12 +45,12 @@ namespace HamstringFX {
 
       //TODO: explain forms auth in slideshow
 
-      var formsAuth = new Forms.FormsAuthenticationConfiguration {
+      var configuration = new Forms.FormsAuthenticationConfiguration {
         RedirectUrl = "~/login",
         UserMapper = container.Resolve<IUserMapper>(),
       };
 
-      Forms.FormsAuthentication.Enable(pipelines, formsAuth);
+      Forms.FormsAuthentication.Enable(pipelines, configuration);
     }
   }
 }

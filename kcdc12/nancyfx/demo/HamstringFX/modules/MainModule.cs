@@ -1,15 +1,19 @@
 ﻿using System;
+using HamstringFX.model;
 using HamstringFX.security;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Extensions;
 
 namespace HamstringFX.modules {
-  public class MainRoutes : NancyModule {
+  public class MainModule : NancyModule {
 
-    public MainRoutes (IMemberAuthentication auth) {
+    public MainModule (IMemberAuthentication auth, Models models) {
 
-      Get["/"] = routeParams => View["hamstring.sshtml"];
+      Get["/"] = routeParams => {
+        var model = models.MainModel().Create();
+        return View["hamstring.sshtml", model];
+      };
 
       Get["/login"] = routeParams => View["login.sshtml"];
 

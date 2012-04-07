@@ -1,0 +1,9 @@
+<section id="upcoming">
+  <h2>Upcoming Races</h2>
+  <dl>
+    @Each.UpcomingRaces
+    <dt><a href="@Current.URL" target="_blank">@Current.Name</a></dt>
+    <dd>@Current.Location</dd>
+    @EndEach
+  </dl>
+</section>

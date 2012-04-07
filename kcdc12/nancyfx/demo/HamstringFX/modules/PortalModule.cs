@@ -1,18 +1,19 @@
 ﻿using System.Linq;
 using HamstringFX.data;
+using HamstringFX.model;
 using Nancy;
 using Nancy.Security;
 
 namespace HamstringFX.modules {
-  public class AccountRoutes : NancyModule {
+  public class PortalModule : NancyModule {
 
-    public AccountRoutes(IHamstringData db) {
+    public PortalModule(IHamstringData db, Models models) {
 
       this.RequiresAuthentication();
 
       Get["/myhamstring"] = parameters => {
         var member = Context.CurrentUser.ToMember(db);
-        dynamic model = Fake.HamstringModel(db, member);
+        dynamic model = models.PortalModel(member).Create();
         return View["myhamstring.sshtml", model];
       };
     }

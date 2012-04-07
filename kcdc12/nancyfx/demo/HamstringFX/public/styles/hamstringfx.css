@@ -154,11 +154,6 @@ footer {
   padding-left:2%;
 }
 
-#contentfocus #upcoming ul {
-  list-style:disc;
-  padding-left:2em;
-}
-
 /* runs --------------------------------------------------- */
 
 #addrun .timesegment {
@@ -203,6 +198,12 @@ footer {
 }
 .playlist label {
 
+}
+
+/* upcoming runs -------------------------------- */
+
+#upcoming dd {
+  padding-bottom:1em;
 }
 
 /* login ------------------------------------------------------*/

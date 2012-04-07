@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md5fx", "md5fx\md5fx.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX.Test", "HamstringFX.Test\HamstringFX.Test.csproj", "{E4859206-93CF-4D11-B620-D4F55BC45BCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX.RaceService", "HamstringFX.RaceService\HamstringFX.RaceService.csproj", "{32EE9E97-F4FA-4001-B9B9-2346EED371B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|x86.ActiveCfg = Release|Any CPU
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|x86.ActiveCfg = Debug|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|x86.Build.0 = Debug|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Release|Any CPU.ActiveCfg = Release|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Release|Mixed Platforms.Build.0 = Release|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Release|x86.ActiveCfg = Release|x86
+		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

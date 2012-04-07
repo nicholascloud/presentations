@@ -5,9 +5,9 @@ using Nancy;
 using Nancy.Security;
 
 namespace HamstringFX.modules {
-  public class RunRoutes : NancyModule {
+  public class RunModule : NancyModule {
 
-    public RunRoutes(IHamstringData db) {
+    public RunModule(IHamstringData db) {
 
       //TODO: talk about extensions in Nancy.Security
       this.RequiresAuthentication();
