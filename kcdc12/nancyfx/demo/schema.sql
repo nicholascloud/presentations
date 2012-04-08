@@ -75,6 +75,16 @@ create table Playlists (
 );
 go
 
+if object_id('News') > 0
+  drop table News;
+go
+
+create table News (
+  Id uniqueidentifier not null primary key nonclustered,
+  ReportedAt datetime not null default getdate(),
+  Content nvarchar(max) not null default ''
+);
+
 -- dummy data
 
 insert into Members (Id, Handle, PasswordHash) values
@@ -108,3 +118,4 @@ insert into Playlists (Id, MemberId, Name, SongCount, Duration, [Image]) values
   ('CD4B070E-E0FC-46CA-9FF0-41111DD85F8B', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'ours is the fury', 20, '1:14:33', 'playlist3.png'),
   ('69DC1930-FC3E-429F-B34C-BCBC16F7895D', '71ED18D9-DE5D-4DC5-9DCF-E9F143605E15', 'WAT', 45, '2:47:44', 'playlist4.png');
 go
+  
