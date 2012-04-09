@@ -12,7 +12,7 @@ namespace HamstringFX.model {
     private readonly IRaceServiceProxy _proxy;
 
     public IModelFactory MainModel () {
-      return new MainModelFactory(_proxy);
+      return new MainModelFactory(_db, _proxy);
     }
 
     public IModelFactory PortalModel (Member member) {

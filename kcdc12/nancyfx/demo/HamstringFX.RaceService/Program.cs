@@ -10,7 +10,7 @@ namespace HamstringFX.RaceService {
       //TODO: discuss self hosting in slideshow
 
       var uri = new Uri("http://localhost:8087/");
-      var host = new NancyHost(uri);
+      var host = new NancyHost(uri, new RaceServiceBootstrapper(cliargs));
       host.Start();
 
       Console.WriteLine(String.Format("HamstringFX.RaceService now listening on {0}", uri.OriginalString));
@@ -23,8 +23,8 @@ namespace HamstringFX.RaceService {
       Console.ReadKey();
 
       host.Stop();
+      Console.WriteLine();
       Console.WriteLine("HamstringFX.RaceService terminated");
-
     }
   }
 }

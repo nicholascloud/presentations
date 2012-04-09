@@ -9,7 +9,8 @@ namespace HamstringFX.data {
     IDbSet<Run> Runs { get; set; }
     IDbSet<Member> Members { get; set; }
     IDbSet<Privilege> Privileges { get; set; }
-    IDbSet<Playlist> Playlists { get; set; } 
+    IDbSet<Playlist> Playlists { get; set; }
+    IDbSet<Announcement> Announcements { get; set; }
   }
 
   public class HamstringData : DbContext, IHamstringData {
@@ -18,5 +19,6 @@ namespace HamstringFX.data {
     public IDbSet<Member> Members { get; set; }
     public IDbSet<Privilege> Privileges { get; set; }
     public IDbSet<Playlist> Playlists { get; set; }
+    public IDbSet<Announcement> Announcements { get; set; } 
   }
 }

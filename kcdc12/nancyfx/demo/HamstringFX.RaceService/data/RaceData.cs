@@ -7,10 +7,18 @@ using HamstringFX.RaceService.domain;
 
 namespace HamstringFX.RaceService.data {
   public class RaceData : IRaceData {
-    readonly IDataStream _remote = new RemoteRaceStream();
-    readonly IDataStream _cached = new CachedRaceStream();
-     
+    public RaceData(bool alwaysUseCache) {
+      _alwaysUseCache = alwaysUseCache;
+    }
+
+    private readonly bool _alwaysUseCache = false;
+    private readonly IDataStream _remote = new RemoteRaceStream();
+    private readonly IDataStream _cached = new CachedRaceStream();
+
     public ICollection<Race> UpcomingRaces() {
+      if (_alwaysUseCache) {
+        return ReadRaces(_cached);
+      }
 
       try {
         return ReadRaces(_remote);

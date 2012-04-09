@@ -97,6 +97,11 @@ header h1 {
   font-weight:bold;
 }
 
+header img {
+  float:left;
+  padding-right:2em;
+}
+
 #content {
   width:100%;
   padding-top:2%;
@@ -115,6 +120,10 @@ header h1 {
 #quickactions {
   width:30%;
   float:left;
+  /*background-color:#fff;*/
+  padding:1em;
+  border-radius:0.5em;
+  box-shadow:0px 0px 5px #ccc;
 }
 
 #contentfocus {
@@ -125,7 +134,6 @@ header h1 {
 footer {
   clear:both;
   text-align:center;
-  font-size:0.6em;
   padding-top:2em;
 }
 
@@ -140,17 +148,17 @@ footer {
   text-shadow:1px 1px 3px #ccc;
 }
 
-#contentfocus #anouncements dl {
+#contentfocus #announcements dl {
   margin:0;
   padding:0;
 }
 
-#contentfocus #anouncements dl dt {
+#contentfocus #announcements dl dt {
   font-weight:bold;
   margin:1em 0;
 }
 
-#contentfocus #anouncements dl dd {
+#contentfocus #announcements dl dd {
   padding-left:2%;
 }
 

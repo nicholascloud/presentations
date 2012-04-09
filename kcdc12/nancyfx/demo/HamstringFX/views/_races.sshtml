@@ -3,7 +3,7 @@
   <dl>
     @Each.UpcomingRaces
     <dt><a href="@Current.URL" target="_blank">@Current.Name</a></dt>
-    <dd>@Current.Location</dd>
+    <dd>@Current.Location<br />@Current.FormattedDate</dd>
     @EndEach
   </dl>
 </section>

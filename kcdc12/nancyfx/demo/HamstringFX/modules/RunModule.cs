@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using HamstringFX.data;
+using HamstringFX.model;
 using Nancy;
+using Nancy.ModelBinding;
 using Nancy.Security;
 
 namespace HamstringFX.modules {
@@ -19,7 +21,8 @@ namespace HamstringFX.modules {
       Post["/run"] = p => {
         try {
           Guid newId = Guid.NewGuid();
-      
+          var runModel = this.Bind<RunModel>();
+          
 
           return HttpStatusCode.OK;
         } catch (Exception ex) {

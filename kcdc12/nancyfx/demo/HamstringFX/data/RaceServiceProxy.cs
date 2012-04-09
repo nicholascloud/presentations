@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
+using HamstringFX.model;
 using Nancy.Json;
 
-namespace HamstringFX.model {
+namespace HamstringFX.data {
   class RaceServiceProxy : IRaceServiceProxy {
     public RaceServiceProxy(String endpoint) {
       _endpoint = endpoint;

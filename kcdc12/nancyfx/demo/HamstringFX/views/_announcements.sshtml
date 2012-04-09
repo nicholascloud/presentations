@@ -1,11 +1,9 @@
-<article id="anouncements">
+<article id="announcements">
   <h1>Announcements</h1>
   <dl>
-    <dt>Thursday, 4/5/2012</dt>
-    <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in metus nisi, id luctus dolor.</dd>
-    <dt>Monday, 3/26/2012</dt>
-    <dd>Praesent vulputate odio nisl, eu fermentum sapien.</dd>
-    <dt>Friday, 3/16/2012</dt>
-    <dd>Nullam et turpis eu mi interdum tincidunt. Integer in leo at mi commodo pulvinar. Integer ut sem sit amet quam luctus lacinia. Praesent est orci, ultrices et ornare a, fermentum non dolor.</dd>
+    @Each.Announcements
+    <dt>@Current.FormattedDate</dt>
+    <dd>@Current.Content</dd>
+    @EndEach
   </dl>
 </article>

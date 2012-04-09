@@ -1,3 +1,5 @@
+//global: postal, $
+
 var Hamstring = {};
 Hamstring.url = (function (location) {
 
@@ -28,7 +30,7 @@ Hamstring.ready = function (bodyid) {
   for (var i = 0; i < this.modules.length; i++) {
     var module = this.modules[i];
     if (module.handles(bodyid)) {
-      module.init();
+      module.init(postal);
     }
   }
 };
@@ -36,7 +38,7 @@ Hamstring.ready = function (bodyid) {
 /*
  * Global operations for all pages
  */
-Hamstring.modules.push((function all () {
+Hamstring.modules.push(function all () {
 
   var _init = function () {
     $('.pickdate').datepicker();  
@@ -48,12 +50,12 @@ Hamstring.modules.push((function all () {
     },
     init: _init
   };
-})());
+}());
 
 /*
  * Login
  */
-Hamstring.modules.push((function login () {
+Hamstring.modules.push(function login () {
 
   var setActionParams = function ($form) {
     var returnUrl = Hamstring.url.param('returnUrl');
@@ -91,14 +93,22 @@ Hamstring.modules.push((function login () {
     },
     init: _init
   };
-})());
+}());
 
 /*
  * Add run
  */
-Hamstring.modules.push((function myhamstring () {
+Hamstring.modules.push(function addRun () {
 
-  var _init = function () {
+  var fields = {
+    when: '[name=when]',
+    where: '[name=where]',
+    hour: '[name=hour]',
+    min: '[name=min]',
+    sec: '[name=sec]'
+  };
+
+  var _init = function (bus) {
     var $section = $('#addrun');
 
     var submitForm = function (onSuccess, onError) {
@@ -106,21 +116,35 @@ Hamstring.modules.push((function myhamstring () {
       onError = onError || function () {};
 
       var formData = {
-        when: $section.find('[name=when]').val(),
-        where: $section.find('[name=where]').val(),
-        hour: $section.find('[name=hour]').val(),
-        min: $section.find('[name=min]').val(),
-        sec: $section.find('[name=sec]').val()
+        when: $section.find(fields.when).val(),
+        where: $section.find(fields.where).val(),
+        hour: $section.find(fields.hour).val(),
+        min: $section.find(fields.min).val(),
+        sec: $section.find(fields.sec).val()
       };
 
-      $.post('', formData, function () {
+      $.post('/run', formData, function () {
         onSuccess();
       }).error(function () {
         onError();
       });
     };
 
+    var resetForm = function () {
+      $section.find(fields.when).val('');
+      $section.find(fields.where)[0].selectedIndex = 0;
+      $section.find(fields.hour).val('0');
+      $section.find(fields.min).val('0');
+      $section.find(fields.sec).val('0');
+    };
+
     $section.find('a.submit').click(function (evt) {
+      submitForm(function onSuccess () {
+        bus.publish('run-added', {});
+        resetForm();
+      }, function onError (message) {
+        bus.publish('display-error', message);
+      });
       evt.stopPropagation();
       evt.preventDefault();
       return false;
@@ -133,7 +157,18 @@ Hamstring.modules.push((function myhamstring () {
     },
     init: _init
   };
-})());
+}());
+
+Hamstring.modules.push(function runs () {
+
+  var _init = function (bus) {
+
+  };
+
+  return {
+    init: _init
+  };
+}());
 
 /*
  * Document is ready

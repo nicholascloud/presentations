@@ -1,5 +1,5 @@
 <section id="addrun">
-  <form method="POST" action="">
+  <form>
     <fieldset>
       <div>
         <label>When?</label>

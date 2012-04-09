@@ -97,5 +97,10 @@
       <link>http://www.runningintheusa.com/Race/View.aspx?RaceID=53901</link>
       <pubDate>4/3/2012 1:25:00 PM</pubDate>
     </item>
+    <!-- dummy data for debugging -->
+    <item>
+      <title>Foo Race ~ Florissant, MO ~ Aug 13 2012</title>
+      <link>http://foorace.com</link>
+    </item>
   </channel>
 </rss>
