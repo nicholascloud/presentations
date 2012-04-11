@@ -9,7 +9,7 @@ namespace HamstringFX.model {
     public Int32 Sec { get; set; }
 
     public String Time {
-      get { return String.Format("{0}:{1}:{2}", Hour, Min, Sec); }
+      get { return String.Format("{0:D2}:{1:D2}:{2:D2}", Hour, Min, Sec); }
     }
   }
 }

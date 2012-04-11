@@ -14,7 +14,7 @@ namespace HamstringFX.RaceService {
       host.Start();
 
       Console.WriteLine(String.Format("HamstringFX.RaceService now listening on {0}", uri.OriginalString));
-      Console.Write("Press any key to terminate");
+      Console.WriteLine("Press any key to terminate");
 
       if (cliargs.LaunchBrowser) {
         Process.Start(uri.OriginalString);
@@ -23,7 +23,6 @@ namespace HamstringFX.RaceService {
       Console.ReadKey();
 
       host.Stop();
-      Console.WriteLine();
       Console.WriteLine("HamstringFX.RaceService terminated");
     }
   }

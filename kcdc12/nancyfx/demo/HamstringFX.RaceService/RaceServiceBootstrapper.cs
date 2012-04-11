@@ -13,6 +13,7 @@ namespace HamstringFX.RaceService {
       base.ConfigureApplicationContainer(container);
 
       container.Register<IRaceData>(new RaceData(_args.AlwaysUseCache));
+      container.Register<IOutput, CliOutput>();
     }
   }
 }

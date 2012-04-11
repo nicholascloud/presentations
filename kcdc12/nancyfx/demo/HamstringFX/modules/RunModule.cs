@@ -19,15 +19,27 @@ namespace HamstringFX.modules {
       };
 
       Post["/run"] = p => {
-        try {
-          Guid newId = Guid.NewGuid();
-          var runModel = this.Bind<RunModel>();
-          
+        var member = Context.CurrentUser.ToMember(db);
 
-          return HttpStatusCode.OK;
+        try {
+          var runModel = this.Bind<RunModel>();
+          var run = new Run {
+            Id = Guid.NewGuid(),
+            Duration = runModel.Time,
+            MemberId = member.Id,
+            RouteId = runModel.Where,
+            ScheduledAt = runModel.When
+          };
+          db.Runs.Add(run);
+          db.SaveChanges();
+
+          return Response.AsJson(new { id = run.Id });
+
         } catch (Exception ex) {
 
-          return HttpStatusCode.InternalServerError;
+          return Response.AsJson(
+            new { error = ex.Message }, 
+            HttpStatusCode.InternalServerError);
         }
       };
 

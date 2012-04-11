@@ -74,6 +74,11 @@ fieldset label {
   background-color:#FDECEC;
   border-radius:0.8em;
   box-shadow:0px 0px 5px #888;
+  display:none;
+}
+
+.message.success {
+
 }
 
 /* page divisions ----------------------------------------- */
@@ -121,7 +126,7 @@ header img {
   width:30%;
   float:left;
   /*background-color:#fff;*/
-  padding:1em;
+  padding:0.5em;
   border-radius:0.5em;
   box-shadow:0px 0px 5px #ccc;
 }
@@ -191,6 +196,11 @@ footer {
 #contentfocus .run dd {
   font-size:1.1em;
   padding-left:8%;
+  line-height:1.8em;
+}
+
+#contentfocus .run p {
+  font-size:1.2em;
   line-height:1.8em;
 }
 

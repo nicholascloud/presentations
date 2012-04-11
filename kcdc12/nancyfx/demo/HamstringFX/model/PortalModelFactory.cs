@@ -13,18 +13,26 @@ namespace HamstringFX.model {
     private readonly Member _member;
 
     public dynamic Create() {
+      var allRuns = _db.Runs
+        .Where(r => r.MemberId == _member.Id)
+        .OrderByDescending(r => r.ScheduledAt)
+        .ToList();
+
       var model = new {
         BestRouteTime = TimeSpan.FromMinutes(25).ToString(),
         RunningRoutes = _db.Routes.OrderBy(r => r.Name),
-        Runs = _db.Runs
-          .Where(r => r.MemberId == _member.Id)
-          .OrderByDescending(r => r.ScheduledAt)
+        Runs = allRuns
           .Select(r => new {
             r.Id,
-            r.Duration,
-            r.ScheduledAt,
+            r.Duration, 
+            ScheduledAt = r.ScheduledAt.ToString("dddd, MM/dd/yyyy"),
             RouteName = r.Route.Name,
-            r.Route.Distance
+            r.Route.Distance,
+            r.Pace,
+            BestTime = allRuns
+              .Where(o => o.RouteId == r.RouteId)
+              .Min()
+              .Duration
           }).ToList(),
         Playlists = _db.Playlists
           .Where(p => p.MemberId == _member.Id)

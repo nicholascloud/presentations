@@ -9,8 +9,5 @@
 @EndSection
 
 @Section['contentfocus']
-  <h1>Welcome to HamstringFX</h1>
-
   @Partial['_announcements', Model]
-  
 @EndSection

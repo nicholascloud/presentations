@@ -51,12 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CliArgs.cs" />
+    <Compile Include="CliOutput.cs" />
     <Compile Include="data\CachedRaceStream.cs" />
     <Compile Include="data\IDataStream.cs" />
     <Compile Include="data\IRaceData.cs" />
     <Compile Include="data\RaceData.cs" />
     <Compile Include="data\RemoteRaceStream.cs" />
     <Compile Include="domain\Race.cs" />
+    <Compile Include="IOutput.cs" />
     <Compile Include="modules\RaceModule.cs" />
     <Compile Include="RaceServiceBootstrapper.cs" />
     <Compile Include="Program.cs" />

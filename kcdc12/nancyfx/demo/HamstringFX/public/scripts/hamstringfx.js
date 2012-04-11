@@ -110,6 +110,7 @@ Hamstring.modules.push(function addRun () {
 
   var _init = function (bus) {
     var $section = $('#addrun');
+    var $error = $section.find('#addrunerror');
 
     var submitForm = function (onSuccess, onError) {
       onSuccess = onSuccess || function () {};
@@ -125,7 +126,7 @@ Hamstring.modules.push(function addRun () {
 
       $.post('/run', formData, function () {
         onSuccess();
-      }).error(function () {
+      }).error(function (e) {
         onError();
       });
     };
@@ -136,14 +137,17 @@ Hamstring.modules.push(function addRun () {
       $section.find(fields.hour).val('0');
       $section.find(fields.min).val('0');
       $section.find(fields.sec).val('0');
+      $error.hide();
     };
 
     $section.find('a.submit').click(function (evt) {
+      $error.hide();
       submitForm(function onSuccess () {
         bus.publish('run-added', {});
         resetForm();
       }, function onError (message) {
-        bus.publish('display-error', message);
+        $error.find('span').html(message);
+        $error.show();
       });
       evt.stopPropagation();
       evt.preventDefault();
@@ -153,19 +157,8 @@ Hamstring.modules.push(function addRun () {
 
   return {
     handles: function (bodyid) {
-      return ['myhamstring'].indexOf(bodyid) >= 0;
+      return bodyid === 'myhamstring';
     },
-    init: _init
-  };
-}());
-
-Hamstring.modules.push(function runs () {
-
-  var _init = function (bus) {
-
-  };
-
-  return {
     init: _init
   };
 }());

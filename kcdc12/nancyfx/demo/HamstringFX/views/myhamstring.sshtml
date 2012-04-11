@@ -1,5 +1,7 @@
 @Master['master']
 
+@Section['bodyid']myhamstring@EndSection
+
 @Section['quickactions']
   <!-- hamstring.sshtml -->
   @Partial['_welcome']

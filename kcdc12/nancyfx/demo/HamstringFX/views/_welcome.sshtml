@@ -2,5 +2,10 @@
 
 <section id="welcome">
   <h2>Welcome @Model.MemberName!</h2>
-  <p><a href="/logout">(logout)</a></p>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/logout">(logout)</a></li>
+    </ul>
+  </nav>
 </section>

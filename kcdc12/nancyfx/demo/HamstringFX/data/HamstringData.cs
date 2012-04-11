@@ -11,6 +11,8 @@ namespace HamstringFX.data {
     IDbSet<Privilege> Privileges { get; set; }
     IDbSet<Playlist> Playlists { get; set; }
     IDbSet<Announcement> Announcements { get; set; }
+
+    int SaveChanges();
   }
 
   public class HamstringData : DbContext, IHamstringData {

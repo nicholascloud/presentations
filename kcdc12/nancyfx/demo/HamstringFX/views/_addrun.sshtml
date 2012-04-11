@@ -24,4 +24,7 @@
       </div>
     </fieldset>
   </form>
+  <div id="addrunerror" class="message error">
+    I was unable to save your run.<br /><span></span>
+  </div>
 </section>
