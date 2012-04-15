@@ -24,15 +24,8 @@
 				</section>
 
 				<section>
-					<h2>Organizing JavaScript code is challenging</h2>
-				</section>
-
-				<section>
-					<h2>Organizing code into modules</h2>
-				</section>
-
-				<section>
-					<h2>Communicating between modules</h2>
+					<h1>Part 1</h1>
+					<h2>In which we compare DOM events to postal messages</h2>
 				</section>
 
 				<section>
@@ -90,10 +83,93 @@ $.post('/my/url', data, function () {
 				</section>
 
 				<section>
-					
+					<h2>Use postal.js instead</h2>
+					<pre><code>
+&lt;script type="text/javascript"&gt;
+postal.subscribe('error-raised', function (msg) {
+  $('#error-message').html(msg).show();
+});
+
+
+//sometime later...
+$.post('/my/url', data, function () {
+  //yay our post worked!
+}).error(function (){
+  postal.publish('error-raised', 'bad!');
+});
+&lt;/script&gt;
+					</code></pre>
 				</section>
 
+				<section>
+					<h1>Part 2</h1>
+					<h2>In which we acknowledge that postal.js is great</h2>
+					<h3>but your code is still a mess</h3>
+					<h4>and you are grounded until you clean it up</h4>
+				</section>
 
+				<section>
+					<h2>Organizing JavaScript code is challenging</h2>
+				</section>
+
+				<section>
+					<h2>Organizing code into modules</h2>
+				</section>
+
+				<section>
+					<h2>Communicating between modules</h2>
+				</section>
+
+				<section>
+					<h1>Part 3</h1>
+					<h2>In which we learn about advanced features</h2>
+					<h3>in postal.js</h3>
+				</section>
+
+				<section>
+					<h1>Part 4</h1>
+					<h2>In which some actual code is shown</h2>
+					<h3>and you are less bored</h3>
+					<div>
+						<img src="img/code-all-the-things.jpg" style="margin:auto; display:block;" />
+					</div>
+				</section>
+
+				<section>
+					<h1>Part 5</h1>
+					<h2>In which I point you</h2>
+					<h3>to additional resources</h3>
+				</section>
+
+				<section>
+					<h2>Additional Resources</h2>
+					<p>Client-side Messaging in JavaScript</p>
+					<ul>
+						<li><a href="http://bit.ly/IC8qqb">Part 1 http://bit.ly/IC8qqb</a></li>
+						<li><a href="http://bit.ly/HDT9R9">Part 2 http://bit.ly/HDT9R9</a></li>
+						<li><a href="http://bit.ly/Ip2RIw">Part 3 http://bit.ly/Ip2RIw</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Additional Resources</h2>
+					<p>Postal.js on Github</p>
+					<p><a href="https://github.com/ifandelse/postal.js">https://github.com/ifandelse/postal.js</a></p>
+				</section>
+
+				<section>
+					<h2>Additional Resources</h2>
+					<p>jsFiddle examples</p>
+					<p><a href="http://jsfiddle.net/ifandelse/NTPcT">http://jsfiddle.net/ifandelse/NTPcT</a></p>
+				</section>
+
+				<section>
+					<h2>Additional Resources</h2>
+					<p>Jim Cowart <a href="http://www.twitter.com/ifandelse">@ifandelse</a></p>
+					<div>
+						<img src="img/jim-cowart-twitter.png" style="display:block; margin:auto;" />
+					</div>
+				</section>
 			</div>	
 
 			<!-- The navigational controls UI -->
