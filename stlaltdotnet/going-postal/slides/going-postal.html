@@ -1,0 +1,148 @@
+<!doctype html>  
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Going Postal with postal.js</title>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="lib/zenburn.css">
+		<style type="text/css">
+		pre {font-size:0.7em !important;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="reveal">
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Going Postal</h1>
+					<h2>with postal.js</h2>
+				</section>
+
+				<section>
+					<h2>Organizing JavaScript code is challenging</h2>
+				</section>
+
+				<section>
+					<h2>Organizing code into modules</h2>
+				</section>
+
+				<section>
+					<h2>Communicating between modules</h2>
+				</section>
+
+				<section>
+					<h2>DOM events are interaction-oriented</h2>
+					<pre><code>
+$('#foo').on('click', function () {...});
+$('#foo').on('hover', function () {...});
+$('#foo').on('keydown', function () {...});
+$('#foo').on('mouseover', function () {...});
+$(document).on('load', function () {...});
+$().ready(function () {...});
+					</code></pre>
+					<p><a href="http://en.wikipedia.org/wiki/DOM_events">'DOM Events', Wikipedia</a></p>
+				</section>
+
+				<section>
+					<h2>jQuery supports user-defined events</h2>
+					<pre><code>
+&lt;div id="foo"&gt;&lt;button id="bar" /&gt;&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+$('#foo').on('launch', function () {
+    launchAllMissiles();
+});
+$('#bar').trigger('launch');
+&lt;/script&gt;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>But...</h2>
+					<ul>
+						<li>DOM events only bubble UP the DOM tree</li>
+						<li>Since events can be triggered anywhere in the DOM tree, the best place to put listeners would be at the top of the tree (e.g. the `body` tag)</li>
+						<li>Only one callback can be assigned for a specific event on a given element</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>A common scenario</h2>
+					<pre><code>
+&lt;script type="text/javascript"&gt;
+$('body').on('error-raised', function (evt, msg) {
+  $('#error-message').html(msg).show();
+});
+
+//sometime later...
+$.post('/my/url', data, function () {
+  //yay our post worked!
+}).error(function (){
+  $(this).trigger('error-raised', ['bad!']);
+});
+&lt;/script&gt;
+					</code></pre>
+				</section>
+
+				<section>
+					
+				</section>
+
+
+			</div>	
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+		<script src="lib/highlight.js"></script>
+		<script src="lib/classList.js"></script>
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: true,
+
+				// UI style
+				theme: query.theme || 'default', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+	</body>
+</html>
