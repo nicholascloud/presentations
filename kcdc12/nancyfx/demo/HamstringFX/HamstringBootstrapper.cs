@@ -1,4 +1,5 @@
-﻿using HamstringFX.data;
+﻿using System;
+using HamstringFX.data;
 using HamstringFX.model;
 using HamstringFX.security;
 using Nancy;
@@ -30,10 +31,11 @@ namespace HamstringFX {
 
       //TODO: explain container configuration in slideshow
 
-      string serviceEndpoint = "http://localhost:8087";
+      const String serviceEndpoint = "http://localhost:8087";
+      const String serviceToken = "E6319915-809C-4A20-81C8-02A63CD9344B";
 
       container.Register<IHamstringData, HamstringData>().AsPerRequestSingleton();
-      container.Register<IRaceServiceProxy>(new RaceServiceProxy(serviceEndpoint));
+      container.Register<IRaceServiceProxy>(new RaceServiceProxy(serviceEndpoint, serviceToken));
       container.Register<IHashStrategy, MD5Strategy>();
       container.Register<IUserMapper, MemberAuthentication>().AsPerRequestSingleton();
       container.Register<IMemberAuthentication, MemberAuthentication>().AsPerRequestSingleton();

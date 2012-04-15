@@ -9,11 +9,7 @@ using Nancy.Extensions;
 namespace HamstringFX.modules {
   public class MainModule : NancyModule {
 
-    private readonly Dictionary<String, dynamic> _cache = new Dictionary<string, dynamic>();
-
     public MainModule (IMemberAuthentication auth, Models models) {
-
-      
 
       Get["/"] = routeParams => {
         var model = models.MainModel().Create();

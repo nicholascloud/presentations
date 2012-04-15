@@ -1,4 +1,4 @@
-//global: postal, $
+/*global postal:true, $:true*/
 
 var Hamstring = {};
 Hamstring.url = (function (location) {
