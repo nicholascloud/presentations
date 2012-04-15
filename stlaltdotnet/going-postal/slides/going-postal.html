@@ -21,11 +21,13 @@
 				<section>
 					<h1>Going Postal</h1>
 					<h2>with postal.js</h2>
+					<h3>in five parts</h3>
 				</section>
 
 				<section>
 					<h1>Part 1</h1>
-					<h2>In which we compare DOM events to postal messages</h2>
+					<h2>In which we compare DOM events</h2>
+					<h3>to postal messages</h3>
 				</section>
 
 				<section>
@@ -58,9 +60,9 @@ $('#bar').trigger('launch');
 				<section>
 					<h2>But...</h2>
 					<ul>
-						<li>DOM events only bubble UP the DOM tree</li>
-						<li>Since events can be triggered anywhere in the DOM tree, the best place to put listeners would be at the top of the tree (e.g. the `body` tag)</li>
-						<li>Only one callback can be assigned for a specific event on a given element</li>
+						<li class="fragment">DOM events only bubble UP the DOM tree</li>
+						<li class="fragment">Since events can be triggered anywhere in the DOM tree, the best place to put listeners would be at the top of the tree (e.g. the `body` tag)</li>
+						<li class="fragment">Only one callback can be assigned for a specific event on a given element</li>
 					</ul>
 				</section>
 
@@ -110,20 +112,102 @@ $.post('/my/url', data, function () {
 
 				<section>
 					<h2>Organizing JavaScript code is challenging</h2>
+					<ul>
+						<li class="fragment">Encapsulate code to avoid global variable collisions</li>
+						<li class="fragment">Deconstruct code and isolate reusable components</li>
+						<li class="fragment">Organize script files for easy maintainability</li>
+						<li class="fragment">Load script files in the correct order (satisfy dependencies)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Organizing JavaScript code is challenging</h2>
+					<ul>
+						<li class="fragment">Avoid jQuey spaghetti code</li>
+						<li class="fragment">Avoid large trees of nested callbacks</li>
+						<li class="fragment">Segregate UI code from application logic</li>
+					</ul>
 				</section>
 
 				<section>
 					<h2>Organizing code into modules</h2>
+					<dl style="margin-top:1em;">
+						<dt><strong>mod·ule [moj-ool]:</strong></dt>
+						<dd style="margin-top:1em;">
+							<p>Code that is encapsulated within a function closure that has a course, public API.</p>
+						</dd>
+					</dl>
 				</section>
 
 				<section>
-					<h2>Communicating between modules</h2>
+					<h2>Organizing code into modules</h2>
+					<pre><code>
+//tax rate module
+var taxRate = (function () {
+  //"private" members
+  var _rates = {
+    'mo': 7.925
+  };
+  //public API
+  return {
+    calc: function (state, retail) {
+      return _rates[state] * retail;
+    }
+  };
+}());
+
+var retail = 10.53;
+var tax = taxRate.calc('mo', retail);
+var total = retail + tax;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Module communication using callbacks</h2>
+					<pre><code>
+var mod1 = (function () { ... }());
+var mod2 = (function () { ... }());
+
+//similar to .NET events
+mod1.onSomeEvent(function () {
+  mod2.doSomethingInResponse();
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Module communication using postal</h2>
+					<pre><code>
+var mod1 = (function ($, bus) {
+  var $list = $('#items');
+  bus.subscribe('new-items', function (items) {
+    items.forEach(function (item) {
+      $list.append($('&lt;li&gt;&lt;/li&gt;')
+        .html(item));
+    });
+  });
+}(jQuery, postal));
+
+var mod2 = (function (bus) {
+  bus.publish('new-items', ['foo', 'bar']);
+}(postal));
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Better modules with require.js</h2>
+					<ul>
+						<li>Simple configuration tells require.js where to look for JavaScript files</li>
+						<li>One script tag required on your page; require.js does the rest</li>
+						<li>Resolves module dependencies (jQuery, postal, underscore, etc.)</li>
+						<li>Lots of other awesome sauce!</li>
+					</ul>
 				</section>
 
 				<section>
 					<h1>Part 3</h1>
-					<h2>In which we learn about advanced features</h2>
-					<h3>in postal.js</h3>
+					<h2>In which we learn about</h2>
+					<h3>advanced features in postal.js</h3>
 				</section>
 
 				<section>
