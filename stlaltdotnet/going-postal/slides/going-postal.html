@@ -9,6 +9,11 @@
 		<link rel="stylesheet" href="lib/zenburn.css">
 		<style type="text/css">
 		pre {font-size:0.7em !important;}
+		h1, h2, h3, h4, h5, h6 {text-transform:none !important;}
+		dl {margin-top:1em;}
+		/*dt {font-weight:bold; color:#d0ff00;}*/
+		dd {margin-bottom:1em;}
+		.slimed {color:#d0ff00; font-weight:bold;}
 		</style>
 	</head>
 	<body>
@@ -21,7 +26,10 @@
 				<section>
 					<h1>Going Postal</h1>
 					<h2>with postal.js</h2>
-					<h3>in five parts</h3>
+					<div>
+						<img src="img/simonpegg.jpg" style="display:block; margin:auto;" />
+					</div>
+					<h3 style="margin-top:1em;">(in five parts)</h3>
 				</section>
 
 				<section>
@@ -40,7 +48,7 @@ $('#foo').on('mouseover', function () {...});
 $(document).on('load', function () {...});
 $().ready(function () {...});
 					</code></pre>
-					<p><a href="http://en.wikipedia.org/wiki/DOM_events">'DOM Events', Wikipedia</a></p>
+					<p><small>(http://en.wikipedia.org/wiki/DOM_events)</small></p>
 				</section>
 
 				<section>
@@ -69,8 +77,7 @@ $('#bar').trigger('launch');
 				<section>
 					<h2>A common scenario</h2>
 					<pre><code>
-&lt;script type="text/javascript"&gt;
-$('body').on('error-raised', function (evt, msg) {
+$('body').on('show-error', function (evt, msg) {
   $('#error-message').html(msg).show();
 });
 
@@ -78,17 +85,15 @@ $('body').on('error-raised', function (evt, msg) {
 $.post('/my/url', data, function () {
   //yay our post worked!
 }).error(function (){
-  $(this).trigger('error-raised', ['bad!']);
+  $(this).trigger('show-error', ['bad!']);
 });
-&lt;/script&gt;
 					</code></pre>
 				</section>
 
 				<section>
 					<h2>Use postal.js instead</h2>
 					<pre><code>
-&lt;script type="text/javascript"&gt;
-postal.subscribe('error-raised', function (msg) {
+postal.subscribe('show.error', function (msg) {
   $('#error-message').html(msg).show();
 });
 
@@ -97,9 +102,8 @@ postal.subscribe('error-raised', function (msg) {
 $.post('/my/url', data, function () {
   //yay our post worked!
 }).error(function (){
-  postal.publish('error-raised', 'bad!');
+  postal.publish('show.error', 'bad!');
 });
-&lt;/script&gt;
 					</code></pre>
 				</section>
 
@@ -131,9 +135,9 @@ $.post('/my/url', data, function () {
 
 				<section>
 					<h2>Organizing code into modules</h2>
-					<dl style="margin-top:1em;">
-						<dt><strong>mod·ule [moj-ool]:</strong></dt>
-						<dd style="margin-top:1em;">
+					<dl>
+						<dt class="slimed">mod·ule [moj-ool]:</dt>
+						<dd>
 							<p>Code that is encapsulated within a function closure that has a course, public API.</p>
 						</dd>
 					</dl>
@@ -197,23 +201,110 @@ var mod2 = (function (bus) {
 				<section>
 					<h2>Better modules with require.js</h2>
 					<ul>
-						<li>Simple configuration tells require.js where to look for JavaScript files</li>
-						<li>One script tag required on your page; require.js does the rest</li>
-						<li>Resolves module dependencies (jQuery, postal, underscore, etc.)</li>
-						<li>Lots of other awesome sauce!</li>
+						<li class="fragment">Simple configuration tells require.js where to look for JavaScript files</li>
+						<li class="fragment">One script tag required on your page; require.js does the rest</li>
+						<li class="fragment">Resolves module dependencies (jQuery, postal, underscore, etc.)</li>
+						<li class="fragment">Lots of other awesome sauce!</li>
 					</ul>
 				</section>
 
 				<section>
 					<h1>Part 3</h1>
 					<h2>In which we learn about</h2>
-					<h3>advanced features in postal.js</h3>
+					<h3>the features of postal.js</h3>
+				</section>
+
+				<section>
+					<h2>Wat?</h2>
+					<dl>
+						<dt class="slimed">topic</dt>
+						<dd>A message name formatted with dot notation, e.g., "foo.bar.baz". May contain wildcards.</dd>
+						<dt class="slimed">channel</dt>
+						<dd>Conduit through which messages can be published or subscriptions can be added for a given topic.</dd>
+					</dl>
+				</section>
+
+								<section>
+					<h2>Wat?</h2>
+					<pre><code>
+var channel = postal.channel('friend.request');
+
+//subscribe to channel messages
+channel.subscribe(function (data) {
+  alert('You have a new friend! ' + data.name);
+});
+
+//publish messages to channel
+channel.publish({name: 'Hubert Farnsworth'});
+
+//unsubscribe from channel
+channel.unsubscribe();
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>The # wildcard</h2>
+					<p>The <span class="slimed">#</span> symbol can be used as a wildcard for one segment of a topic.</p>
+					<pre><code>
+postal.subscribe('#.created', function (data) {
+
+  // Matches `friend.created`, but
+  // not `created.position`
+
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>The * wildcard</h2>
+					<p>The <span class="slimed">*</span> symbol can be used as a wildcard for any consecutive character string in a topic.</p>
+					<pre><code>
+postal.subscribe('*.validation*', function (data) {
+  
+  // Matches `form.validation.success`,
+  // `entity.validation`,
+  // `mastadon.validationate`, etc.
+
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>ignoreDuplicates()</h2>
+				</section>
+
+				<section>
+					<h2>disposeAfter()</h2>
+				</section>
+
+				<section>
+					<h2>whenHandledThenExecute()</h2>
+				</section>
+
+				<section>
+					<h2>withConstraint()</h2>
+				</section>
+
+				<section>
+					<h2>withContext()</h2>
+				</section>
+
+				<section>
+					<h2>withDelay()</h2>
+				</section>
+
+				<section>
+					<h2>withPriority()</h2>
+				</section>
+
+				<section>
+					<h2>withThrottle()</h2>
 				</section>
 
 				<section>
 					<h1>Part 4</h1>
 					<h2>In which some actual code is shown</h2>
-					<h3>and you are less bored</h3>
+					<h3>and you are less bored!</h3>
 					<div>
 						<img src="img/code-all-the-things.jpg" style="margin:auto; display:block;" />
 					</div>
