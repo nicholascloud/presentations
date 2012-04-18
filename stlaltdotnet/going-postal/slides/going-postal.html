@@ -14,6 +14,8 @@
     /*dt {font-weight:bold; color:#d0ff00;}*/
     dd {margin-bottom:1em;}
     .slimed {color:#d0ff00; font-weight:bold;}
+    .bigsemi {display:block; font-weight:bold; font-size:25em; text-shadow:2px 2px 10px #000000;}
+    .centerme {margin:auto !important; display:block;}
     </style>
   </head>
   <body>
@@ -27,15 +29,16 @@
           <h1>Going Postal</h1>
           <h2>with postal.js</h2>
           <div>
-            <img src="img/simonpegg.jpg" style="display:block; margin:auto;" />
+            <img src="img/simonpegg.jpg" class="centerme" />
           </div>
           <h3 style="margin-top:1em;">(in five parts)</h3>
         </section>
 
         <section>
-          <h1>Part 1</h1>
-          <h2>In which we compare DOM events</h2>
-          <h3>to postal messages</h3>
+          <h1>Part 1: Events &amp; Messages</h1>
+          <div>
+            <img src="img/simonpegg6.jpg" class="centerme" />
+          </div>
         </section>
 
         <section>
@@ -108,10 +111,10 @@ $.post('/my/url', data, function () {
         </section>
 
         <section>
-          <h1>Part 2</h1>
-          <h2>In which we acknowledge that postal.js is great</h2>
-          <h3>but your code is still a mess</h3>
-          <h4>and you are grounded until you clean it up</h4>
+          <h1>Part 2: Clean Code</h1>
+          <div>
+            <img src="img/simonpegg3.jpg" class="centerme" />
+          </div>
         </section>
 
         <section>
@@ -169,7 +172,11 @@ var total = retail + tax;
         <section>
           <h2>Module communication using callbacks</h2>
           <pre><code>
-var mod1 = (function () { ... }());
+var mod1 = (function () {
+  return {
+    onSomeEvent: function (handler) {...}
+  };
+}());
 var mod2 = (function () { ... }());
 
 //similar to .NET events
@@ -209,9 +216,25 @@ var mod2 = (function (bus) {
         </section>
 
         <section>
-          <h1>Part 3</h1>
-          <h2>In which we learn about</h2>
-          <h3>the features of postal.js</h3>
+          <h2>Better modules with require.js</h2>
+          <pre><code>
+define('mod1', ['postal'], function (postal) {
+  //private members
+  var private = function (data) {...};
+
+  postal.subscribe('some.message', private);
+
+  //public API
+  return {
+    public: function () {...}
+  };
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Part 3: Features</h1>
+          <img src="img/simonpegg4.jpg" class="centerme" />
         </section>
 
         <section>
@@ -352,31 +375,106 @@ postal.subscribe('lightning.strike', function () {
           <h2>withContext()</h2>
           <p>Determines the value of <span class="slimed">this</span> within a subscription callback.</p>
           <pre><code>
+var c = postal.channel('coffee.ready');
 
+c.subscribe(function (data) {
+  //this === window
+});
+
+c.subscribe(function (data) {
+  //this === $('#mug')
+}).withContext($('#mug'));
           </code></pre>
         </section>
 
         <section>
           <h2>withDelay()</h2>
           <p>Delays the subscription callback execution for a given number of milliseconds.</p>
+          <pre><code>
+var c = postal.channel('wakeup.alarm');
+
+//going to snooze for 30 mins.
+var snoozeDuration = (30 * 60 * 1000);
+
+c.subscribe(function (data) {
+  
+  //make sure this lazy ass gets out of bed!
+  alarm.buzz({volume: data.volume});
+
+}).withDelay(snoozeDuration);
+
+c.publish({volume: 'annoying'});
+          </code></pre>
         </section>
 
         <section>
           <h2>withPriority()</h2>
           <p>Associates a subscription callback with an arbitrary priority number; higher priority callbacks are triggered first.</p>
+          <pre><code>
+var c = postal.channel('stock.event');
+
+var stockholder = function (data) {
+  alert('Stockholder knows!');
+};
+var insider = function (data) {
+  //will always know first!
+  alert('Insider knows!');
+};
+
+c.subscribe(stockholder).withPriority(75);
+c.subscribe(insider).withPriority(100);
+c.publish({action: 'sell!'});
+          </code></pre>
+        </section>
+
+        <section>
+          <p class="bigsemi">;</p>
         </section>
 
         <section>
           <h2>withThrottle()</h2>
-          <p>Prevents a subscription callback from being invoked more than once in a given time frame.</p>
+          <p>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</p>
+          <pre><code>
+var c = postal.channel('dhs.track.movement');
+
+c.subscribe(function (pos) {
+  alert('Moved to ' + pos);
+}).withThrottle(2000);
+
+(function move (timesMoved) {
+  if (timesMoved === 50) return;
+  c.publish(timesMoved);
+  setTimeout(function () {
+    move(timesMoved + 1);
+  }, 500);
+}(0));
+          </code></pre>
         </section>
 
         <section>
-          <h1>Part 4</h1>
-          <h2>In which some actual code is shown</h2>
-          <h3>and you are less bored!</h3>
+          <h2>withThrottle()</h2>
+          <pre><code>
+Moved to 0
+Moved to 3
+Moved to 7
+Moved to 11
+Moved to 15
+Moved to 19
+Moved to 23
+Moved to 27
+Moved to 31
+Moved to 35
+Moved to 39
+Moved to 43
+Moved to 47
+Moved to 49
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Part 4: Code</h1>
           <div>
-            <img src="img/code-all-the-things.jpg" style="margin:auto; display:block;" />
+            <img src="img/simonpegg5.jpg" class="centerme" />
           </div>
         </section>
 
@@ -412,10 +510,18 @@ postal.subscribe('lightning.strike', function () {
           <h2>Additional Resources</h2>
           <p>Jim Cowart <a href="http://www.twitter.com/ifandelse">@ifandelse</a></p>
           <div>
-            <img src="img/jim-cowart-twitter.png" style="display:block; margin:auto;" />
+            <img src="img/jim-cowart-twitter.png" class="centerme" />
           </div>
         </section>
-      </div>  
+
+        <section>
+          <h1>THE END</h1>
+          <div>
+            <img src="img/simonpegg2.jpg" class="centerme" />
+          </div>
+          <p><small>(probably a real picture of Jim Cowart)</small></p>
+        </section>
+      </div>
 
       <!-- The navigational controls UI -->
       <aside class="controls">

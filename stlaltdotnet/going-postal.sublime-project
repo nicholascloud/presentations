@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "going-postal"
+		},
+		{
+			"path": "/C/lib/postal.js"
 		}
 	]
 }
