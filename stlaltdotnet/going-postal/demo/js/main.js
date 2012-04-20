@@ -7,6 +7,6 @@ require.config({
   }
 });
 
-require(['jquery', 'postal'], function ($, postal) {
-
+require(['jquery', 'postal', 'home'], function ($, bus) {
+  bus.publish('ready');
 });

@@ -2,22 +2,9 @@
 
 define(['underscore'], function (_) {
 
-  return {
-    members: {
-      all: function () {
-        return _members;
-      }
-    },
-
-    topics: {
-      all: function () {
-        return _topics;
-      }
-    }
-  };
-
   var _members = [
     {
+      id: 1,
       name: 'Felecia',
       pic: 'portrait1.jpg',
       offers: [
@@ -30,68 +17,124 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 2,
       name: 'Candice',
       pic: 'portrait2.jpg',
       offers: [
         {
-          category: 'photography',
-          title: 'Need assistant photographers, willing to train',
-          
+          category: 'fashion',
+          title: 'Want to be a model? I can teach you the breaks of the business.',
+          description: "I spent 5 years in LA modeling for several high-profile agencies. If you want to break into this business, I can show you how.",
+          cost: 250.00
         }
       ]
     },
     {
+      id: 3,
       name: 'Tricia',
       pic: 'portrait3.jpg',
       offers: [
+        {
+          category: 'gardening',
+          title: 'Keep your plants alive this summer',
+          description: "I've been gardening and landscaping for six years now and I can show you how to turn your yard into a real paradise.",
+          cost: 70.00
+        }
       ]
     },
     {
+      id: 4,
       name: 'Carl',
       pic: 'portrait4.jpg',
       offers: [
+        {
+          category: 'fitness',
+          title: 'UR A WIMP DO SOMETHING ABOUT IT',
+          description: "ARE YOU TIRED OF LOOKING BAD AT THE GYM? DO YOU WANT TO BE PUMPED LIKE ME? i CAN HELP CREATE A WORKOUT ROUTINE THAT IS RIGHT FOR YOU!!!",
+          cost: 189.99
+        }
       ]
     },
     {
+      id: 5,
       name: 'Sarah',
       pic: 'portrait5.jpg',
       offers: [
+        {
+          category: 'tutor',
+          title: 'I can help you improve your math scores',
+          description: "I am a former math teacher, retired, looking to help students who are looking for math tutelage outside the classroom.",
+          cost: 75.00
+        }
       ]
     },
     {
+      id: 6,
       name: 'Melody',
       pic: 'portrait6.jpg',
       offers: [
+        {
+          category: 'fitness',
+          title: 'you can snowboard too!',
+          description: "hi i'm melody and my passion is snowboarding! if you've never been, or just want to improve yourself, i can help you master this insanely fun sport!",
+          cost: 90.00
+        }
       ]
     },
     {
+      id: 7,
       name: 'Kurt',
       pic: 'portrait7.jpg',
       offers: [
+        {
+          category: 'food',
+          title: 'Gormet chef can show you the goods',
+          description: "If you want to spice up your kitchen and learn how the real chefs prepare food, I'm your man. I can teach you, in four easy sessions, how to create mals that will stun and astonish.",
+          cost: 180.00
+        }
       ]
     },
     {
-      name: 'Julio',
+      id: 8,
+      name: 'Fezz',
       pic: 'portrait8.jpg',
       offers: [
+        {
+          category: 'pesonal',
+          title: 'Are you bad with the ladies? Fezz can help you.',
+          description: "Face it, you cannot compete with Fezz. But I can show you how to be a charming stud for a very modest investment.",
+          cost: 250.00
+        }
       ]
     },
     {
+      id: 9,
       name: 'Sandy',
       pic: 'portrait9.jpg',
       offers: [
+        {
+          category: 'music',
+          title: "Piano teacher looking for students",
+          description: "I've been a piano teacher for 8 years and have a master's degree in music. My rates are reasonable and I am willing to conduct lessons at my house or yours.",
+          cost: 15.00
+        }
       ]
     },
     {
+      id: 10,
       name: 'Kyle',
       pic: 'portrait10.jpg',
       offers: [
         {
-          category: ''
+          category: 'technology',
+          title: "You don't have to be scared of your computer!",
+          description: "My name is Kyle and I've been using computers since I was 5. I can show you how to get the most out of your home PC, how to maintain it, and when to upgrade to the newest model.",
+          cost: 60.00
         }
       ]
     },
     {
+      id: 11,
       name: 'Linda',
       pic: 'portrait11.jpg',
       offers: [
@@ -104,6 +147,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 12,
       name: 'Kaylee',
       pic: 'portrait12.jpg',
       offers: [
@@ -116,6 +160,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 13,
       name: 'Walter',
       pic: 'portrait13.jpg',
       offers: [
@@ -128,6 +173,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 14,
       name: 'Amy',
       pic: 'portrait14.jpg',
       offers: [
@@ -140,6 +186,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 15,
       name: 'Mark',
       pic: 'portrait15.jpg',
       offers: [
@@ -152,6 +199,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 16,
       name: 'Jeff',
       pic: 'portrait16.jpg',
       offers: [
@@ -164,6 +212,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 17,
       name: 'Drew',
       pic: 'portrait17.jpg',
       offers: [
@@ -176,6 +225,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 18,
       name: 'Tom',
       pic: 'portrait18.jpg',
       offers: [
@@ -188,6 +238,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 19,
       name: 'Oleg',
       pic: 'portrait19.jpg',
       offers: [
@@ -200,6 +251,7 @@ define(['underscore'], function (_) {
       ]
     },
     {
+      id: 20,
       name: 'David',
       pic: 'portrait20.jpg',
       offers: [
@@ -212,5 +264,31 @@ define(['underscore'], function (_) {
       ]
     }
   ];
+
+  var cache = {};
+
+  return {
+    members: {
+      all: function () {
+        return _members;
+      }
+    },
+
+    categories: {
+      all: function () {
+        if (!cache.hasOwnProperty('categories_all')) {
+          var categories = [];
+          _members.forEach(function (member) {
+            member.offers.forEach(function (offer) {
+              categories.push(offer.category);
+            });
+          });
+          cache['categories_all'] = _.uniq(categories.sort(), true);
+        }
+
+        return cache['categories_all'];
+      }
+    }
+  };
 
 });
