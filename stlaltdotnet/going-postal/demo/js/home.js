@@ -1,20 +1,35 @@
-/*global define:true*/
+Array.prototype.contains = function (what) {
+  var contains = false;
 
-define(['jquery', 'data', 'postal'], function ($, data, bus) {
+  //do a strict comparison
+  if (typeof what !== 'function') {
+    this.forEach(function (item) {
+      if (contains) return;
+      contains = (item === what);
+    });
+    return contains;
+  }
 
-  var tagCloud = function (selector) {
-    var $cloud = $(selector);
-
-    return {
-      fill: function () {
-        data.categories.all().forEach(function (c) {
-          $cloud.append($('<span></span>').html(c));
-        });
-      }
-    }
-  };
-
-  bus.subscribe('ready', function () {
-    tagCloud('#tagcloud').fill();
+  //compare with an evaluator
+  this.forEach(function (item) {
+    if (contains) return;
+    contains = what(item);
   });
+  return contains;
+};
+
+require.config({
+  paths: {
+    jquery: 'lib/jquery-1.7.2.min',
+    underscore: 'lib/underscore-min',
+    postal: 'lib/postal.min',
+    diagnostics: 'lib/postal.diagnostics.min'
+  }
+});
+
+require(['jquery', 'postal', 'tagCloud', 'offers', 'search'], function ($, bus) {
+  bus.publish('ready');
+
+  //TODO: delete
+  bus.publish('categories.changed', ['art']);
 });

@@ -1,19 +1,7 @@
 body {
-  font-size: 100;
-  background: #7d7e7d;
-/* Old browsers */
-  background: -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-/* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7d7e7d), color-stop(100%, #0e0e0e));
-/* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-/* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-/* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-/* IE10+ */
-  background: linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-/* W3C */
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
 }
 h1 {
   font-size: 3em;
@@ -24,6 +12,111 @@ h2 {
 h3 {
   font-size: 2em;
 }
-#content {
-  height: 100%;
+a:link,
+a:visited {
+  color: #839106;
+  text-decoration: none;
+}
+a:hover {
+  color: #cae014;
+}
+header {
+  width: 60%;
+  margin: 3em auto 0 auto;
+  color: #e53f14;
+}
+header h1 > span {
+  font-style: italic;
+  padding-left: 0.1em;
+  font-size: 0.9em;
+}
+header p {
+  line-height: 0.9em;
+}
+#tagcloud {
+  width: 60%;
+  margin: 0 auto;
+  border-bottom: 1px solid #c0c0c0;
+  padding: 2em 0;
+  text-align: center;
+}
+#tagcloud > a {
+  display: inline-block;
+  word-wrap: break-word;
+  font-size: 2em;
+  padding: 0 0.5em;
+  line-height: 1.5em;
+}
+#tagcloud > a:link,
+#tagcloud > a:visited {
+  -webkit-transition: color 0.2s ease-out;
+}
+#tagcloud > a:link.current,
+#tagcloud > a:visited.current {
+  color: #f26f4c;
+  -webkit-transition: color 0.4s ease-in;
+}
+#offers {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-bottom: 1px solid #c0c0c0;
+  padding: 0 0 2em 0;
+}
+#offers #moar {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  font-size: 0.8em;
+}
+#offers #viewing span.invisible {
+  display: none;
+}
+#offers #viewing span.fadein {
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in;
+}
+#offers #viewing span {
+  position: relative;
+  display: block;
+  float: left;
+  width: 30%;
+  padding: 3em 0;
+  margin: 0 1em;
+  font-size: 0.8em;
+  opacity: 0;
+}
+#offers #viewing span div.frame {
+  padding: 0;
+  margin: 0 1.2em 0 0;
+  border: solid 4px #ccc;
+  border-radius: 1em;
+  overflow: hidden;
+  float: left;
+  height: 205px;
+  box-shadow: 0px 0px 10px #000;
+}
+#offers #viewing span a {
+  color: #000;
+  font-size: 2em;
+  font-weight: bold;
+}
+#offers #viewing span a:hover {
+  color: #666;
+}
+#offers #viewing span p {
+  position: absolute;
+  left: 172px;
+  line-height: 1.6em;
+}
+#search {
+  width: 30%;
+  margin: 3em auto;
+}
+#search label {
+  font-style: italic;
+}
+#search input {
+  margin: 0 0.5em;
 }
