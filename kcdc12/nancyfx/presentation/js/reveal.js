@@ -36,7 +36,7 @@
  * - Reveal.navigateDown();
  * 	
  * @author Hakim El Hattab | http://hakim.se
- * @version 1.2
+ * @version 1.3
  */
 var Reveal = (function(){
 	
@@ -58,6 +58,11 @@ var Reveal = (function(){
 			rollingLinks: true
 		},
 
+		// Slides may hold a data-state attribute which we pick up and apply 
+		// as a class to the body. This list contains the combined state of 
+		// all current slides.
+		state = [],
+
 		// Cached references to DOM elements
 		dom = {},
 
@@ -74,7 +79,10 @@ var Reveal = (function(){
                         		document.body.style['OTransform'] !== undefined,
 		
 		// Throttles mouse wheel navigation
-		mouseWheelTimeout = 0;
+		mouseWheelTimeout = 0,
+
+		// Delays updates to the URL due to a Chrome thumbnailer bug
+		writeURLTimeout = 0;
 	
 	/**
 	 * Starts up the slideshow by applying configuration
@@ -181,16 +189,16 @@ var Reveal = (function(){
 		// instead of checking contentEditable?
 
 		if( event.target.contentEditable === 'inherit' ) {
-			if( event.keyCode >= 37 && event.keyCode <= 40 ) {
+			if( event.keyCode >= 33 && event.keyCode <= 40 ) {
 				
 				switch( event.keyCode ) {
+					case 33: navigatePrev(); break; // prev for wireless presenter (PgUp)
+					case 34: navigateNext(); break; // next for wireless presenter (PgDn)
 					case 37: navigateLeft(); break; // left
 					case 39: navigateRight(); break; // right
 					case 38: navigateUp(); break; // up
 					case 40: navigateDown(); break; // down
 				}
-				
-				slide();
 				
 				event.preventDefault();
 				
@@ -266,10 +274,10 @@ var Reveal = (function(){
 		mouseWheelTimeout = setTimeout( function() {
 			var delta = event.detail || -event.wheelDelta;
 			if( delta > 0 ) {
-				availableRoutes().down ? navigateDown() : navigateRight();
+				navigateNext();
 			}
 			else {
-				availableRoutes().up ? navigateUp() : navigateLeft();
+				navigatePrev();
 			}
 		}, 100 );
 	}
@@ -426,8 +434,6 @@ var Reveal = (function(){
 		if( slides.length ) {
 			// Enforce max and minimum index bounds
 			index = Math.max(Math.min(index, slides.length - 1), 0);
-			
-			slides[index].className = 'present';
 
 			for( var i = 0; i < slides.length; i++ ) {
 				var slide = slides[i];
@@ -438,19 +444,33 @@ var Reveal = (function(){
 					slide.style.display = Math.abs( index - i ) > 3 ? 'none' : 'block';
 				}
 
+				slides[i].classList.remove( 'past' );
+				slides[i].classList.remove( 'present' );
+				slides[i].classList.remove( 'future' );
+
 				if( i < index ) {
 					// Any element previous to index is given the 'past' class
-					slide.className = 'past';
+					slides[i].classList.add( 'past' );
 				}
 				else if( i > index ) {
 					// Any element subsequent to index is given the 'future' class
-					slide.className = 'future';
+					slides[i].classList.add( 'future' );
 				}
 
 				// If this element contains vertical slides
 				if( slide.querySelector( 'section' ) ) {
-					slide.classList.add( 'stack' );
+					slides[i].classList.add( 'stack' );
 				}
+			}
+
+			// Mark the current slide as present
+			slides[index].classList.add( 'present' );
+
+			// If this slide has a state associated with it, add it
+			// onto the current state of the deck
+			var slideState = slides[index].dataset.state;
+			if( slideState ) {
+				state = state.concat( slideState.split( ' ' ) );
 			}
 		}
 		else {
@@ -468,8 +488,39 @@ var Reveal = (function(){
 	 * set indices. 
 	 */
 	function slide() {
+		// Remember the state before this slide
+		var stateBefore = state.concat();
+
+		// Reset the state array
+		state.length = 0;
+
+		// Activate and transition to the new slide
 		indexh = updateSlides( HORIZONTAL_SLIDES_SELECTOR, indexh );
 		indexv = updateSlides( VERTICAL_SLIDES_SELECTOR, indexv );
+
+		// Apply the new state
+		stateLoop: for( var i = 0, len = state.length; i < len; i++ ) {
+			// Check if this state existed on the previous slide. If it 
+			// did, we will avoid adding it repeatedly.
+			for( var j = 0; j < stateBefore.length; j++ ) {
+				if( stateBefore[j] === state[i] ) {
+					stateBefore.splice( j, 1 );
+					continue stateLoop;
+				}
+			}
+
+			document.documentElement.classList.add( state[i] );
+
+			// Dispatch custom event
+			var event = document.createEvent( "HTMLEvents" );
+			event.initEvent( state[i], true, true );
+			document.dispatchEvent( event );
+		}
+
+		// Clean up the remaints of the previous state
+		while( stateBefore.length ) {
+			document.documentElement.classList.remove( stateBefore.pop() );
+		}
 
 		// Update progress if enabled
 		if( config.progress ) {
@@ -483,7 +534,8 @@ var Reveal = (function(){
 
 		updateControls();
 		
-		writeURL();
+		clearTimeout( writeURLTimeout );
+		writeURLTimeout = setTimeout( writeURL, 1500 );
 	}
 
 	/**
@@ -528,8 +580,8 @@ var Reveal = (function(){
 		var bits = window.location.hash.slice(2).split('/');
 		
 		// Read the index components of the hash
-		indexh = bits[0] ? parseInt( bits[0] ) : 0;
-		indexv = bits[1] ? parseInt( bits[1] ) : 0;
+		indexh = parseInt( bits[0] ) || 0 ;
+		indexv = parseInt( bits[1] ) || 0 ;
 		
 		navigateTo( indexh, indexv );
 	}
@@ -646,6 +698,41 @@ var Reveal = (function(){
 		if( overviewIsActive() || nextFragment() === false ) {
 			indexv ++;
 			slide();
+		}
+	}
+
+	/**
+	 * Navigates backwards, prioritized in the following order:
+	 * 1) Previous fragment
+	 * 2) Previous vertical slide
+	 * 3) Previous horizontal slide
+	 */
+	function navigatePrev() {
+		// Prioritize revealing fragments
+		if( previousFragment() === false ) {
+			if( availableRoutes().up ) {
+				navigateUp();
+			}
+			else {
+				// Fetch the previous horizontal slide, if there is one
+				var previousSlide = document.querySelector( '#reveal .slides>section.past:nth-child(' + indexh + ')' );
+
+				if( previousSlide ) {
+					indexv = ( previousSlide.querySelectorAll('section').length + 1 ) || 0;
+					indexh --;
+					slide();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Same as #navigatePrev() but navigates forwards.
+	 */
+	function navigateNext() {
+		// Prioritize revealing fragments
+		if( nextFragment() === false ) {
+			availableRoutes().down ? navigateDown() : navigateRight();
 		}
 	}
 	

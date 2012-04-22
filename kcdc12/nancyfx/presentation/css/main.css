@@ -897,6 +897,31 @@ html {
 }
 
 
+/*********************************************
+ * DEFAULT STATES
+ *********************************************/
+
+.state-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba( 0, 0, 0, 0 );
+
+	-webkit-transition: background 800ms ease;
+	   -moz-transition: background 800ms ease;
+	    -ms-transition: background 800ms ease;
+	     -o-transition: background 800ms ease;
+	        transition: background 800ms ease;
+}
+.alert .state-background {
+	background: rgba( 200, 50, 30, 0.6 );
+}
+.soothe .state-background {
+	background: rgba( 50, 200, 90, 0.4 );
+}
+.blackout .state-background {
+	background: rgba( 0, 0, 0, 0.6 );
+}
 
 
 
