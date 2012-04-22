@@ -1,170 +1,421 @@
 <!doctype html>  
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>The Nancy Micro Web Framework</title>
-		<meta name="description" content="In which I discuss Nancy, the open source .NET micro web framework!">
-		<meta name="author" content="Nicholas Cloud">
-		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/main.css">
-		<link rel="stylesheet" href="lib/zenburn.css">
-		<style type="text/css">
-			#reveal #nancy-logo {background-color:#000000; width:100%;}
-			#reveal #nancy-logo img {border:0px; padding:none; margin:none;}
-			#reveal pre {font-size:25px;}
-		</style>
-	</head>
-	<body>
-		<div id="reveal">
-			<div class="slides">
+  <head>
+    <meta charset="utf-8">
+    <title>The Nancy Micro Web Framework</title>
+    <meta name="description" content="In which I discuss Nancy, the open source .NET micro web framework!">
+    <meta name="author" content="Nicholas Cloud">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="lib/zenburn.css">
+    <style type="text/css">
+      pre {font-size:0.7em !important;}
+      h1, h2, h3, h4, h5, h6 {text-transform:none !important;}
+      h3 {font-weight:normal;}
+      dl {margin-top:1em; text-align:left;}
+      /*dt {font-weight:bold; color:#d0ff00;}*/
+      dd {margin-bottom:1em; padding-left:1em;}
+      .slimed {color:#d0ff00; font-weight:bold;}
+      .bigsemi {display:block; font-weight:bold; font-size:25em; text-shadow:2px 2px 10px #000000;}
+      .centerme {margin:auto !important; display:block;}
+      #reveal #nancy-logo {background-color:#000000; width:100%;}
+      #reveal #nancy-logo img {border:0px; padding:none; margin:none;}
+      /*p {text-align:left;}*/
+      @media all and (max-width:1024px) {
+        pre {font-size:0.6em !important;}
+        ul {max-width:80%;}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="reveal">
+      <div class="slides">
 
-				<section id="title">
-					<div id="nancy-logo">
-						<img src="img/nancy-logo.png" alt="NancyFX" />
-					</div>
-					<br /><hr />
-					<h3 class="inverted">Micro Web Framework</h3>
-				</section>
-				
-				<section>
-					<h2>WAT?</h2>
-					<ul>
-						<li>open source</li>
-						<li>lightweight website framework</li>
-						<li>spiritual debt to Sinatra</li>
-						<li>low ceremony coding</li>
-						<li>simple setup</li>
-						<li>extensible API</li>
-					</ul>
-				</section>
+        <section id="title">
+          <div id="nancy-logo">
+            <img src="img/nancy-logo.png" alt="NancyFX" />
+          </div>
+          <br /><hr />
+          <h3 class="inverted">Micro Web Framework</h3>
+        </section>
+        
+        <section>
+          <h2>WAT?</h2>
+          <ul>
+            <li>open source</li>
+            <li>lightweight website framework</li>
+            <li>spiritual debt to Sinatra</li>
+            <li>low ceremony</li>
+            <li>simple setup</li>
+            <li>extensible API</li>
+          </ul>
+        </section>
 
-				<section>
-					<h2>HTTP Handler</h2>
-					<ul>
-						<li>GET</li>
-						<li>HEAD</li>
-						<li>PUT</li>
-						<li>POST</li>
-						<li>DELETE</li>
-						<li>OPTIONS</li>
-						<li>PATCH</li>
-					</ul>
-				</section>
+        <section>
+          <h2>Hosting Options</h2>
+          <ul>
+            <li>IIS</li>
+            <li>WCF</li>
+            <li>OWIN</li>
+            <li>custom process</li>
+          </ul>
+        </section>
 
-				<section>
-					<h2>Hosting Options</h2>
-					<ul>
-						<li>IIS</li>
-						<li>WCF</li>
-						<li>OWIN</li>
-						<li>custom process</li>
-					</ul>
-				</section>
+        <section>
+          <h2>More view engines</h2>
+          <h3>than you can shake a stick at!</h3>
+          <ul>
+            <li>Razor</li>
+            <li>Spark</li>
+            <li>NDjango</li>
+            <li>dotLiquid</li>
+            <li>SuperSimpleViewEngine (default)</li>
+          </ul>
+        </section>
 
-				<section>
-					<h2>More view engines</h2>
-					<h3>than you can shake a stick at!</h3>
-					<ul>
-						<li>Razor</li>
-						<li>Spark</li>
-						<li>NDjango</li>
-						<li>dotLiquid</li>
-						<li>SuperSimpleViewEngine (default)</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Setup</h2>
-					<ul>
-						<li>create a new ASP.NET web project (or however you intend to host)</li>
-						<li>nuget that shit</li>
-						<li>tweak web.config</li>
-						<li>profit</li>
-					</ul>
-					<p>&nbsp;</p>
-					<pre><code>
+        <section>
+          <h2>Setup</h2>
+          <ul>
+            <li>create a new ASP.NET web project (or however you intend to host)</li>
+            <li>nuget that shit</li>
+            <li>tweak web.config</li>
+            <li>profit</li>
+          </ul>
+          <p>&nbsp;</p>
+          <pre><code>
 PM&gt; install-package nancy
 PM&gt; install-package nancy.hosting.aspnet
-					</code></pre>
-				</section>
+          </code></pre>
+        </section>
 
-				<section>
-					<h2>Modules</h2>
-				</section>
+        <!-- MODULES -->
 
-				<section>
-					<h2>Routes</h2>
-				</section>
+        <section>
+          <h2>Modules</h2>
+          <ul>
+            <li>simple classes that inherit `NancyModule`</li>
+            <li>define URL routes and their handlers in the constructor</li>
+            <li>can define base paths that will be prepended to all URL routes</li>
+            <li>globally discovered through dark magic</li>
+          </ul>
+        </section>
 
-				<section>
-					<h2>Route Patterns</h2>
-				</section>
+        <section>
+          <h2>Modules</h2>
+          <pre><code>
+public class PartyModule : NancyModule {
+
+  public PartyModule () : base("/event") {
+    Get["/parties"] = p => { ... };
+    Get["/party"] = p => { ... };
+    Post["/party"] = p => { ... };
+    //etc.
+  } 
+}
+          </code></pre>
+        </section>
+
+        <!-- ROUTES -->
+
+        <section>
+          <h2>Routes</h2>
+          <h3>Deconstructing a route</h3>
+          <ul>
+            <li>HTTP <span class="slimed">method</span></li>
+            <li><span class="slimed">pattern</span> to match route URL</li>
+            <li><span class="slimed">action</span> that is invoked by Nancy when a request matches the route</li>
+            <li>(optional) <span class="slimed">condition</span> that influences route matching</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Routes</h2>
+          <h3>Supported HTTP <span class="slimed">methods</span></h3>
+          <ul>
+            <li>GET</li>
+            <li>HEAD</li>
+            <li>PUT</li>
+            <li>POST</li>
+            <li>DELETE</li>
+            <li>OPTIONS</li>
+            <li>PATCH</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Routes</h2>
+          <h3>URLs match route <span class="slimed">patterns</span></h3>
+          <pre><code>
+//ROUTE LITERAL
+//will match: /dinosaur/carnivore
+Get["/dinosaur/carnivore"] = p => { ... };
+
+//CAPTURE SEGMENTS
+//will match: /dinosaur/12
+Get["/dinosaur/{dinoId}"] = p => {
+  var id = p.dinoId;
+};
+
+//REGULAR EXPRESSIONS
+//will match: /dinosaur/stegosaurus
+Get["/dinosaur/(?&lt;name&gt;[\w]+)"] = p => {
+  var name = p.name;
+};
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Routes</h2>
+          <h3><span class="slimed">Patterns</span> can capture URL parameters</h3>
+          <pre><code>
+Post["/school/{schoolId}/reunion/{year}"] = p => {
+
+  //accessed as dynamic properties
+  Int32 id = p.schoolId;
+  Int32 year = p.year;
+
+  //accessed with dictionary indexers
+  Int32 id = p["schoolId"]
+  Int32 year = p["year"];
+
+  //can test if a parameter value was provided
+  Boolean hasYear = p.year.HasValue();
+};
+          </code></pre>
+        </section>
  
- 				<section>
-					<h2>Route Actions</h2>
-				</section>
+        <section>
+          <h2>Routes</h2>
+          <h3>Matched routes invoke <span class="slimed">actions</span></h3>
+          <pre><code>
+var action = new Func&lt;dynamic, Response&gt;(p => {...});
+Get["/about"] = p => action;
 
-				<section>
-					<h2>Route Anatomy</h2>
-				</section>
+//or, shorthand
+Get["/about"] = p => { ... };
+          </code></pre>
+        </section>
 
-				<section>
-					<h2>Modules</h2>
-				</section>
+         <section>
+          <h2>Routes</h2>
+          <h3>Matched routes invoke <span class="slimed">actions</span></h3>
+          <pre><code>
+Get["/parks/63031"] = p => {
+  return 501;
+
+  return HttpStatusCode.NotFound;
+
+  return "Sorry, this is currently unavailable.";
+
+  return s => {
+    var path = "parks.txt";
+    //Nancy handles disposal
+    var writer = new StreamWriter(s);
+    writer.Write(File.ReadAllText(path));
+  }
+};
+          </pre></code>
+        </section>
+
+        <section>
+          <h2>Routes</h2>
+          <h3>Filtering routes with <span class="slimed">conditions</span></h3>
+          <pre><code>
+var condition = new &lt;NancyContext, bool&gt;(c => {
+  //promos only available for one campaign
+  return c.Request.Query["campaign"] == "93882";
+});
+
+Get["/promo", condition] = p => {
+  //show special discount page!
+};
+          </code></pre>
+        </section>
+
+        <!-- MODULE HOOKS -->
+
+        <section>
+          <h2>Module Hooks</h2>
+          <pre><code>
+public class EarningsModule : NancyModule {
+  public EarningsModule () {
+
+    Before += ctx => {
+      if (!File.Exists("earnings-report.csv")) {
+        return 404;
+      }
+      return null;
+    };
+
+    Get["/earnings/{y}/{m}/{d}"] = p => { ... };
+
+    After += ctx => {
+      var now = DateTime.Now;
+      ctx.Response.Headers
+        .Add("X-LastCheckedAt", now.ToString());
+    };
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Model Binding</h2>
+        </section>
+
+        <section>
+          <h2>Bootstrapping Nancy</h2>
+        </section>
+
+        <section>
+          <h2>View Engines</h2>
+        </section>
+
+        <section>
+          <h2>View Location</h2>
+          <p>There are a number of built in conventions for locating views</p>
+          <dl>
+            <dt class="slimed">"root" convention</dt>
+            <dd>looks in a view in the application root</dd>
+
+            <dt class="slimed">"views" folder convention</dt>
+            <dd>looks in a folder called "/views"</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>View Location</h2>
+          <dl>
+            <dt class="slimed">module name convention</dt>
+            <dd>looks in a folder named after the module at the application root</dd>
+
+            <dt class="slimed">"views" + module name convention<dt>
+            <dd>looks in a folder named after the module under "/views"</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>View Location</h2>
+          <dl>
+            <dt class="slimed">module path convention</dt>
+            <dd>looks in a folder that matches the module's (directory) path at the application root</dd>
+
+            <dt class="slimed">"views" + module path convention</dt>
+            <dd>looks in a folder that matches the module's (directory) path under "/views"</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>View Location</h2>
+          <p>And of course, you can always create your own convention.</p>
+          <pre><code>
+//add custom view location convention
+//in custom bootstrapper
+
+protected override void ApplicationStartup (...) {
+
+  this.Conventions.ViewLocationConventions.Add(
+    (viewName, model, context) => {
+      return "/my/location/" + viewName;
+    }
+  );
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Static Content</h2>
+          <ul>
+          <p>By default, Nancy looks in <span class="slimed">"/content"</span> for static content.</p>
+          <p>This is the only pre-defined static content convention.</p>
+        </section>
+
+        <section>
+          <h2>Static Content</h2>
+          <p>Static content conventions can be created in the bootstrapper.</p>
+          <pre><code>
+public override void ConfigureConventions(
+  NancyConventions conventions) {
+
+  base.ConfigureConventions(conventions);
+
+  conventions.StaticContentConvetions.Add(
+    StaticContentConventionBuilder.AddDirectory(
+      //URL route
+      "js",
+      //relative filesystem path
+      @"public\javascript",
+      //allowed extensions (optional params)
+      "js", "javascript", "jscript"
+    );
+  );
+}
+          </pre></code>
+        </section>
+
+        <section>
+          <h2>Static Content</h2>
+          <p>Nancy modules have helper methods that will deliver some static content appropriately.</p>
+          <ul>
+            <li>AsCss()</li>
+            <li>AsImage()</li>
+            <li>AsJs()</li>
+            <li>AsJson()</li>
+            <li>AsXml()</li>
+            <li>AsFile()</li>
+          </ul>
+        <section>
 
 
+      </div>
 
+      <!-- The navigational controls UI -->
+      <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+      </aside>
 
-			
-			</div>
+      <!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+      <div class="progress"><span></span></div>
+      
+    </div>
+    
+    <script src="js/reveal.js"></script>
+    <script src="lib/highlight.js"></script>
+    <script>
+      // Parse the query string into a key/value object
+      var query = {};
+      location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+        query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+      } );
 
-			<!-- The navigational controls UI -->
-			<aside class="controls">
-				<a class="left" href="#">&#x25C4;</a>
-				<a class="right" href="#">&#x25BA;</a>
-				<a class="up" href="#">&#x25B2;</a>
-				<a class="down" href="#">&#x25BC;</a>
-			</aside>
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
 
-			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
-			<div class="progress"><span></span></div>
-			
-		</div>
-		
-		<script src="js/reveal.js"></script>
-		<script src="lib/highlight.js"></script>
-		<script>
-			// Parse the query string into a key/value object
-			var query = {};
-			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
-				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
-			} );
+        // Display a presentation progress bar
+        progress: true,
 
-			Reveal.initialize({
-				// Display controls in the bottom right corner
-				controls: true,
+        // If true; each slide will be pushed to the browser history
+        history: false,
 
-				// Display a presentation progress bar
-				progress: true,
+        // Flags if mouse wheel navigation should be enabled
+        mouseWheel: true,
 
-				// If true; each slide will be pushed to the browser history
-				history: false,
+        // Apply a 3D roll to links on hover
+        rollingLinks: true,
 
-				// Flags if mouse wheel navigation should be enabled
-				mouseWheel: true,
+        // UI style
+        theme: query.theme || 'default', // default/neon
 
-				// Apply a 3D roll to links on hover
-				rollingLinks: true,
+        // Transition style
+        transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+      });
 
-				// UI style
-				theme: query.theme || 'default', // default/neon
-
-				// Transition style
-				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
-			});
-
-			hljs.initHighlightingOnLoad();
-		</script>
-	</body>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
 </html>
