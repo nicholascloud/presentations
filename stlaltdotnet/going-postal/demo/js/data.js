@@ -43,7 +43,7 @@ define(['underscore'], function (_) {
       id: 5,
       name: 'Sarah',
       pic: 'portrait5.jpg',
-      category: 'tutor',
+      category: 'education',
       title: 'I can help you improve your math scores',
       description: "I am a former math teacher, retired, looking to help students who are looking for math tutelage outside the classroom.",
       cost: 75.00
@@ -182,6 +182,51 @@ define(['underscore'], function (_) {
       title: 'I can teach you to paint!',
       description: "You know you've always wanted to learn how to paint. In four lessons I can turn you into a master artist!",
       cost: 150.00
+    },
+    {
+      id: 21,
+      name: 'Mileah',
+      pic: 'portrait21.jpg',
+      category: 'fashion',
+      title: 'Your hair is your most precious asset.',
+      description: 'I can show you how to give your hair full, lucious body all the time with my seven-stop program for hair rejuvenation.',
+      cost: 95.99
+    },
+    {
+      id: 22,
+      name: 'Tom',
+      pic: 'portrait22.jpg',
+      category: 'career',
+      title: 'Looking to make big sales? I can help.',
+      description: 'Are you tired of performing poorly at work? Do you constantly tell yourself that "coffee is for closers"?  I can help you up your game and be the top-earning sales rep in your company.',
+      cost: 499.00  
+    },
+    {
+      id: 23,
+      name: 'Veronica',
+      pic: 'portrait23.jpg',
+      category: 'entertainment',
+      title: 'Belly dancing for fun and profit!',
+      description: "Hi everyone! I run a belly dancing studio for novices who are looking to get into the art, and who aren't shy about the performing with others. I can get you started on the path to finding your true inner dancer!",
+      cost: 225.00
+    },
+    {
+      id: 24,
+      name: 'Rebecca',
+      pic: 'portrait24.jpg',
+      category: 'education',
+      title: 'Science major, willing to help run experiments',
+      description: "I have some free time this semester and thought I would reach out to other science students who need help with experiments. My rates are reasonable and I have lots of lab experience.",
+      cost: 55.00
+    },
+    {
+      id: 25,
+      name: 'Ramone',
+      pic: 'portrait25.jpg',
+      category: 'music',
+      title: 'Drummer can show you how the pros do it',
+      description: "Face it, you've always dreamed of twirling the sticks. Now's the time: I can teach you all you need to know about rocking out on the drums!",
+      cost: 170.00
     }
   ];
 

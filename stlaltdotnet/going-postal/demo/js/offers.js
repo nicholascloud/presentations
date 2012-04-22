@@ -1,21 +1,15 @@
 /*global define:true*/
 
-define(['jquery', 'postal', 'data', 'template'],
+define(['jquery', 'postal', 'data', 'template', 'jqueryext'],
   function ($, bus, data, template) {
 
   var offerUI = (function (selector) {
     var _this = this;
     var $offers = $(selector);
     var $viewing = $offers.find('#viewing');
-    var $moar = $offers.find('#moar');
 
     var _clear = function () {
-      $viewing.find('*').remove();
-    };
-
-    var _showMore = function () {
-      $offers.find('.invisible')
-        .removeClass('invisible');
+      $viewing.find('> span').remove();
     };
 
     var _load = function (categories) {
@@ -25,25 +19,36 @@ define(['jquery', 'postal', 'data', 'template'],
 
     var _render = function (offers) {
       offers.forEach(function (offer, i) {
-        var isVisible = (i < 3);
         var tmpl = new template.Offer(offer);
-        tmpl.setVisibility(isVisible);
         tmpl.appendTo($viewing);
       });
-      $moar.toggle(offers.length > 3);
-      $offers.find('span').addClass('fadein');
+      setTimeout(function () {
+        $viewing.find('span')
+          .addClass('show');
+      }, 10);
     };
 
-    $offers.find('#moar').on('click', function (evt) {
-      _showMore();
-      $(this).hide();
+    $viewing.on('click', '.learnyou', function () {
+      $viewing.find('> .offer')
+        .removeClass('extended')
+        .swapClass('show', 'obscured');
+      $(this).closest('span')
+        .swapClass('obscured', 'extended');
+      return false;
+    });
+
+    $viewing.on('click', '.close', function () {
+      $(this).closest('.offer')
+        .removeClass('extended');
+      $viewing.find('> span')
+        .swapClass('obscured', 'show');
+      return false;
     });
 
     return {
       clear: _clear,
       load: _load,
       render: _render,
-      showMore: _showMore
     };
   }('#offers'));
 

@@ -18,6 +18,8 @@ Array.prototype.contains = function (what) {
   return contains;
 };
 
+
+
 require.config({
   paths: {
     jquery: 'lib/jquery-1.7.2.min',
@@ -28,8 +30,9 @@ require.config({
 });
 
 require(['jquery', 'postal', 'tagCloud', 'offers', 'search'], function ($, bus) {
-  bus.publish('ready');
-
-  //TODO: delete
-  bus.publish('categories.changed', ['art']);
+  $().ready(function () {
+    bus.publish('ready');
+    //TODO: delete
+    bus.publish('categories.changed', ['art']);
+  });
 });
