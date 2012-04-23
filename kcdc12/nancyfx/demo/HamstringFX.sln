@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX", "HamstringFX\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md5fx", "md5fx\md5fx.csproj", "{9358F606-B487-4DEF-960F-05878CB0CE0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX.Test", "HamstringFX.Test\HamstringFX.Test.csproj", "{E4859206-93CF-4D11-B620-D4F55BC45BCD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX.RaceService", "HamstringFX.RaceService\HamstringFX.RaceService.csproj", "{32EE9E97-F4FA-4001-B9B9-2346EED371B6}"
 EndProject
 Global
@@ -40,16 +38,6 @@ Global
 		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|x86.ActiveCfg = Release|x86
 		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|x86.Build.0 = Release|x86
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E4859206-93CF-4D11-B620-D4F55BC45BCD}.Release|x86.ActiveCfg = Release|Any CPU
 		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Any CPU.Build.0 = Debug|x86
 		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86

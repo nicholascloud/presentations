@@ -14,7 +14,8 @@
       h1, h2, h3, h4, h5, h6 {text-transform:none !important;}
       h3 {font-weight:normal;}
       dl {margin-top:1em; text-align:left;}
-      /*dt {font-weight:bold; color:#d0ff00;}*/
+      dt {clear:both;}
+      dt img {float:right;}
       dd {margin-bottom:1em; padding-left:1em;}
       .slimed {color:#d0ff00; font-weight:bold;}
       .bigsemi {display:block; font-weight:bold; font-size:25em; text-shadow:2px 2px 10px #000000;}
@@ -57,20 +58,9 @@
           <ul>
             <li>IIS</li>
             <li>WCF</li>
-            <li>OWIN</li>
+            <li>Azure</li>
+            <li>Umbraco (CMS)</li>
             <li>custom process</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>More view engines</h2>
-          <h3>than you can shake a stick at!</h3>
-          <ul>
-            <li>Razor</li>
-            <li>Spark</li>
-            <li>NDjango</li>
-            <li>dotLiquid</li>
-            <li>SuperSimpleViewEngine (default)</li>
           </ul>
         </section>
 
@@ -80,13 +70,38 @@
             <li>create a new ASP.NET web project (or however you intend to host)</li>
             <li>nuget that shit</li>
             <li>tweak web.config</li>
-            <li>profit</li>
+            <li>profit!</li>
           </ul>
           <p>&nbsp;</p>
           <pre><code>
 PM&gt; install-package nancy
 PM&gt; install-package nancy.hosting.aspnet
           </code></pre>
+        </section>
+
+        <!-- BOOTSTRAPPER -->
+
+        <section>
+          <h2>Bootstrapping Nancy</h2>
+          <ul>
+            <li>the bootstrapper class is the heart of a Nancy application</li>
+            <li>bootstrapper can be subclassed for custom configuration</li>
+            <li>DefaultNancyBootstrapper is used for default settings</li>
+            <li>IOC-specific boostrappers are available</li>
+            <li>hosting-specific bootstrappers are available</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Bootstrapping Nancy</h2>
+          <p>common configuration tasks</p>
+          <ul>
+            <li>IOC registrations</li>
+            <li>view location conventions</li>
+            <li>static content location conventions</li>
+            <li>application startup configuration</li>
+            <li>request startup configuration</li>
+          </ul>
         </section>
 
         <!-- MODULES -->
@@ -120,7 +135,6 @@ public class PartyModule : NancyModule {
 
         <section>
           <h2>Routes</h2>
-          <h3>Deconstructing a route</h3>
           <ul>
             <li>HTTP <span class="slimed">method</span></li>
             <li><span class="slimed">pattern</span> to match route URL</li>
@@ -131,7 +145,7 @@ public class PartyModule : NancyModule {
 
         <section>
           <h2>Routes</h2>
-          <h3>Supported HTTP <span class="slimed">methods</span></h3>
+          <p>Supported HTTP <span class="slimed">methods</span></p>
           <ul>
             <li>GET</li>
             <li>HEAD</li>
@@ -145,7 +159,7 @@ public class PartyModule : NancyModule {
 
         <section>
           <h2>Routes</h2>
-          <h3>URLs match route <span class="slimed">patterns</span></h3>
+          <p>URLs match route <span class="slimed">patterns</span></p>
           <pre><code>
 //ROUTE LITERAL
 //will match: /dinosaur/carnivore
@@ -167,7 +181,7 @@ Get["/dinosaur/(?&lt;name&gt;[\w]+)"] = p => {
 
         <section>
           <h2>Routes</h2>
-          <h3><span class="slimed">Patterns</span> can capture URL parameters</h3>
+          <p><span class="slimed">Patterns</span> can capture URL parameters</p>
           <pre><code>
 Post["/school/{schoolId}/reunion/{year}"] = p => {
 
@@ -187,7 +201,7 @@ Post["/school/{schoolId}/reunion/{year}"] = p => {
  
         <section>
           <h2>Routes</h2>
-          <h3>Matched routes invoke <span class="slimed">actions</span></h3>
+          <p>Matched routes invoke <span class="slimed">actions</span></p>
           <pre><code>
 var action = new Func&lt;dynamic, Response&gt;(p => {...});
 Get["/about"] = p => action;
@@ -199,7 +213,7 @@ Get["/about"] = p => { ... };
 
          <section>
           <h2>Routes</h2>
-          <h3>Matched routes invoke <span class="slimed">actions</span></h3>
+          <p>Matched routes invoke <span class="slimed">actions</span></p>
           <pre><code>
 Get["/parks/63031"] = p => {
   return 501;
@@ -220,7 +234,7 @@ Get["/parks/63031"] = p => {
 
         <section>
           <h2>Routes</h2>
-          <h3>Filtering routes with <span class="slimed">conditions</span></h3>
+          <p>Filtering routes with <span class="slimed">conditions</span></p>
           <pre><code>
 var condition = new &lt;NancyContext, bool&gt;(c => {
   //promos only available for one campaign
@@ -260,21 +274,88 @@ public class EarningsModule : NancyModule {
           </code></pre>
         </section>
 
+        <!-- MODELS -->
+
         <section>
-          <h2>Model Binding</h2>
+          <h2>Models</h2>
+          <ul>
+            <li>models are normal POCO classes</li>
+            <li>used in an action to bind data to a view</li>
+            <li>request data can be bound to a model class in an action</li>
+            <li>XML and JSON requests are deserialized if `Content-Type` is set</li>
+            <li>custom deserliaizers can be implemented for other request types</li>
+          </ul>
         </section>
 
         <section>
-          <h2>Bootstrapping Nancy</h2>
+          <h2>Models</h2>
+          <p>model binding occurs when the Bind() method is called</p>
+          <pre><code>
+//request body:
+//answer1=monkeys&amp;answer2=true&amp;answer3=3.14
+
+public class Quiz {
+  public String Answer1 {get; set;}
+  public Boolean Answer2 {get; set;}
+  public Decimal Answer3 {get; set;}
+}
+
+Post["/quiz/366"] = p => {
+  Quiz q = this.Bind();
+
+  //or...
+  var q = this.Bind&lt;Quiz&gt;();
+
+  //do something with `q`
+};
+          </code></pre>
         </section>
 
         <section>
-          <h2>View Engines</h2>
+          <h2>Models</h2>
+          <p>properties can be "blacklisted" to prevent updates</p>
+          <pre><code>
+class Customer {
+  public Int32 Id {get; set;}
+  public String Name {get; set;}
+  public DateTime CreatedAt {get; set;}
+}
+
+Put["/customer/232"] = p => {
+  var c = this.Bind&lt;Customer&gt;("Id", "CreatedAt");
+  //update customer record
+}
+          </pre></code>
+        </section>
+
+        <!-- VIEWS -->
+
+        <section>
+          <h2>Views</h2>
+          <p>More <span class="slimed">view engines</span> than you can shake a stick at!</p>
+          <ul>
+            <li>Razor</li>
+            <li>Spark</li>
+            <li>NDjango</li>
+            <li>dotLiquid</li>
+            <li>SuperSimpleViewEngine (default)</li>
+          </ul>
         </section>
 
         <section>
-          <h2>View Location</h2>
-          <p>There are a number of built in conventions for locating views</p>
+          <h2>Views</h2>
+          <p>To enable a specific <span class="slimed">view engine</span>:</p>
+          <ul>
+            <li>install the appropriate view engine library (nuget)</li>
+            <li>create a file with the appropriate extension in a known view location</li>
+            <li>render your new file in a module action</li>
+            <li>profit!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Views</h2>
+          <p>There are a number of built in <span class="slimed">conventions for locating views</span>.</p>
           <dl>
             <dt class="slimed">"root" convention</dt>
             <dd>looks in a view in the application root</dd>
@@ -285,7 +366,7 @@ public class EarningsModule : NancyModule {
         </section>
 
         <section>
-          <h2>View Location</h2>
+          <h2>Views</h2>
           <dl>
             <dt class="slimed">module name convention</dt>
             <dd>looks in a folder named after the module at the application root</dd>
@@ -296,7 +377,7 @@ public class EarningsModule : NancyModule {
         </section>
 
         <section>
-          <h2>View Location</h2>
+          <h2>Views</h2>
           <dl>
             <dt class="slimed">module path convention</dt>
             <dd>looks in a folder that matches the module's (directory) path at the application root</dd>
@@ -307,8 +388,8 @@ public class EarningsModule : NancyModule {
         </section>
 
         <section>
-          <h2>View Location</h2>
-          <p>And of course, you can always create your own convention.</p>
+          <h2>Views</h2>
+          <p>And of course, you can always create <span class="slimed">your own convention</span>.</p>
           <pre><code>
 //add custom view location convention
 //in custom bootstrapper
@@ -326,14 +407,12 @@ protected override void ApplicationStartup (...) {
 
         <section>
           <h2>Static Content</h2>
-          <ul>
-          <p>By default, Nancy looks in <span class="slimed">"/content"</span> for static content.</p>
-          <p>This is the only pre-defined static content convention.</p>
+          <p>by default, Nancy looks in "/content" for <span class="slimed">static content</span></p>
         </section>
 
         <section>
           <h2>Static Content</h2>
-          <p>Static content conventions can be created in the bootstrapper.</p>
+          <p><span class="slimed">static content</span> conventions can be created in the bootstrapper</p>
           <pre><code>
 public override void ConfigureConventions(
   NancyConventions conventions) {
@@ -356,7 +435,7 @@ public override void ConfigureConventions(
 
         <section>
           <h2>Static Content</h2>
-          <p>Nancy modules have helper methods that will deliver some static content appropriately.</p>
+          <p>Nancy modules have helper methods that will deliver some <span class="slimed">static content</span> appropriately</p>
           <ul>
             <li>AsCss()</li>
             <li>AsImage()</li>
@@ -365,8 +444,48 @@ public override void ConfigureConventions(
             <li>AsXml()</li>
             <li>AsFile()</li>
           </ul>
-        <section>
+        </section>
 
+        <!-- AUTHENTICATION -->
+
+        <section>
+          <h2>Authentication</h2>
+        </section>
+
+        <!-- RESOURCES -->
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li>nancyfx.org</li>
+            <li>github.com/NancyFx</li>
+            <li>groups.google.com/forum/#!forum/nancy-web-framework</li>
+            <li>nuget.org/packages?q=nancy</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <dl>
+            <dt>
+                <img src="img/thecodejunkie.png" alt="thecodejunkie" />
+                <h3>Andreas 'thecodejunkie' Håkansson!</h3>
+            </dt>
+            <dd>
+              http://twitter.com/thecodejunkie<br />
+              https://github.com/thecodejunkie
+            </dd>
+
+            <dt>
+              <img src="img/grumpydev.jpeg" alt="grumpydev" />
+              <h3>Steven 'grumpydev' Robbins!</h3>
+            </dt>
+            <dd>
+              http://twitter.com/grumpydev<br />
+              https://github.com/grumpydev
+            </dd>
+          </dl>
+        </section>
 
       </div>
 

@@ -44,11 +44,9 @@ namespace HamstringFX.modules {
 
       //
 
-      Before += ctx => {
-        return null;
-      };
+//      Before += ctx => {
+//        return null;
+//      };
     }
-
-
   }
 }
