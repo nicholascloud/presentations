@@ -95,6 +95,21 @@ Hamstring.modules.push(function login () {
   };
 }());
 
+Hamstring.modules.push(function register () {
+  
+
+  var _init = function () {
+
+  };
+
+  return {
+    handles: function (bodyid) {
+      return bodyid === 'register';
+    },
+    init: _init
+  }
+}());
+
 /*
  * Add run
  */
@@ -105,53 +120,166 @@ Hamstring.modules.push(function addRun () {
     where: '[name=where]',
     hour: '[name=hour]',
     min: '[name=min]',
-    sec: '[name=sec]'
+    sec: '[name=sec]',
+    names: function () {
+      var selectors = [];
+      for (var prop in this) {
+        if (!this.hasOwnProperty(prop)) continue;
+        if (typeof this[prop] !== 'string') continue;
+        selectors.push(prop);
+      }
+      return selectors;
+    },
+    enable: function () {
+      this.names().forEach(function (name) {
+        $(name).attr('disabled', true);
+      });
+    },
+    disable: function () {
+      this.names().forEach(function (name) {
+        $(name).removeAttr('disabled');
+      });
+    },
+    getData: function ($section) {
+      return {
+        when: $section.find(this.when).val(),
+        where: $section.find(this.where).val(),
+        hour: $section.find(this.hour).val(),
+        min: $section.find(this.min).val(),
+        sec: $section.find(this.sec).val()
+      };
+    },
+    reset: function ($section) {
+      $section.find(this.when).val('');
+      $section.find(this.where)[0].selectedIndex = 0;
+      $section.find(this.hour).val('0');
+      $section.find(this.min).val('0');
+      $section.find(this.sec).val('0');
+    }
   };
 
   var _init = function (bus) {
     var $section = $('#addrun');
     var $error = $section.find('#addrunerror');
+    var $success = $section.find('#addrunsuccess');
 
     var submitForm = function (onSuccess, onError) {
       onSuccess = onSuccess || function () {};
       onError = onError || function () {};
 
-      var formData = {
-        when: $section.find(fields.when).val(),
-        where: $section.find(fields.where).val(),
-        hour: $section.find(fields.hour).val(),
-        min: $section.find(fields.min).val(),
-        sec: $section.find(fields.sec).val()
-      };
+      var formData = fields.getData($section);
 
-      $.post('/run', formData, function () {
-        onSuccess();
+      $.post('/run', formData, function (data, textStatus, jqXHR) {
+        onSuccess(data.id);
       }).error(function (e) {
         onError();
       });
     };
 
     var resetForm = function () {
-      $section.find(fields.when).val('');
-      $section.find(fields.where)[0].selectedIndex = 0;
-      $section.find(fields.hour).val('0');
-      $section.find(fields.min).val('0');
-      $section.find(fields.sec).val('0');
+      fields.reset($section);
       $error.hide();
     };
 
     $section.find('a.submit').click(function (evt) {
       $error.hide();
-      submitForm(function onSuccess () {
-        bus.publish('run-added', {});
+      $success.hide();
+      fields.disable();
+
+      submitForm(function onSuccess (id) {
+        bus.publish('run-added', id);
         resetForm();
+        $success.fadeIn(500, function () {
+          setTimeout(function () {
+            $success.fadeOut(500);
+          }, 1000);
+        });
+        fields.enable();
+
       }, function onError (message) {
         $error.find('span').html(message);
-        $error.show();
+        $error.fadeIn(500);
+        fields.enable();
       });
       evt.stopPropagation();
       evt.preventDefault();
       return false;
+    });
+  };
+
+  return {
+    handles: function (bodyid) {
+      return bodyid === 'myhamstring';
+    },
+    init: _init
+  };
+}());
+
+Hamstring.modules.push(function () {
+
+  var runTemplate = (function () {
+    return {
+      bind: function (run) {
+        var $e = $('<div class="run" style="display:none;"></div>');
+        $e.append(
+          $('<h2></h2>').html(run.routeName));
+
+        var $dl = $('<dl></dl>');
+        $e.append($dl);
+
+        $dl.append(
+          $('<dt>Your time:</dt>'));
+
+        $dl.append(
+          $('<dd></dd>').html(run.duration));
+
+        $dl.append(
+          $('<dt>Best time:</dt>'));
+
+        $dl.append(
+          $('<dd></dd>').html(run.bestTime));
+
+        $e.append(
+          $('<p></p>').html(run.scheduledAt));
+
+        $e.append(
+          $('<p></p>').html(run.distance + ' miles'));
+
+        $e.append(
+          $('<p></p>').html(run.pace + ' min/mile'));
+
+        return $e;
+      }
+    };
+  }());
+
+  var _getRun = function (id, handlers) {
+    $.get('/run/' + id, function (data, textStatus, jqXHR) {
+      handlers.success(data);
+    }).error(function (e) {
+      handlers.error(e);
+    });
+  };
+
+  var _init = function (bus) {
+    var $myruns = $('#myruns');
+    var $error = $('#updaterunserror');
+
+    bus.subscribe('run-added', function (id) {
+      _getRun(id, {
+        success: function (run) {
+          var $run = runTemplate.bind(run);
+          $myruns.prepend($run);
+          $run.fadeIn(1000);
+        },
+        error: function () {
+          $error.fadeIn(500, function () {
+            setTimeout(function () {
+              $error.fadeOut(500);
+            }, 1000);
+          });
+        }
+      });
     });
   };
 

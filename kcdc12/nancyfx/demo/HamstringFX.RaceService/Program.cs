@@ -7,8 +7,6 @@ namespace HamstringFX.RaceService {
     static void Main(string[] args) {
       var cliargs = new CliArgs(args);
 
-      //TODO: discuss self hosting in slideshow
-
       var uri = new Uri("http://localhost:8087/");
       var host = new NancyHost(uri, new RaceServiceBootstrapper(cliargs));
       host.Start();

@@ -91,6 +91,7 @@
     <Compile Include="data\Race.cs" />
     <Compile Include="data\RaceServiceProxy.cs" />
     <Compile Include="model\RunModel.cs" />
+    <Compile Include="model\RunModelFactory.cs" />
     <Compile Include="modules\MainModule.cs" />
     <Compile Include="security\AuthenticationResult.cs" />
     <Compile Include="security\IHashStrategy.cs" />

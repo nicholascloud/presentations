@@ -35,7 +35,7 @@
 
         <section id="title">
           <div id="nancy-logo">
-            <img src="img/nancy-logo.png" alt="NancyFX" />
+            <img src="img/nancy-logo.png" alt="Nancy" />
           </div>
           <br /><hr />
           <h3 class="inverted">Micro Web Framework</h3>
@@ -51,6 +51,10 @@
             <li>simple setup</li>
             <li>extensible API</li>
           </ul>
+        </section>
+
+        <section>
+          <img src="img/nuget-list.png" alt="nuget list" />
         </section>
 
         <section>
@@ -99,7 +103,12 @@ PM&gt; install-package nancy.hosting.aspnet
             <li>IOC registrations</li>
             <li>view location conventions</li>
             <li>static content location conventions</li>
-            <li>application startup configuration</li>
+            <li>application startup configuration
+              <ul>
+                <li>global "BeforeRequest" pipeline</li>
+                <li>global "AfterRequest" pipeline</li>
+              </ul>
+            </li>
             <li>request startup configuration</li>
           </ul>
         </section>
@@ -145,7 +154,7 @@ public class PartyModule : NancyModule {
 
         <section>
           <h2>Routes</h2>
-          <p>Supported HTTP <span class="slimed">methods</span></p>
+          <p>supported HTTP <span class="slimed">methods</span></p>
           <ul>
             <li>GET</li>
             <li>HEAD</li>
@@ -181,7 +190,7 @@ Get["/dinosaur/(?&lt;name&gt;[\w]+)"] = p => {
 
         <section>
           <h2>Routes</h2>
-          <p><span class="slimed">Patterns</span> can capture URL parameters</p>
+          <p><span class="slimed">patterns</span> can capture URL parameters</p>
           <pre><code>
 Post["/school/{schoolId}/reunion/{year}"] = p => {
 
@@ -201,7 +210,7 @@ Post["/school/{schoolId}/reunion/{year}"] = p => {
  
         <section>
           <h2>Routes</h2>
-          <p>Matched routes invoke <span class="slimed">actions</span></p>
+          <p>matched routes invoke <span class="slimed">actions</span></p>
           <pre><code>
 var action = new Func&lt;dynamic, Response&gt;(p => {...});
 Get["/about"] = p => action;
@@ -211,9 +220,9 @@ Get["/about"] = p => { ... };
           </code></pre>
         </section>
 
-         <section>
+        <section>
           <h2>Routes</h2>
-          <p>Matched routes invoke <span class="slimed">actions</span></p>
+          <p><span class="slimed">actions</span> return some variant of Nancy.Response</p>
           <pre><code>
 Get["/parks/63031"] = p => {
   return 501;
@@ -234,7 +243,32 @@ Get["/parks/63031"] = p => {
 
         <section>
           <h2>Routes</h2>
-          <p>Filtering routes with <span class="slimed">conditions</span></p>
+          <p><span class="slimed">actions</span> have access to request data</p>
+          <pre><code>
+/*
+* URL:  
+*   /blog/13/article/45/comment?twitter=flingpoo
+* BODY:
+*   title=this%20sucks!&comments=get%20a%20job
+*/
+
+Post["/blog/{bid}/article/{aid}/comment"] = p => {
+
+  //route parameters
+  var blogId = p.bid;
+
+  //query string values
+  var twitter = this.Request.Query.twitter;
+
+  //form parameters
+  var comments = this.Request.Form.comments;
+};
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Routes</h2>
+          <p>filtering routes with <span class="slimed">conditions</span></p>
           <pre><code>
 var condition = new &lt;NancyContext, bool&gt;(c => {
   //promos only available for one campaign
@@ -332,7 +366,7 @@ Put["/customer/232"] = p => {
 
         <section>
           <h2>Views</h2>
-          <p>More <span class="slimed">view engines</span> than you can shake a stick at!</p>
+          <p>more <span class="slimed">view engines</span> than you can shake a stick at!</p>
           <ul>
             <li>Razor</li>
             <li>Spark</li>
@@ -344,7 +378,7 @@ Put["/customer/232"] = p => {
 
         <section>
           <h2>Views</h2>
-          <p>To enable a specific <span class="slimed">view engine</span>:</p>
+          <p>to enable a specific <span class="slimed">view engine</span>:</p>
           <ul>
             <li>install the appropriate view engine library (nuget)</li>
             <li>create a file with the appropriate extension in a known view location</li>
@@ -355,7 +389,7 @@ Put["/customer/232"] = p => {
 
         <section>
           <h2>Views</h2>
-          <p>There are a number of built in <span class="slimed">conventions for locating views</span>.</p>
+          <p>there are built in <span class="slimed">conventions for locating views</span></p>
           <dl>
             <dt class="slimed">"root" convention</dt>
             <dd>looks in a view in the application root</dd>
@@ -389,7 +423,7 @@ Put["/customer/232"] = p => {
 
         <section>
           <h2>Views</h2>
-          <p>And of course, you can always create <span class="slimed">your own convention</span>.</p>
+          <p>you can always create <span class="slimed">your own convention</span></p>
           <pre><code>
 //add custom view location convention
 //in custom bootstrapper
@@ -450,6 +484,94 @@ public override void ConfigureConventions(
 
         <section>
           <h2>Authentication</h2>
+          <p>several authentication mechanisms</p>
+          <ul>
+            <li><span class="slimed">forms</span> authentication</li>
+            <li><span class="slimed">basic</span> authentication</li>
+            <li>roll your own</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Authentication</h2>
+          <p>to set up authentication:</p>
+          <ul>
+            <li>configure authentication mechanism in the bootstrapper</li>
+            <li>depending on the authentication mechanism you will need to provide a way to retrieve user information</li>
+            <li>in a secured module, call `this.RequiresAuthentication();` in the constructor</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Authentication</h2>
+          <pre style="font-size:60% !important;"><code>
+protected override void ApplicationStartup(
+  TinyIoCContainer container, IPipelines pipelines,
+  NancyContext context) {
+
+  var configuration = new FormsAuthenticationConfiguration {
+    RedirectUrl = "~/login",
+    UserMapper = container.Resolve&lt;IUserMapper&gt;(),
+  };
+
+  FormsAuthentication.Enable(pipelines, configuration);
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Authentication</h2>
+          <pre><code>
+public class AccountModule : NancyModule {
+
+  public AccountModule () {
+    this.RequiresAuthentication();
+    
+    //set up secure routes
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Authentication</h2>
+          <pre><code>
+public class AppUserIdentity : IUserIdentity {
+  public String UserName { get; set; }
+  public IEnumerable&lt;String&gt; Claims { get; set; }
+}
+
+public class AppUserMapper : IUserMapper {
+  
+  public IUserIdentity GetUserFromIdentifier(
+    Guid identifier) {
+
+    //fetch user from DB or some other data store
+
+    return new AppUserIdentity {
+      //set properties with user identity data
+    };
+  }
+}
+          </pre></code>
+        </section>
+
+        <!-- WHY USE -->
+
+        <section>
+          <h2>Why should you use Nancy?</h2>
+          <ul>
+            <li>simple setup</li>
+            <li>because web.config files suck</li>
+            <li>modular</li>
+            <li>use what you need, when you need it</li>
+            <li>open source, great community</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why should you use Nancy?</h2>
+          <h1>Because you became a developer to create and think, not to paint by numbers.</h1>
         </section>
 
         <!-- RESOURCES -->
@@ -457,8 +579,8 @@ public override void ConfigureConventions(
         <section>
           <h2>Resources</h2>
           <ul>
-            <li>nancyfx.org</li>
-            <li>github.com/NancyFx</li>
+            <li>nancyfx.org (official docs!)</li>
+            <li>github.com/NancyFx (lots of good code examples)</li>
             <li>groups.google.com/forum/#!forum/nancy-web-framework</li>
             <li>nuget.org/packages?q=nancy</li>
           </ul>

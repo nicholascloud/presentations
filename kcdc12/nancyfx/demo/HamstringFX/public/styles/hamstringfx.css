@@ -65,11 +65,19 @@ fieldset > div {
 
 fieldset label {
   display:block;
+  margin:0.4em 0;
+}
+
+fieldset label.mini {
+  display:inline;
+  padding:0 0.2em;
+  font-size:0.7em;
 }
 
 .message.error {
   border:2px solid #ED5959;
   padding:1em;
+  margin:1em;
   background-color:#FDECEC;
   border-radius:0.8em;
   box-shadow:0px 0px 5px #888;
@@ -77,7 +85,13 @@ fieldset label {
 }
 
 .message.success {
-
+  border:2px solid #4EFE4E;
+  padding:1em;
+  margin:1em;
+  background-color:#CFFFCF;
+  border-radius:0.8em;
+  box-shadow:0px 0px 5px #888;
+  display:none;
 }
 
 /* page divisions ----------------------------------------- */
@@ -212,9 +226,6 @@ footer {
 .playlist img {
   float:left;
   padding-right:5%;
-}
-.playlist label {
-
 }
 
 /* upcoming runs -------------------------------- */

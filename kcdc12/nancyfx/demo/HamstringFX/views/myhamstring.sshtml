@@ -15,6 +15,10 @@
 
 @Section['contentfocus']
   <!-- hamstring.sshtml -->
+  <div id="updaterunserror" class="error message">
+    There was a problem updating your run list. :-(
+  </div>
+
   <section id="myruns">
     @Partial['_runs', Model]
   </section>

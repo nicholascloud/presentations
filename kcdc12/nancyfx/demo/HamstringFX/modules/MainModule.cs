@@ -20,8 +20,6 @@ namespace HamstringFX.modules {
 
       Post["/login"] = routeParams => {
 
-        //TODO: discuss the difference between routeParams, Request.Form, Request.Query, etc.
-
         AuthenticationResult authResult = auth.Authenticate(Request.Form.handle, Request.Form.password);
 
         if (!authResult.IsAuthenticated) {
@@ -41,12 +39,6 @@ namespace HamstringFX.modules {
       };
 
       Get["/logout"] = routeParams => this.LogoutAndRedirect("~/");
-
-      //
-
-//      Before += ctx => {
-//        return null;
-//      };
     }
   }
 }

@@ -9,9 +9,8 @@ using Nancy.Security;
 namespace HamstringFX.modules {
   public class RunModule : NancyModule {
 
-    public RunModule(IHamstringData db) {
+    public RunModule(IHamstringData db, Models models) {
 
-      //TODO: talk about extensions in Nancy.Security
       this.RequiresAuthentication();
 
       Post["/run"] = p => {
@@ -46,30 +45,9 @@ namespace HamstringFX.modules {
         var run = db.Runs
           .SingleOrDefault(r => r.Id == id && r.MemberId == member.Id);
         if (run == null) return HttpStatusCode.NotFound;
-        
-        return Response.AsJson(new {
-          id = run.Id,
-          duration = run.Duration,
-          member = run.Member.Handle,
-          route = run.Route.Name,
-          scheduledAt = run.ScheduledAt.ToString("MM/dd/yyyy")
-        });
-      };
 
-      Get["/runs"] = p => {
-        var member = Context.CurrentUser.ToMember(db);
-        var runs = db.Runs
-          .Where(r => r.MemberId == member.Id)
-          .ToList()
-          .Select(r => new {
-            id = r.Id,
-            duration = r.Duration,
-            member = r.Member.Handle,
-            route = r.Route.Name,
-            scheduledAt = r.ScheduledAt.ToString("MM/dd/yyyy")
-          });
-        
-        return Response.AsJson(runs);
+        dynamic model = models.RunModel(member, id.Value).Create();
+        return Response.AsJson((Object)model);
       };
     }
   }

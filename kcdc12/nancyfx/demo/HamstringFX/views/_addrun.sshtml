@@ -15,8 +15,11 @@
       </div>
       <div>
         <label>Your time?</label>
+        <label class="mini">H</label>
         <input class="timesegment" name="hour" type="number" value="00" />
+        <label class="mini">M</label>
         <input class="timesegment" name="min" type="number" value="00" />
+        <label class="mini">S</label>
         <input class="timesegment" name="sec" type="number" value="00" />
       </div>
       <div>
@@ -25,6 +28,9 @@
     </fieldset>
   </form>
   <div id="addrunerror" class="message error">
-    I was unable to save your run.<br /><span></span>
+    I was unable to save your run.
+  </div>
+  <div id="addrunsuccess" class="message success">
+    Congratulations! You're a winner!
   </div>
 </section>

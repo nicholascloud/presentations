@@ -1,3 +1,4 @@
+using System;
 using HamstringFX.data;
 
 namespace HamstringFX.model {
@@ -19,5 +20,8 @@ namespace HamstringFX.model {
       return new PortalModelFactory(_db, member);
     }
 
+    public IModelFactory RunModel (Member member, Guid runId) {
+      return new RunModelFactory(_db, member, runId);
+    }
   }
 }
