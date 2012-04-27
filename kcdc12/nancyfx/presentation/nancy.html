@@ -23,6 +23,7 @@
       #reveal #nancy-logo {background-color:#000000; width:100%;}
       #reveal #nancy-logo img {border:0px; padding:none; margin:none;}
       /*p {text-align:left;}*/
+      img {max-width:95%;}
       @media all and (max-width:1024px) {
         pre {font-size:0.6em !important;}
         ul {max-width:80%;}
@@ -32,6 +33,10 @@
   <body>
     <div id="reveal">
       <div class="slides">
+
+        <section>
+          <img src="img/SponsorSlide.001.png" style="display:block; margin:auto;" />
+        </section>
 
         <section id="title">
           <div id="nancy-logo">
@@ -382,7 +387,7 @@ Put["/customer/232"] = p => {
           <ul>
             <li>install the appropriate view engine library (nuget)</li>
             <li>create a file with the appropriate extension in a known view location</li>
-            <li>render your new file in a module action</li>
+            <li>reference your new file in a module action</li>
             <li>profit!</li>
           </ul>
         </section>

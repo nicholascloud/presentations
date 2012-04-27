@@ -17,6 +17,12 @@ body {
   font-family: 'Droid Sans', sans-serif;
 }
 
+@media all and (max-width:1024px) {
+  body {
+    width:80%;
+  }
+}
+
 h1,h2,h3 { margin:0.5em 0; }
 h1 {font-size:3em;}
 h2,h3 {color:#4F4F4F;}

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX", "HamstringFX\HamstringFX.csproj", "{80725130-8510-4BFD-93AC-B3999E0A03CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md5fx", "md5fx\md5fx.csproj", "{9358F606-B487-4DEF-960F-05878CB0CE0D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamstringFX.RaceService", "HamstringFX.RaceService\HamstringFX.RaceService.csproj", "{32EE9E97-F4FA-4001-B9B9-2346EED371B6}"
 EndProject
 Global
@@ -27,17 +25,6 @@ Global
 		{80725130-8510-4BFD-93AC-B3999E0A03CB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{80725130-8510-4BFD-93AC-B3999E0A03CB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{80725130-8510-4BFD-93AC-B3999E0A03CB}.Release|x86.ActiveCfg = Release|Any CPU
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Debug|Any CPU.Build.0 = Debug|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Debug|x86.ActiveCfg = Debug|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Debug|x86.Build.0 = Debug|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|Any CPU.ActiveCfg = Release|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|Mixed Platforms.Build.0 = Release|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|x86.ActiveCfg = Release|x86
-		{9358F606-B487-4DEF-960F-05878CB0CE0D}.Release|x86.Build.0 = Release|x86
 		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Any CPU.Build.0 = Debug|x86
 		{32EE9E97-F4FA-4001-B9B9-2346EED371B6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
