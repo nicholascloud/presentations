@@ -1,0 +1,575 @@
+<!doctype html>  
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Going Postal with postal.js</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="lib/zenburn.css">
+    <style type="text/css">
+    pre {font-size:0.7em !important;}
+    h1, h2, h3, h4, h5, h6 {text-transform:none !important;}
+    dl {margin-top:1em;}
+    /*dt {font-weight:bold; color:#d0ff00;}*/
+    dd {margin-bottom:1em;}
+    .slimed {color:#d0ff00; font-weight:bold;}
+    .bigsemi {display:block; font-weight:bold; font-size:25em; text-shadow:2px 2px 10px #000000;}
+    .centerme {margin:auto !important; display:block;}
+    </style>
+  </head>
+  <body>
+    
+    <div id="reveal">
+      <!-- Used to fade in a background when a specific slide state is reached -->
+      <div class="state-background"></div>
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Going Postal</h1>
+          <h2>with postal.js</h2>
+          <div>
+            <img src="img/simonpegg.jpg" class="centerme" />
+          </div>
+          <h3 style="margin-top:1em;">(in five parts)</h3>
+        </section>
+
+        <section>
+          <h1>Part 1: Events &amp; Messages</h1>
+          <div>
+            <img src="img/simonpegg6.jpg" class="centerme" />
+          </div>
+        </section>
+
+        <section>
+          <h2>DOM events are interaction-oriented</h2>
+          <pre><code>
+$('#foo').on('click', function () {...});
+$('#foo').on('hover', function () {...});
+$('#foo').on('keydown', function () {...});
+$('#foo').on('mouseover', function () {...});
+$(document).on('load', function () {...});
+$().ready(function () {...});
+          </code></pre>
+          <p><small>(http://en.wikipedia.org/wiki/DOM_events)</small></p>
+        </section>
+
+        <section>
+          <h2>jQuery supports user-defined events</h2>
+          <pre><code>
+&lt;div id="foo"&gt;&lt;button id="bar" /&gt;&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+$('#foo').on('launch', function () {
+    launchAllMissiles();
+});
+$('#bar').trigger('launch');
+&lt;/script&gt;
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>But...</h2>
+          <ul>
+            <li class="fragment">DOM events only bubble UP the DOM tree</li>
+            <li class="fragment">Since events can be triggered anywhere in the DOM tree, the best place to put listeners would be at the top of the tree (e.g. the `body` tag)</li>
+            <li class="fragment">Only one callback can be assigned for a specific event on a given element</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>A common scenario</h2>
+          <pre><code>
+$('body').on('show-error', function (evt, msg) {
+  $('#error-message').html(msg).show();
+});
+
+//sometime later...
+$.post('/my/url', data, function () {
+  //yay our post worked!
+}).error(function (){
+  $(this).trigger('show-error', ['bad!']);
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Use postal.js instead</h2>
+          <pre><code>
+postal.subscribe('show.error', function (msg) {
+  $('#error-message').html(msg).show();
+});
+
+
+//sometime later...
+$.post('/my/url', data, function () {
+  //yay our post worked!
+}).error(function (){
+  postal.publish('show.error', 'bad!');
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Part 2: Clean Code</h1>
+          <div>
+            <img src="img/simonpegg3.jpg" class="centerme" />
+          </div>
+        </section>
+
+        <section>
+          <h2>Organizing JavaScript code is challenging</h2>
+          <ul>
+            <li class="fragment">Encapsulate code to avoid global variable collisions</li>
+            <li class="fragment">Deconstruct code and isolate reusable components</li>
+            <li class="fragment">Organize script files for easy maintainability</li>
+            <li class="fragment">Load script files in the correct order (satisfy dependencies)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Organizing JavaScript code is challenging</h2>
+          <ul>
+            <li class="fragment">Avoid jQuey spaghetti code</li>
+            <li class="fragment">Avoid large trees of nested callbacks</li>
+            <li class="fragment">Segregate UI code from application logic</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Organizing code into modules</h2>
+          <dl>
+            <dt class="slimed">mod·ule [moj-ool]:</dt>
+            <dd>
+              <p>Code that is encapsulated within a function closure that has a course, public API.</p>
+            </dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Organizing code into modules</h2>
+          <pre><code>
+//tax rate module
+var taxRate = (function () {
+  //"private" members
+  var _rates = {
+    'mo': 7.925
+  };
+  //public API
+  return {
+    calc: function (state, retail) {
+      return _rates[state] * retail;
+    }
+  };
+}());
+
+var retail = 10.53;
+var tax = taxRate.calc('mo', retail);
+var total = retail + tax;
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Module communication using callbacks</h2>
+          <pre><code>
+var mod1 = (function () {
+  return {
+    onSomeEvent: function (handler) {...}
+  };
+}());
+var mod2 = (function () { ... }());
+
+//similar to .NET events
+mod1.onSomeEvent(function () {
+  mod2.doSomethingInResponse();
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Module communication using postal</h2>
+          <pre><code>
+var mod1 = (function ($, bus) {
+  var $list = $('#items');
+  bus.subscribe('new-items', function (items) {
+    items.forEach(function (item) {
+      $list.append($('&lt;li&gt;&lt;/li&gt;')
+        .html(item));
+    });
+  });
+}(jQuery, postal));
+
+var mod2 = (function (bus) {
+  bus.publish('new-items', ['foo', 'bar']);
+}(postal));
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Better modules with require.js</h2>
+          <ul>
+            <li class="fragment">Simple configuration tells require.js where to look for JavaScript files</li>
+            <li class="fragment">One script tag required on your page; require.js does the rest</li>
+            <li class="fragment">Resolves module dependencies (jQuery, postal, underscore, etc.)</li>
+            <li class="fragment">Lots of other awesome sauce!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Better modules with require.js</h2>
+          <pre><code>
+define('mod1', ['postal'], function (postal) {
+  //private members
+  var private = function (data) {...};
+
+  postal.subscribe('some.message', private);
+
+  //public API
+  return {
+    public: function () {...}
+  };
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Part 3: Features</h1>
+          <img src="img/simonpegg4.jpg" class="centerme" />
+        </section>
+
+        <section>
+          <h2>Wat?</h2>
+          <dl>
+            <dt class="slimed">topic</dt>
+            <dd>A message name formatted with dot notation, e.g., "foo.bar.baz". May contain wildcards.</dd>
+            <dt class="slimed">channel</dt>
+            <dd>Conduit through which messages can be published or subscriptions can be added for a given topic.</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Wat?</h2>
+          <pre><code>
+var channel = postal.channel('friend.request');
+
+//subscribe to channel messages
+channel.subscribe(function (data) {
+  alert('You have a new friend! ' + data.name);
+});
+
+//publish messages to channel
+channel.publish({name: 'Hubert Farnsworth'});
+
+//unsubscribe from channel
+channel.unsubscribe();
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Wat?</h2>
+          <pre><code>
+//or, shorthand:
+
+postal.subscribe('friend.request', function (data) {
+  alert('You have a new friend! ' + data.name);
+});
+
+postal.publish({name: 'Hubert Farnsworth'});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>The # wildcard</h2>
+          <p>The <span class="slimed">#</span> symbol can be used as a wildcard for one segment of a topic.</p>
+          <pre><code>
+postal.subscribe('#.created', function (data) {
+
+  // Matches `friend.created`, but
+  // not `created.position`
+
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>The * wildcard</h2>
+          <p>The <span class="slimed">*</span> symbol can be used as a wildcard for any consecutive character string in a topic.</p>
+          <pre><code>
+postal.subscribe('*.validation*', function (data) {
+  
+  // Matches `form.validation.success`,
+  // `entity.validation`,
+  // `mastadon.validationate`, etc.
+
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>ignoreDuplicates()</h2>
+          <p>Limits subscription handlers to one execution per topic.</p>
+          <pre><code>
+var total = 0;
+postal.subscribe('#.selected', function (item) {
+  total += item.price;
+}).ignoreDuplicates();
+
+postal.publish('shirt.selected', {price: 10});
+postal.publish('slacks.selected', {price: 15});
+postal.publish('shoes.selected', {price: 20});
+//duplicate is ignored
+postal.publish('shirt.selected', {price: 10});
+
+//total price is 10 + 15 + 20 = 45
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>disposeAfter()</h2>
+          <p>Automatically unsubscribes a channel after a given number of handler invocations.</p>
+          <pre><code>
+var favorites = [];
+postal.subscribe('favorite.movies', function (m) {
+  favorites.push(m);
+}).disposeAfter(3);
+
+postal.publish('favorite.movies', 'Hot Fuzz');
+postal.publish('favorite.movies', 'Blade Runner');
+postal.publish('favorite.movies', 'TRON');
+//oh darn, too late--already unsubscribed!
+postal.publish('favorite.movies', 'Star Wars');
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>whenHandledThenExecute()</h2>
+          <p>Invokes a function immediately after a message is handled.</p>
+          <pre><code>
+var progress = {
+  increment: function () { ... }
+};
+
+postal.subscribe('donation.received', function () {
+  progress.increment();
+}).whenHandledThenExecute(function () {
+  postal.publish('progress.incremented', {});
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>withConstraint()</h2>
+          <p>Will prevent the subscription handler from executing if a constraint is not met.</p>
+          <pre><code>
+var speed = 88;
+
+postal.subscribe('lightning.strike', function () {
+  timeTravel();
+}).withConstraint(function () {
+  return speed === 88;
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>withContext()</h2>
+          <p>Determines the value of <span class="slimed">this</span> within a subscription callback.</p>
+          <pre><code>
+var c = postal.channel('coffee.ready');
+
+c.subscribe(function (data) {
+  //this === window
+});
+
+c.subscribe(function (data) {
+  //this === $('#mug')
+}).withContext($('#mug'));
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>withDelay()</h2>
+          <p>Delays the subscription callback execution for a given number of milliseconds.</p>
+          <pre><code>
+var c = postal.channel('wakeup.alarm');
+
+//going to snooze for 30 mins.
+var snoozeDuration = (30 * 60 * 1000);
+
+c.subscribe(function (data) {
+  
+  //make sure this lazy ass gets out of bed!
+  alarm.buzz({volume: data.volume});
+
+}).withDelay(snoozeDuration);
+
+c.publish({volume: 'annoying'});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>withPriority()</h2>
+          <p>Associates a subscription callback with an arbitrary priority number; higher priority callbacks are triggered first.</p>
+          <pre><code>
+var c = postal.channel('stock.event');
+
+var stockholder = function (data) {
+  alert('Stockholder knows!');
+};
+var insider = function (data) {
+  //will always know first!
+  alert('Insider knows!');
+};
+
+c.subscribe(stockholder).withPriority(75);
+c.subscribe(insider).withPriority(100);
+c.publish({action: 'sell!'});
+          </code></pre>
+        </section>
+
+        <section>
+          <p class="bigsemi">;</p>
+        </section>
+
+        <section>
+          <h2>withThrottle()</h2>
+          <p>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</p>
+          <pre><code>
+var c = postal.channel('dhs.track.movement');
+
+c.subscribe(function (pos) {
+  alert('Moved to ' + pos);
+}).withThrottle(2000);
+
+(function move (timesMoved) {
+  if (timesMoved === 50) return;
+  c.publish(timesMoved);
+  setTimeout(function () {
+    move(timesMoved + 1);
+  }, 500);
+}(0));
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>withThrottle()</h2>
+          <pre><code>
+Moved to 0
+Moved to 3
+Moved to 7
+Moved to 11
+Moved to 15
+Moved to 19
+Moved to 23
+Moved to 27
+Moved to 31
+Moved to 35
+Moved to 39
+Moved to 43
+Moved to 47
+Moved to 49
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Part 4: Code</h1>
+          <div>
+            <img src="img/simonpegg5.jpg" class="centerme" />
+          </div>
+        </section>
+
+        <section>
+          <h1>Part 5</h1>
+          <h2>In which I point you</h2>
+          <h3>to additional resources</h3>
+        </section>
+
+        <section>
+          <h2>Additional Resources</h2>
+          <p>Client-side Messaging in JavaScript</p>
+          <ul>
+            <li><a href="http://bit.ly/IC8qqb">Part 1 http://bit.ly/IC8qqb</a></li>
+            <li><a href="http://bit.ly/HDT9R9">Part 2 http://bit.ly/HDT9R9</a></li>
+            <li><a href="http://bit.ly/Ip2RIw">Part 3 http://bit.ly/Ip2RIw</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Additional Resources</h2>
+          <p>Postal.js on Github</p>
+          <p><a href="https://github.com/ifandelse/postal.js">https://github.com/ifandelse/postal.js</a></p>
+        </section>
+
+        <section>
+          <h2>Additional Resources</h2>
+          <p>jsFiddle examples</p>
+          <p><a href="http://jsfiddle.net/ifandelse/NTPcT">http://jsfiddle.net/ifandelse/NTPcT</a></p>
+        </section>
+
+        <section>
+          <h2>Additional Resources</h2>
+          <p>Jim Cowart <a href="http://www.twitter.com/ifandelse">@ifandelse</a></p>
+          <div>
+            <img src="img/jim-cowart-twitter.png" class="centerme" />
+          </div>
+        </section>
+
+        <section>
+          <h1>THE END</h1>
+          <div>
+            <img src="img/simonpegg2.jpg" class="centerme" />
+          </div>
+          <p><small>(probably a real picture of Jim Cowart)</small></p>
+        </section>
+      </div>
+
+      <!-- The navigational controls UI -->
+      <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+      </aside>
+
+      <!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+      <div class="progress"><span></span></div>
+    </div>
+    
+    <script src="js/reveal.js"></script>
+    <!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+    <script src="lib/highlight.js"></script>
+    <script src="lib/classList.js"></script>
+    <script>
+      // Parse the query string into a key/value object
+      var query = {};
+      location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+        query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+      } );
+
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // If true; each slide will be pushed to the browser history
+        history: true,
+
+        // Flags if mouse wheel navigation should be enabled
+        mouseWheel: true,
+
+        // Apply a 3D roll to links on hover
+        rollingLinks: true,
+
+        // UI style
+        theme: query.theme || 'default', // default/neon
+
+        // Transition style
+        transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+      });
+
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
