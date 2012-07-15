@@ -1,40 +1,61 @@
 var postal = require('postal');
 
-var pace = 2000;
+var pace = 0,
+  loop = null,
+  paceChannel = postal.channel('fitbuddy', 'pace'),
+  paceIncreaseChannel = postal.channel('fitbuddy', 'pace.increase'),
+  paceDecreaseChannel = postal.channel('fitbuddy', 'pace.decrease'),
+  elevationChangeChannel = postal.channel('fitbuddy', 'elevation.change');
 
-var paceChannel = postal.channel('pace');
-var paceChangeChannel = postal.channel('pace.change');
-
-var simulateRun = function () {
+var run = function () {
   paceChannel.publish({currentPace: pace});
 };
 
-var loop = setInterval(simulateRun, pace);
+elevationChangeChannel.subscribe(function (data) {
+  var paceChange = -(data.delta / 2);
+  module.exports.change(paceChange);
+});
 
-exports.accel = function (increment, callback) {
+module.exports = {
+  accel: function (increment, callback) {
+    setTimeout(function () {
+      if (increment === 0) {
+        return callback(null, 'no pace change');
+      }
+      if (loop) {
+        clearInterval(loop);
+      }
+      pace += increment;
+      paceIncreaseChannel.publish({newPace: pace});
+      loop = setInterval(run, 1000);
+      if (callback) {
+        callback(null, 'pace incremented by ' + increment);
+      }
+    }, 0);
+  },
 
-  setTimeout(function () {
-    if ((pace - increment) <= 100) {
-      pace = 100;
-      return callback('PACE CANNOT CANNOT BE HIGHER THAN 100');
+  decel: function (decrement, callback) {
+    setTimeout(function () {
+      if (decrement === 0) {
+        return callback(null, 'no pace change');
+      }
+      if (loop) {
+        clearInterval(loop);
+      }
+      pace -= decrement;
+      paceDecreaseChannel.publish({newPace: pace});
+      loop = setInterval(run, 1000);
+      if (callback) {
+        callback(null, 'pace decremented by ' + decrement);
+      }
+    }, 0);
+  },
+
+  change: function (value, callback) {
+    if (value > 0) {
+      this.accel(value, callback);
+    } else if (value < 0) {
+      this.decel(Math.abs(value), callback);
     }
-    clearInterval(loop);
-    pace -= increment;
-    loop = setInterval(simulateRun, pace);
-    callback(null, 'pace incremented by ' + increment);
-  }, 0);
-};
-
-exports.decel = function (decrement, callback) {
-
-  setTimeout(function () {
-    if ((pace + decrement) >= 5000) {
-      pace = 5000;
-      return callback('PACE CANNOT BE LOWER THAN 5000');
-    }
-    clearInterval(loop);
-    pace += decrement;
-    loop = setInterval(simulateRun, pace);
-    callback(null, 'pace decremented by ' + decrement);
-  }, 0);
+  }
 };
