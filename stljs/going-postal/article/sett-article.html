@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0044)http://sett.ociweb.com/sett/settJun2012.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<meta name="description" content="Going Postal with postal.js">
+<meta name="keywords" content="OCI, SETT, Software Engineering Tech Trends, postal.js">
+<meta name="subject" content="Going Postal with postal.js">
+<title> Object Computing, Inc. —&nbsp;Software Engineering Tech Trends —&nbsp;June&nbsp;2012</title>
+<link rel="stylesheet" type="text/css" href="./sett-article_files/SETT.css">
+<link rel="stylesheet" type="text/css" href="./sett-article_files/SyntaxHighlighterModified.css">
+<style type="text/css"></style><link type="text/css" rel="stylesheet" href="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/page_context.js"></script></head>
+<body screen_capture_injected="true" cz-shortcut-listen="true">
+<div>
+   <script type="text/javascript" src="./sett-article_files/shCoreStaticInclude.js"></script>
+    <a name="top"> </a>
+    <div class="quicklinks">
+		<a name="top"> </a>
+		<a href="http://www.ociweb.com/">Home</a> | 
+		<a href="http://www.ociweb.com/sett/index.html"> Software Engineering Tech Trends Archive</a> | 
+		<a href="http://sett.ociweb.com/sett/settJun2012.html#ocieducationalservices">OCI Educational Services</a>
+	</div>
+    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+      <tbody>
+        <tr>
+          <td><a href="http://www.ociweb.com/"><img moz-do-not-send="true" alt="" src="./sett-article_files/OCILogo.png" height="120" width="180"></a></td>
+          <td><img moz-do-not-send="true" alt="" src="./sett-article_files/Left.png" height="58" width="10"></td>
+          <td width="100%"> <img moz-do-not-send="true" alt="" src="./sett-article_files/Middle.png" height="58" width="100%"> </td>
+          <td><img moz-do-not-send="true" alt="" src="./sett-article_files/Right.png" height="58" width="278"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <hr> <img moz-do-not-send="true" alt="" src="./sett-article_files/SETT.png" height="34" width="377">
+	  <br>
+      <br>
+    </div>
+</div>
+
+    <h1>Going Postal with postal.js</h1>
+    <p class="author">
+      by<br>
+      Nicholas Cloud, Software Engineer<br>
+      Object Computing, Inc. (OCI)
+    </p>
+
+    <h2>JavaScript: a chimera</h2>
+
+    <p>
+      One day Brendan Eich forgot to have his morning shot of espresso and, in a decaffeinated stupor, created the JavaScript programming language.  I cannot vouch for the accuracy of this claim but, as this is not a historical exposition, we will assume the truth of it.  JavaScript is unique because it is a functional language with classical trappings.  JavaScript code may be organized according to classical conventions primarily through the use of JavaScript constructor functions, or it may be organized according to functional conventions in which individual functions are composed and passed as arguments to other functions.
+    </p>
+
+    <p>
+      JavaScript objects can message each other via methods, and JavaScript functions can message each other via invocation.  In the dark and distant past, it was common for constructor functions (classes) and normal functions to live in the global JavaScript scope, which meant that all classes and functions were accessible everywhere.  This was often mitigated by creating classes and functions as public members of a global, named object literal, so that what was once <code>var bar = function () {...};</code> became <code>var Foo = {}; Foo.bar = function () {...};</code>.  This was a much more pleasant situation, but it did nothing to prevent developers from overriding members of the named object literal, since it was still in the global scope.
+    </p>
+
+    <p>
+      A far more elegant solution to this problem has come into favor in modern times: the JavaScript module pattern.  Because JavaScript is a functional language, it can leverage closures to give objects returned from a function access to what would otherwise be "private" data and code within the function.  This object then becomes a public API to the code contained within its closure function.  Instead of organizing classes and functions in the global scope, or making them members of a global object, these constructs can be declared inside of a large function closure and only the parts that should be exposed publically can be returned from the closure function invocation, creating a form of encapsulation.  Other code can "message" code within the closure by invoking members on the returned object (or, if the returned object is a function itself, invoking it directly).
+    </p>
+
+    <p>
+      The module pattern solves the problem of encapsulation, but objects still need to communicate.  We want modules to message other modules so we can build composable JavaScript applications.  Since modules are large function closures, it makes sense that the closure might accept, as function arguments, the public objects returned from other module closures.  Messages could be sent to, and received from, other modules by interacting with these objects.  This is, in fact, how many JavaScript programs are structured.  There are even libraries such as <a href="http://requirejs.org/" target="_blank" title="require.js">require.js</a> that will resolve and "inject" module dependencies for the developer.  This approach works well for a manageable set of modules, but what happens when modules, like Tribbles, begin to multiply?  What happens when one operation in a given module affects several, or all other modules in an application?  The list of dependencies begins to grow, and every time a new module is introduced, otherwise working code must be changed.
+    </p>
+
+    <p>
+      This can be avoided. We have the technology. We can build it.
+    </p>
+
+    <h2>When going postal <em>is</em> the answer</h2>
+
+    <p>
+      It is fortunate for us that a solution to this problem already exists: the message bus.  Gregor Hohpe, in the excellent volume <em>Enterprise Integration Patterns</em>, defines a message bus as "a common command set, and a messaging infrastructure to allow different systems to communicate through a shared set of interfaces."<sup><a href="http://sett.ociweb.com/sett/settJun2012.html#fn1">1</a></sup> While JavaScript is hardly identified with "enterprise architecture" (though, oddly enough, it is probably found in nearly every enterprise application in some way or another), the message bus pattern is still an elegant approach to decoupling an application.  <a href="./sett-article_files/postal.js" target="_blank">postal.js</a> is an in-memory JavaScript message bus, maintained as an open source project by Jim Cowart, "husband, father, architect, developer, tea drinker"<sup><a href="http://sett.ociweb.com/sett/settJun2012.html#fn2">2</a></sup>, and international man of mystery. (I may have embellished that last part.)  According to the postal.js README:
+      </p><blockquote cite="./sett-article_files/postal.js">"Using a local message bus can enable to you de-couple your web application's components in a way not possible with other 'eventing' approaches. In addition, strategically adopting messaging at the 'seams' of your application (e.g. - between modules, at entry/exit points for browser data and storage) can not only help enforce better overall architectural design, but also insulate you from the risks of tightly coupling your application to 3rd party libraries."<sup><a href="http://sett.ociweb.com/sett/settJun2012.html#fn3">3</a></sup></blockquote>
+    <p></p>
+
+    <p>
+      If you use JavaScript on the client, there is a good chance you also use jQuery or some other DOM abstraction library to handle DOM events and perhaps create your own custom events.  If you are writing JavaScript on the server you probably use Node.js and the EventEmitter object to create and handle events as well.  postal.js does not replace these eventing mechanisms, but instead augments an application by providing a common messaging layer between modules that, themselves, leverage these eventing technologies internally.
+    </p>
+
+    <p>
+      All features of postal.js are accessed via the <code>postal</code> object.  In the browser, the <code>postal</code> object is typically attached to the <code>window</code> object by default.  I explained earlier that, while this is a workable solution, global objects are typically a bad idea for many different reasons.  Instead, wrapping code in closures and passing dependencies to them as function parameters is an excellent way to avoid polluting the global scope.  Fortunately, postal.js ships with two alternate scripts that conform to this pattern:
+
+      </p><ul>
+        <li>an AMD-compatible<sup><a href="http://sett.ociweb.com/sett/settJun2012.html#fn4">4</a></sup> script that can be used with AMD loaders like require.js, and</li>
+        <li>a Node.js module that assigns the <code>postal</code> object to <code>exports</code> which can be accessed by other Node.js modules
+      </li></ul>
+
+      Regardless of how your code is organized and your dependencies are managed, however, postal concepts and API calls remain the same.
+    <p></p>
+
+    <h3>Channels and Topics</h3>
+
+    <p>
+      When I send a letter to a friend who lives in another city, I specify the city, state, and street address to which the message will be delivered.  It is entirely possible that a street in another city may share the same name as my friend's street (e.g., Washington Street), but because I have "namespaced" the address with the city in which my friend lives, the post office knows exactly which street is meant.
+    </p>
+
+    <p>
+      Messages are routed by the message bus according to the <em>channel</em> on which they are published, and the <em>topic</em> the message specifies.  A channel is a logical container for topics.  Channel names are unique, but topics, like streets in a city, are only unique for the channel of which they are a part (i.e., topics with the same name can exist under different channels).  When a message is placed on the message bus both a channel and topic are specified, and only handlers which listen for that topic, on that specific channel, will receive that message.  Channels are convenient ways to organize groups of "topics" at a very high level.  Topics are the individual message types that a subscriber might be interested in within a channel.
+    </p>
+
+    <p>
+      To add a message subscription, a channel object is created by invoking the <code>postal.channel()</code> method, supplying one set of the following arguments:
+      </p><ul>
+        <li>channel name and topic name (both strings); <strong>or</strong></li>
+        <li>an object with <code>channel</code> and <code>topic</code> properties (both strings); <strong>or</strong></li>
+        <li>a topic name (the channel name is defaulted to "/", or the "global channel"); <strong>or</strong></li>
+        <li>an object with a <code>topic</code> property (the channel name is defaulted to "/", or the "global channel")</li>
+      </ul>
+    <p></p>
+
+    <p>
+      In the following example I create two channels, <code>vehicle</code> and <code>payment</code>, both of which have a <code>reverse</code> topic.  By calling <code>postal.channel()</code> I obtain subscription definition objects with which I add message handlers to the message bus.  I then publish a message on the vehicle channel, specifying the <code>reverse</code> topic, and the corresponding vehicle subscription callback is invoked.  Notice also that, while I hold a reference to the <code>vehicleChannel</code> object, I can always ask postal for the channel by name/topic elsewhere in code; I need not pass around a channel reference, which is desireable because a message bus is designed to facilitate communication between subsystems that may not even know about each other.
+    </p>
+
+    <pre><code>
+var vehicleChannel = postal.channel('vehicle', 'reverse');
+//or: var vehicleChannel = postal.channel({channel: 'vehicle', topic: 'reverse'});
+var paymentChannel = postal.channel('payment', 'reverse');
+
+vehicleChannel.subscribe(function (data) {
+  //this callback will be invoked
+  console.log('backing up ' + data.qty + ' feet');
+});
+
+paymentChannel.subscribe(function (data) {
+  //this callback will not be invoked
+  console.log('refunding ' + data.qty + ' dollars');
+});
+
+postal.channel('vehicle', 'reverse').publish({qty: 3});
+    </code></pre>
+
+    <p>
+      When a subscription is no longer needed, calling <code>unsubscribe()</code> on the subscription object prevents the message handler from receiving any further messages from the bus.
+    </p>
+
+    <h3>Wildcards: <code>#</code> and <code>*</code></h3>
+
+    <p>
+      Topics may be refined through dot notation.  It is typically the case that a topic may subsume a number of more specific topics, for which additional channels would be a waste, but nevertheless warrant their own handlers when messages are published on the bus.  For example, <code>order.placed</code>, <code>order.packaged</code>, <code>order.packaged.labeled</code>, <code>order.shipped.ground</code>, and <code>order.shipped.air</code> are all topics related to an order delivery pipeline that many parts of an application would be interested in.
+    </p>
+
+    <p>
+      If an event handler applies to multiple topic refinements, wildcards can be used to eliminate the need for multiple handlers.  In the following example I set up a handler to respond to any orders that have been shipped, regardless of the shipping method.
+    </p>
+
+    <pre><code>
+var fulfillmentChannel = postal.channel('fulfillment', 'order.shipped.#');
+fulfillmentChannel.subscribe(function (data) {
+  //do something with the data
+});
+    </code></pre>
+
+    <p>
+      The "hash" or "pound" symbol can be used as wildcard for <em>one segment of a topic name</em>.  In our fulfillment example, I used the <code>#</code> wildcard to replace the specific <code>ground</code> and <code>air</code> portions of the topic since I was only interested in the fact that an order had actually shipped.  The "star" or "asterisk" symbol may be used as a wildcard for any consecutive characters in a topic name, and is not limited to individual segments like the hash symbol.  If I were interested in all order events, for example, I might use the topic <code>order.*</code> or <code>order*</code> when requesting a channel.<sup><a href="http://sett.ociweb.com/sett/settJun2012.html#fn5">5</a></sup>
+    </p>
+
+    <h3>Subscriptions</h3>
+
+    <p>The subscription object in postal.js has a number of helpful methods that provide precise control over how and when subscription callbacks are executed.  These API methods may be used individually, or chained together for more complicated callback scenarios.  <em>Note that in most of these examples I am using the global "/" channel by omitting the channel argument from the <code>postal.channel()</code> call.  This omission is a definite indication of laziness.</em></p>
+
+    <h3><code>distinctUntilChanged()</code></h3>
+
+    <p>
+      <em>Prevents subscription callbacks from handling duplicate, consecutive topics.</em>
+    </p>
+
+    <p>
+      It is often desirable to limit the number of times a program can respond to consecutive application event.  This is especially important for user interaction scenarios when an accidental double-click could mean the difference between a happy customer with a single credit card charge or an irate customer paying overdraft fees.
+    </p>
+
+    <p>
+      In the following example, a fictitious shopping cart prevents a customer from accidentally adding a shirt to her order twice.
+    </p>
+
+    <pre><code>
+var total = 0;
+var c = postal.channel('shop', '#.selected');
+c.subscribe(function (item) {
+  total += item.price;
+}).<strong>distinctUntilChanged()</strong>;
+ 
+postal.channel('shop', 'shirt.selected').publish({id: 102, price: 10});
+//duplicate is ignored
+postal.channel('shop', 'shirt.selected').publish({id: 102, price: 10});
+postal.channel('shop', 'slacks.selected').publish({id: 110, price: 15});
+postal.channel('shop', 'shoes.selected').publish({id: 255, price: 20});
+
+//total price is 10 + 15 + 20 = 45
+    </code></pre>
+
+    <h3><code>distinct()</code></h3>
+
+    <p>
+      In many modern video games a player can earn achievements by performing certain actions within the game.  In role-playing games, for example, players often collect "loot" that they may then use for different purposes.  Some of this "loot" is very valuable, and an achievement might be awarded to a player who collects a certain set of unique items.  The code below uses the subscription's <code>distinct()</code> method to simulate this system and award a player for collecting a full set of armor.  Duplicate items will be ignored by the handler, because the achievement is only awarded when the player collects one type of each item.
+    </p>
+
+    <pre><code>
+var inventory = [];
+
+var c = postal.channel('loot.acquired');
+c.subscribe(function (item) {
+  inventory.push(item);
+  if (inventory.length === 3) {
+    postal.channel('achievement.earned').publish('full.armor.set');
+  }
+}).distinct();
+
+postal.channel('loot.acquired').publish('sword');
+postal.channel('loot.acquired').publish('shield');
+//duplicate ignored
+postal.channel('loot.acquired').publish('sword');
+//duplicate ignored
+postal.channel('loot.acquired').publish('shield');
+postal.channel('loot.acquired').publish('boots');
+//achievement earned!
+    </code></pre>
+
+    <h3><code>disposeAfter(maxCalls)</code></h3>
+
+    <p>
+      <em>Automatically unsubscribes a channel after a given number of handler invocations.</em>
+    </p>
+
+    <p>
+      An application may have an interest in system events, but at some threshold, ceases to care whether those events continue or not.  A channel subscription can be instructed to automatically "dispose" itself (unsubscribe, really) after it has handled a certain number of events.  If events are further published on the channel, the unsubscribed event handler will not be invoked.
+    </p>
+
+    <p>
+      Below I am interested in capturing a user's top three movies.  Once they have selected three their choice is irreversible, so I instruct the channel to unsubscribe once it has handled three events.
+    </p>
+
+    <pre><code>
+var favorites = [];
+var c = postal.channel('favorite.movies');
+c.subscribe(function (m) {
+  favorites.push(m);
+}).<strong>disposeAfter(3)</strong>;
+
+postal.channel('favorite.movies').publish('Hot Fuzz');
+postal.channel('favorite.movies').publish('Blade Runner');
+postal.channel('favorite.movies').publish('TRON');
+//oh darn, too late--already unsubscribed!
+postal.channel('favorite.movies').publish('Star Wars');
+
+//favorite moves are: Hot Fuzz, Blade Runner, and TRON
+    </code></pre>
+
+    <h3><code>withConstraint(predicate) / withConstraints(predicates)</code></h3>
+
+    <p>
+      <em>Will prevent the subscription handler from executing if a constraint is not met.</em>
+    </p>
+
+    <p>
+      Although we could add conditional logic in the body of an event handler, postal provides methods whereby we can specify one or more conditions that must be met in order for the event handler to be executed when a publish occurs on the channel.  This keeps the event handler unpolluted with criteria logic that is related to the behavior of the subscription.  In this example I am using a compound condition that tests both data outside of the message handler and the data placed on the bus.
+    </p>
+
+    <p>
+      If you have seen <em>Back to the Future</em> you know that the one constant of time travel is that a time machine must reach 88 MPH to traverse the ages.  Undoubtedly Doc Brown's code looked something like this:
+    </p>
+
+    <pre><code>
+var speed = 88;
+
+postal.channel('vehicle.accelerated').subscribe(function (passenger) {
+  timeTravel(passenger);
+}).<strong>withConstraint(function (passenger) {
+  return speed === 88 &amp;&amp; passenger === 'Marty';
+})</strong>;
+
+postal.channel('vehicle.accelerated').publish('Marty');
+    </code></pre>
+
+    <h3><code>withContext(context)</code></h3>
+
+    <p>
+      <em>Determines the value of <code>this</code> within a subscription callback.</em>
+    </p>
+
+    <p>
+      The JavaScript <code>this</code> keyword is schizophrenic.  Its identity changes depending on the scope in which it is used, and it is often not at all predictable.  A free-standing function is attached automatically to the global object (<code>window</code> in the browser), so the value of <code>this</code> within that function is the global object.  A function that is assigned to an object property (a method) will reference that object when <code>this</code> is used. The <code>Function</code> object prototype also has both <code>call()</code> and <code>apply()</code> methods which allow the value of <code>this</code> to be arbitrarily set by the developer when a function is invoked.
+    </p>
+
+    <p>
+      Because postal subscriptions use anonymous functions as callbacks, the value of <code>this</code> within the callback is, by default, the global object.  The postal API allows this to be manipulated, however, so that when a callback is invoked, the <code>this</code> variable may be set deterministically.  In the example below I want to modify a DOM element when my coffee is ready, and because I am lazy, I use <code>withContext()</code> to capture a reference to my "mug" DOM element, which will be the value of <code>this</code> within my callback.
+    </p>
+
+    <p>
+      It is also important to note that postal caches the object passed into <code>withContext()</code>, so in this case the DOM is traversed only once for the "mug" element.  All callbacks invocations will have a reference to the exact same <code>this</code> object.
+    </p>
+
+    <pre><code>
+var c = postal.channel('coffee.ready');
+
+c.subscribe(function (data) {
+  //this === window
+});
+
+c.subscribe(function (data) {
+  //this === $('#mug')
+}).<strong>withContext($('#mug'))</strong>;
+
+postal.channel('coffee.ready').publish({});
+postal.channel('coffee.ready').publish({});
+postal.channel('coffee.ready').publish({});
+    </code></pre>
+
+    <h3><code>withDebounce(milliseconds)</code></h3>
+
+    <p>
+      <em>Delays execution of the callback for a given number of milliseconds after the last time the callback would have been invoked.</em>
+    </p>
+
+    <p>
+      My wife often says many things to me over a very short period of time.  She is very good at communicating, but I am not as good at listening.  I tend to remember the last thing she tells me but everything prior to that evades my short term memory.  This is because, by default, I have <code>debounce</code> enabled.
+    </p>
+
+    <p>
+      In postal, <code>debounce()</code> is used to delay the execution of a callback by a specific period of time <em>after the last time the callback would have been invoked had the delay not been in place.</em>  When a stream of messages are published to postal in rapid succession, often a handler is only interested in the last of the messages, which represents the final state of some operation.  When <code>debounce()</code> is called on a subscription object, postal will delay the execution of the subscription callback by the duration specified.  If postal receives a message for the handler before this timeframe has elapsed, it resets the timer to zero and begins to wait again.  If the time elapses with no further interruption, the callback is invoked.
+    </p>
+
+    <p>
+      In the following example I am listening for the <code>window.resize</code> event, which is notoriously noisy.  The event fires often as the user drags the edge of the browser, but I am really only interested in the final size of the viewport when the resizing has been completed.  I use <code>debounce()</code> to delay the invocation of my callback for exactly one second each time a resize message is published to postal.  When the message handler executes, it will receive the <em>last</em> message placed on the bus.  When I receive that event, I resize the element with an ID value of <code>#movie</code> to be half the height and width of the window.
+    </p>
+
+    <pre><code>
+var c = postal.channel('resize');
+
+c.subscribe(function (dim) {
+  $('#movie').height(dim.h / 2)
+    .width(dim.w / 2);
+}).<strong>withDebounce(1000)</strong>;
+
+$(window).resize(function () {
+  postal.channel('resize').publish({
+    h: this.innerHeight,
+    w: this.innerWidth
+  });
+});
+    </code></pre>
+
+    <h3><code>withDelay(milliseconds)</code></h3>
+
+    <p>
+      <em>Delays the subscription callback execution for a given number of milliseconds.</em>
+    </p>
+
+    <p>
+      A delay is similar to a debounce in that they both defer the invocation of a callback until some future point in time.  Unlike a debounce, a delay does not discard all published messages except the last.  A delayed callback will still react to all messages published to its channel during the delay period, but it defers <em>all invocations</em>.
+    </p>
+
+    <p>
+      Waking up in the morning can be a difficult task, so I can delay the inevitable by hitting the snooze button on my alarm clock.  In the example below I am only publishing one "wakeup.alarm" message to the bus, but if I had published more, the callback would execute for each message published.
+    </p>
+
+    <pre><code>
+var c = postal.channel('wakeup.alarm');
+
+//going to snooze for 30 mins.
+var snoozeDuration = (30 * 60 * 1000);
+
+c.subscribe(function (data) {
+  
+  //make sure this lazy ass gets out of bed!
+  alarm.buzz({volume: data.volume});
+
+}).<strong>withDelay(snoozeDuration)</strong>;
+
+postal.channel('wakeup.alarm').publish({volume: 'annoying'});
+    </code></pre>
+
+    <h3><code>withPriority(priority)</code></h3>
+
+    <p>
+      <em>Associates a subscription callback with an arbitrary priority number; higher priority callbacks are triggered first.</em>
+    </p>
+
+    <p>
+      Typically the order in which messages are handled on a message bus is irrelevant, but occasionally it is helpful to specify the order in which handlers react to published messages.  The subscription object provides a <code>withPriority()</code> method that accepts a number indicating the relative priority its handler should receive.  A lower number will take precedence over a higher number (think of it link an array index - lower numbered indices are iterated over first).
+    </p>
+
+    <p>
+      I've created two handlers that respond to a stock event messages--one handler represents stock holders, the other, inside traders.  Even though the stock holder subscription is created first, its larger priority number means that it will be executed after the inside trader handler.
+    </p>
+
+    <pre><code>
+var c = postal.channel('stock.event');
+
+var stockholder = function (data) {
+  console.log('Stockholder knows!');
+};
+
+var insider = function (data) {
+  //will always know first!
+  console.log('Insider knows!');
+};
+
+c.subscribe(stockholder).<strong>withPriority(100)</strong>;
+c.subscribe(insider).<strong>withPriority(75)</strong>;
+
+postal.channel('stock.event').publish({action: 'sell!'});
+    </code></pre>
+
+    <h3><code>withThrottle(milliseconds)</code></h3>
+
+    <p>
+      <em>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</em>
+    </p>
+
+    <p>
+      A throttled subscription will invoke its handler once, then wait for a specified period of time before invoking it again, regardless of the number of messages that are published to the channel during that time.  Once the throttle period has elapsed, the handler may then respond to another message, but will ignore subsequent messages until the throttle period has, again, elapsed.  This allows a subscription to effectively "ignore" a steady stream of messages, preferring to respond to individual messages, at timed intervals, instead.  Like <code>debounce()</code> and <code>withDelay()</code>, this API method is designed to mitigate the demand of high message traffic.
+    </p>
+
+    <p>
+      GPS tracking is a good source of constant, streaming data. In the example that follows I simulate the movement of a high-speed vehicle with a recursive function that increments its position on a linear path.  Each time the movement function executes--every 0.5 seconds--it publishes an event to the bus.  The subscription handler has a throttle of two seconds because the movement data is being published too quickly.  The callback handler will be invoked for (roughly) every third message.
+    </p>
+
+    <pre><code>
+var c = postal.channel('dhs.track.movement');
+
+c.subscribe(function (pos) {
+  console.log('Moved to ' + pos);
+}).<strong>withThrottle(2000)</strong>;
+
+(function move (timesMoved) {
+  if (timesMoved === 50) return;
+  postal.channel('dhs.track.movement').publish(timesMoved);
+  setTimeout(function () {
+    move(timesMoved + 1);
+  }, 500);
+}(0));
+    </code></pre>
+
+    <h3><code>defer()</code></h3>
+
+    <p>
+      <em>Prevents the callback from executing until the current execution stack is cleared. Useful for long computations that could make the UI non-responsive.</em>
+    </p>
+
+    <p>
+      One key principle of user interface design is that the user should not be kept waiting.  A responsive UI is a friendly UI.  Since JavaScript is executed on a single thread in the browser, it must use clever tricks to simulate parallel operations.  Using a subscription's <code>defer()</code> method effectively short-circuits these tricks, and forces the runtime to finish what it's doing before the message handler executes its code.  This allows the UI to stay responsive for as long as possible before performing resource-intensive operations.
+    </p>
+
+    <pre><code>
+var largeDataSet = {}; //lots of data in here
+
+var c = postal.channel('schedule', 'query');
+c.subscribe(function (query) {
+  var item, results = [];
+  for (item in largeDataSet) {
+    if (!largeDataSet.hasOwnProperty(item)) continue;
+    if (query.matches(item)) {
+      results.push(item);
+    }
+  }
+  postal.channel('schedule', 'filter').publish(results);
+}).<strong>defer()</strong>;
+
+//elsewhere...
+$('input[type="checkbox"]').change(function () {
+  var checkbox = this;
+  var query = {
+    matches: function (item) {
+      return item.title === checkbox.value;
+    }
+  };
+  postal.channel('schedule', 'query').publish(query);
+});
+    </code></pre>
+
+
+    <h2>Putting it all together</h2>
+
+    <p>
+      So far we've seen what postal.js can do, but not how it might actually be used.  To illustrate how an application using modules might take advantage of the postal message bus, I have created a demo project that is freely available in my <a href="https://github.com/nicholascloud/writing/tree/master/sett/going-postal/demo" target="_blank">Github repository</a>.  While duplicating the project code in this article would be prohibitive, I will give you an overview of the project (with pictures!) and explain how the code is organized, and how it leverages postal.js to manage module interaction.
+    </p>
+
+    <p>
+      My demo project is called <em>LEARNyou</em>.  It is a small, fictitious application that is designed to connect people with certain skills to  people who want to learn those skills.  If I want to learn how to replace kitchen cabinets, I can browse to <em>LEARNyou</em> and search for someone in my city that's willing to teach me how to do it (for a fee, of course).
+    </p>
+
+    <p>
+      The initial set of use cases for this application is very small:
+      </p><ul>
+        <li>users can pick a skill category to see people offering to teach skills in that category</li>
+        <li>users can search for a particular skill and see people offering to teach that skill</li>
+        <li>users can view details about someone who is willing to teach a skill</li>
+      </ul>
+    <p></p>
+
+    <p>
+      The application is a single page divided into several functional areas with which the user may interact.  At the top is a "tag cloud" that displays all skill categories.  In the middle is a list of people within a category, and the services that they are offering.  When a user clicks on a particular category the offers below the tag cloud change.  At the bottom of the page is a search box in which the user can enter queries that will filter both the tag cloud and the available offers if matches are found.
+    </p>
+
+    <figure style="display:block; margin:auto; padding:2%; width:500px;">
+      <img src="./sett-article_files/learnyou01.png" alt="LEARNyou home screen">
+      <figcaption>LEARNyou</figcaption>
+    </figure>
+
+    <p>
+      The application's JavaScript code has been separated into modules that correspond to the functional areas of the page, as well as some utility modules that handle lower-level tasks.  All modules are located under the <code>js/</code> directory and are written for require.js.  (Understanding how require.js works is not necessary for understanding the structure of the application.  All you need to know is that require.js loads and passes dependencies into modules for you.  In this case, I am mainly using require.js to pass the jQuery and postal objects to my modules).
+
+      Below is a list of modules, along with what messages they subscribe and listen to on the message bus.
+    </p>
+
+    <h3><code>home.js</code></h3>
+    
+    <p>
+      <em>Configures require.js.</em>
+    </p>
+    
+    <ul>
+      <li>when all modules have been loaded, publishes a "ready" message to the message bus</li>
+    </ul>
+
+    <h3><code>search.js</code></h3>
+    
+    <p>
+      <em>Queries the data store when the user performs a search.</em>
+    </p>
+    
+    <ul>
+      <li>publishes a "search.categories" message when categories on the page should change to match search results</li>
+      <li>publishes a "search.offers" message when offers on the page should change to match search results</li>
+    </ul>
+
+    <figure style="display:block; margin:auto; padding:2%; width:500px;">
+      <img src="./sett-article_files/learnyou03.png" alt="Performing a search highlights applicable categories and changes the visible offers">
+      <figcaption>Performing a search highlights applicable categories and changes the visible offers</figcaption>
+    </figure>
+
+    <h3><code>tagCloud.js</code></h3>
+    
+    <p>
+      <em>Manages user interaction with the tag cloud at the top of the page.</em>
+    </p>
+    
+    <ul>
+      <li>subscribes to a message which is generated when the whole page has loaded and highlights an initial category for the user</li>
+      <li>subscribes to a "search.categories" message generated by the search module; highlights categories that match search results</li>
+      <li>publishes a "categories.changed" message whenever one or more category has been selected</li>
+      <li>subscribes to a "categories.changed" message generated by <em>itself</em>; highlights the categories that have been selected</li>
+    </ul>
+
+    <figure style="display:block; margin:auto; padding:2%; width:500px;">
+      <img src="./sett-article_files/learnyou02.png" alt="Choosing a different category highlights that category and changes the visible offers">
+      <figcaption>Choosing a different category highlights that category and changes the visible offers</figcaption>
+    </figure>
+    
+    <h3><code>offers.js</code></h3>
+
+    <p>
+      <em>Manages user interaction with the list of offers below the tag cloud and loads and refreshes offers when the user selects a category from the tag cloud or when the user performs a search.</em>
+    </p>
+        
+    <ul>
+      <li>subscribes to a "categories.changed" message generated by the tag cloud module which indicates that a new category has been selected; offers are then refreshed based on the new category</li>
+      <li>subscribes to a "search.offers" message generated by the search module; loads offers that match search results</li>
+      <li>expands an offer's details when it is clicked; no message is published for this event</li>
+    </ul>
+
+    <figure style="display:block; margin:auto; padding:2%; width:500px;">
+      <img src="./sett-article_files/learnyou04b.png" alt="Clicking on an offer reveals offer details">
+      <figcaption>Clicking on an offer reveals offer details</figcaption>
+    </figure>
+
+    <h3>Utility scripts</h3>
+
+    <p>The utility scripts do not subscribe to messages from, or publish to, the message bus, but provide plumbing for the rest of the application.</p>
+
+    <ul>
+      <li><code>data.js</code> - a data access module for hard-coded demo data.</li>
+      <li><code>jqueryext.js</code> - some simple jQuery extensions.</li>
+      <li><code>querystring.js</code> - a small module that parses query string parameters.</li>
+      <li><code>template.js</code> - a small module that builds DOM elements using jQuery.</li>
+    </ul>
+
+    <p>
+      Even though <em>LEARNyou</em> is a simple demo project, it still makes good use of the module pattern to encapsulate code, and uses the postal message bus to allow these modules to communicate without having to know about each other.  Each module subscribes to and publishes messages as needed.
+    </p>
+
+    <h2>Conclusion</h2>
+
+    <p>
+      There are two important ideas that are common to applications developed on all platforms, in all languages, and in all paradigms.
+    </p>
+
+    <p>
+      The first idea is that code should, to some extent, be isolated from other code.  In classical languages encapsulation is accomplished by access modifiers on classes and members; in functional languages this is accomplished with closures; and in procedural languages this is accomplished by the religious inclusion of underscores in structure member names, a ritual which reminds other developers to behave themselves and pretend that said members are, in fact, private.
+    </p>
+
+    <p>
+      The second idea is that these isolated pieces of code, while hiding their implementation from prying eyes, nevertheless must communicate with each other, much like those awkward conversations we all have every year at Thanksgiving.  Regardless of how code is organized, if it cannot communicate or message other code our programs would be severely restricted and code reuse would cease to be possible.
+    </p>
+
+    <p>
+      On the surface, both of these ideas might appear to be antithetical.  How can hidden or encapsulated code, about which external code must necessarily be agnostic, communicate with the very code it hides from?  It can do so by delegating communication to a neutral third party, who acts as a message broker on behalf of all units of code involved.  For JavaScript modules, postal.js excels at this role.  The postal.js API is simple and terse, and sports a powerful set of features that give a developer significant control over how and when messages are handled.  Channels and topics are a convenient way for applications to organize messages, and wildcard subscriptions eliminate the need for overly-granular callbacks.
+    </p>
+
+    <p>
+      The power of postal.js makes it a library fit for every JavaScript developer's toolkit.
+    </p>
+
+    <h2>Footnotes</h2>
+
+    <ol>
+      <li><a name="fn1">Hohpe, Gregor. <em>Enterprise Integration Patterns</em>. 2004 Pearson Education, Inc. p. 139.</a></li><a name="fn1">
+      </a><li><a name="fn1"></a><a name="fn2">Cowart, Jim. "About". </a><a href="http://freshbrewedcode.com/jimcowart/about/" target="_blank">Fresh Brewed Code</a>. n.d. web 13 May 2012.</li>
+      <li><a name="fn3">Cowart, Jim. "README". </a><a href="./sett-article_files/postal.js" target="_blank">ifandelse/postal.js</a>. Github.  23 April 2012.</li>
+      <li><a name="fn4">cmosher01. "AMD". </a><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank">amdjs/amdjs-api</a>. Github.</li>
+      <li><a name="fn5">In future versions of postal.js wildcards will be inversed so that <code>*</code> will act as a segment wildcard and <code>#</code> will act as a consecutive character wildcard. This is closer to established wildcard patterns, such as that of </a><a href="http://blog.springsource.org/2010/06/14/understanding-amqp-the-protocol-used-by-rabbitmq/" title="AMQP" target="_blank">AMQP</a>.</li>
+    </ol>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="./sett-article_files/postal.js" title="postal.js Github repository">postal.js Github repository</a></li>
+      <li><a href="http://jsfiddle.net/ifandelse/FdFM3/" title="postal.js jsFiddle examples">postal.js jsFiddle examples</a></li>
+      <li><a href="http://www.twitter.com/ifandelse" title="Jim Cowart (@ifandelse) on Twitter">Jim Cowart (@ifandelse) on Twitter</a></li>
+      <li><a href="http://freshbrewedcode.com/jimcowart/2011/12/05/client-side-messaging-with-postal-js-part-1/" title="Client-side Messaging in JavaScript -- Part 1 (Postal.js)">Client-side Messaging in JavaScript -- Part 1 (Postal.js)</a></li>
+      <li><a href="http://freshbrewedcode.com/jimcowart/2012/02/02/client-side-messaging-in-javascript-part-2-postal-js/" title="Client-side Messaging in JavaScript -- Part 2 (Postal.js)">Client-side Messaging in JavaScript -- Part 2 (Postal.js)</a></li>
+      <li><a href="http://freshbrewedcode.com/jimcowart/2012/03/19/client-side-messaging-in-javascript-part-3-anti-patterns/" title="Client-side messaging in JavaScript -- Part 3 (anti-patterns)">Client-side messaging in JavaScript -- Part 3 (anti-patterns)</a></li>
+    </ul>
+
+
+<hr>
+
+<p class="footer">
+<strong>Object Computing, Inc.</strong> is located in  
+            St. Louis, MO and a Member of the Object Management
+            Group, OMG. OCI specializes in distributed computing using
+            object-oriented and web-enabled technologies and provides
+            <a href="http://www.ociweb.com/consulting/index.html">Consulting</a>,
+            <a href="http://www.ociweb.com/education/index.html">Education</a>,
+            <a href="http://www.ociweb.com/solution-engineering/index.html">Solutions Engineering</a>
+            and
+            <a href="http://www.ociweb.com/product/index.html">Open Source Development/Support</a>
+            services to clients nation-wide. For more information contact us in
+            St. Louis, MO (314)579-0066, Tempe, AZ (480)752-0042 or email
+            <a href="mailto:info@ociweb.com">info@ociweb.com</a>.
+        </p>
+<p class="footer">
+            Inquiries regarding
+            <a class="career" href="http://www.ociweb.com/careers/index.html">Career Opportunities</a>
+            can be directed to: <a href="mailto:hr@ociweb.com">hr@ociweb.com</a>.
+        </p>
+<p class="footer">
+            The <em>
+<strong>Software Engineering Tech Trends</strong>
+</em>
+            is a monthly newsletter. The purpose and intent of this publication is to
+			partner with clients in developing solutions for their most demanding mission critical
+			systems, by leveraging our deep experience in software and systems engineering. We promote
+			non-proprietary, standards-based solutions that afford our clients greater control and 
+			broader choice. Knowledge transfer is a fundamental aspect of services we offer our customers.
+			We tailor our engagements to meet customer needs. We foster the professional growth of our 
+			employees and reward excellence.
+
+                To
+                <a href="mailto:sett-join@ociweb.com">subscribe</a>
+                or
+                <a href="mailto:sett-leave@ociweb.com">unsubscribe</a>
+</p>
+<p class="footer">
+            Copyright
+            ©2008-2012.
+            Object Computing, Inc. All rights reserved.<br>
+<br>Java and all
+            Java-based marks are trademarks or registered trademarks of Oracle Corporation.<br>
+<br>
+            .NET, C#, and .NET-based marks are trademarks or registered trademarks of Microsoft
+            Corporation.
+        </p>
+<div class="quicklinks">
+<a href="http://sett.ociweb.com/sett/settJun2012.html#top">Top</a>
+</div>
+<p>
+</p><table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td valign="bottom">
+<a href="http://validator.w3.org/">
+<img moz-do-not-send="true" alt="" src="./sett-article_files/valid-css2.png" width="88" height="31">
+</a>
+</td>
+</tr>
+</tbody></table>
+
+
+
+</body></html>

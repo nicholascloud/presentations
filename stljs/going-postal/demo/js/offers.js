@@ -52,12 +52,12 @@ define(['jquery', 'postal', 'data', 'template', 'jqueryext'],
     };
   }('#offers'));
 
-  bus.subscribe('categories.changed', function (categories) {
+  bus.channel('categories.changed').subscribe(function (categories) {
     offerUI.clear();
     offerUI.load(categories);
   });
 
-  bus.subscribe('search.offers', function (offers) {
+  bus.channel('search.offers').subscribe(function (offers) {
     offerUI.clear();
     offerUI.render(offers);
   });

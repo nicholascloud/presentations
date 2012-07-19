@@ -22,8 +22,8 @@ define(['jquery', 'postal', 'data'],
       if (result.count === 0) {
         //show some message
       }
-      bus.publish('search.categories', result.categories)
-      bus.publish('search.offers', result.offers);
+      bus.channel('search.categories').publish(result.categories)
+      bus.channel('search.offers').publish(result.offers);
     };
 
     return {

@@ -1,21 +1,34 @@
-var postal = require('postal');
+var postal = require('postal'),
+  EventEmitter = require('events').EventEmitter,
+  util = require('util');
 
-var hydration = 100;
+function Hydration() {
+  var self = this,
+    percent = 100;
 
-var distanceChangeChannel = postal.channel('fitbuddy', 'distance.change'),
-  hydrationDecreaseChannel = postal.channel('fitbuddy', 'hydration.decrease');
+  var distanceChangeChannel = postal.channel('fitbuddy', 'distance.change');
 
-distanceChangeChannel.subscribe(function (data) {
-  hydration -= 15;
-  hydrationDecreaseChannel.publish({
-    hydration: hydration
+  distanceChangeChannel.subscribe(function () {
+    percent -= 15;
+    self.emit('decreased', percent);
+  }).withConstraint(function (data) {
+      return data.distance % 5 === 0;
   });
-}).withConstraint(function (data) {
-    return data.distance % 5 === 0;
+
+  this.rehydrate = function () {
+    percent = 100;
+  };
+}
+
+util.inherits(Hydration, EventEmitter);
+
+var hydration = new Hydration();
+var hydrationDecreaseChannel = postal.channel('fitbuddy', 'hydration.decrease');
+
+hydration.on('decreased', function (percent) {
+  hydrationDecreaseChannel.publish({
+    hydration: percent
+  });
 });
 
-module.exports = {
-  rehydrate: function () {
-    hydration = 100;
-  }
-};
+module.exports = hydration;

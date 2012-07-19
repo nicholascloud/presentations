@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="lib/zenburn.css">
     <style type="text/css">
-    pre {font-size:0.7em !important;}
+    pre {font-size:0.7em !important; width:100% !important;}
     h1, h2, h3, h4, h5, h6 {text-transform:none !important;}
     dl {margin-top:1em;}
     /*dt {font-weight:bold; color:#d0ff00;}*/
@@ -71,9 +71,10 @@ $('#bar').trigger('launch');
         <section>
           <h2>But...</h2>
           <ul>
-            <li class="fragment">DOM events only bubble UP the DOM tree</li>
+            <li class="fragment">DOM events are only handled between the target element and the top of the DOM tree</li>
+            <li class="fragment">Any element nested within an eventing element would not receive the triggered event</li>
             <li class="fragment">Since events can be triggered anywhere in the DOM tree, the best place to put listeners would be at the top of the tree (e.g. the `body` tag)</li>
-            <li class="fragment">Only one callback can be assigned for a specific event on a given element</li>
+            <li class="fragment">Only one callback can be assigned for a specific event on a given element (libraries like jQuery circumvent this limitation)</li>
           </ul>
         </section>
 
@@ -96,7 +97,8 @@ $.post('/my/url', data, function () {
         <section>
           <h2>Use postal.js instead</h2>
           <pre><code>
-postal.subscribe('show.error', function (msg) {
+var channel = postal.channel('show.error');
+channel.subscribe(function (msg) {
   $('#error-message').html(msg).show();
 });
 
@@ -105,7 +107,7 @@ postal.subscribe('show.error', function (msg) {
 $.post('/my/url', data, function () {
   //yay our post worked!
 }).error(function (){
-  postal.publish('show.error', 'bad!');
+  channel.publish('bad!');
 });
           </code></pre>
         </section>
@@ -177,12 +179,18 @@ var mod1 = (function () {
     onSomeEvent: function (handler) {...}
   };
 }());
-var mod2 = (function () { ... }());
+var mod2 = (function () {
+  return {
+    doSomething: function () {...}
+  };
+}());
 
 //similar to .NET events
 mod1.onSomeEvent(function () {
-  mod2.doSomethingInResponse();
+  mod2.doSomething();
 });
+//or:
+mod1.onSomeEvent(mod2.doSomething);
           </code></pre>
         </section>
 
@@ -191,7 +199,8 @@ mod1.onSomeEvent(function () {
           <pre><code>
 var mod1 = (function ($, bus) {
   var $list = $('#items');
-  bus.subscribe('new-items', function (items) {
+  var channel = postal.channel('new-items');
+  channel.subscribe(function (items) {
     items.forEach(function (item) {
       $list.append($('&lt;li&gt;&lt;/li&gt;')
         .html(item));
@@ -200,7 +209,7 @@ var mod1 = (function ($, bus) {
 }(jQuery, postal));
 
 var mod2 = (function (bus) {
-  bus.publish('new-items', ['foo', 'bar']);
+  bus.channel('new-items').publish(['foo', 'bar']);
 }(postal));
           </code></pre>
         </section>
@@ -218,11 +227,12 @@ var mod2 = (function (bus) {
         <section>
           <h2>Better modules with require.js</h2>
           <pre><code>
-define('mod1', ['postal'], function (postal) {
+define(['postal'], function (postal) {
   //private members
   var private = function (data) {...};
 
-  postal.subscribe('some.message', private);
+  postal.channel('some.message')
+    .subscribe(private);
 
   //public API
   return {
@@ -250,31 +260,23 @@ define('mod1', ['postal'], function (postal) {
         <section>
           <h2>Wat?</h2>
           <pre><code>
-var channel = postal.channel('friend.request');
+var vehicleChannel =
+  postal.channel('vehicle', 'reverse');
+var paymentChannel =
+  postal.channel('payment', 'reverse');
 
-//subscribe to channel messages
-channel.subscribe(function (data) {
-  alert('You have a new friend! ' + data.name);
+vehicleChannel.subscribe(function (data) {
+  //this callback will be invoked
+  console.log('backing up ' + data.qty + ' feet');
 });
 
-//publish messages to channel
-channel.publish({name: 'Hubert Farnsworth'});
-
-//unsubscribe from channel
-channel.unsubscribe();
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Wat?</h2>
-          <pre><code>
-//or, shorthand:
-
-postal.subscribe('friend.request', function (data) {
-  alert('You have a new friend! ' + data.name);
+paymentChannel.subscribe(function (data) {
+  //this callback will not be invoked
+  console.log('refunding ' + data.qty + ' dollars');
 });
 
-postal.publish({name: 'Hubert Farnsworth'});
+postal.channel('vehicle', 'reverse')
+  .publish({qty: 3});
           </code></pre>
         </section>
 
@@ -282,11 +284,11 @@ postal.publish({name: 'Hubert Farnsworth'});
           <h2>The # wildcard</h2>
           <p>The <span class="slimed">#</span> symbol can be used as a wildcard for one segment of a topic.</p>
           <pre><code>
-postal.subscribe('#.created', function (data) {
+var fulfillmentChannel =
+  postal.channel('fulfillment', 'order.shipped.#');
 
-  // Matches `friend.created`, but
-  // not `created.position`
-
+fulfillmentChannel.subscribe(function (data) {
+  //will be invoked for all order.shipping topics
 });
           </code></pre>
         </section>
@@ -295,85 +297,121 @@ postal.subscribe('#.created', function (data) {
           <h2>The * wildcard</h2>
           <p>The <span class="slimed">*</span> symbol can be used as a wildcard for any consecutive character string in a topic.</p>
           <pre><code>
-postal.subscribe('*.validation*', function (data) {
-  
-  // Matches `form.validation.success`,
-  // `entity.validation`,
-  // `mastadon.validationate`, etc.
+var fulfillmentChannel =
+  postal.channel('fulfillment', 'order*');
 
+fulfillmentChannel.subscribe(function (data) {
+  //will be invoked for all order topics
 });
           </code></pre>
         </section>
 
         <section>
-          <h2>ignoreDuplicates()</h2>
-          <p>Limits subscription handlers to one execution per topic.</p>
+          <h2>distinctUntilChanged()</h2>
+          <p>Prevents subscription callbacks from handling duplicate, consecutive topics.</p>
+        </section>
+
+        <section>
+          <h2>distinctUntilChanged()</h2>
           <pre><code>
 var total = 0;
-postal.subscribe('#.selected', function (item) {
+var c = postal.channel('shop', '#.selected');
+c.subscribe(function (item) {
   total += item.price;
-}).ignoreDuplicates();
+}).<strong>distinctUntilChanged()</strong>;
 
-postal.publish('shirt.selected', {price: 10});
-postal.publish('slacks.selected', {price: 15});
-postal.publish('shoes.selected', {price: 20});
+postal.channel('shop', 'shirt.selected').publish({id: 102, price: 10});
 //duplicate is ignored
-postal.publish('shirt.selected', {price: 10});
+postal.channel('shop', 'shirt.selected').publish({id: 102, price: 10});
+postal.channel('shop', 'slacks.selected').publish({id: 110, price: 15});
+postal.channel('shop', 'shoes.selected').publish({id: 255, price: 20});
 
 //total price is 10 + 15 + 20 = 45
           </code></pre>
         </section>
 
         <section>
-          <h2>disposeAfter()</h2>
+          <h2>distinct()</h2>
+          <p>Subscription callbacks ignore all duplicate topics.</p>
+        </section>
+
+        <section>
+          <h2>distinct()</h2>
+          <pre><code>
+var inventory = [];
+
+var c = postal.channel('loot.acquired');
+c.subscribe(function (item) {
+  inventory.push(item);
+  if (inventory.length === 3) {
+    postal.channel('achievement.earned').publish('full.armor.set');
+  }
+}).distinct();
+
+postal.channel('loot.acquired').publish('sword');
+postal.channel('loot.acquired').publish('shield');
+//duplicate ignored
+postal.channel('loot.acquired').publish('sword');
+//duplicate ignored
+postal.channel('loot.acquired').publish('shield');
+postal.channel('loot.acquired').publish('boots');
+//achievement earned!
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>disposeAfter(maxCallls)</h2>
           <p>Automatically unsubscribes a channel after a given number of handler invocations.</p>
+        </section>
+
+        <section>
+          <h2>disposeAfter(maxCallls)</h2>
           <pre><code>
 var favorites = [];
-postal.subscribe('favorite.movies', function (m) {
+var c = postal.channel('favorite.movies');
+c.subscribe(function (m) {
   favorites.push(m);
-}).disposeAfter(3);
+}).<strong>disposeAfter(3)</strong>;
 
-postal.publish('favorite.movies', 'Hot Fuzz');
-postal.publish('favorite.movies', 'Blade Runner');
-postal.publish('favorite.movies', 'TRON');
+postal.channel('favorite.movies').publish('Hot Fuzz');
+postal.channel('favorite.movies').publish('Blade Runner');
+postal.channel('favorite.movies').publish('TRON');
 //oh darn, too late--already unsubscribed!
-postal.publish('favorite.movies', 'Star Wars');
+postal.channel('favorite.movies').publish('Star Wars');
+
+//favorite moves are: Hot Fuzz, Blade Runner, and TRON
           </code></pre>
         </section>
 
         <section>
-          <h2>whenHandledThenExecute()</h2>
-          <p>Invokes a function immediately after a message is handled.</p>
-          <pre><code>
-var progress = {
-  increment: function () { ... }
-};
-
-postal.subscribe('donation.received', function () {
-  progress.increment();
-}).whenHandledThenExecute(function () {
-  postal.publish('progress.incremented', {});
-});
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>withConstraint()</h2>
+          <h2>withConstraint(predicate)</h2>
           <p>Will prevent the subscription handler from executing if a constraint is not met.</p>
+          <br />
+          <p>(Also a pluralized version of this method, for multiple predicates.)</p>
+        </section>
+
+        <section>
+          <h2>withConstraint(predicate)</h2>
           <pre><code>
 var speed = 88;
 
-postal.subscribe('lightning.strike', function () {
-  timeTravel();
-}).withConstraint(function () {
-  return speed === 88;
-});
+postal.channel('vehicle.accelerated').subscribe(function (passenger) {
+  timeTravel(passenger);
+}).<strong>withConstraint(function (passenger) {
+  return speed === 88 && passenger === 'Marty';
+})</strong>;
+
+postal.channel('vehicle.accelerated').publish('Marty');
           </code></pre>
         </section>
 
         <section>
-          <h2>withContext()</h2>
+          <h2>withContext(context)</h2>
           <p>Determines the value of <span class="slimed">this</span> within a subscription callback.</p>
+        </section>
+
+        <section>
+          <h2>withContext(context)</h2>
           <pre><code>
 var c = postal.channel('coffee.ready');
 
@@ -383,13 +421,45 @@ c.subscribe(function (data) {
 
 c.subscribe(function (data) {
   //this === $('#mug')
-}).withContext($('#mug'));
+}).<strong>withContext($('#mug'))</strong>;
+
+postal.channel('coffee.ready').publish({});
+postal.channel('coffee.ready').publish({});
+postal.channel('coffee.ready').publish({});
           </code></pre>
         </section>
 
         <section>
-          <h2>withDelay()</h2>
+          <h2>withDebounce(milliseconds)</h2>
+          <p>Delays execution of the callback for a given number of milliseconds after the last time the callback would have been invoked.</p>
+        </section>
+
+        <section>
+          <h2>withDebounce(milliseconds)</h2>
+          <pre><code>
+var c = postal.channel('resize');
+
+c.subscribe(function (dim) {
+  $('#movie').height(dim.h / 2)
+    .width(dim.w / 2);
+}).<strong>withDebounce(1000)</strong>;
+
+$(window).resize(function () {
+  postal.channel('resize').publish({
+    h: this.innerHeight,
+    w: this.innerWidth
+  });
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>withDelay(milliseconds)</h2>
           <p>Delays the subscription callback execution for a given number of milliseconds.</p>
+        </section>
+
+        <section>
+          <h2>withDelay(milliseconds)</h2>
           <pre><code>
 var c = postal.channel('wakeup.alarm');
 
@@ -401,49 +471,55 @@ c.subscribe(function (data) {
   //make sure this lazy ass gets out of bed!
   alarm.buzz({volume: data.volume});
 
-}).withDelay(snoozeDuration);
+}).<strong>withDelay(snoozeDuration)</strong>;
 
-c.publish({volume: 'annoying'});
+postal.channel('wakeup.alarm').publish({volume: 'annoying'});
           </code></pre>
         </section>
 
         <section>
-          <h2>withPriority()</h2>
+          <h2>withPriority(priority)</h2>
           <p>Associates a subscription callback with an arbitrary priority number; higher priority callbacks are triggered first.</p>
+        </section>
+
+        <section>
+          <h2>withPriority(priority)</h2>
           <pre><code>
 var c = postal.channel('stock.event');
 
 var stockholder = function (data) {
-  alert('Stockholder knows!');
-};
-var insider = function (data) {
-  //will always know first!
-  alert('Insider knows!');
+  console.log('Stockholder knows!');
 };
 
-c.subscribe(stockholder).withPriority(75);
-c.subscribe(insider).withPriority(100);
-c.publish({action: 'sell!'});
+var insider = function (data) {
+  //will always know first!
+  console.log('Insider knows!');
+};
+
+c.subscribe(stockholder).<strong>withPriority(100)</strong>;
+c.subscribe(insider).<strong>withPriority(75)</strong>;
+
+postal.channel('stock.event').publish({action: 'sell!'});
           </code></pre>
         </section>
 
         <section>
-          <p class="bigsemi">;</p>
+          <h2>withThrottle(milliseconds)</h2>
+          <p>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</p>
         </section>
 
         <section>
-          <h2>withThrottle()</h2>
-          <p>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</p>
+          <h2>withThrottle(milliseconds)</h2>
           <pre><code>
 var c = postal.channel('dhs.track.movement');
 
 c.subscribe(function (pos) {
-  alert('Moved to ' + pos);
-}).withThrottle(2000);
+  console.log('Moved to ' + pos);
+}).<strong>withThrottle(2000)</strong>;
 
 (function move (timesMoved) {
   if (timesMoved === 50) return;
-  c.publish(timesMoved);
+  postal.channel('dhs.track.movement').publish(timesMoved);
   setTimeout(function () {
     move(timesMoved + 1);
   }, 500);
@@ -452,22 +528,37 @@ c.subscribe(function (pos) {
         </section>
 
         <section>
-          <h2>withThrottle()</h2>
+          <h2>defer()</h2>
+          <p>Prevents the callback from executing until the current execution stack is cleared. Useful for long computations that could make the UI non-responsive.</p>
+        </section>
+
+        <section>
+          <h2>defer()</h2>
           <pre><code>
-Moved to 0
-Moved to 3
-Moved to 7
-Moved to 11
-Moved to 15
-Moved to 19
-Moved to 23
-Moved to 27
-Moved to 31
-Moved to 35
-Moved to 39
-Moved to 43
-Moved to 47
-Moved to 49
+var largeDataSet = {}; //lots of data in here
+
+var c = postal.channel('schedule', 'query');
+c.subscribe(function (query) {
+  var item, results = [];
+  for (item in largeDataSet) {
+    if (!largeDataSet.hasOwnProperty(item)) continue;
+    if (query.matches(item)) {
+      results.push(item);
+    }
+  }
+  postal.channel('schedule', 'filter').publish(results);
+}).<strong>defer()</strong>;
+
+//elsewhere...
+$('input[type="checkbox"]').change(function () {
+  var checkbox = this;
+  var query = {
+    matches: function (item) {
+      return item.title === checkbox.value;
+    }
+  };
+  postal.channel('schedule', 'query').publish(query);
+});
           </code></pre>
         </section>
 
@@ -482,6 +573,12 @@ Moved to 49
           <h1>Part 5</h1>
           <h2>In which I point you</h2>
           <h3>to additional resources</h3>
+        </section>
+
+        <section>
+          <h2>Additional Resources</h2>
+          <p>Going Postal with postal.js</p>
+          <p><a href="http://sett.ociweb.com/sett/settJun2012.html">http://sett.ociweb.com/sett/settJun2012.html</a></p>
         </section>
 
         <section>

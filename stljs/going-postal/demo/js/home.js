@@ -23,16 +23,15 @@ Array.prototype.contains = function (what) {
 require.config({
   paths: {
     jquery: 'lib/jquery-1.7.2.min',
-    underscore: 'lib/underscore-min',
-    postal: 'lib/postal.min',
-    diagnostics: 'lib/postal.diagnostics.min'
+    underscore: 'lib/underscore',
+    postal: 'lib/postal',
+    diagnostics: 'lib/postal.diagnostics'
   }
 });
 
 require(['jquery', 'postal', 'tagCloud', 'offers', 'search'], function ($, bus) {
   $().ready(function () {
-    bus.publish('ready');
-    //TODO: delete
-    bus.publish('categories.changed', ['art']);
+    bus.channel('ready').publish({});
+    bus.channel('categories.changed').publish(['art']);
   });
 });

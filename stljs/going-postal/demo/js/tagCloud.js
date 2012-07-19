@@ -8,7 +8,7 @@ define(['jquery', 'data', 'postal', 'template'],
 
     $cloud.on('click', 'a', function (evt) {
       var category = $(this).attr('data-category');
-      bus.publish('categories.changed', [category]);
+      bus.channel('categories.changed').publish([category]);
       return false;
     });
 
@@ -43,15 +43,15 @@ define(['jquery', 'data', 'postal', 'template'],
 
   }('#tagcloud'));
 
-  bus.subscribe('ready', function () {
+  bus.channel('ready').subscribe(function () {
     tagCloud.fill();
   });
 
-  bus.subscribe('categories.changed', function (categories) {
+  bus.channel('categories.changed').subscribe(function (categories) {
     tagCloud.highlight(categories);
   });
 
-  bus.subscribe('search.categories', function (categories) {
+  bus.channel('search.categories').subscribe(function (categories) {
     tagCloud.highlight(categories);
   });
 

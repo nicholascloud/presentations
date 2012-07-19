@@ -1,347 +1,480 @@
-define(['underscore'], function(_) {
 /*
-    postal.js
-    Author: Jim Cowart
-    License: Dual licensed MIT (http://www.opensource.org/licenses/mit-license) & GPL (http://www.opensource.org/licenses/gpl-license)
-    Version 0.4.4
-*/
+ postal.js
+ Author: Jim Cowart
+ License: Dual licensed MIT (http://www.opensource.org/licenses/mit-license) & GPL (http://www.opensource.org/licenses/gpl-license)
+ Version 0.6.0
+ */
 
-var DEFAULT_EXCHANGE = "/",
-    DEFAULT_PRIORITY = 50,
-    DEFAULT_DISPOSEAFTER = 0,
-    SYSTEM_EXCHANGE = "postal",
-    NO_OP = function() { },
-    parsePublishArgs = function(args) {
-        var parsed = { envelope: { } }, env;
-        switch(args.length) {
-            case 3:
-                if(typeof args[1] === "Object" && typeof args[2] === "Object") {
-                    parsed.envelope.exchange = DEFAULT_EXCHANGE;
-                    parsed.envelope.topic = args[0];
-                    parsed.payload = args[1];
-                    env = parsed.envelope;
-                    parsed.envelope = _.extend(env, args[2]);
-                }
-                else {
-                    parsed.envelope.exchange = args[0];
-                    parsed.envelope.topic = args[1];
-                    parsed.payload = args[2];
-                }
-                break;
-            case 4:
-                parsed.envelope.exchange = args[0];
-                parsed.envelope.topic = args[1];
-                parsed.payload = args[2];
-                env = parsed.envelope;
-                parsed.envelope = _.extend(env, args[3]);
-                break;
-            default:
-                parsed.envelope.exchange = DEFAULT_EXCHANGE;
-                parsed.envelope.topic = args[0];
-                parsed.payload = args[1];
-                break;
-        }
-        return parsed;
-    };
+// This is the amd-module version of postal.js
+// If you need the standard lib style version, go to http://github.com/ifandelse/postal.js
+define( ["underscore"], function ( _, undefined ) {
 
-var DistinctPredicate = function() {
-    var previous;
-    return function(data) {
-        var eq = false;
-        if(_.isString(data)) {
-            eq = data === previous;
-            previous = data;
-        }
-        else {
-            eq = _.isEqual(data, previous);
-            previous = _.clone(data);
-        }
-        return !eq;
-    };
+var DEFAULT_CHANNEL = "/",
+	DEFAULT_PRIORITY = 50,
+	DEFAULT_DISPOSEAFTER = 0,
+	SYSTEM_CHANNEL = "postal",
+	NO_OP = function () {
+	};
+
+var DistinctPredicate = function () {
+	var previous;
+	return function ( data ) {
+		var eq = false;
+		if ( _.isString( data ) ) {
+			eq = data === previous;
+			previous = data;
+		}
+		else {
+			eq = _.isEqual( data, previous );
+			previous = _.clone( data );
+		}
+		return !eq;
+	};
 };
 
-var ChannelDefinition = function(exchange, topic) {
-    this.exchange = exchange;
-    this.topic = topic;
+var ChannelDefinition = function ( channelName, defaultTopic ) {
+	this.channel = channelName || DEFAULT_CHANNEL;
+	this._topic = defaultTopic || "";
 };
 
 ChannelDefinition.prototype = {
-    subscribe: function(callback) {
-        var subscription = new SubscriptionDefinition(this.exchange, this.topic, callback);
-        postal.configuration.bus.subscribe(subscription);
-        return subscription;
-    },
+	subscribe : function () {
+		var len = arguments.length;
+		if ( len === 1 ) {
+			return new SubscriptionDefinition( this.channel, this._topic, arguments[0] );
+		}
+		else if ( len === 2 ) {
+			return new SubscriptionDefinition( this.channel, arguments[0], arguments[1] );
+		}
+	},
 
-    publish: function(data, envelope) {
-        var env = _.extend({
-            exchange: this.exchange,
-            timeStamp: new Date(),
-            topic: this.topic
-        }, envelope);
-        postal.configuration.bus.publish(data, env);
-    }
+	publish : function ( obj ) {
+		var envelope = {
+			channel : this.channel,
+			topic : this._topic,
+			data : obj || {}
+		};
+		// If this is an envelope....
+		if ( obj.topic && obj.data ) {
+			envelope = obj;
+			envelope.channel = envelope.channel || this.channel;
+		}
+		envelope.timeStamp = new Date();
+		postal.configuration.bus.publish( envelope );
+		return envelope;
+	},
+
+	topic : function ( topic ) {
+		if ( topic === this._topic ) {
+			return this;
+		}
+		return new ChannelDefinition( this.channel, topic );
+	}
 };
 
-var SubscriptionDefinition = function(exchange, topic, callback) {
-    this.exchange = exchange;
-    this.topic = topic;
-    this.callback = callback;
-    this.priority = DEFAULT_PRIORITY;
-    this.constraints = [];
-    this.maxCalls = DEFAULT_DISPOSEAFTER;
-    this.onHandled = NO_OP;
-    this.context = null;
+var SubscriptionDefinition = function ( channel, topic, callback ) {
+	this.channel = channel;
+	this.topic = topic;
+	this.callback = callback;
+	this.priority = DEFAULT_PRIORITY;
+	this.constraints = new Array( 0 );
+	this.maxCalls = DEFAULT_DISPOSEAFTER;
+	this.onHandled = NO_OP;
+	this.context = null;
+	postal.configuration.bus.publish( {
+		channel : SYSTEM_CHANNEL,
+		topic : "subscription.created",
+		timeStamp : new Date(),
+		data : {
+			event : "subscription.created",
+			channel : channel,
+			topic : topic
+		}
+	} );
 
-    postal.publish(SYSTEM_EXCHANGE, "subscription.created",
-        {
-            event: "subscription.created",
-            exchange: exchange,
-            topic: topic
-        });
+	postal.configuration.bus.subscribe( this );
+
 };
 
 SubscriptionDefinition.prototype = {
-    unsubscribe: function() {
-        postal.configuration.bus.unsubscribe(this);
-        postal.publish(SYSTEM_EXCHANGE, "subscription.removed",
-            {
-                event: "subscription.removed",
-                exchange: this.exchange,
-                topic: this.topic
-            });
-    },
+	unsubscribe : function () {
+		postal.configuration.bus.unsubscribe( this );
+		postal.configuration.bus.publish( {
+			channel : SYSTEM_CHANNEL,
+			topic : "subscription.removed",
+			timeStamp : new Date(),
+			data : {
+				event : "subscription.removed",
+				channel : this.channel,
+				topic : this.topic
+			}
+		} );
+	},
 
-    defer: function() {
-        var fn = this.callback;
-        this.callback = function(data) {
-            setTimeout(fn,0,data);
-        };
-        return this;
-    },
+	defer : function () {
+		var fn = this.callback;
+		this.callback = function ( data ) {
+			setTimeout( fn, 0, data );
+		};
+		return this;
+	},
 
-    disposeAfter: function(maxCalls) {
-        if(_.isNaN(maxCalls) || maxCalls <= 0) {
-            throw "The value provided to disposeAfter (maxCalls) must be a number greater than zero.";
-        }
+	disposeAfter : function ( maxCalls ) {
+		if ( _.isNaN( maxCalls ) || maxCalls <= 0 ) {
+			throw "The value provided to disposeAfter (maxCalls) must be a number greater than zero.";
+		}
 
-        var fn = this.onHandled;
-        var dispose = _.after(maxCalls, _.bind(function() {
-                this.unsubscribe(this);
-            }, this));
+		var fn = this.onHandled;
+		var dispose = _.after( maxCalls, _.bind( function () {
+			this.unsubscribe( this );
+		}, this ) );
 
-        this.onHandled = function() {
-            fn.apply(this.context, arguments);
-            dispose();
-        };
-        return this;
-    },
+		this.onHandled = function () {
+			fn.apply( this.context, arguments );
+			dispose();
+		};
+		return this;
+	},
 
-    ignoreDuplicates: function() {
-        this.withConstraint(new DistinctPredicate());
-        return this;
-    },
+	ignoreDuplicates : function () {
+		this.withConstraint( new DistinctPredicate() );
+		return this;
+	},
 
-    whenHandledThenExecute: function(callback) {
-        if(! _.isFunction(callback)) {
-            throw "Value provided to 'whenHandledThenExecute' must be a function";
-        }
-        this.onHandled = callback;
-        return this;
-    },
+	withConstraint : function ( predicate ) {
+		if ( !_.isFunction( predicate ) ) {
+			throw "Predicate constraint must be a function";
+		}
+		this.constraints.push( predicate );
+		return this;
+	},
 
-    withConstraint: function(predicate) {
-        if(! _.isFunction(predicate)) {
-            throw "Predicate constraint must be a function";
-        }
-        this.constraints.push(predicate);
-        return this;
-    },
+	withConstraints : function ( predicates ) {
+		var self = this;
+		if ( _.isArray( predicates ) ) {
+			_.each( predicates, function ( predicate ) {
+				self.withConstraint( predicate );
+			} );
+		}
+		return self;
+	},
 
-    withConstraints: function(predicates) {
-        var self = this;
-        if(_.isArray(predicates)) {
-            _.each(predicates, function(predicate) { self.withConstraint(predicate); } );
-        }
-        return self;
-    },
+	withContext : function ( context ) {
+		this.context = context;
+		return this;
+	},
 
-    withContext: function(context) {
-        this.context = context;
-        return this;
-    },
+	withDebounce : function ( milliseconds ) {
+		if ( _.isNaN( milliseconds ) ) {
+			throw "Milliseconds must be a number";
+		}
+		var fn = this.callback;
+		this.callback = _.debounce( fn, milliseconds );
+		return this;
+	},
 
-    withDebounce: function(milliseconds) {
-        if(_.isNaN(milliseconds)) {
-            throw "Milliseconds must be a number";
-        }
-        var fn = this.callback;
-        this.callback = _.debounce(fn, milliseconds);
-        return this;
-    },
+	withDelay : function ( milliseconds ) {
+		if ( _.isNaN( milliseconds ) ) {
+			throw "Milliseconds must be a number";
+		}
+		var fn = this.callback;
+		this.callback = function ( data ) {
+			setTimeout( function () {
+				fn( data );
+			}, milliseconds );
+		};
+		return this;
+	},
 
-    withDelay: function(milliseconds) {
-        if(_.isNaN(milliseconds)) {
-            throw "Milliseconds must be a number";
-        }
-        var fn = this.callback;
-        this.callback = function(data) {
-            setTimeout(fn, milliseconds, data);
-        };
-        return this;
-    },
+	withPriority : function ( priority ) {
+		if ( _.isNaN( priority ) ) {
+			throw "Priority must be a number";
+		}
+		this.priority = priority;
+		return this;
+	},
 
-    withPriority: function(priority) {
-        if(_.isNaN(priority)) {
-            throw "Priority must be a number";
-        }
-        this.priority = priority;
-        return this;
-    },
+	withThrottle : function ( milliseconds ) {
+		if ( _.isNaN( milliseconds ) ) {
+			throw "Milliseconds must be a number";
+		}
+		var fn = this.callback;
+		this.callback = _.throttle( fn, milliseconds );
+		return this;
+	},
 
-    withThrottle: function(milliseconds) {
-        if(_.isNaN(milliseconds)) {
-            throw "Milliseconds must be a number";
-        }
-        var fn = this.callback;
-        this.callback = _.throttle(fn, milliseconds);
-        return this;
-    }
+	subscribe : function ( callback ) {
+		this.callback = callback;
+		return this;
+	}
 };
 
 var bindingsResolver = {
-    cache: { },
+	cache : { },
 
-    compare: function(binding, topic) {
-        if(this.cache[topic] && this.cache[topic][binding]) {
-            return true;
-        }
-        var rgx = new RegExp("^" + this.regexify(binding) + "$"), // match from start to end of string
-            result = rgx.test(topic);
-        if(result) {
-            if(!this.cache[topic]) {
-                this.cache[topic] = {};
-            }
-            this.cache[topic][binding] = true;
-        }
-        return result;
-    },
+	compare : function ( binding, topic ) {
+		if ( this.cache[topic] && this.cache[topic][binding] ) {
+			return true;
+		}
+		//  binding.replace(/\./g,"\\.")             // escape actual periods
+		//         .replace(/\*/g, ".*")             // asterisks match any value
+		//         .replace(/#/g, "[A-Z,a-z,0-9]*"); // hash matches any alpha-numeric 'word'
+		var rgx = new RegExp( "^" + binding.replace( /\./g, "\\." ).replace( /\*/g, ".*" ).replace( /#/g, "[A-Z,a-z,0-9]*" ) + "$" ),
+			result = rgx.test( topic );
+		if ( result ) {
+			if ( !this.cache[topic] ) {
+				this.cache[topic] = {};
+			}
+			this.cache[topic][binding] = true;
+		}
+		return result;
+	},
 
-    regexify: function(binding) {
-        return binding.replace(/\./g,"\\.") // escape actual periods
-                      .replace(/\*/g, ".*") // asterisks match any value
-                      .replace(/#/g, "[A-Z,a-z,0-9]*"); // hash matches any alpha-numeric 'word'
-    }
+	reset : function () {
+		this.cache = {};
+	}
 };
 
 var localBus = {
 
-    subscriptions: {},
+	addWireTap : function ( callback ) {
+		var self = this;
+		self.wireTaps.push( callback );
+		return function () {
+			var idx = self.wireTaps.indexOf( callback );
+			if ( idx !== -1 ) {
+				self.wireTaps.splice( idx, 1 );
+			}
+		};
+	},
 
-    wireTaps: [],
+	publish : function ( envelope ) {
+		_.each( this.wireTaps, function ( tap ) {
+			tap( envelope.data, envelope );
+		} );
 
-    publish: function(data, envelope) {
-        this.notifyTaps(data, envelope);
+		_.each( this.subscriptions[envelope.channel], function ( topic ) {
+			_.each( topic, function ( subDef ) {
+				if ( postal.configuration.resolver.compare( subDef.topic, envelope.topic ) ) {
+					if ( _.all( subDef.constraints, function ( constraint ) {
+						return constraint( envelope.data, envelope );
+					} ) ) {
+						if ( typeof subDef.callback === 'function' ) {
+							subDef.callback.apply( subDef.context, [envelope.data, envelope] );
+							subDef.onHandled();
+						}
+					}
+				}
+			} );
+		} );
+	},
 
-        _.each(this.subscriptions[envelope.exchange], function(topic) {
-            _.each(topic, function(binding){
-                if(postal.configuration.resolver.compare(binding.topic, envelope.topic)) {
-                    if(_.all(binding.constraints, function(constraint) { return constraint(data); })) {
-                        if(typeof binding.callback === 'function') {
-                            binding.callback.apply(binding.context, [data, envelope]);
-                            binding.onHandled();
-                        }
-                    }
-                }
-            });
-        });
-    },
+	reset : function () {
+		if ( this.subscriptions ) {
+			_.each( this.subscriptions, function ( channel ) {
+				_.each( channel, function ( topic ) {
+					while ( topic.length ) {
+						topic.pop().unsubscribe();
+					}
+				} );
+			} );
+			this.subscriptions = {};
+		}
+	},
 
-    subscribe: function(subDef) {
-        var idx, found, fn;
+	subscribe : function ( subDef ) {
+		var idx, found, fn, channel = this.subscriptions[subDef.channel], subs;
 
-        if(!this.subscriptions[subDef.exchange]) {
-            this.subscriptions[subDef.exchange] = {};
-        }
-        if(!this.subscriptions[subDef.exchange][subDef.topic]) {
-            this.subscriptions[subDef.exchange][subDef.topic] = [];
-        }
+		if ( !channel ) {
+			channel = this.subscriptions[subDef.channel] = {};
+		}
+		subs = this.subscriptions[subDef.channel][subDef.topic];
+		if ( !subs ) {
+			subs = this.subscriptions[subDef.channel][subDef.topic] = new Array( 0 );
+		}
 
-        idx = this.subscriptions[subDef.exchange][subDef.topic].length - 1;
-        if(!_.any(this.subscriptions[subDef.exchange][subDef.topic], function(cfg) { return cfg === subDef; })) {
-            for(; idx >= 0; idx--) {
-                if(this.subscriptions[subDef.exchange][subDef.topic][idx].priority <= subDef.priority) {
-                    this.subscriptions[subDef.exchange][subDef.topic].splice(idx + 1, 0, subDef);
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                this.subscriptions[subDef.exchange][subDef.topic].unshift(subDef);
-            }
-        }
+		idx = subs.length - 1;
+		for ( ; idx >= 0; idx-- ) {
+			if ( subs[idx].priority <= subDef.priority ) {
+				subs.splice( idx + 1, 0, subDef );
+				found = true;
+				break;
+			}
+		}
+		if ( !found ) {
+			subs.unshift( subDef );
+		}
+		return subDef;
+	},
 
-        return _.bind(function() { this.unsubscribe(subDef); }, this);
-    },
+	subscriptions : {},
 
-    notifyTaps: function(data, envelope) {
-        _.each(this.wireTaps,function(tap) {
-            tap(data, envelope);
-        });
-    },
+	wireTaps : new Array( 0 ),
 
-    unsubscribe: function(config) {
-        if(this.subscriptions[config.exchange][config.topic]) {
-            var len = this.subscriptions[config.exchange][config.topic].length,
-                idx = 0;
-            for ( ; idx < len; idx++ ) {
-                if (this.subscriptions[config.exchange][config.topic][idx] === config) {
-                    this.subscriptions[config.exchange][config.topic].splice( idx, 1 );
-                    break;
-                }
-            }
-        }
-    },
-
-    addWireTap: function(callback) {
-        this.wireTaps.push(callback);
-        return function() {
-            var idx = this.wireTaps.indexOf(callback);
-            if(idx !== -1) {
-                this.wireTaps.splice(idx,1);
-            }
-        };
-    }
+	unsubscribe : function ( config ) {
+		if ( this.subscriptions[config.channel][config.topic] ) {
+			var len = this.subscriptions[config.channel][config.topic].length,
+				idx = 0;
+			for ( ; idx < len; idx++ ) {
+				if ( this.subscriptions[config.channel][config.topic][idx] === config ) {
+					this.subscriptions[config.channel][config.topic].splice( idx, 1 );
+					break;
+				}
+			}
+		}
+	}
 };
+
+var publishPicker = {
+		"1" : function ( envelope ) {
+			if ( !envelope ) {
+				throw new Error( "publishing from the 'global' postal.publish call requires a valid envelope." );
+			}
+			envelope.channel = envelope.channel || DEFAULT_CHANNEL;
+			envelope.timeStamp = new Date();
+			postal.configuration.bus.publish( envelope );
+			return envelope;
+		},
+		"2" : function ( topic, data ) {
+			var envelope = { channel : DEFAULT_CHANNEL, topic : topic, timeStamp : new Date(), data : data };
+			postal.configuration.bus.publish( envelope );
+			return envelope;
+		},
+		"3" : function ( channel, topic, data ) {
+			var envelope = { channel : channel, topic : topic, timeStamp : new Date(), data : data };
+			postal.configuration.bus.publish( envelope );
+			return envelope;
+		}
+	},
+	channelPicker = {
+		"1" : function ( chn ) {
+			var channel = chn, topic, options = {};
+			if ( Object.prototype.toString.call( channel ) === "[object String]" ) {
+				channel = DEFAULT_CHANNEL;
+				topic = chn;
+			}
+			else {
+				channel = chn.channel || DEFAULT_CHANNEL;
+				topic = chn.topic;
+				options = chn.options || options;
+			}
+			return new postal.channelTypes[ options.type || "local" ]( channel, topic );
+		},
+		"2" : function ( chn, tpc ) {
+			var channel = chn, topic = tpc, options = {};
+			if ( Object.prototype.toString.call( tpc ) === "[object Object]" ) {
+				channel = DEFAULT_CHANNEL;
+				topic = chn;
+				options = tpc;
+			}
+			return new postal.channelTypes[ options.type || "local" ]( channel, topic );
+		},
+		"3" : function ( channel, topic, options ) {
+			return new postal.channelTypes[ options.type || "local" ]( channel, topic );
+		}
+	},
+	sessionInfo = {};
+
+// save some setup time, albeit tiny
+localBus.subscriptions[SYSTEM_CHANNEL] = {};
 
 var postal = {
-    configuration: {
-        bus: localBus,
-        resolver: bindingsResolver
-    },
+	configuration : {
+		bus : localBus,
+		resolver : bindingsResolver,
+		DEFAULT_CHANNEL : DEFAULT_CHANNEL,
+		DEFAULT_PRIORITY : DEFAULT_PRIORITY,
+		DEFAULT_DISPOSEAFTER : DEFAULT_DISPOSEAFTER,
+		SYSTEM_CHANNEL : SYSTEM_CHANNEL
+	},
 
-    channel: function(exchange, topic) {
-        var exch = arguments.length === 2 ? exchange : DEFAULT_EXCHANGE,
-            tpc  = arguments.length === 2 ? topic : exchange;
-        return new ChannelDefinition(exch, tpc);
-    },
+	channelTypes : {
+		local : ChannelDefinition
+	},
 
-    subscribe: function(exchange, topic, callback) {
-        var exch = arguments.length === 3 ? exchange : DEFAULT_EXCHANGE,
-            tpc  = arguments.length === 3 ? topic : exchange,
-            callbk  = arguments.length === 3 ? callback : topic;
-        var channel = this.channel(exch, tpc);
-        return channel.subscribe(callbk);
-    },
+	channel : function () {
+		var len = arguments.length;
+		if ( channelPicker[len] ) {
+			return channelPicker[len].apply( this, arguments );
+		}
+	},
 
-    publish: function(exchange, topic, payload, envelopeOptions) {
-        var parsedArgs = parsePublishArgs([].slice.call(arguments,0));
-        var channel = this.channel(parsedArgs.envelope.exchange, parsedArgs.envelope.topic);
-        channel.publish(parsedArgs.payload, parsedArgs.envelope);
-    },
+	subscribe : function ( options ) {
+		var callback = options.callback,
+			topic = options.topic,
+			channel = options.channel || DEFAULT_CHANNEL;
+		return new SubscriptionDefinition( channel, topic, callback );
+	},
 
-    addWireTap: function(callback) {
-        return this.configuration.bus.addWireTap(callback);
-    }
+	publish : function () {
+		var len = arguments.length;
+		if ( publishPicker[len] ) {
+			return publishPicker[len].apply( this, arguments );
+		}
+	},
+
+	addWireTap : function ( callback ) {
+		return this.configuration.bus.addWireTap( callback );
+	},
+
+	linkChannels : function ( sources, destinations ) {
+		var result = [];
+		if ( !_.isArray( sources ) ) {
+			sources = [sources];
+		}
+		if ( !_.isArray( destinations ) ) {
+			destinations = [destinations];
+		}
+		_.each( sources, function ( source ) {
+			var sourceTopic = source.topic || "*";
+			_.each( destinations, function ( destination ) {
+				var destChannel = destination.channel || DEFAULT_CHANNEL;
+				result.push(
+					postal.subscribe( {
+						channel : source.channel || DEFAULT_CHANNEL,
+						topic : source.topic || "*",
+						callback : function ( data, env ) {
+							var newEnv = env;
+							newEnv.topic = _.isFunction( destination.topic ) ? destination.topic( env.topic ) : destination.topic || env.topic;
+							newEnv.channel = destChannel;
+							newEnv.data = data;
+							postal.publish( newEnv );
+						}
+					} )
+				);
+			} );
+		} );
+		return result;
+	},
+
+	utils : {
+		getSubscribersFor : function () {
+			var channel = arguments[ 0 ],
+				tpc = arguments[ 1 ],
+				result = [];
+			if ( arguments.length === 1 ) {
+				if ( Object.prototype.toString.call( channel ) === "[object String]" ) {
+					channel = postal.configuration.DEFAULT_CHANNEL;
+					tpc = arguments[ 0 ];
+				}
+				else {
+					channel = arguments[ 0 ].channel || postal.configuration.DEFAULT_CHANNEL;
+					tpc = arguments[ 0 ].topic;
+				}
+			}
+			if ( postal.configuration.bus.subscriptions[ channel ] &&
+			     postal.configuration.bus.subscriptions[ channel ].hasOwnProperty( tpc ) ) {
+				result = postal.configuration.bus.subscriptions[ channel ][ tpc ];
+			}
+			return result;
+		},
+
+		reset : function () {
+			postal.configuration.bus.reset();
+			postal.configuration.resolver.reset();
+		}
+	}
 };
 
-return postal; });
+	return postal;
+} );

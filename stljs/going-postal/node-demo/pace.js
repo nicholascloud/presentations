@@ -29,7 +29,7 @@ module.exports = {
       paceIncreaseChannel.publish({newPace: pace});
       loop = setInterval(run, 1000);
       if (callback) {
-        callback(null, 'pace incremented by ' + increment);
+        callback(null, 'pace/min incremented by ' + increment);
       }
     }, 0);
   },
@@ -46,7 +46,7 @@ module.exports = {
       paceDecreaseChannel.publish({newPace: pace});
       loop = setInterval(run, 1000);
       if (callback) {
-        callback(null, 'pace decremented by ' + decrement);
+        callback(null, 'pace/min decremented by ' + decrement);
       }
     }, 0);
   },
