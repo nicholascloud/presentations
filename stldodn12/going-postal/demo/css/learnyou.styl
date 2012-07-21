@@ -1,0 +1,224 @@
+$background = #ffffff
+$headerClr = #E53F14
+$headerShadowClr = #000000
+$anchorClr = #839106
+$anchorHighlightClr = #F26F4C
+$anchorHoverClr = #CAE014
+
+@font-face
+  font-family: 'EntypoRegular'
+  src: url('../type/entypo-webfont.eot')
+  src: url('../type/entypo-webfont.eot?#iefix') format('embedded-opentype'), url('../type/entypo-webfont.woff') format('woff'), url('../type/entypo-webfont.ttf') format('truetype'), url('../type/entypo-webfont.svg#EntypoRegular') format('svg')
+  font-weight:normal
+  font-style:normal
+
+body
+  font-size:100%
+  font-family:'Open Sans', sans-serif
+  background-color:$background
+
+h1
+  font-size:3em
+h2
+  font-size:2.5em
+h3
+  font-size:2em
+
+a:link, a:visited
+  color:$anchorClr
+  text-decoration:none
+
+a:hover
+  color:$anchorHoverClr
+
+.glyph
+  font-family:'EntypoRegular'
+
+header
+  width:60%
+  margin:1em auto 0 auto
+  color:$headerClr
+
+  h1 > span
+    font-style:italic
+    padding-left:0.1em
+    font-size:0.9em
+
+  p
+    line-height:0.9em
+
+#tagcloud
+  width:60%
+  margin:0 auto
+  border-bottom:1px solid silver
+  padding:2em 0
+  text-align:center
+
+  > a
+    display:inline-block
+    word-wrap:break-word
+    font-size:2em
+    padding:0 0.5em
+    line-height:1.5em
+
+  > a:link, > a:visited
+    -webkit-transition:color 0.2s ease-out
+
+  > a:link.current, > a:visited.current
+    color:$anchorHighlightClr
+    -webkit-transition:color 0.4s ease-in
+
+#offers
+  position:relative
+  width:80%
+  margin:0 auto
+  padding:1em 0
+  overflow:hidden
+  border-bottom:1px solid silver
+
+  #viewing > .offer
+    position:relative
+    float:left
+    width:30%
+    padding:2em 0 3em 0
+    margin:0 1em
+    font-size:0.8em
+    opacity:0
+    -webkit-transition:all 0.8s ease
+
+    &.show
+      opacity:1
+
+    &.obscured
+      opacity:0.1
+
+    &.extended
+      width:93%
+      height:95%
+      background-color:gainsboro
+      border-radius:1em
+      padding:2%
+      opacity:1
+      z-index:1000
+
+      .close
+        display:block
+        float:right
+
+      a.learnyou
+        display:none
+
+      .description
+        display:block
+
+      .cost
+        display:block
+
+    .close
+      font-size:5em
+      display:none
+      position:absolute
+      top:0
+      right:2%
+      cursor:pointer
+      color:#000000
+
+    .close:hover
+      color:#333333
+
+    div.frame
+      padding:0
+      margin:0 1.2em 0 0
+      border:solid 4px #ccc
+      border-radius:1em
+      overflow:hidden
+      float:left
+      height:205px
+      box-shadow:0px 0px 10px #000000
+
+    label
+      color:#000000
+      font-size:2em
+      font-weight:bold
+
+    label:hover
+      color:#666666
+
+    p
+      line-height:1.6em
+
+    .description
+      display:none
+
+    .learnyou:link, .learnyou:visited
+      display:block
+      margin:1em 0
+      color:$headerClr
+
+    .learnyou:hover
+      color:#F2724C
+
+    .cost
+      display:none
+
+      label
+        font-size:1em
+        padding-right:1em
+        
+
+#search
+  width:30%
+  margin:3em auto
+
+  label
+    font-style:italic
+
+  input
+    margin:0 0.5em
+
+  button
+    display:inline
+
+// media queries ----------------
+
+@media only screen and (max-width:1024px)
+  body
+    font-size:90%
+
+  header
+    width:90%
+
+  #tagcloud
+    width:90%
+
+  #offers
+    width:90%
+
+    #viewing .offer
+      img
+        max-width:95px
+      div.frame
+        height:129px
+      p
+        left:118px
+
+  #search
+    width:32%
+
+@media only screen and (max-width:800px)
+  body
+    font-size:60%
+
+  #offers
+    #viewing .offer
+      img
+        max-width:50px
+      div.frame
+        height:68px
+      p
+        left:72px
+
+  #search
+    width:35%
+
+

@@ -1,0 +1,222 @@
+@font-face {
+  font-family: 'EntypoRegular';
+  src: url("../type/entypo-webfont.eot");
+  src: url("../type/entypo-webfont.eot?#iefix") format('embedded-opentype'), url("../type/entypo-webfont.woff") format('woff'), url("../type/entypo-webfont.ttf") format('truetype'), url("../type/entypo-webfont.svg#EntypoRegular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
+}
+h1 {
+  font-size: 3em;
+}
+h2 {
+  font-size: 2.5em;
+}
+h3 {
+  font-size: 2em;
+}
+a:link,
+a:visited {
+  color: #839106;
+  text-decoration: none;
+}
+a:hover {
+  color: #cae014;
+}
+.glyph {
+  font-family: 'EntypoRegular';
+}
+header {
+  width: 60%;
+  margin: 1em auto 0 auto;
+  color: #e53f14;
+}
+header h1 > span {
+  font-style: italic;
+  padding-left: 0.1em;
+  font-size: 0.9em;
+}
+header p {
+  line-height: 0.9em;
+}
+#tagcloud {
+  width: 60%;
+  margin: 0 auto;
+  border-bottom: 1px solid #c0c0c0;
+  padding: 2em 0;
+  text-align: center;
+}
+#tagcloud > a {
+  display: inline-block;
+  word-wrap: break-word;
+  font-size: 2em;
+  padding: 0 0.5em;
+  line-height: 1.5em;
+}
+#tagcloud > a:link,
+#tagcloud > a:visited {
+  -webkit-transition: color 0.2s ease-out;
+}
+#tagcloud > a:link.current,
+#tagcloud > a:visited.current {
+  color: #f26f4c;
+  -webkit-transition: color 0.4s ease-in;
+}
+#offers {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1em 0;
+  overflow: hidden;
+  border-bottom: 1px solid #c0c0c0;
+}
+#offers #viewing > .offer {
+  position: relative;
+  float: left;
+  width: 30%;
+  padding: 2em 0 3em 0;
+  margin: 0 1em;
+  font-size: 0.8em;
+  opacity: 0;
+  -webkit-transition: all 0.8s ease;
+}
+#offers #viewing > .offer.show {
+  opacity: 1;
+}
+#offers #viewing > .offer.obscured {
+  opacity: 0.1;
+}
+#offers #viewing > .offer.extended {
+  width: 93%;
+  height: 95%;
+  background-color: #dcdcdc;
+  border-radius: 1em;
+  padding: 2%;
+  opacity: 1;
+  z-index: 1000;
+}
+#offers #viewing > .offer.extended .close {
+  display: block;
+  float: right;
+}
+#offers #viewing > .offer.extended a.learnyou {
+  display: none;
+}
+#offers #viewing > .offer.extended .description {
+  display: block;
+}
+#offers #viewing > .offer.extended .cost {
+  display: block;
+}
+#offers #viewing > .offer .close {
+  font-size: 5em;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 2%;
+  cursor: pointer;
+  color: #000;
+}
+#offers #viewing > .offer .close:hover {
+  color: #333;
+}
+#offers #viewing > .offer div.frame {
+  padding: 0;
+  margin: 0 1.2em 0 0;
+  border: solid 4px #ccc;
+  border-radius: 1em;
+  overflow: hidden;
+  float: left;
+  height: 205px;
+  box-shadow: 0px 0px 10px #000;
+}
+#offers #viewing > .offer label {
+  color: #000;
+  font-size: 2em;
+  font-weight: bold;
+}
+#offers #viewing > .offer label:hover {
+  color: #666;
+}
+#offers #viewing > .offer p {
+  line-height: 1.6em;
+}
+#offers #viewing > .offer .description {
+  display: none;
+}
+#offers #viewing > .offer .learnyou:link,
+#offers #viewing > .offer .learnyou:visited {
+  display: block;
+  margin: 1em 0;
+  color: #e53f14;
+}
+#offers #viewing > .offer .learnyou:hover {
+  color: #f2724c;
+}
+#offers #viewing > .offer .cost {
+  display: none;
+}
+#offers #viewing > .offer .cost label {
+  font-size: 1em;
+  padding-right: 1em;
+}
+#search {
+  width: 30%;
+  margin: 3em auto;
+}
+#search label {
+  font-style: italic;
+}
+#search input {
+  margin: 0 0.5em;
+}
+#search button {
+  display: inline;
+}
+@media only screen and (max-width:1024px) {
+  body {
+    font-size: 90%;
+  }
+  header {
+    width: 90%;
+  }
+  #tagcloud {
+    width: 90%;
+  }
+  #offers {
+    width: 90%;
+  }
+  #offers #viewing .offer img {
+    max-width: 95px;
+  }
+  #offers #viewing .offer div.frame {
+    height: 129px;
+  }
+  #offers #viewing .offer p {
+    left: 118px;
+  }
+  #search {
+    width: 32%;
+  }
+}
+@media only screen and (max-width:800px) {
+  body {
+    font-size: 60%;
+  }
+  #offers #viewing .offer img {
+    max-width: 50px;
+  }
+  #offers #viewing .offer div.frame {
+    height: 68px;
+  }
+  #offers #viewing .offer p {
+    left: 72px;
+  }
+  #search {
+    width: 35%;
+  }
+}
