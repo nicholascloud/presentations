@@ -508,8 +508,8 @@ var insider = function (data) {
   console.log('Insider knows!');
 };
 
-c.subscribe(stockholder).<strong>withPriority(100)</strong>;
-c.subscribe(insider).<strong>withPriority(75)</strong>;
+c.subscribe(stockholder).<strong>withPriority(75)</strong>;
+c.subscribe(insider).<strong>withPriority(100)</strong>;
 
 postal.channel('stock.event').publish({action: 'sell!'});
           </code></pre>
