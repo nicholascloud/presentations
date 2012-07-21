@@ -5,6 +5,14 @@ var postal = require('postal'),
   pace = require('./pace'),
   hydration = require('./hydration');
 
+/*
+
+  ELEVATION ---> PACE
+  PACE ---> DISTANCE
+  DISTANCE ---> HYDRATION
+
+*/
+
 var paceChannel = postal.channel('fitbuddy', 'pace'),
   distanceChangeChannel = postal.channel('fitbuddy', 'distance.change'),
   elevationChangeChannel = postal.channel('fitbuddy', 'elevation.change'),

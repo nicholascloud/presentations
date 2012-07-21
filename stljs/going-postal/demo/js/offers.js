@@ -48,7 +48,7 @@ define(['jquery', 'postal', 'data', 'template', 'jqueryext'],
     return {
       clear: _clear,
       load: _load,
-      render: _render,
+      render: _render
     };
   }('#offers'));
 
