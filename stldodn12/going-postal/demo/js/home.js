@@ -29,8 +29,9 @@ require.config({
 
 require(['jquery', 'postal', 'tagCloud', 'offers', 'search'], function ($, bus) {
   $().ready(function () {
-    //when all modules have been loaded, publishes a "ready" message to the message bus
-    bus.channel('ready').publish({});
-    bus.channel('categories.changed').publish(['art']);
+    // when all modules have been loaded, publishes a "ready"
+    // message to the message bus
+    bus.channel('learnyou', 'ready').publish({});
+    bus.channel('learnyou', 'categories.changed').publish(['art']);
   });
 });

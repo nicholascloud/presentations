@@ -25,11 +25,11 @@ define(['jquery', 'postal', 'data'],
 
       // publishes a "search.categories" message when categories on
       // the page should change to match search results
-      bus.channel('search.categories').publish(result.categories);
+      bus.channel('learnyou', 'search.categories').publish(result.categories);
 
       // publishes a "search.offers" message when offers on the page
       // should change to match search results
-      bus.channel('search.offers').publish(result.offers);
+      bus.channel('learnyou', 'search.offers').publish(result.offers);
     };
 
     return {
