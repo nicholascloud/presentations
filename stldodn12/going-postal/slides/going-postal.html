@@ -168,6 +168,16 @@ fulfillmentChannel.subscribe(function (data) {
         </section>
 
         <section>
+          <h2>SubscriptionDefinition</h2>
+          <pre><code>
+var c = postal.channel('batman', 'dispense.justice');
+//SubscriptionDefinition
+var s = c.subscribe(function (villain) {});
+          </code></pre>
+          <img src="img/subscription-definition.PNG" class="centerme" />
+        </section>
+
+        <section>
           <h2>distinctUntilChanged()</h2>
           <p>Prevents subscription callbacks from handling duplicate, consecutive topics.</p>
         </section>
