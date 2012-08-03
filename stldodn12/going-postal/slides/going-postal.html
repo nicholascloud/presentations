@@ -26,16 +26,19 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
+          <img src="img/stldodn-sponsors.png" class="centerme" />
+        </section>
+
+        <section>
           <h1>Going Postal</h1>
           <h2>with postal.js</h2>
           <div>
             <img src="img/simonpegg.jpg" class="centerme" />
           </div>
-          <h3 style="margin-top:1em;">(in five parts)</h3>
         </section>
 
         <section>
-          <h1>Part 1: Events &amp; Messages</h1>
+          <h1>Events &amp; Messages</h1>
           <div>
             <img src="img/simonpegg6.jpg" class="centerme" />
           </div>
@@ -77,7 +80,7 @@ $('#bar').trigger('launch');
             <li class="fragment">Only one callback can be assigned for a specific event on a given element (libraries like jQuery circumvent this limitation)</li>
           </ul>
         </section>
-
+<!--
         <section>
           <h2>A common scenario</h2>
           <pre><code>
@@ -113,7 +116,7 @@ $.post('/my/url', data, function () {
         </section>
 
         <section>
-          <h1>Part 2: Clean Code</h1>
+          <h1>Clean Code</h1>
           <div>
             <img src="img/simonpegg3.jpg" class="centerme" />
           </div>
@@ -241,9 +244,9 @@ define(['postal'], function (postal) {
 });
           </code></pre>
         </section>
-
+-->
         <section>
-          <h1>Part 3: The Big Guns</h1>
+          <h1>The Big Guns</h1>
           <img src="img/simonpegg4.jpg" class="centerme" />
         </section>
 
@@ -255,17 +258,20 @@ define(['postal'], function (postal) {
             <li class="fragment">simple script that creates a `window.postal` object</li>
             <li class="fragment">an AMD-compatible script that can be used with AMD loaders like require.js</li>
             <li class="fragment">a Node.js module that assigns the postal object to `exports`</li>
-
           </ul>
         </section>
 
         <section>
           <h2>Wat?</h2>
           <dl>
+            <dt class="slimed">channel</dt>
+            <dd>A named "pipe" through which messages with different topics (names) may be published.</dd>
+
             <dt class="slimed">topic</dt>
             <dd>A message name formatted with dot notation, e.g., "foo.bar.baz". May contain wildcards.</dd>
-            <dt class="slimed">channel</dt>
-            <dd>Conduit through which messages can be published or subscriptions can be added for a given topic.</dd>
+
+            <dt class="slimed">subscription</dt>
+            <dd>A handler (function) that has been assigned to a channel & topic. </dd>
           </dl>
         </section>
 
@@ -316,6 +322,13 @@ fulfillmentChannel.subscribe(function (data) {
   //will be invoked for all order topics
 });
           </code></pre>
+        </section>
+
+        <section>
+          <h1>Subscription API</h1>
+          <div>
+            <img src="img/simonpegg5.jpg" class="centerme" />
+          </div>
         </section>
 
         <section>
@@ -551,13 +564,7 @@ var largeDataSet = {}; //lots of data in here
 
 var c = postal.channel('schedule', 'query');
 c.subscribe(function (query) {
-  var item, results = [];
-  for (item in largeDataSet) {
-    if (!largeDataSet.hasOwnProperty(item)) continue;
-    if (query.matches(item)) {
-      results.push(item);
-    }
-  }
+  //get `results` from slow data store
   postal.channel('schedule', 'filter').publish(results);
 }).<strong>defer()</strong>;
 
@@ -574,17 +581,11 @@ $('input[type="checkbox"]').change(function () {
           </code></pre>
         </section>
 
-        <section>
-          <h1>Part 4: Code</h1>
-          <div>
-            <img src="img/simonpegg5.jpg" class="centerme" />
-          </div>
-        </section>
+
 
         <section>
-          <h1>Part 5</h1>
-          <h2>In which I point you</h2>
-          <h3>to additional resources</h3>
+          <h1>Additional Resources</h1>
+          <img src="img/simonpegg7.jpg" class="centerme" />
         </section>
 
         <section>

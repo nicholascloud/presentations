@@ -22,7 +22,13 @@ define(['jquery', 'postal', 'data'],
       if (result.count === 0) {
         //show some message
       }
-      bus.channel('search.categories').publish(result.categories)
+
+      // publishes a "search.categories" message when categories on
+      // the page should change to match search results
+      bus.channel('search.categories').publish(result.categories);
+
+      // publishes a "search.offers" message when offers on the page
+      // should change to match search results
       bus.channel('search.offers').publish(result.offers);
     };
 
