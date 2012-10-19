@@ -1,0 +1,12 @@
+{
+  "name": "backbonejs-tutorial",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Nicholas Cloud",
+  "title": "Backbone.js tutorial",
+  "description": "Backbone.js tutorial",
+  "dependencies": {
+    "strata": "0.18.1",
+    "stylus": "0.29.0"
+  }
+}

@@ -1,0 +1,15 @@
+body {
+  font-size: 16px;
+}
+#container {
+  font-size: 1.5em;
+}
+#container .artist-name {
+  font-weight: bold;
+}
+#container .album-title {
+  font-style: italic;
+}
+#container .tracks {
+  font-style: italic;
+}
