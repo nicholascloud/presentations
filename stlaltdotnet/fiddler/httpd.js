@@ -17,9 +17,9 @@ strata.get('/', function (env, callback) {
   strata.redirect(env, callback, '/index.html');
 });
 
-strata.get('/albums', function (env, callback) {
+strata.get('/:collection', function (env, callback) {
   "use strict";
-  dataStore('albums', function (err, store) {
+  dataStore(env.route.collection, function (err, store) {
     if (err && strata.handleError(appError(err), env, callback)) {
       return;
     }
@@ -30,13 +30,13 @@ strata.get('/albums', function (env, callback) {
   });
 });
 
-strata.get('/albums/:id', function (env, callback) {
+strata.get('/:collection/:id', function (env, callback) {
   "use strict";
   if (!ID_REGEX.test(env.route.id)) {
     return strata.handleError(appError('invalid identifier'), env, callback);
   }
 
-  dataStore('albums', function (err, store) {
+  dataStore(env.route.collection, function (err, store) {
     if (err && strata.handleError(appError(err), env, callback)) {
       return;
     }

@@ -3,7 +3,7 @@ var fs = require('fs'),
   trycatch = require('./trycatch');
 
 var DATA_PATH = path.join(__dirname, 'data'),
-  connectedStores = {};
+  cachedStores = {};
 
 function load(path, callback) {
   "use strict";
@@ -76,7 +76,7 @@ function connectStore(store, callback) {
     dispose: function (callback) {
       this.flush(function (err) {
         if (err) return callback(err);
-        delete connectedStores[store];
+        delete cachedStores[store];
         callback(null);
       });
     }
@@ -91,14 +91,14 @@ function connectStore(store, callback) {
 
 module.exports = function (storeName, callback) {
   "use strict";
-  if (connectedStores.hasOwnProperty(storeName)) {
+  if (cachedStores.hasOwnProperty(storeName)) {
     console.log('==>', 'using cached data store', storeName);
-    return callback(null, connectedStores[storeName]);
+    return callback(null, cachedStores[storeName]);
   }
   console.log('==>', 'connecting data store', storeName);
   connectStore(storeName, function (err, dataStore) {
     if (err) return callback(err);
-    connectedStores[storeName] = dataStore;
+    cachedStores[storeName] = dataStore;
     callback(null, dataStore);
   });
 };
