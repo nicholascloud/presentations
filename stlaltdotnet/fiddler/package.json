@@ -1,10 +1,10 @@
 {
-  "name": "backbonejs-tutorial",
+  "name": "fiddler-presentation-code",
   "version": "0.0.1",
   "private": true,
   "author": "Nicholas Cloud",
-  "title": "Backbone.js tutorial",
-  "description": "Backbone.js tutorial",
+  "title": "Fiddler presentation code",
+  "description": "Fiddler presentation code",
   "dependencies": {
     "strata": "0.18.1",
     "stylus": "0.29.0"
