@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs'),
   path = require('path'),
   trycatch = require('./trycatch');
@@ -6,7 +8,6 @@ var DATA_PATH = path.join(__dirname, 'data'),
   cachedStores = {};
 
 function load(path, callback) {
-  "use strict";
   fs.readFile(path, function (err, text) {
     if (err) return callback(err);
     trycatch(function () {
@@ -19,7 +20,6 @@ function load(path, callback) {
 }
 
 function save(path, data, callback) {
-  "use strict";
   trycatch(function () {
     return JSON.stringify(data);
   }, function (err, text) {
@@ -29,8 +29,6 @@ function save(path, data, callback) {
 }
 
 function connectStore(store, callback) {
-  "use strict";
-
   var dataFile = store + '.json',
     dataPath = path.join(DATA_PATH, dataFile),
     dataSet = [];
@@ -90,7 +88,6 @@ function connectStore(store, callback) {
 }
 
 module.exports = function (storeName, callback) {
-  "use strict";
   if (cachedStores.hasOwnProperty(storeName)) {
     console.log('==>', 'using cached data store', storeName);
     return callback(null, cachedStores[storeName]);
