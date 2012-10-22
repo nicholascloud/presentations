@@ -8,6 +8,9 @@ _Capturing requests_
 
 _Seeing requests/responses in the session list_
 
+- finding parent requests
+- finding child requests
+
 _Inspecting requests with the "inspectors" tab_
 
 - headers
@@ -17,6 +20,8 @@ _Inspecting requests with the "inspectors" tab_
 _Automatically responding with the "AutoResponder" tab_
 
 _Composing a new request based on an old one with the "Composer" tab_
+
+- modifying headers
 
 _Filtering requests with the "Filters" tab_
 
