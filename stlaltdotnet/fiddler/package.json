@@ -7,7 +7,7 @@
   "description": "Fiddler presentation code",
   "dependencies": {
     "strata": "0.18.1",
-    "stylus": "0.29.0",
-    "inflection": "1.2.3"
+    "inflection": "1.2.3",
+    "yamljs": "0.1.3"
   }
 }
