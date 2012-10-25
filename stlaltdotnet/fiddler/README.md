@@ -1,33 +1,28 @@
-# Using Fiddler
+# Fiddler Lightning Talk Outline
 
-_Capturing requests_
+Capturing requests
 
 - browser/non-browser
 - process specific
 - toggle capturing
 
-_Seeing requests/responses in the session list_
+Seeing requests/responses in the session list
 
-- finding parent requests
-- finding child requests
-
-_Inspecting requests with the "inspectors" tab_
+Inspecting requests with the "inspectors" tab
 
 - headers
 - syntax
 - json
 
-_Automatically responding with the "AutoResponder" tab_
+Automatically responding with the "AutoResponder" tab
 
-_Composing a new request based on an old one with the "Composer" tab_
+Composing a new request based on an old one with the "Composer" tab
 
-- modifying headers
+Filtering requests with the "Filters" tab
 
-_Filtering requests with the "Filters" tab_
+Viewing request timeline with the "Timeline" tab
 
-_Viewing request timeline with the "Timeline" tab_
-
-_QuickExec commands_
+QuickExec commands
 
 - Alt+q
 - ?search
@@ -37,13 +32,14 @@ _QuickExec commands_
 - =Method (=GET, =POST)
 - bold _term_ (bold index.html) - only applies to new requests
 
-_Saving and loading sessions_
+Saving and loading sessions
 
 - adding comments
 - attaching files
 
-_Using the "TextWizard" to compose strings that are painful to do by hand_
+Using the "TextWizard" to compose strings that are painful to do by hand
 
-_Adding custom rules with the "FiddlerScript" tab_
+Adding custom rules with the "FiddlerScript" tab
 
 - external FiddlerScript editor with intellisense
+
