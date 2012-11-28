@@ -17,6 +17,7 @@ namespace AsyncPatterns
         private const Int32 READ_LIMIT = 50;
 
         public void Start() {
+            Console.WriteLine("(IAR) IAsyncResult interface");
             Read();
         }
 

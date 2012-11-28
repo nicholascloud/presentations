@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace AsyncPatterns
 {
-    class Program
-    {
+    class Program {
+
+        static EAP _eap = new EAP();
+        static IAR _iar = new IAR();
+        static TAP _tap = new TAP();
+
         static void Main(string[] args) {
-            var eap = new IAR();
-            eap.Start();
-
-
+            _tap.Start();
             Console.ReadLine();
         }
     }

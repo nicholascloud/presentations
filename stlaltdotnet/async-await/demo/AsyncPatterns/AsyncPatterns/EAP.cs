@@ -16,6 +16,7 @@ namespace AsyncPatterns
         }
 
         public void Start() {
+            Console.WriteLine("(EAP) Event-based Asynchronous Pattern");
             Console.WriteLine(">>> entering Start()");
             DownloadURL("http://stlalt.net");
             Console.WriteLine("<<< exiting Start()");
