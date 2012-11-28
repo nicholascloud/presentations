@@ -9,31 +9,35 @@ using System.Threading.Tasks;
 namespace AsyncPatterns
 {
     class EAP {
-        private readonly WebClient _client = new WebClient();
-
-        public EAP() {
-            _client.DownloadStringCompleted += OnDownloadString;
-        }
 
         public void Start() {
             Console.WriteLine("(EAP) Event-based Asynchronous Pattern");
-            Console.WriteLine(">>> entering Start()");
+            Console.WriteLine(">>> Start()");
+
+            Console.WriteLine("invocation on thread {0}", Thread.CurrentThread.ManagedThreadId);
             DownloadURL("http://stlalt.net");
-            Console.WriteLine("<<< exiting Start()");
+            
+            Console.WriteLine("<<< Start()");
         }
 
         private void DownloadURL(string url) {
-            Console.WriteLine(">>> entering DownloadURL()");
-            Console.WriteLine("invocation on thread {0}", Thread.CurrentThread.ManagedThreadId);
-            _client.DownloadStringAsync(new Uri(url));
-            Console.WriteLine("<<< exiting DownloadURL()");
+            Console.WriteLine(">>> DownloadURL()");
+            
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += OnDownloadString;
+            client.DownloadStringAsync(new Uri(url));
+            
+            Console.WriteLine("<<< DownloadURL()");
         }
 
         private void OnDownloadString(Object sender, DownloadStringCompletedEventArgs args) {
-            Console.WriteLine(">>> entering OnDownloadString");
+            Console.WriteLine(">>> OnDownloadString");
             Console.WriteLine("callback on thread {0}", Thread.CurrentThread.ManagedThreadId);
-            Console.WriteLine(new String(args.Result.Take(255).ToArray()));
-            Console.WriteLine("<<< exiting OnDownloadString");
+
+            var shortVersion = new String(args.Result.Take(255).ToArray());
+            Console.WriteLine(shortVersion);
+            
+            Console.WriteLine("<<< OnDownloadString");
         }
     }
 }

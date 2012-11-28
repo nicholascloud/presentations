@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace AsyncPatterns
 {
     class IAR {
-        private readonly Object _locker = new Object();
         private readonly FileStream _stream = new FileStream("a-new-hope.txt", FileMode.Open);
         private readonly Byte[] _data = new Byte[5000];
         private Int32 _bytesRead = 0;
@@ -23,17 +22,13 @@ namespace AsyncPatterns
 
         private void Read() {
             Console.WriteLine("reading on thread {0}", Thread.CurrentThread.ManagedThreadId);
-            lock (_locker) {
-                IAsyncResult result = _stream.BeginRead(_data, _bytesRead, READ_LIMIT, OnRead, null);
-            }
+            IAsyncResult result = _stream.BeginRead(_data, _bytesRead, READ_LIMIT, OnRead, null);
         }
 
         private void OnRead(IAsyncResult ar) {
             Console.WriteLine("callback on thread {0}", Thread.CurrentThread.ManagedThreadId);
             Int32 chunkSize;
-            lock (_locker) {
                 chunkSize = _stream.EndRead(ar);
-            }
             _bytesRead += chunkSize;
             if (chunkSize > 0 && _bytesRead < _data.Length) {
                 Read();

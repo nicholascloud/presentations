@@ -137,13 +137,20 @@
         </section>
 
         <section>
+          <img src="img/async-method-signatures.PNG" />
+        </section>
+
+        <section>
           <p>When async methods return:</p>
           <ul>
             <li><code>Task</code>: evaluates as a statement (same with void)</li>
             <li><code>Task&lt;T&gt;</code>: evaluates as an expression, yielding the value of an async
               operation</li>
           </ul>
-          <p class="nudge">[code]</p>
+        </section>
+
+        <section>
+          <img src="img/task-as-expression.PNG" />
         </section>
 
         <section>
@@ -156,7 +163,10 @@
             <li>methods will only be executed asynchronously if they contain an <code>await</code> keyword</li>
             <li><code>await</code> may only be used in a method with an <code>async</code> signature</li>
           </ul>
-          <p class="nudge">[code]</p>
+        </section>
+
+        <section>
+          <img src="img/await-examples-1.PNG" />
         </section>
 
         <section>
@@ -165,7 +175,10 @@
             <li>calling thread will only return once a task is awaited, <em>not</em> when the method that returns the task is
               invoked</li>
           </ul>
-          <p class="nudge">[code]</p>
+        </section>
+
+        <section>
+          <img src="img/await-examples-2.PNG" />
         </section>
 
         <section>
@@ -173,7 +186,10 @@
             <li>multiple async methods can be called in a row, and awaited later</li>
             <li>multiple <code>await</code>s can occur in the same expression or statement</li>
           </ul>
-          <p class="nudge">[code]</p>
+        </section>
+
+        <section>
+          <img src="img/await-examples-3.PNG" />
         </section>
 
         <section>
@@ -185,6 +201,10 @@
             <li>the <code>this</code> reference</li>
             <li>.NET context objects (execution, security, call)</li>
           </ul>
+        </section>
+
+        <section>
+          <img src="img/decompiled-await.PNG" />
         </section>
 
         <section>
@@ -236,7 +256,10 @@
             <li>returns a single Task that can be awaited</li>
             <li>will complete when <em>all</em> of its arguments have completed</li>
           </ul>
-          <p class="nudge">[code]</p>
+        </section>
+
+        <section>
+          <img src="img/when-all.PNG" />
         </section>
 
         <section>
@@ -246,7 +269,10 @@
             <li>returns a single Task that can be awaited</li>
             <li>will complete when <em>any one</em> of its arguments have completed</li>
           </ul>
-          <p class="nudge">[code]</p>
+        </section>
+
+        <section>
+          <img src="img/when-any.PNG" />
         </section>
 
         <section>
@@ -256,6 +282,10 @@
             <li>returns a task that may be awaited</li>
             <li>useful as a "timeout" argument to Task.WhenAny().</li>
           </ul>
+        </section>
+
+        <section>
+          <img src="img/task-delay.PNG" />
         </section>
 
         <section>
@@ -275,7 +305,7 @@
         <section>
           <ul>
             <li>async method that is never awaited will never report an exception</li>
-            <li>an awaited task in a `try` block that never completes will not hit the `finally` block</li>
+            <li>an awaited task in a <code>try</code> block that never completes will not hit the <code>finally</code> block</li>
           </ul>
         </section>
 

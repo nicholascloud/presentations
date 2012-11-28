@@ -11,9 +11,18 @@ namespace AsyncPatterns
         static EAP _eap = new EAP();
         static IAR _iar = new IAR();
         static TAP _tap = new TAP();
+        static TCS _tcs = new TCS();
 
         static void Main(string[] args) {
-            _tap.Start();
+            _eap.Start();
+//            _iar.Start();
+//            _tap.Start();
+//            _tcs.Start();
+
+//            var ex = new Exceptions();
+//            ex.ExceptionNotReported();
+//            ex.FinallyNotHit();
+
             Console.ReadLine();
         }
     }

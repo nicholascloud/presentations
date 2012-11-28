@@ -11,27 +11,42 @@ namespace AsyncPatterns
 
         public void Start() {
             Console.WriteLine("(TAP) Task-based Asynchronous Pattern");
-            Console.WriteLine("pre invoke");
+            Console.WriteLine(">>> Start()");
+            
             Invoke();
-            Console.WriteLine("post invoke");
+            
+            Console.WriteLine("<<< *** Start() ***");
         }
 
-        private async void Invoke() {
-            Console.WriteLine(">>> enter Invoke()");
-            await DoWork();
-            Console.WriteLine("<<< exit Invoke()");
+        private void ProcessResult(Task<String> task) {
+            Console.WriteLine(">>> ProcessResult()");
+
+            Console.WriteLine(task.Result); //All Done!
+            
+            Console.WriteLine("<<< ProcessResult()");
         }
 
-        private Task DoWork() {
-            Console.WriteLine(">>> enter DoWork()");
-            Thread.Sleep(5000);
-            var task = new Task(() => {
-                Console.WriteLine(">>> enter worker thread");
+        private void Invoke() {
+            Console.WriteLine(">>> Invoke()");
+            
+            DoWork().ContinueWith(ProcessResult);
+            
+            Console.WriteLine("<<< Invoke()");
+        }
+
+        private Task<String> DoWork() {
+            Console.WriteLine(">>> DoWork()");
+
+            var task = new Task<String>(() => {
+                Console.WriteLine(">>> task thread");
                 Thread.Sleep(3000);
-                Console.WriteLine("<<< exit worker thread");
+                Console.WriteLine("<<< task thread");
+                return "All Done!";
             });
+            
             task.Start();
-            Console.WriteLine("<<< exit DoWork()");
+            
+            Console.WriteLine("<<< DoWork()");
             return task;
         }
     }
