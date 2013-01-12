@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "artist":"Stavesacre",
+    "title":"Speakeasy",
+    "tracks":[
+      {
+        "title":"Minuteman",
+        "url":"/music/stavesacre/speakeasy/minuteman.mp3"
+      },
+      {
+        "title":"Sundown Motel",
+        "url":"/music/stavesacre/speakeasy/sundown-motel.mp3"
+      },
+      {
+        "title":"Gold and Silver",
+        "url":"/music/stavesacre/speakeasy/gold-and-silver.mp3"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "artist":"Poor Old Lu",
+    "title":"Sin",
+    "tracks":[
+      {
+        "title":"Where Were All of You",
+        "url":"/music/poor-old-lu/sin/where-were-all-of-you.mp3"
+      },
+      {
+        "title":"My World Falls Down",
+        "url":"/music/poor-old-lu/sin/my-world-falls-down.mp3"
+      },
+      {
+        "title":"Cannon-Fire Orange",
+        "url":"/music/poor-old-lu/sin/cannon-fire-orange.mp3"
+      }
+    ]
+  },
+  {
+    "artist":"Project 86",
+    "title":"Picket Fence Cartel",
+    "tracks":[
+      {
+        "title":"The Butcher",
+        "url":"/music/project-86/picket-fence-cartel/the-butcher.mp3"
+      },
+      {
+        "title":"The Black Brigade",
+        "url":"/music/project-86/picket-fence-cartel/the-black-brigade.mp3"
+      }
+    ]
+  }
+]

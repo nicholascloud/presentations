@@ -1,0 +1,13 @@
+{
+  "name": "fiddler-presentation-code",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Nicholas Cloud",
+  "title": "Fiddler presentation code",
+  "description": "Fiddler presentation code",
+  "dependencies": {
+    "strata": "0.18.1",
+    "inflection": "1.2.3",
+    "yamljs": "0.1.3"
+  }
+}

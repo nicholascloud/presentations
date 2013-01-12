@@ -1,0 +1,24 @@
+<!doctype html>
+  <html>
+    <head>
+      <link type="text/css" rel="stylesheet" href="styles/styles.css" />
+      <script type="text/javascript" src="scripts/jquery-1.8.2.js"></script>
+    </head>
+    <body>
+      <img id="img1" src="images/laughing-lol-crazy-l.png" />
+      <img id="img2" src="images/marker-meme.jpg" />
+      <img id="img3" src="images/scumbag-brain.png" />
+
+      <script type="text/javascript">
+        $(function () {
+          var $img = $('img');
+          $img.on('hover', function () {
+            $img.each(function (index, img) {
+              $(img).css('z-index', 1);
+            });
+            $(this).css('z-index', 100);
+          });
+        });
+      </script>
+    </body>
+  </html>

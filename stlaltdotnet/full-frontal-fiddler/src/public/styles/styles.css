@@ -1,0 +1,17 @@
+#img1 {
+  position: absolute;
+  left:100px;
+  top: 100px;
+}
+
+#img2 {
+  position: absolute;
+  right: 100px;
+  top: 120px;
+}
+
+#img3 {
+  position: absolute;
+  left: 200px;
+  bottom: 100px;
+}
