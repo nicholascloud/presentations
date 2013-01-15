@@ -2,9 +2,20 @@
 
 ### Capturing requests
 
+Fiddler registers itself as a WinINET proxy.
+
+Any application that uses HTTP and respects WinINET settings will be proxied through Fiddler.
+
+Applications that do not respect WinINET need to be configured manually to use a proxy (e.g., FireFox, curl).
+
 - browser/non-browser
 - process specific
 - toggle capturing
+
+
+
+
+
 
 Seeing requests/responses in the session list
 
