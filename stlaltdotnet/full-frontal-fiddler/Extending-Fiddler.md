@@ -2,11 +2,9 @@
 
 ### FiddlerScript
 
-_FiddlerScript_ is based on JScript.NET.
-
+- FiddlerScript is based on JScript.NET
 - classes, fields, properties, methods
 - (optional) variable types
-
 
 - add custom rules with the "FiddlerScript" tab
 - external FiddlerScript editor with intellisense
