@@ -40,6 +40,10 @@ QuickExec commands
 - `={ResponseCode}`: select sessions with a specific response code (`=200`, `=404`)
 - `={method}`: selection sessions with specific HTTP methods (`=get`, `=post`)
 - `bold {term}`: makes session text __bold__ if it matches the specified term (`bold index.html`); only applies to new requests
+- `about:config`: show Fiddler preferences
+- `prefs log`: output all preferences to log window
+- `prefs set {name} {value}`: set a Fiddler preference
+- `prefs remove {name}`: remove a Fiddler preference
 
 Saving and loading sessions
 
