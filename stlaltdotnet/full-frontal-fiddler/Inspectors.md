@@ -1,3 +1,0 @@
-# Inspectors
-
-p. 234
