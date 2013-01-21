@@ -1,4 +1,4 @@
-# .NET Extensions
+# .NET extensions
 
 - Fiddler2 loads .NET 2.0/3.5 assemblies only (there is a .NET 4.0 version of Fiddler in beta)
 - users must have the appropriate .NET runtime installed (2.0 or 3.5)
@@ -8,15 +8,106 @@
 - set preference `fiddler.debug.extensions.verbose` to write log messages and warnings to the log tab
 - globally available extensions installed to: `%Program Files%\Fiddler2\Scripts`
 - user extensions installed to: `%USERPROFILE%\My Documents\Fiddler2\Scripts`
+- http://fiddler2.com/Fiddler/dev/IFiddlerExtension.asp
+
+## Extension interfaces
+
+### IFiddlerExtension
+
+Basic interface required to load an extension on startup.
+
+- `OnLoad()`: UI is fully available
+- `OnBeforeUnload()`: application is shutting down
+
+### IAutoTamper : IFiddlerExtension
+
+Methods called for each HTTP(S) request/response.  Methods are called on background threads, which has implications for UI components.
+
+- `AutoTamperRequestBefore(Session)`: before the user can edit a request with inspectors
+- `AutoTamperRequestAfter(Session)`: after the user can edit a request, and before the request is actually sent
+- `AutoTamperResponseBefore(Session)`: before the user can edit a response with inspectors (unless streaming)
+- `AutoTamperResponseAfter(Session)`: after the user can edit a response (unless streaming)
+- `OnBeforeReturningError(Session)`: when fiddler returns a self-generated HTTP error (e.g., DNS lookup failure)
+
+### IAutoTamper2 : IAutoTamper
+
+Allows extensions to optionally "peek" at response headers before anything handles the response.
+
+- `OnPeekAtResponseHeaders(Session)`: when the response headers become available
+
+### IAutoTamper3 : IAutoTamper2
+
+Allows extensions to "peek" at request headers before anything handles the request.
+
+- `OnPeekAtRequestHeaders(Session)`: when the request headers become available
+
+### IHandleExecAction
+
+An extension that can handle commands entered into the QuickExec field.
+
+- OnExecAction(String)
 
 
+## Extension preferences
 
-### Extensions
+Preferences can be set manually in the QuickExec bar:
 
-### Importer/Exporter Extensions
+`prefs set [name] [value]`
 
-### Author extensions
+They can also be set by invoking the preferences dialog from the QuickExec bar:
 
-http://getfiddler.com/addons
+`about:config`
 
-- JavaScript formatter
+The `FiddlerApplication.Prefs` object implements `IFiddlerPreferences` and allows you to manipulate preferences programatically.
+
+- `Get[Bool|String|Int32]Pref(name, default)`
+- `Set[Bool|String|Int32]Pref(name, value)`
+- `RemovePref(name)`
+- `AddWatcher(filter, handler)`
+- `RemoveWatcher(watcher)`
+- `[name]` (get/set by indexer)
+
+__NOTE__: Extensions must invoke `RemoveWatcher` when disposed in order to get garbage collected.
+
+
+## Fiddler objects
+
+Fiddler exposes several useful objects that extensions can access.
+
+### FiddlerApplication.UI
+
+- manipulate sessions in the session (select, unselect, remove) list
+- change layout options
+- toggle capturing
+- set status text / show alert
+- copy sessions and session information (e.g., headers, URL, etc.)
+- persist session(s) to archive
+- etc.
+
+### FiddlerApplication.Log
+
+- log a simple string to the Log inspector (`LogString()`)
+- log a formatted string to the Log inspector (`LogFormat()`)
+
+### FiddlerApplication.Prefs
+
+- get/set/remove preferences
+- attach/remove preference "watchers" that will be triggered when preferences change
+
+### Session
+
+- manipulate request (`oRequest`), including headers, URL, query string, and HTTP method
+- manipulate response (`oResponse`) including headers and response code
+- manipulate flags (used by extensions and UI components)
+- abort
+- query client information (IP address, port, etc.)
+- query destination information (IP address, port, host)
+- determine if the session is using HTTPS
+- examine a number of time spans (`Timers`) that measure the duration of certain parts of the request
+- etc.
+
+
+## Other types of extensions
+
+- importer/exporter extensions
+- inspectors (UI)

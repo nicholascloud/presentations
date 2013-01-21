@@ -4,21 +4,25 @@ using System.Text;
 
 namespace AltNetFiddler {
   internal class TraceFile {
-    private readonly IDictionary<Guid, string> _traces;
-
     public TraceFile(IDictionary<Guid, String> traces) {
       _traces = traces;
     }
 
+    private readonly IDictionary<Guid, string> _traces;
+    private String _cache = String.Empty;
+
     public override string ToString() {
-      var b = new StringBuilder();
-      foreach (var kvp in _traces) {
-        b.AppendLine(kvp.Key.ToString())
-          .AppendLine(kvp.Value)
-          .AppendLine(String.Empty)
-          .AppendLine(String.Empty);
+      if (_cache == String.Empty) {
+        var b = new StringBuilder();
+        foreach (var kvp in _traces) {
+          b.AppendLine(kvp.Key.ToString())
+           .AppendLine(kvp.Value)
+           .AppendLine(String.Empty)
+           .AppendLine(String.Empty);
+        }
+        _cache = b.ToString();
       }
-      return b.ToString();
+      return _cache;
     }
   }
 }

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Log.cs" />
+    <Compile Include="Prefs.cs" />
     <Compile Include="TraceFile.cs" />
     <Compile Include="TraceRouteTamper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
