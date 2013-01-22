@@ -1,4 +1,4 @@
-# .NET extensions
+# 04 .NET extensions
 
 - Fiddler2 loads .NET 2.0/3.5 assemblies only (there is a .NET 4.0 version of Fiddler in beta)
 - users must have the appropriate .NET runtime installed (2.0 or 3.5)
@@ -105,7 +105,6 @@ Fiddler exposes several useful objects that extensions can access.
 - determine if the session is using HTTPS
 - examine a number of time spans (`Timers`) that measure the duration of certain parts of the request
 - etc.
-
 
 ## Other types of extensions
 

@@ -1,4 +1,4 @@
-# FiddlerScript
+# 03 FiddlerScript
 
 - FiddlerScript is based on JScript.NET
 - classes, fields, properties, methods
@@ -68,3 +68,12 @@ static function OnBeforeRequest(oSession: Session) {
 
 `RulesOption`: adds a boolean option to the rules menu; applies to boolean properties
 
+## Setting breakpoints
+
+Sometimes it can be convenient to set a request/response breakpoint in FiddlerScript.
+
+```jscript
+if (oSession.url.IndexOf('localhost') > -1) {
+    oSession["X-BreakRequest"] = true;
+}
+```

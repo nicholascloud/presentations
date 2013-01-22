@@ -1,4 +1,4 @@
-# Fiddler sessions
+# 01 Fiddler sessions
 
 - Fiddler registers itself as a WinINET proxy
 - applications that use HTTP and respect WinINET will be proxied through Fiddler
@@ -11,8 +11,7 @@
 - toggle capturing
 - streaming mode (no buffering; request/response cannot be edited)
 - decode (compressed sessions)
-
-## Session list
+- `F12`: capture traffic
 
 ## Selecting sessions (subject to HTTP-Referer)
 
@@ -20,6 +19,7 @@
 - `c`: select child session
 - `d`: select duplicate sessions (url and HTTP method)
 - `Shift+Del`: delete unselected sessions
+- `Ctrl+x`: clear all sessions
 
 ## Marking sessions
 
@@ -30,25 +30,6 @@
 - `Ctrl+5`: mark session(s) orange
 - `Ctrl+6`: mark session(s) purple
 - `Ctrl+0`: unmark session
-
-## Adding meta-data to sessions
-
-- adding comments (`m`)
-- attaching files (drag/drop)
-- taking a screenshot (toolbar)
-
-## Import/export sessions
-
-TODO
-
-Right-click menu
-
-- `Copy`
-- `Save`
-
-## Replaying sessions
-
-TODO
 
 ## QuickExec commands
 
@@ -63,3 +44,25 @@ TODO
 - `prefs log`: output all preferences to log window
 - `prefs set {name} {value}`: set a Fiddler preference
 - `prefs remove {name}`: remove a Fiddler preference
+
+## Adding meta-data to sessions
+
+- adding comments (`m`)
+- attaching files (drag/drop)
+- taking a screenshot (toolbar)
+
+## Import/export sessions
+
+File menu
+
+- save/load archive
+    - `.saz` file
+- import/export sessions
+    - HTML5 AppCache manifest
+    - HTTP archive (JSON)
+    - raw files
+
+Right-click menu
+
+- `Copy`
+- `Save`
