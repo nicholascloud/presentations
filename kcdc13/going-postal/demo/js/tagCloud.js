@@ -1,14 +1,22 @@
-/*global define:true*/
+/*global define*/
+define([
+  'jquery',
+  'underscore',
+  'data',
+  'channels',
+  'template'
+], function ($, _, data, channels, template) {
+  'use strict';
 
-define(['jquery', 'data', 'postal', 'template'],
-  function ($, data, bus, template) {
+  var tagCloud = (function () {
+    var $cloud = $('#tagcloud');
 
-  var tagCloud = (function (selector) {
-    var $cloud = $(selector);
-
-    $cloud.on('click', 'a', function (evt) {
+    $cloud.on('click', 'a', function (e) {
       var category = $(this).attr('data-category');
-      bus.channel('categories.changed').publish([category]);
+      channels.categories.publish({
+        topic: 'categories.changed',
+        data: [category]
+      });
       return false;
     });
 
@@ -27,7 +35,7 @@ define(['jquery', 'data', 'postal', 'template'],
       }
       $cloud.find('a').each(function () {
         var $a = $(this);
-        var isCurrent = categories.contains($a.html());
+        var isCurrent = _.contains(categories, $a.html());
         if (isCurrent) {
           $a.addClass('current');
         } else {
@@ -41,19 +49,22 @@ define(['jquery', 'data', 'postal', 'template'],
       highlight: _highlight
     };
 
-  }('#tagcloud'));
+  }());
 
-  bus.channel('ready').subscribe(function () {
-    tagCloud.fill();
-  });
+  channels.global.subscribe({
+    topic: 'ready',
+    callback: tagCloud.fill
+  }).withContext(tagCloud);
 
-  bus.channel('categories.changed').subscribe(function (categories) {
-    tagCloud.highlight(categories);
-  });
+  channels.categories.subscribe({
+    topic: 'categories.changed',
+    callback: tagCloud.highlight
+  }).withContext(tagCloud);
 
-  bus.channel('search.categories').subscribe(function (categories) {
-    tagCloud.highlight(categories);
-  });
+  channels.categories.subscribe({
+    topic: 'categories.searched',
+    callback: tagCloud.highlight
+  }).withContext(tagCloud);
 
   return tagCloud;
 });

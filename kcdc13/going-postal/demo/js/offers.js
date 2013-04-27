@@ -1,11 +1,14 @@
-/*global define:true*/
+/*global define*/
+define([
+  'jquery',
+  'channels',
+  'data',
+  'template'
+], function ($, channels, data, template) {
+  'use strict';
 
-define(['jquery', 'postal', 'data', 'template', 'jqueryext'],
-  function ($, bus, data, template) {
-
-  var offerUI = (function (selector) {
-    var _this = this;
-    var $offers = $(selector);
+  var offerUI = (function () {
+    var $offers = $('#offers');
     var $viewing = $offers.find('#viewing');
 
     var _clear = function () {
@@ -50,16 +53,22 @@ define(['jquery', 'postal', 'data', 'template', 'jqueryext'],
       load: _load,
       render: _render
     };
-  }('#offers'));
+  }());
 
-  bus.channel('categories.changed').subscribe(function (categories) {
-    offerUI.clear();
-    offerUI.load(categories);
+  channels.categories.subscribe({
+    topic: 'categories.changed',
+    callback: function (categories) {
+      offerUI.clear();
+      offerUI.load(categories);
+    }
   });
 
-  bus.channel('search.offers').subscribe(function (offers) {
-    offerUI.clear();
-    offerUI.render(offers);
+  channels.categories.subscribe({
+    topic: 'offers.searched',
+    callback: function (offers) {
+      offerUI.clear();
+      offerUI.render(offers);
+    }
   });
 
   return offerUI;

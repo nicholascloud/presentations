@@ -1,7 +1,6 @@
-/*global define:true*/
-
+/*global define*/
 define(['underscore'], function (_) {
-
+  'use strict';
   var _offers = [
     {
       id: 1,
@@ -232,7 +231,9 @@ define(['underscore'], function (_) {
 
   var cache = {
     fetchStore: function (key, fetchData) {
-      if (this.hasOwnProperty(key)) return this[key];
+      if (this.hasOwnProperty(key)) {
+        return this[key];
+      }
       var data = fetchData();
       this[key] = data;
       return data;
@@ -246,7 +247,7 @@ define(['underscore'], function (_) {
         this.categories.push(offer.category);
         this.count += 1;
       };
-    };
+    }
 
     F.prototype = {
       terms: terms,
@@ -263,51 +264,48 @@ define(['underscore'], function (_) {
       all: function () {
         return _offers;
       },
-      random: function (howMany) {
-        howMany = howMany || 3;
-        if (howMany > _offers.length) {
-          howMany = _offers.length;
-        }
-        var offers = [];
-        while (offers.length < howMany) {
-
-        }
-      },
       single: function (id) {
         return _.find(_offers, function (offer) {
-          offer.id === id;
+          return offer.id === id;
         });
       },
       inCategories: function (categories) {
         var offers = [];
         _offers.forEach(function (offer) {
-          if (!categories.contains(offer.category)) return;
+          if (!_.contains(categories, offer.category)) {
+            return;
+          }
           offers.push(offer);
         });
         return offers;
       },
       search: function (terms) {
-        var terms = terms.split(' ');
+        terms = terms.split(' ');
         var result = searchResult(terms);
 
         for (var i in _offers) {
-          if (!_offers.hasOwnProperty(i)) continue;
+          if (!_offers.hasOwnProperty(i)) {
+            continue;
+          }
           var offer = _offers[i];
           if (terms.indexOf(offer.category) >= 0) {
             result.add(offer); continue;
           }
 
           for (var j in terms) {
-            if (!terms.hasOwnProperty(j)) continue;
+            if (!terms.hasOwnProperty(j)) {
+              continue;
+            }
             var term = terms[j];
 
             var conditions = [
               (offer.name.indexOf(term) >= 0),
               (offer.description.indexOf(term) >= 0)
             ];
-            
-            if (conditions.contains(true)) {
-              result.add(offer); break;
+
+            if (_.contains(conditions, true)) {
+              result.add(offer);
+              break;
             }
           }
         }
@@ -323,7 +321,7 @@ define(['underscore'], function (_) {
           _offers.forEach(function (offer) {
             categories.push(offer.category);
           });
-          return _.uniq(categories.sort(), true)
+          return _.uniq(categories.sort(), true);
         });
       }
     }

@@ -1,6 +1,6 @@
-/*global define:true*/
-
+/*global define*/
 define(['jquery'], function ($) {
+  'use strict';
 
   function CategoryTemplate(category) {
     var $a = $('<a href="#"></a>')
@@ -50,7 +50,7 @@ define(['jquery'], function ($) {
     this.appendTo = function ($element) {
       $element.append($span);
     };
-  };
+  }
 
   return {
     Offer: OfferTemplate,

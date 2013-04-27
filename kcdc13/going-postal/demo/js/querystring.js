@@ -1,7 +1,6 @@
-/*global define:true*/
-
-define('querystring', ['jquery'], function ($) {
-
+/*global define*/
+define('querystring', function () {
+  'use strict';
   return {
     parse: function (query) {
       var queryParts = {};
@@ -28,5 +27,4 @@ define('querystring', ['jquery'], function ($) {
       };
     }
   };
-
 });

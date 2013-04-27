@@ -1,17 +1,20 @@
-/*global define:true*/
+/*global define*/
+define([
+  'jquery',
+  'channels',
+  'data'
+], function ($, channels, data) {
+  'use strict';
 
-define(['jquery', 'postal', 'data'],
-  function ($, bus, data) {
+  var search = (function () {
+    var $form = $('#search').find('form');
 
-  var search = (function (selector) {
-    var $form = $(selector).find('form');
-
-    $form.find('.submit').on('click', function (evt) {
+    $form.find('.submit').on('click', function (e) {
       $form.submit();
       return false;
     });
 
-    $form.on('submit', function (evt) {
+    $form.on('submit', function (e) {
       var terms = $form.find('#terms').val();
       _query(terms);
       return false;
@@ -19,18 +22,20 @@ define(['jquery', 'postal', 'data'],
 
     var _query = function (terms) {
       var result = data.offers.search(terms);
-      if (result.count === 0) {
-        //show some message
-      }
-      bus.channel('search.categories').publish(result.categories)
-      bus.channel('search.offers').publish(result.offers);
+      channels.categories.publish({
+        topic: 'categories.searched',
+        data: result.categories
+      });
+      channels.categories.publish({
+        topic: 'offers.searched',
+        data: result.offers
+      });
     };
 
     return {
       query: _query
-    }
-
-  }('#search'));
+    };
+  }());
 
   return search;
 });

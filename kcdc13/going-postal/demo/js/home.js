@@ -1,35 +1,32 @@
-Array.prototype.contains = function (what) {
-  var contains = false;
+/*global requirejs, rquire*/
+'use strict';
 
-  //do a strict comparison
-  if (typeof what !== 'function') {
-    this.forEach(function (item) {
-      if (contains) return;
-      contains = (item === what);
-    });
-    return contains;
-  }
-
-  //compare with an evaluator
-  this.forEach(function (item) {
-    if (contains) return;
-    contains = what(item);
-  });
-  return contains;
-};
-
-require.config({
+requirejs.config({
   paths: {
-    jquery: 'lib/jquery-1.7.2.min',
-    underscore: 'lib/underscore',
-    postal: 'lib/postal',
-    diagnostics: 'lib/postal.diagnostics'
+    'jquery': 'lib/jquery-1.9.1',
+    'underscore': 'lib/underscore',
+    'postal': 'lib/postal'
+  },
+  shim: {
+    'underscore': {
+      exports: '_'
+    }
   }
 });
 
-require(['jquery', 'postal', 'tagCloud', 'offers', 'search'], function ($, bus) {
+require([
+  'jquery',
+  'channels',
+  'jqueryext',
+  'tagCloud',
+  'offers',
+  'search'
+], function ($, channels) {
   $().ready(function () {
-    bus.channel('ready').publish({});
-    bus.channel('categories.changed').publish(['art']);
+    channels.global.publish({topic: 'ready'});
+    channels.categories.publish({
+      topic: 'categories.changed',
+      data: ['art']
+    });
   });
 });
