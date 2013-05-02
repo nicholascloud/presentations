@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Going Postal with postal.js | Nicholas Cloud | KCDC13</title>
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -21,6 +21,7 @@
       .reveal dd {margin-bottom:1em;}
       .reveal .slimed {color:#d0ff00; font-weight:bold;}
       .reveal .centerme {margin:auto !important; display:block;}
+      .reveal section > h2 {text-transform:none;}
     </style>
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -131,7 +132,7 @@ $.post('/my/url', data, function () {
 });
           </code></pre>
       </section>
-
+<!--
       <section>
         <h1>Clean Code</h1>
         <div>
@@ -263,36 +264,35 @@ define(['postal'], function (postal) {
 });
           </code></pre>
       </section>
-
+-->
       <section>
         <h1>The Big Guns</h1>
         <img src="img/simonpegg4.jpg" class="centerme" />
       </section>
 
       <section>
-        <h2>Wat?</h2>
+        <h2>Using postal</h2>
         <ul>
-          <li>in-memory</li>
-          <li class="fragment">service bus</li>
-          <li class="fragment">simple script that creates a `window.postal` object</li>
+          <li>simple script that creates a `window.postal` object</li>
           <li class="fragment">an AMD-compatible script that can be used with AMD loaders like require.js</li>
           <li class="fragment">a Node.js module that assigns the postal object to `exports`</li>
-
         </ul>
       </section>
 
       <section>
-        <h2>Wat?</h2>
+        <h2>Channels, topics, and subscriptions</h2>
         <dl>
-          <dt class="slimed">topic</dt>
-          <dd>A message name formatted with dot notation, e.g., "foo.bar.baz". May contain wildcards.</dd>
           <dt class="slimed">channel</dt>
-          <dd>Conduit through which messages can be published or subscriptions can be added for a given topic.</dd>
+          <dd>Conduit through which messages (and data) can be published or subscriptions can be added for specific <strong>topics</strong>.</dd>
+          <dt class="slimed">topic</dt>
+          <dd>A message name segmented by dot notation ("foo.bar.baz"). May contain wildcards.</dd>
+          <dt class="slimed">subscription</dt>
+          <dd>A <strong>callback</strong> that listens for specific <strong>topics</strong> on a specific <strong>channel</strong>.</dd>
         </dl>
       </section>
 
       <section>
-        <h2>Wat?</h2>
+        <h2>Channels "namespace" topics</h2>
           <pre><code>
 var vc = postal.channel('vehicle');
 var pc = postal.channel('payment');
@@ -318,60 +318,48 @@ vc.publish({topic: 'reverse', data: 3});
       </section>
 
       <section>
-        <h2>The # wildcard</h2>
-        <p>The <span class="slimed">#</span> symbol can be used as a wildcard for one segment of a topic.</p>
-          <pre><code>
-var c1 = postal.channel('fulfillment');
-
-c1.subscribe({
-  topic: , 'order.shipped.#',
-  callback: function (data, env) {
-    //will be invoked for all order.shipping topics
-  }
-});
-          </code></pre>
-      </section>
-
-      <section>
         <h2>The * wildcard</h2>
-        <p>The <span class="slimed">*</span> symbol can be used as a wildcard for any consecutive character string in a topic.</p>
+        <p>The <span class="slimed">*</span> symbol can be used as a wildcard for exactly one segment of a topic.</p>
           <pre><code>
 var c1 = postal.channel('fulfillment');
 
 c1.subscribe({
-  topic: 'order*',
+  topic: , 'order.shipped.*',
   callback: function (data, env) {
-    //will be invoked for all order topics
+    //will be invoked for all `order.shipped` topics
   }
 });
           </code></pre>
       </section>
 
       <section>
-        <h2>distinctUntilChanged()</h2>
-        <p>Prevents subscription callbacks from handling duplicate, consecutive topics.</p>
+        <h2>The # wildcard</h2>
+        <p>The <span class="slimed">#</span> symbol can be used as a wildcard for any consecutive segments in a topic.</p>
+          <pre><code>
+var c1 = postal.channel('fulfillment');
+
+c1.subscribe({
+  topic: 'order.#',
+  callback: function (data, env) {
+    //will be invoked for all `order` topics
+  }
+});
+          </code></pre>
       </section>
 
       <section>
-        <h2>distinctUntilChanged()</h2>
-          <pre><code>
-var total = 0;
-var c1 = postal.channel('shop');
-c1.subscribe({
-  topic: '#.selected',
-  callback: function (item, env) {
-    total += item.price;
-  }
-}).<strong>distinctUntilChanged()</strong>;
+        <h1>The Subscription API</h1>
+        <p>The subscription API allows us to control if, when, and how subscription callbacks are fired.</p>
+      </section>
 
-var c2 = postal.channel('shop');
-c2.publish({topic: 'shirt.selected', data: {id: 102, price: 10}});
-//duplicate is ignored
-c2.publish({topic: 'shirt.selected', data: {id: 102, price: 10}});
-c2.publish({topic: 'slacks.selected', data: {id: 110, price: 15}});
-c2.publish({topic: 'shoes.selected', data: {id: 255, price: 20}});
-//total price is 10 + 15 + 20 = 45
-          </code></pre>
+      <section>
+        <pre><code>
+var c = postal.channel('channel');
+c instanceof ChannelDefinition; //true
+
+var s = c.subscribe({topic: 'topic', callback: function () {});
+s instanceof SubscriptionDefinition; //true
+        </code></pre>
       </section>
 
       <section>
@@ -407,12 +395,39 @@ c2.publish({topic: 'loot.acquired', data: 'boots'});
       </section>
 
       <section>
-        <h2>disposeAfter(maxCallls)</h2>
+        <h2>distinctUntilChanged()</h2>
+        <p>Prevents subscription callbacks from handling duplicate, consecutive topics.</p>
+      </section>
+
+      <section>
+        <h2>distinctUntilChanged()</h2>
+          <pre><code>
+var total = 0;
+var c1 = postal.channel('shop');
+c1.subscribe({
+  topic: '#.selected',
+  callback: function (item, env) {
+    total += item.price;
+  }
+}).<strong>distinctUntilChanged()</strong>;
+
+var c2 = postal.channel('shop');
+c2.publish({topic: 'shirt.selected', data: {id: 102, price: 10}});
+//duplicate is ignored
+c2.publish({topic: 'shirt.selected', data: {id: 102, price: 10}});
+c2.publish({topic: 'slacks.selected', data: {id: 110, price: 15}});
+c2.publish({topic: 'shoes.selected', data: {id: 255, price: 20}});
+//total price is 10 + 15 + 20 = 45
+          </code></pre>
+      </section>
+
+      <section>
+        <h2>disposeAfter(maxCalls)</h2>
         <p>Automatically unsubscribes a channel after a given number of handler invocations.</p>
       </section>
 
       <section>
-        <h2>disposeAfter(maxCallls)</h2>
+        <h2>disposeAfter(maxCalls)</h2>
           <pre><code>
 var favorites = [];
 var c1 = postal.channel('preferences');
@@ -431,6 +446,36 @@ c2.publish({topic: 'favorite.movies', data: 'TRON'});
 c2.publish({topic: 'favorite.movies', data: 'Star Wars'});
 //favorite moves are: Hot Fuzz, Blade Runner, and TRON
           </code></pre>
+      </section>
+
+      <section>
+        <h2>once()</h2>
+        <p>Automatically unsubscribes a channel after the first handler invocation.</p>
+        <p>Shorthand for <em>disposeAfter(1)</em>.</p>
+      </section>
+
+      <section>
+        <h2>once()</h2>
+        <pre><code>
+function dropBass(delta) {
+  //drop the bass, but only once!
+}
+
+var c1 = postal.channel('dj');
+c.subscribe({
+  topic: 'bass.drop',
+  callback: dropBass
+}).once();
+
+postal.channel('dj').publish({
+  topic: 'bass.drop',
+  data: -11
+});
+        </code></pre>
+      </section>
+
+      <section>
+        <img src="img/drop-bass.jpg" class="centerme" />
       </section>
 
       <section>
@@ -548,7 +593,7 @@ c2.publish({
 });
           </code></pre>
       </section>
-
+<!--
       <section>
         <h2>withPriority(priority)</h2>
         <p>Associates a subscription callback with an arbitrary priority number; higher priority callbacks are triggered first.</p>
@@ -584,7 +629,7 @@ c2.publish({
 });
           </code></pre>
       </section>
-
+-->
       <section>
         <h2>withThrottle(milliseconds)</h2>
         <p>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</p>
