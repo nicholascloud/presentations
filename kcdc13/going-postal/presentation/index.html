@@ -16,7 +16,7 @@
     <style type="text/css">
       .reveal pre {width:100% !important;}
       .reveal pre code {max-height:100%;}
-      .reveal dl {margin-top:1em;}
+      .reveal dl {margin-top:1em; text-align:left;}
       .reveal dt {font-weight:bold; color:#d0ff00;}
       .reveal dd {margin-bottom:1em;}
       .reveal .slimed {color:#d0ff00; font-weight:bold;}
@@ -52,6 +52,10 @@
       </section>
 
       <section>
+        <img src="img/yuno-dom-events.jpg" class="centerme" />
+      </section>
+
+      <section>
         <h2>DOM events are interaction-oriented</h2>
           <pre><code>
 $('#foo').on('click', function () {...});
@@ -79,16 +83,17 @@ $().ready(function () {...});
       </section>
 
       <section>
-        <h2>DOM event limitations</h2>
+        <h2>Inefficient DOM messaging</h2>
         <ul>
           <li>DOM events are only handled between the target element and the top of the DOM tree (capturing or bubbling)</li>
-          <li class="fragment">Any element nested within an eventing element would not receive the triggered event</li>
-          <li class="fragment">Since events can be triggered anywhere in the DOM tree, the best place to put listeners would be at the top of the tree (e.g. the `body` tag)</li>
+          <li class="fragment">dynamic DOM updates can disrupt event handlers</li>
+          <li class="fragment">modules without access to the DOM cannot handle DOM events</li>
+          <li class="fragment">using UI messaging for business logic violates SOC</li>
         </ul>
       </section>
 
       <section>
-        <h2>DOM event limitations</h2>
+        <h2>Inefficient DOM messaging</h2>
         <img src="img/yui-dom-events.jpg" class="centerme" />
         <p><small>YUI blog</small></p>
       </section>
@@ -268,6 +273,14 @@ define(['postal'], function (postal) {
       <section>
         <h1>The Big Guns</h1>
         <img src="img/simonpegg4.jpg" class="centerme" />
+      </section>
+
+      <section>
+        <h2>Patterns</h2>
+        <dt class="slimed">observer</dt>
+        <dd>All objects/modules reference and message each other directly.</dd>
+        <dt class="slimed">mediator</dt>
+        <dd>All objects/modules reference and message a single mediator that brokers and routes messages.</dd>
       </section>
 
       <section>
@@ -683,6 +696,35 @@ $('input.tower').change(function () {
   c2.publish({topic: 'towers.changed', data: towers});
 });
           </code></pre>
+      </section>
+
+      <section>
+        <h1>Plugins</h1>
+        <div>
+          <img src="img/simonpegg7.jpg" class="centerme" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Plugins</h2>
+        <dl>
+          <dt>postal.federation</dt>
+          <dd>conditionally connect multiple bus instances and black/whitelist messages between them (<a target="_blank" href="https://github.com/postaljs/postal.federation">link</a>)</dd>
+          <dt>postal.xframe</dt>
+          <dd>federate message busses across iframes in same/different domains (<a target="_blank" href="https://github.com/postaljs/postal.xframe">link</a>)</dd>
+          <dt>monologue.js/monopost.js</dt>
+          <dd>bridge EventEmitter objects with postal bus instances <br />(<a target="_blank" href="https://github.com/postaljs/monologue.js">link1</a>) (<a target="_blank" href="https://github.com/postaljs/monopost.js">link2</a>)</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Plugins</h2>
+        <dl>
+          <dt>postal.when</dt>
+          <dd>add deferred/promise async behavior to postal subscriptions (<a target="_blank" href="https://github.com/postaljs/postal.when">link</a>)</dd>
+          <dt>postal.dom</dt>
+          <dd>trigger postal messages with DOM events and data attributes (<a target="_blank" href="https://github.com/nicholascloud/postal.dom">link</a>)</dd>
+        </dl>
       </section>
 
       <section>
