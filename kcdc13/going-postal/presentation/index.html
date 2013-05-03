@@ -462,6 +462,10 @@ c2.publish({topic: 'favorite.movies', data: 'Star Wars'});
       </section>
 
       <section>
+        <img src="img/drop-bass.jpg" class="centerme" />
+      </section>
+
+      <section>
         <h2>once()</h2>
         <p>Automatically unsubscribes a channel after the first handler invocation.</p>
         <p>Shorthand for <em>disposeAfter(1)</em>.</p>
@@ -488,14 +492,10 @@ postal.channel('dj').publish({
       </section>
 
       <section>
-        <img src="img/drop-bass.jpg" class="centerme" />
-      </section>
-
-      <section>
         <h2>withConstraint(predicate)</h2>
         <p>Will prevent the subscription handler from executing if a constraint is not met.</p>
         <br />
-        <p>(Also a pluralized version of this method, for multiple predicates.)</p>
+        <p>Also a pluralized version of this method, for multiple predicates.</p>
       </section>
 
       <section>
