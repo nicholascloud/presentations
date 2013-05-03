@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Raffle Picker</title>
+    <link type="text/css" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>Choose a winner!</h1>
+
+    <section id="contestants">
+      <h2>Contestants</h2>
+      <input type="text" id="contestant-names" name="contestant-names" />
+      <button id="submit-contestants">Submit</button>
+      <p id="notice" class="invisible">Calculating winner...</p>
+    </section>
+
+    <section id="winner">
+      <h2>Winners</h2>
+      <textarea></textarea>
+    </section>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="lib/jquery-1.9.1.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

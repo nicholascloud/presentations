@@ -1,0 +1,4 @@
+#contestant-names {width:490px; display:block;}
+#winner textarea {width:500px; height:300px;}
+.invisible {display:none;}
+input[type=text], textarea {font-size:1.2em;}

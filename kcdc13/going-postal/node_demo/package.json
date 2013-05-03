@@ -1,0 +1,11 @@
+{
+  "name": "going-postal-kcdc13-node-demo",
+  "version": "1.0.0",
+  "author": "Nicholas Cloud",
+  "dependencies": {
+    "strata": "0.20.1",
+    "underscore": "1.4.4",
+    "socket.io": "0.9.14",
+    "postal": "0.8.4"
+  }
+}
