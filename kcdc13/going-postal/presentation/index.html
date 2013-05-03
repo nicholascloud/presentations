@@ -22,6 +22,10 @@
       .reveal .slimed {color:#d0ff00; font-weight:bold;}
       .reveal .centerme {margin:auto !important; display:block;}
       .reveal section > h2 {text-transform:none;}
+      .reveal section .split-container {position:relative; height:400px;}
+      .reveal section dl.split {position:absolute; top:0; width:50%;}
+      .reveal section dl.split.right {right:0;}
+      .reveal section dl.split.left {left:0;}
     </style>
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -35,6 +39,32 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+
+      <section>
+        <img src="img/sponsor-slide.png" class="centerme" />
+      </section>
+
+      <section>
+        <h2>Nicholas Cloud</h2>
+        <div class="split-container">
+          <dl class="split left">
+            <dt>employer</dt>
+            <dd>appendTo</dd>
+            <dt>what I used to do</dt>
+            <dd>.net, c#</dd>
+            <dt>what I do now</dt>
+            <dd>node.js, javascript</dd>
+          </dl>
+          <dl class="split right">
+            <dt>github</dt>
+            <dd>nicholascloud</dd>
+            <dt>twitter</dt>
+            <dd>@nicholascloud</dd>
+            <dt>web</dt>
+            <dd>nicholascloud.com<br/>stlalt.net</dd>
+          </dl>
+        </div>
+      </section>
 
       <section>
         <h1>Going Postal</h1>
@@ -85,10 +115,10 @@ $().ready(function () {...});
       <section>
         <h2>Inefficient DOM messaging</h2>
         <ul>
-          <li>DOM events are only handled between the target element and the top of the DOM tree (capturing or bubbling)</li>
+          <li>modules without access to the DOM cannot handle DOM events</li>
+          <li class="fragment">using UI events for business logic violates SOC</li>
           <li class="fragment">dynamic DOM updates can disrupt event handlers</li>
-          <li class="fragment">modules without access to the DOM cannot handle DOM events</li>
-          <li class="fragment">using UI messaging for business logic violates SOC</li>
+          <li class="fragment">DOM events are only handled between the target element and the top of the DOM tree (capturing or bubbling)</li>
         </ul>
       </section>
 
@@ -109,7 +139,7 @@ $('body').on('show-error', function (evt, msg) {
 $.post('/my/url', data, function () {
   //yay our post worked!
 }).error(function (){
-  $(this).trigger('show-error', ['bad!']);
+  $('#someElement').trigger('show-error', ['bad!']);
 });
           </code></pre>
       </section>
@@ -278,9 +308,9 @@ define(['postal'], function (postal) {
       <section>
         <h2>Patterns</h2>
         <dt class="slimed">observer</dt>
-        <dd>All objects/modules reference and message each other directly.</dd>
+        <dd>all objects/modules reference and message each other directly</dd>
         <dt class="slimed">mediator</dt>
-        <dd>All objects/modules reference and message a single mediator that brokers and routes messages.</dd>
+        <dd>all objects/modules reference and message a single mediator that brokers and routes messages</dd>
       </section>
 
       <section>
@@ -296,11 +326,11 @@ define(['postal'], function (postal) {
         <h2>Channels, topics, and subscriptions</h2>
         <dl>
           <dt class="slimed">channel</dt>
-          <dd>Conduit through which messages (and data) can be published or subscriptions can be added for specific <strong>topics</strong>.</dd>
+          <dd>conduit through which messages (and data) can be published or subscriptions can be added for specific <strong>topics</strong></dd>
           <dt class="slimed">topic</dt>
-          <dd>A message name segmented by dot notation ("foo.bar.baz"). May contain wildcards.</dd>
+          <dd>a message name segmented by dot notation ("foo.bar.baz"). May contain wildcards</dd>
           <dt class="slimed">subscription</dt>
-          <dd>A <strong>callback</strong> that listens for specific <strong>topics</strong> on a specific <strong>channel</strong>.</dd>
+          <dd>a <strong>callback</strong> that listens for specific <strong>topics</strong> on a specific <strong>channel</strong></dd>
         </dl>
       </section>
 
