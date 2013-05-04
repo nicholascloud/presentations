@@ -26,6 +26,7 @@
       .reveal section dl.split {position:absolute; top:0; width:50%;}
       .reveal section dl.split.right {right:0;}
       .reveal section dl.split.left {left:0;}
+      .reveal section .underline {text-decoration:underline;}
     </style>
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -308,9 +309,9 @@ define(['postal'], function (postal) {
       <section>
         <h2>Patterns</h2>
         <dt class="slimed">observer</dt>
-        <dd>all objects/modules reference and message each other directly</dd>
+        <dd>objects/modules have <span class="underline">direct references</span> to other objects/modules and subscribe to their events</dd>
         <dt class="slimed">mediator</dt>
-        <dd>all objects/modules reference and message a single mediator that brokers and routes messages</dd>
+        <dd>objects/modules <span class="underline">reference a single mediator</span> that brokers and routes messages to subscribers</dd>
       </section>
 
       <section>
