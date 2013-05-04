@@ -396,13 +396,22 @@ c1.subscribe({
       </section>
 
       <section>
+        <h2>ChannelDefinition</h2>
         <pre><code>
 var c = postal.channel('channel');
 c instanceof ChannelDefinition; //true
+        </code></pre>
+        <img src="img/channel-definition.png" class="centerme" />
+      </section>
 
+      <section>
+        <h2>SubscriptionDefinition</h2>
+        <pre><code>
+var c = postal.channel('channel');
 var s = c.subscribe({topic: 'topic', callback: function () {});
 s instanceof SubscriptionDefinition; //true
         </code></pre>
+        <img src="img/subscription-definition.png" class="centerme" />
       </section>
 
       <section>
@@ -726,6 +735,22 @@ $('input.tower').change(function () {
   c2.publish({topic: 'towers.changed', data: towers});
 });
           </code></pre>
+      </section>
+
+      <section>
+        <h1>Pitfalls</h1>
+        <div>
+          <img src="img/simonpegg8.jpg" class="centerme" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Pitfalls</h2>
+        <ul>
+          <li>messaging introduces indirection, and can be confusing</li>
+          <li class="fragment">difficult to keep track of channel/topic names</li>
+          <li class="fragment">temptation to gravitate towards `commands` instead of messages</li>
+        </ul>
       </section>
 
       <section>
