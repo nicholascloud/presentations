@@ -417,7 +417,7 @@ s instanceof SubscriptionDefinition; //true
 
       <section>
         <h2>distinct()</h2>
-        <p>Subscription callbacks ignore all duplicate topics.</p>
+        <p>Subscription callbacks ignore all duplicate messages (topic + data).</p>
       </section>
 
       <section>
@@ -449,7 +449,7 @@ c2.publish({topic: 'loot.acquired', data: 'boots'});
 
       <section>
         <h2>distinctUntilChanged()</h2>
-        <p>Prevents subscription callbacks from handling duplicate, consecutive topics.</p>
+        <p>Prevents subscription callbacks from handling duplicate, consecutive messages (topics + data).</p>
       </section>
 
       <section>
@@ -646,43 +646,7 @@ c2.publish({
 });
           </code></pre>
       </section>
-<!--
-      <section>
-        <h2>withPriority(priority)</h2>
-        <p>Associates a subscription callback with an arbitrary priority number; higher priority callbacks are triggered first.</p>
-      </section>
 
-      <section>
-        <h2>withPriority(priority)</h2>
-          <pre><code>
-var stockholder = function (data, env) {
-  console.log('Stockholder knows!');
-};
-
-var insider = function (data, env) {
-  //will always know first!
-  console.log('Insider knows!');
-};
-
-var c1 = postal.channel('financial');
-c1.subscribe({
-  topic: 'stock.event',
-  callback: stockholder
-}).<strong>withPriority(75)</strong>;
-
-c1.subscribe({
-  topic: 'stock.event',
-  callback: insider
-}).<strong>withPriority(100)</strong>;
-
-var c2 = postal.channel('financial');
-c2.publish({
-  topic: 'stock.event',
-  data: {action: 'sell!'}
-});
-          </code></pre>
-      </section>
--->
       <section>
         <h2>withThrottle(milliseconds)</h2>
         <p>Prevents a subscription callback from being invoked more than once in a given time frame (in milliseconds).</p>
@@ -715,7 +679,8 @@ var c2 = postal.channel('sec-theater');
 
       <section>
         <h2>defer()</h2>
-        <p>Prevents the callback from executing until the current execution stack is cleared. Useful for long computations that could make the UI non-responsive.</p>
+        <p>Prevents the callback from executing until the current execution stack is cleared.</p>
+        <p>Useful for long computations that could make the UI non-responsive.</p>
       </section>
 
       <section>
@@ -724,7 +689,9 @@ var c2 = postal.channel('sec-theater');
 var c1 = postal.channel('triangulation');
 c1.subscribe({
   topic: 'towers.changed',
-  callback: function (data, env) {/*...*/}
+  callback: function (data, env) {
+    //intensive drawing or something
+  }
 }).<strong>defer()</strong>;
 
 //elsewhere...
