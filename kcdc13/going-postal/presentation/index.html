@@ -336,7 +336,16 @@ define(['postal'], function (postal) {
       </section>
 
       <section>
-        <h2>Channels "namespace" topics</h2>
+        <h2>ChannelDefinition</h2>
+        <pre><code>
+var c = postal.channel('channel');
+c instanceof ChannelDefinition; //true
+        </code></pre>
+        <img src="img/channel-definition.png" class="centerme" />
+      </section>
+
+      <section>
+        <h2>Channels enforce bounded contexts</h2>
           <pre><code>
 var vc = postal.channel('vehicle');
 var pc = postal.channel('payment');
@@ -394,15 +403,6 @@ c1.subscribe({
       <section>
         <h1>The Subscription API</h1>
         <p>The subscription API allows us to control if, when, and how subscription callbacks are fired.</p>
-      </section>
-
-      <section>
-        <h2>ChannelDefinition</h2>
-        <pre><code>
-var c = postal.channel('channel');
-c instanceof ChannelDefinition; //true
-        </code></pre>
-        <img src="img/channel-definition.png" class="centerme" />
       </section>
 
       <section>
@@ -566,25 +566,27 @@ c2.publish({topic: 'vehicle.accelerated', data: 'Marty'});
       <section>
         <h2>withContext(context)</h2>
           <pre><code>
-var c1 = postal.channel('morning');
+var mug = { fill: function () {/*...*/} };
+
+var c1 = postal.channel('beverages');
 c1.subscribe({
   topic: 'coffee.ready',
   callback: function (data, env) {
     //this === window
+    this.fill(data.oz); //error!
   }
 });
 
 c1.subscribe({
   topic: 'coffee.ready',
   callback: function (data, env) {
-    //this === $('#mug')
+    //this === mug
+    this.fill(data.oz);
   }
-}).<strong>withContext($('#mug'))</strong>;
+}).<strong>withContext(mug)</strong>;
 
-var c2 = postal.channel('morning');
-c2.publish({topic: 'coffee.ready', data: {}});
-c2.publish({topic: 'coffee.ready', data: {}});
-c2.publish({topic: 'coffee.ready', data: {}});
+var c2 = postal.channel('beverages');
+c2.publish({topic: 'coffee.ready', data: {oz: 12}});
           </code></pre>
       </section>
 
@@ -597,7 +599,6 @@ c2.publish({topic: 'coffee.ready', data: {}});
         <h2>withDebounce(milliseconds)</h2>
           <pre><code>
 var c1 = postal.channel('ui');
-
 c1.subscribe({
   topic: 'resize',
   callback: function (dim, env) {
@@ -607,12 +608,13 @@ c1.subscribe({
 
 var c2 = postal.channel('ui');
 $(window).resize(function () {
-  var self = this; //window
+  var height = window.innerHeight,
+    width = window.innderWidth;
   c2.publish({
     topic: 'resize',
     data: {
-      h: self.innerHeight,
-      w: self.innerWidth
+      h: height,
+      w: width
     }
   });
 });
@@ -628,21 +630,22 @@ $(window).resize(function () {
         <h2>withDelay(milliseconds)</h2>
           <pre><code>
 //going to snooze for 30 mins.
+var alarm = $('audio#alarm')[0];
 var snoozeDuration = (30 * 60 * 1000);
 
-var c1 = postal.channel('morning');
+var c1 = postal.channel('daily-schedule');
 c1.subscribe({
-  topic: 'wakeup.alarm',
+  topic: 'wakeup.triggered',
   callback: function (data, env) {
-    //make sure this lazy ass gets out of bed!
-    alarm.buzz({volume: data.volume});
+    alarm.volume = 11;
+    alarm.play();
   }
 }).<strong>withDelay(snoozeDuration)</strong>;
 
-var c2 = potal.channel('morning');
+var c2 = postal.channel('daily-schedule');
 c2.publish({
-  topic: 'wakeup.alarm',
-  data: {volume: 11}
+  topic: 'wakeup.triggered',
+  data: {when: new Date()}
 });
           </code></pre>
       </section>
@@ -657,7 +660,7 @@ c2.publish({
           <pre><code>
 var c1 = postal.channel('sec-theater');
 c1.subscribe({
-  topic: 'dhs.track.movement',
+  topic: 'dhs.tracked.movement',
   callback: function (pos, env) {
     console.log('Moved to ' + pos);
   }
@@ -667,7 +670,7 @@ var c2 = postal.channel('sec-theater');
 (function move (timesMoved) {
   if (timesMoved === 50) return;
   c2.publish({
-    topic: 'dhs.track.movement',
+    topic: 'dhs.tracked.movement',
     data: timesMoved
   });
   setTimeout(function () {
@@ -688,7 +691,7 @@ var c2 = postal.channel('sec-theater');
           <pre><code>
 var c1 = postal.channel('triangulation');
 c1.subscribe({
-  topic: 'towers.changed',
+  topic: 'towers.available',
   callback: function (data, env) {
     //intensive drawing or something
   }
@@ -700,7 +703,7 @@ $('input.tower').change(function () {
   var towers = $.map($('input.tower:checked'), function (input) {
     return input.value;
   });
-  c2.publish({topic: 'towers.changed', data: towers});
+  c2.publish({topic: 'towers.available', data: towers});
 });
           </code></pre>
       </section>
