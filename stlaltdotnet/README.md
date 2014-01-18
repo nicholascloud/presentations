@@ -1,10 +1,14 @@
-# Presentation files from the St. Louis ALT.NET meetup group. #
+# NOTE: All presentations have been moved to their own individual reponsitories
+
+See [github.com/stlaltdotnet](https://github.com/stlaltdotnet).
+
+## Presentation files from the St. Louis ALT.NET meetup group.
 
 Below is a list of presentations given at [STL ALT .NET](http://www.meetup.com/stlaltdotnet).
 
 Many presentations have corredponding notes or sample projects in this repository.  Where applicable, links to external repositories or presentation materials are provided.
 
-## Presentations: ##
+## Presentations:
 
 - 10/20/2010 Introduction to NHibernate (Nicholas Cloud)
 - 11/17/2010 Functional Programming with Scheme (Aaron Hsu)
