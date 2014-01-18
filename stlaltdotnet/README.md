@@ -1,4 +1,4 @@
-# NOTE: All presentations have been moved to their own individual reponsitories
+# NOTE: All presentations have been moved to their own individual repositories
 
 See [github.com/stlaltdotnet](https://github.com/stlaltdotnet).
 
